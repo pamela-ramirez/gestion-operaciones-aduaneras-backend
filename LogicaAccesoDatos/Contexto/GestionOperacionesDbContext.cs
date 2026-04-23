@@ -1,6 +1,5 @@
 ﻿using LogicaNegocio.Entidades;
 using Microsoft.EntityFrameworkCore;
-using LogicaNegocio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,67 +20,78 @@ namespace LogicaAccesoDatos.Contexto
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Despachante> Despachantes { get; set; }
-        /*
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configuracion de herencia
-            // Le indica a Entity Framework como manejar
-            // las clases hijas de Usuario
+            // Configuración de herencia TPH (Table Per Hierarchy) con discriminador para manehar jerarquia
             modelBuilder.Entity<Usuario>()
-                .HasDiscriminator<int>("Rol")
+                .HasDiscriminator<int>("Discriminator")
                 .HasValue<Usuario>(0)
-                .HasValue<Despachante>((int)Rol.Despachante)
-                .HasValue<Cliente>((int)Rol.Cliente);
+                .HasValue<Cliente>(1)
+                .HasValue<Despachante>(2);
 
-            // Configuracion de la tabla Usuario
+            // Configuración de la tabla Usuario
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.ToTable("Usuarios");
                 entity.HasKey(u => u.Id);
-                entity.Property(u => u.NombreCompleto)
+
+                entity.Property(u => u.Nombre)
                     .IsRequired()
                     .HasMaxLength(100);
-                entity.Property(u => u.CorreoElectronico)
+
+                entity.Property(u => u.Apellido)
                     .IsRequired()
-                    .HasMaxLength(150);
-                entity.HasIndex(u => u.CorreoElectronico)
+                    .HasMaxLength(100);
+
+                entity.OwnsOne(u => u.Email, email =>
+                {
+                    email.Property(e => e.Valor)
+                        .HasColumnName("Email")
+                        .IsRequired()
+                        .HasMaxLength(150);
+                });
+
+                entity.HasIndex("Email")
                     .IsUnique();
-                entity.Property(u => u.ContrasenaHash)
-                    .IsRequired();
+
+                entity.OwnsOne(u => u.Password, password =>
+                {
+                    password.Property(p => p.Valor)
+                        .HasColumnName("PasswordHash")
+                        .IsRequired();
+                });
+
                 entity.Property(u => u.Rol)
                     .IsRequired();
             });
 
-            // Configuracion de la tabla Cliente
+            // Configuración de la tabla Cliente (hereda de Usuario)
             modelBuilder.Entity<Cliente>(entity =>
             {
-                entity.Property(c => c.RUT)
+                entity.Property(c => c.rut)
                     .IsRequired()
-                    .HasMaxLength(20);
-                entity.HasIndex(c => c.RUT)
-                    .IsUnique(); // RN-04.1: RUT unico
-                entity.Property(c => c.Telefono)
-                    .IsRequired()
-                    .HasMaxLength(20);
-                entity.Property(c => c.Direccion)
-                    .HasMaxLength(200);
+                    .HasMaxLength(20)
+                    .HasColumnName("RUT");
+
+                entity.HasIndex("RUT")
+                    .IsUnique();
             });
 
-            // Datos iniciales: crear un despachante por defecto
-            // La contrasena es: Admin1234
-            modelBuilder.Entity<Despachante>().HasData(new Despachante
+            // Configuración de la tabla Despachante (hereda de Usuario)
+            modelBuilder.Entity<Despachante>(entity =>
             {
-                Id = 1,
-                NombreCompleto = "Administrador",
-                CorreoElectronico = "admin@aduanas.com",
-                ContrasenaHash = BCrypt.Net.BCrypt.HashPassword("Admin1234"),
-                Rol = Rol.Despachante,
-                Activo = true,
-                FechaCreacion = new DateTime(2026, 1, 1)
+                entity.Property(d => d.rut)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .HasColumnName("RUT");
+
+                entity.HasIndex("RUT")
+                    .IsUnique();
             });
-        }*/
+        }
 
     }
 }
