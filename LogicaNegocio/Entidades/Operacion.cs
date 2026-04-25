@@ -21,7 +21,7 @@ namespace LogicaNegocio.Entidades
 
         // Datos que se completan DESPUES (RF-08)
         // son opcionales al inicio, por eso tienen ?
-        public int? NroDua { get; set; }
+        public string? NroDua { get; set; }
         public int? TipoConocimientoId { get; set; }
         public TipoConocimiento? TipoConocimiento { get; set; }
         public int? NroConocimiento { get; set; }
@@ -55,7 +55,7 @@ namespace LogicaNegocio.Entidades
         }
 
         // Metodo para actualizar datos aduaneros, cuando el despachante completa la informacion
-        public void ActualizarDatosAduaneros(int nroDua,
+        public void ActualizarDatosAduaneros(string nroDua,
             TipoConocimiento tipoConocimiento, int nroConocimiento)
         {
             NroDua = nroDua;
