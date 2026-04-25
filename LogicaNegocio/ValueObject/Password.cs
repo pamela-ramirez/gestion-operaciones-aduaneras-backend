@@ -12,7 +12,7 @@ namespace LogicaNegocio.ValueObject
     [ComplexType]
     public record Password
     {
-        [StringLength(50, MinimumLength = 6)]
+        [StringLength(50, MinimumLength = 8)]
         public string Valor { get; init; }
         public Password(string valor)
         {
@@ -36,9 +36,9 @@ namespace LogicaNegocio.ValueObject
 
         private void Validar()
         {
-            if (Valor.Trim().Length < 6)
+            if (Valor.Trim().Length < 8)
             {
-                throw new UsuarioException("La password debe tener por lo menos 6 caracteres");
+                throw new UsuarioException("La password debe tener por lo menos 8 caracteres");
             }
             if (!PasswordEsValida())
             {
