@@ -1,7 +1,6 @@
-﻿using LogicaAccesoDatos.Contexto;
-using LogicaNegocio.Entidades;
+﻿using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
-using Microsoft.EntityFrameworkCore;
+using LogicaNegocio.ValueObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +9,21 @@ using System.Threading.Tasks;
 
 namespace LogicaAccesoDatos.Repositorios
 {
-    public class RepositorioUsuario : IRepositorioUsuario
+    public class RepositorioUsuarioMock : IRepositorioUsuario
     {
-        public GestionOperacionesDbContext Contexto { get; set; }
-
-        public RepositorioUsuario(GestionOperacionesDbContext contexto)
+        private List<Usuario> usuarios = new List<Usuario>
+    {
+        new Usuario
         {
-            Contexto = contexto;
+            Id = 1,
+            Nombre = "Pamela",
+            Apellido = "Test",
+            Email = new Email("pamela@test.com"),
+            Password = new Password("Abc123!"),
+            RolId = 1,
+            Rol = new Rol("Admin")
         }
-
-
+    };
 
         public void Add(Usuario item)
         {
@@ -41,11 +45,10 @@ namespace LogicaAccesoDatos.Repositorios
             throw new NotImplementedException();
         }
 
-        public async Task<Usuario?> GetByEmail(string email)
+        public Task<Usuario?> GetByEmail(string email)
         {
-            return await Contexto.Usuarios // Accede a la tabla de usuarios
-           .Include(u => u.Rol) // Asegura que el rol se cargue junto con el usuario
-           .FirstOrDefaultAsync(u => u.Email.Valor == email); // Busca el usuario por su email
+            var usuario = usuarios.FirstOrDefault(u => u.Email.Valor == email);
+            return Task.FromResult(usuario);
         }
 
         public void Update(Usuario item, int id)
