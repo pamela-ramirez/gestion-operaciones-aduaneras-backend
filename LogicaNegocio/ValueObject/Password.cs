@@ -17,8 +17,23 @@ namespace LogicaNegocio.ValueObject
         public Password(string valor)
         {
             Valor = valor;
-            Validar();
+            Validar();  // SOLO para password plano
         }
+
+        // Método para crear un objeto Password a partir de un hash, sin validar las restricciones de formato
+        public static Password FromHash(string hash)
+        {
+            return new Password(hash, true);
+        }
+        // Constructor privado que permite crear un objeto Password sin validar las restricciones de formato, utilizado para contraseñas ya hasheadas
+        private Password(string valor, bool esHash)
+        {
+            Valor = valor;
+
+            if (!esHash)
+                Validar();
+        }
+
         private void Validar()
         {
             if (Valor.Trim().Length < 6)

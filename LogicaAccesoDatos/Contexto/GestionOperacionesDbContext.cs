@@ -73,8 +73,8 @@ namespace LogicaAccesoDatos.Contexto
                         .HasMaxLength(150);
                 });
 
-                entity.HasIndex("Email")
-                    .IsUnique();
+                //entity.HasIndex("Email")
+                //    .IsUnique();
 
                 entity.OwnsOne(u => u.Password, password =>
                 {
@@ -83,31 +83,35 @@ namespace LogicaAccesoDatos.Contexto
                         .IsRequired();
                 });
 
-                entity.Property(u => u.Rol)
-                    .IsRequired();
+                //entity.Property(u => u.Rol)
+                //    .IsRequired();
+                entity.HasOne(u => u.Rol)
+                    .WithMany()
+                    .HasForeignKey(u => u.RolId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configuración de la tabla Cliente (hereda de Usuario)
             modelBuilder.Entity<Cliente>(entity =>
             {
-                entity.Property(c => c.rut)
+                entity.Property(c => c.Rut)
                     .IsRequired()
                     .HasMaxLength(20)
-                    .HasColumnName("RUT");
+                    .HasColumnName("Rut");
 
-                entity.HasIndex("RUT")
+                entity.HasIndex("Rut")
                     .IsUnique();
             });
 
             // Configuración de la tabla Despachante (hereda de Usuario)
             modelBuilder.Entity<Despachante>(entity =>
             {
-                entity.Property(d => d.rut)
+                entity.Property(d => d.Rut)
                     .IsRequired()
                     .HasMaxLength(20)
-                    .HasColumnName("RUT");
+                    .HasColumnName("Rut");
 
-                entity.HasIndex("RUT")
+                entity.HasIndex("Rut")
                     .IsUnique();
             });
         }

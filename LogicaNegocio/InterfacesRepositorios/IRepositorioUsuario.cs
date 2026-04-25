@@ -9,6 +9,7 @@ namespace LogicaNegocio.InterfacesRepositorios
 {
     public interface IRepositorioUsuario:IRepositorio<Usuario>
     {
-        Usuario Login(string email, string contrasenia);
+        //Usuario Login(string email, string contrasenia);
+        Task<Usuario?> GetByEmail(string email);
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.ValueObject
 {
-    [ComplexType]
+    //[ComplexType]
     public record Email
     {
         public string Valor { get; init; }
