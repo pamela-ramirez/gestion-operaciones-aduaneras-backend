@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.3.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Compartido\Compartido.csproj" />
+    <ProjectReference Include="..\LogicaNegocio\LogicaNegocio.csproj" />
+  </ItemGroup>
+
 </Project>

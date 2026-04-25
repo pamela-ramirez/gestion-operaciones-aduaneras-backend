@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Compartido\Compartido.csproj" />
+  </ItemGroup>
+
 </Project>
