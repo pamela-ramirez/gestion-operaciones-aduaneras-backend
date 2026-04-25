@@ -22,8 +22,6 @@ namespace LogicaAccesoDatos.Contexto
         public DbSet<Despachante> Despachantes { get; set; }
         public DbSet<Rol> Roles { get; set; }
 
-        public DbSet<Rol> Roles { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
