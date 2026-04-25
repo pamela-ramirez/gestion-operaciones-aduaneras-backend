@@ -107,7 +107,6 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+293d32dd71b1de9d8fa1013778603964b56e2753")]
 [assembly: System.Reflection.AssemblyProductAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -185,8 +184,6 @@ namespace GestionOperacionesAduaneras.Controllers
         [HttpGet("privado")]
         public IActionResult Privado()
         {
-            var email = User.FindFirst(ClaimTypes.Email)?.Value;
-            var rol = User.FindFirst(ClaimTypes.Role)?.Value;
 
             return Ok(new
             {
@@ -259,7 +256,6 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+293d32dd71b1de9d8fa1013778603964b56e2753")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -454,9 +450,9 @@ namespace GestionOperacionesAduaneras
             var builder = WebApplication.CreateBuilder(args);
 
             // Base de datos
-            //builder.Services.AddDbContext<GestionOperacionesDbContext>(options =>
-            // options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            // Repositorios
+            builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 
             // Repositorios
             // builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
@@ -518,7 +514,7 @@ namespace GestionOperacionesAduaneras
              });
 
             var app = builder.Build();
-  
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -631,8 +627,6 @@ namespace LogicaAccesoDatos.Contexto
                         .HasMaxLength(150);
                 });
 
-                //entity.HasIndex("Email")
-                //    .IsUnique();
 
                 entity.OwnsOne(u => u.Password, password =>
                 {
@@ -641,35 +635,23 @@ namespace LogicaAccesoDatos.Contexto
                         .IsRequired();
                 });
 
-                //entity.Property(u => u.Rol)
-                //    .IsRequired();
-                entity.HasOne(u => u.Rol)
-                    .WithMany()
-                    .HasForeignKey(u => u.RolId)
-                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configuración de la tabla Cliente (hereda de Usuario)
             modelBuilder.Entity<Cliente>(entity =>
             {
-                entity.Property(c => c.Rut)
                     .IsRequired()
                     .HasMaxLength(20)
-                    .HasColumnName("Rut");
 
-                entity.HasIndex("Rut")
                     .IsUnique();
             });
 
             // Configuración de la tabla Despachante (hereda de Usuario)
             modelBuilder.Entity<Despachante>(entity =>
             {
-                entity.Property(d => d.Rut)
                     .IsRequired()
                     .HasMaxLength(20)
-                    .HasColumnName("Rut");
 
-                entity.HasIndex("Rut")
                     .IsUnique();
             });
         }
@@ -702,7 +684,6 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+293d32dd71b1de9d8fa1013778603964b56e2753")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -947,7 +928,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
     {
         private readonly IRepositorioUsuario _repoUsuario;
         private readonly IJwtService _jwtService;
-        
+
 
         public Login(IRepositorioUsuario repoUsuario, IJwtService jwtService)
         {
@@ -966,25 +947,6 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
                 throw new UsuarioNoEncontradoException();
 
             // Paso 3: verificar que la contraseña coincida con el hash guardado
-            //produccion:
-            //bool passwordCorrecta = BCrypt.Net.BCrypt.Verify(dto.Password, usuario.Password.Valor);
-            
-            //empieza desarrollo/testing
-            bool passwordCorrecta;
-
-            if (usuario.Password.Valor.StartsWith("$2"))
-            {
-                passwordCorrecta = BCrypt.Net.BCrypt.Verify(
-                    dto.Password,
-                    usuario.Password.Valor
-                );
-            }
-            else
-            {
-                passwordCorrecta = dto.Password == usuario.Password.Valor;
-            }
-            //termina desarrollo/testing
-
             if (!passwordCorrecta)
                 throw new CredencialesInvalidasException();
 
@@ -1121,7 +1083,6 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+293d32dd71b1de9d8fa1013778603964b56e2753")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -1163,13 +1124,11 @@ namespace LogicaNegocio.Entidades
 {
     public class Cliente:Usuario
     {
-        public string Rut { get; set; } = string.Empty;
 
         public Cliente() { }
 
         public Cliente(string nombre, string apellido, Email email, Password password, Rol rol, string rut) : base(nombre, apellido, email, password, rol)
         {
-            this.Rut = rut;
         }
 
 
@@ -1189,14 +1148,12 @@ namespace LogicaNegocio.Entidades
 {
     public class Despachante:Usuario
     {
-        public string Rut { get; set; } = string.Empty;
 
 
         public Despachante() { }
 
         public Despachante(string nombre, string apellido, Email email, Password password, Rol rol, string rut) : base(nombre, apellido, email, password, rol)
         {
-            this.Rut = rut;
         }
 
 
@@ -1261,7 +1218,7 @@ namespace LogicaNegocio.Entidades
         public string Nombre { get; set; } = string.Empty;
         public string Apellido { get; set; } = string.Empty;
         public Email Email { get; set; } 
-        public Password Password { get; set; }
+        public Password Password { get; set; } 
         //public Rol Rol { get; set; }
         public int RolId { get; set; }
         public Rol Rol { get; set; }
@@ -1475,7 +1432,6 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+293d32dd71b1de9d8fa1013778603964b56e2753")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -1506,7 +1462,6 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.ValueObject
 {
-    //[ComplexType]
     public record Email
     {
         public string Valor { get; init; }
