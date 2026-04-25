@@ -19,8 +19,13 @@ namespace LogicaNegocio.Entidades
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
 
+        // Datos que se completan DESPUES (RF-08)
+        // son opcionales al inicio, por eso tienen ?
+        public int? NroDua { get; set; }
+        public int? TipoConocimientoId { get; set; }
+        public TipoConocimiento? TipoConocimiento { get; set; }
+        public int? NroConocimiento { get; set; }
 
-        public Tramite Tramite { get; set; }
 
         public ICollection<Liquidacion> Liquidaciones { get; set; }
             = new List<Liquidacion>();
@@ -48,7 +53,7 @@ namespace LogicaNegocio.Entidades
             Estado = EstadoOperacion.Iniciado;
             FechaRegistro = DateTime.Now;
         }
-
+        /*
         // RN-07: actualizacion automatica del estado
         public void ActualizarEstado()
         {
@@ -67,6 +72,8 @@ namespace LogicaNegocio.Entidades
                 Estado = EstadoOperacion.DocumentacionPendiente;
             }
         }
+        */
+
 
         // RN-07.5: el estado Finalizado se asigna manualmente
         public void Finalizar()
