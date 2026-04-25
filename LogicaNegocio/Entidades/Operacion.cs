@@ -14,7 +14,7 @@ namespace LogicaNegocio.Entidades
         public EstadoOperacion Estado { get; set; }
 
         public int TipoOperacionId { get; set; }
-        public TipoOperacion Tipo { get; set; }
+        public TipoOperacion TipoOperacion { get; set; }
 
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
@@ -45,37 +45,46 @@ namespace LogicaNegocio.Entidades
         aunque no sea lo mas eficiente*/
         public Operacion() { }
 
-        public Operacion(string nroCarpeta, TipoOperacion tipo, Cliente cliente)
+        public Operacion(string nroCarpeta, TipoOperacion tipoOperacion, Cliente cliente)
         {
             NroCarpeta = nroCarpeta;
-            Tipo = tipo;
+            TipoOperacion = tipoOperacion;
             Cliente = cliente;
             Estado = EstadoOperacion.Iniciado;
             FechaRegistro = DateTime.Now;
         }
-        /*
-        // RN-07: actualizacion automatica del estado
-        public void ActualizarEstado()
+
+        // Metodo para actualizar datos aduaneros, cuando el despachante completa la informacion
+        public void ActualizarDatosAduaneros(int nroDua,
+            TipoConocimiento tipoConocimiento, int nroConocimiento)
+        {
+            NroDua = nroDua;
+            TipoConocimiento = tipoConocimiento;
+            NroConocimiento = nroConocimiento;
+
+            ActualizarEstado();
+        }
+
+        private void ActualizarEstado()
         {
             if (Estado == EstadoOperacion.Finalizado)
                 return;
 
-            if (Tramite != null &&
-                Tramite.NroDua != 0 &&
-                Tramite.TipoConocimiento != null &&
-                Tramite.NroConocimiento != 0)
+            // Si tiene todos los datos aduaneros completos
+            if (NroDua != null &&
+                TipoConocimiento != null &&
+                NroConocimiento != null)
             {
                 Estado = EstadoOperacion.EnProceso;
             }
+            // Si le faltan datos
             else
             {
                 Estado = EstadoOperacion.DocumentacionPendiente;
             }
         }
-        */
 
-
-        // RN-07.5: el estado Finalizado se asigna manualmente
+        // El estado Finalizado se asigna manualmente
         public void Finalizar()
         {
             Estado = EstadoOperacion.Finalizado;
