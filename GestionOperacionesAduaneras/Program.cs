@@ -4,15 +4,14 @@ using LogicaAccesoDatos.Contexto;
 using LogicaAccesoDatos.Repositorios;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
-using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
-using LogicaNegocio.ValueObject;
+using LogicaNegocio.Servicios;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.EntityFrameworkCore;
 
 namespace GestionOperacionesAduaneras
 {
@@ -40,8 +39,12 @@ namespace GestionOperacionesAduaneras
             // Repositorios
             // builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuarioMock>();
+            builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+            
+
             // Servicios
             builder.Services.AddScoped<IJwtService, JwtService>();
+            builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();
 
             // Casos de uso
             builder.Services.AddScoped<ILogin, Login>();
