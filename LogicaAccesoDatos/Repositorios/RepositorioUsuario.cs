@@ -20,25 +20,36 @@ namespace LogicaAccesoDatos.Repositorios
         }
 
 
-
         public void Add(Usuario item)
         {
-            throw new NotImplementedException();
+            Contexto.Usuarios.Add(item);
+            Contexto.SaveChanges();
+
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var usuario = Contexto.Usuarios.Find(id);
+            if (usuario != null)
+            {
+                Contexto.Usuarios.Remove(usuario);
+                Contexto.SaveChanges();
+            }
         }
 
+        // Traer todos los usuarios
         public IEnumerable<Usuario> FindAll()
         {
-            throw new NotImplementedException();
+            return Contexto.Usuarios
+                .Include(u => u.Rol)
+                .ToList();
         }
 
         public Usuario FindById(int id)
         {
-            throw new NotImplementedException();
+            return Contexto.Usuarios
+                .Include(u => u.Rol)
+                .FirstOrDefault(u => u.Id == id);
         }
 
         public async Task<Usuario?> GetByEmail(string email)
@@ -50,7 +61,15 @@ namespace LogicaAccesoDatos.Repositorios
 
         public void Update(Usuario item, int id)
         {
-            throw new NotImplementedException();
+            var usuarioExistente = Contexto.Usuarios.Find(id);
+            if(usuarioExistente != null)
+            {
+                usuarioExistente.Nombre = item.Nombre;
+                usuarioExistente.Apellido = item.Apellido;
+                usuarioExistente.Email = item.Email;
+                usuarioExistente.RolId = item.RolId;
+                Contexto.SaveChanges();
+            }
         }
     }
 }
