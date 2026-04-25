@@ -94,10 +94,13 @@ namespace LogicaAccesoDatos.Contexto
                         .HasMaxLength(150);
                 });
 
-                entity.HasIndex("Email")
+                
+                /*
+                entity.OwnsOne(u => u.Email)
+                    .HasIndex(e => e.Valor)
                     .IsUnique()
                     .HasDatabaseName("IX_Usuarios_Email_Unique");
-
+                */
                 // Configuración del value object password
                 entity.OwnsOne(u => u.Password, password =>
                 {
@@ -105,10 +108,12 @@ namespace LogicaAccesoDatos.Contexto
                         .HasColumnName("PasswordHash")
                         .IsRequired();
                 });
-
-                entity.Property(u => u.Rol)
+                
+                entity.HasOne(u => u.Rol)
+                    .WithMany()
+                    .HasForeignKey(u => u.RolId)
                     .IsRequired()
-                    .HasColumnName("Rol");
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configuración de la tabla Cliente
@@ -119,7 +124,7 @@ namespace LogicaAccesoDatos.Contexto
                     .HasMaxLength(20)
                     .HasColumnName("RUT");
 
-                entity.HasIndex("RUT")
+                entity.HasIndex(c => c.Rut)
                     .IsUnique()
                     .HasDatabaseName("IX_Clientes_RUT_Unique");
             });
@@ -132,7 +137,7 @@ namespace LogicaAccesoDatos.Contexto
                     .HasMaxLength(20)
                     .HasColumnName("RUT");
 
-                entity.HasIndex("RUT")
+                entity.HasIndex(d => d.Rut)
                     .IsUnique()
                     .HasDatabaseName("IX_Despachantes_RUT_Unique");
             });
