@@ -6,9 +6,7 @@ using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
-using LogicaNegocio.Servicios;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -44,7 +42,7 @@ namespace GestionOperacionesAduaneras
 
             // Servicios
             builder.Services.AddScoped<IJwtService, JwtService>();
-            builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();
+            builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
             // Casos de uso
             builder.Services.AddScoped<ILogin, Login>();
