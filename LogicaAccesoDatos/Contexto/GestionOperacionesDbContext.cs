@@ -114,7 +114,7 @@ namespace LogicaAccesoDatos.Contexto
             // Configuración de la tabla Cliente
             modelBuilder.Entity<Cliente>(entity =>
             {
-                entity.Property(c => c.rut)
+                entity.Property(c => c.Rut)
                     .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("RUT");
@@ -127,7 +127,7 @@ namespace LogicaAccesoDatos.Contexto
             // Configuración de la tabla Despachante
             modelBuilder.Entity<Despachante>(entity =>
             {
-                entity.Property(d => d.rut)
+                entity.Property(d => d.Rut)
                     .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("RUT");
