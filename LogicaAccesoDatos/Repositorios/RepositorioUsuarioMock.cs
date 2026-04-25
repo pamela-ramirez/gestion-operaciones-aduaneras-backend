@@ -19,7 +19,7 @@ namespace LogicaAccesoDatos.Repositorios
             Nombre = "Pamela",
             Apellido = "Test",
             Email = new Email("pamela@test.com"),
-            Password = new Password("Abc123!"),
+            Password = new Password("Abc123!!"),
             RolId = 1,
             Rol = new Rol("Admin")
         }
