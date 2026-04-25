@@ -20,10 +20,29 @@ namespace LogicaAccesoDatos.Contexto
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Despachante> Despachantes { get; set; }
+        public DbSet<Rol> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // Configuración de la tabla Rol
+            modelBuilder.Entity<Rol>(entity =>
+            {
+                entity.ToTable("Roles");
+                entity.HasKey(r => r.Id);
+
+                entity.Property(r => r.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(r => r.NombreRol)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.HasIndex(r => r.NombreRol)
+              .IsUnique();
+            });
+
 
             // Configuración de herencia TPH (Table Per Hierarchy) con discriminador para manehar jerarquia
             modelBuilder.Entity<Usuario>()
