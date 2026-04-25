@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.Entidades;
+﻿using LogicaAccesoDatos.Data;
+using LogicaNegocio.Entidades;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -571,6 +572,9 @@ namespace LogicaAccesoDatos.Contexto
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);
             });
+
+            // Aplicar Seed Data
+            modelBuilder.ConfigureSeedData();
         }
 
     }
