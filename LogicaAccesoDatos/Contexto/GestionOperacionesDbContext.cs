@@ -96,12 +96,13 @@ namespace LogicaAccesoDatos.Contexto
                 });
 
                 
-                /*
+                //
                 entity.OwnsOne(u => u.Email)
                     .HasIndex(e => e.Valor)
                     .IsUnique()
                     .HasDatabaseName("IX_Usuarios_Email_Unique");
-                */
+                //
+
                 // Configuración del value object password
                 entity.OwnsOne(u => u.Password, password =>
                 {
