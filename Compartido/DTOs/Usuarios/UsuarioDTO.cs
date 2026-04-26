@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Compartido.DTOs.Usuarios
 {
-    //internal class UsuarioDTO
-    //{
+
         /// <summary>
         /// DTO para CREAR un usuario.
         /// Lo usa el frontend cuando manda un POST /api/usuarios.
@@ -56,4 +55,3 @@ namespace Compartido.DTOs.Usuarios
             public string Rol { get; set; } = string.Empty;
         }
     }
-//}
