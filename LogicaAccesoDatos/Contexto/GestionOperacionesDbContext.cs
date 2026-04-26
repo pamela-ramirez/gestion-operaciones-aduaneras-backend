@@ -20,8 +20,8 @@ namespace LogicaAccesoDatos.Contexto
         // Tablas de la base de datos
         public DbSet<Rol> Roles { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Despachante> Despachantes { get; set; }
+        //public DbSet<Cliente> Clientes { get; set; }
+        //public DbSet<Despachante> Despachantes { get; set; }
         public DbSet<TipoOperacion> TiposOperacion { get; set; }
         public DbSet<TipoConocimiento> TiposConocimiento { get; set; }
         public DbSet<Operacion> Operaciones { get; set; }
