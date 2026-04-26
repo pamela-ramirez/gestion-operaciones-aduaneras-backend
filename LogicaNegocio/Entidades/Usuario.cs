@@ -15,7 +15,6 @@ namespace LogicaNegocio.Entidades
         public string Apellido { get; set; } = string.Empty;
         public Email Email { get; set; } 
         public Password Password { get; set; }
-        //public Rol Rol { get; set; }
         public int RolId { get; set; }
         public Rol Rol { get; set; }
 
@@ -23,17 +22,12 @@ namespace LogicaNegocio.Entidades
 
         public Usuario(string nombre, string apellido, Email email, Password password, Rol rol)
         {
-            //Id = id;
             Nombre = nombre;
             Apellido = apellido;
             Email = email;
             Password = password;
             Rol = rol;
-        }
-
-
-        
-
+        } 
 
     }
 }
