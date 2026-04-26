@@ -26,7 +26,6 @@ namespace LogicaAccesoDatos.Repositorios
             // Se deberia de validar el cliente primero aqui o ya se manda el cliente validado?
             _context.Clientes.Add(item);
             _context.SaveChanges();
-
         }
 
         public void Delete(int id)
@@ -40,16 +39,20 @@ namespace LogicaAccesoDatos.Repositorios
             _context.SaveChanges();
         }
 
-        public void Update(Cliente item, int id) //VER
+        public void Update(Cliente item, int id)
         {
             Cliente clienteExistente = FindById(id);
             if (clienteExistente == null)
             {
                 throw new Exception("Cliente no encontrado.");
             }
+
+            // Atributos heredados de Usuario
             clienteExistente.Nombre = item.Nombre;
             clienteExistente.Apellido = item.Apellido;
             clienteExistente.Email = new Email(item.Email.Valor); // Porque es value objet
+            
+            // Atributos propios de Cliente
             clienteExistente.Telefono = item.Telefono;
             clienteExistente.Direccion = item.Direccion;
             clienteExistente.Rut = item.Rut;
