@@ -129,6 +129,15 @@ namespace LogicaAccesoDatos.Contexto
                 entity.HasIndex(c => c.Rut)
                     .IsUnique()
                     .HasDatabaseName("IX_Clientes_RUT_Unique");
+
+                entity.Property(c => c.Telefono)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .HasColumnName("Telefono");
+
+                entity.Property(c => c.Direccion)
+                    .HasMaxLength(300)
+                    .HasColumnName("Direccion");
             });
 
             // Configuración de la tabla Despachante
