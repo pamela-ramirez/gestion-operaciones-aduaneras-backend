@@ -13,3 +13,4 @@ Release/
 *.dll
 *.exe
 *.log
+/codigo_completo.txt
