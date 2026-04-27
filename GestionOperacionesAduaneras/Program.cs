@@ -2,7 +2,9 @@
 using GestionOperacionesAduaneras.Servicios;
 using LogicaAccesoDatos.Contexto;
 using LogicaAccesoDatos.Repositorios;
+using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
@@ -40,14 +42,21 @@ namespace GestionOperacionesAduaneras
             // builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuarioMock>();
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
-            
+            builder.Services.AddScoped<IClienteService, ClienteService>();
+
 
             // Servicios
             builder.Services.AddScoped<IJwtService, JwtService>();
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+            builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
             // Casos de uso
             builder.Services.AddScoped<ILogin, Login>();
+            builder.Services.AddScoped<ICrearCliente, CrearCliente>();
+            builder.Services.AddScoped<IObtenerClientes, ObtenerClientes>();
+            builder.Services.AddScoped<IObtenerClientePorId, ObtenerClientePorId>();
+            builder.Services.AddScoped<IModificarCliente, ModificarCliente>();
+            builder.Services.AddScoped<IEliminarCliente, EliminarCliente>();
 
             // Autenticación JWT
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
