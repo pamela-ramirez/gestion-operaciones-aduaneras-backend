@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Excepciones.Roles
 {
-    public class RolException:Exception
+    public class RolException : ClassException
     {
-        public RolException() { }
+        public RolException() : base("Rol no encontrado") { }
 
-        public RolException(string message) : base(message) { }
-
-        public RolException(string message, Exception innerException) : base(message, innerException) { }
     }
 }
