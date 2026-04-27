@@ -79,7 +79,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaEnvio")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 25, 16, 19, 16, 696, DateTimeKind.Local).AddTicks(2095))
+                        .HasDefaultValue(new DateTime(2026, 4, 26, 17, 10, 36, 316, DateTimeKind.Local).AddTicks(3032))
                         .HasColumnName("FechaEnvio");
 
                     b.Property<int?>("OperacionId")
@@ -143,7 +143,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 25, 16, 19, 16, 693, DateTimeKind.Local).AddTicks(197))
+                        .HasDefaultValue(new DateTime(2026, 4, 26, 17, 10, 36, 315, DateTimeKind.Local).AddTicks(12))
                         .HasColumnName("FechaCarga");
 
                     b.Property<string>("Formato")
@@ -185,7 +185,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 25, 16, 19, 16, 695, DateTimeKind.Local).AddTicks(6675))
+                        .HasDefaultValue(new DateTime(2026, 4, 26, 17, 10, 36, 316, DateTimeKind.Local).AddTicks(82))
                         .HasColumnName("FechaCarga");
 
                     b.Property<int>("LiquidacionId")
@@ -261,7 +261,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaRegistro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 25, 16, 19, 16, 691, DateTimeKind.Local).AddTicks(1834))
+                        .HasDefaultValue(new DateTime(2026, 4, 26, 17, 10, 36, 314, DateTimeKind.Local).AddTicks(2357))
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("NroCarpeta")
@@ -547,7 +547,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaValidacion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 25, 16, 19, 16, 695, DateTimeKind.Local).AddTicks(2855))
+                        .HasDefaultValue(new DateTime(2026, 4, 26, 17, 10, 36, 315, DateTimeKind.Local).AddTicks(7697))
                         .HasColumnName("FechaValidacion");
 
                     b.Property<string>("MotivoRechazo")
@@ -575,12 +575,23 @@ namespace LogicaAccesoDatos.Migrations
                 {
                     b.HasBaseType("LogicaNegocio.Entidades.Usuario");
 
+                    b.Property<string>("Direccion")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)")
+                        .HasColumnName("Direccion");
+
                     b.Property<string>("Rut")
                         .IsRequired()
                         .ValueGeneratedOnUpdateSometimes()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("RUT");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("Telefono");
 
                     b.HasIndex("Rut")
                         .IsUnique()
@@ -755,6 +766,10 @@ namespace LogicaAccesoDatos.Migrations
                                 .HasColumnName("Email");
 
                             b1.HasKey("UsuarioId");
+
+                            b1.HasIndex("Valor")
+                                .IsUnique()
+                                .HasDatabaseName("IX_Usuarios_Email_Unique");
 
                             b1.ToTable("Usuarios");
 

@@ -20,8 +20,10 @@ namespace GestionOperacionesAduaneras
             var builder = WebApplication.CreateBuilder(args);
 
             // Base de datos
-            //builder.Services.AddDbContext<GestionOperacionesDbContext>(options =>
-            // options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<GestionOperacionesDbContext>(options =>
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("DefaultConnection")
+                ));
 
             // Agregar DbContext
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
