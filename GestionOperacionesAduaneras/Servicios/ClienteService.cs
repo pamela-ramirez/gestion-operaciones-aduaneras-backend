@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.Cliente;
 using LogicaNegocio.Entidades;
+using LogicaNegocio.Excepciones.Roles;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
 using LogicaNegocio.ValueObject;
@@ -9,14 +10,20 @@ namespace GestionOperacionesAduaneras.Servicios
     public class ClienteService : IClienteService
     {
         private readonly IRepositorioCliente _repositorioCliente;
+        private readonly IRepositorioRol _repositorioRol; // Agregar esta dependencia
+
 
         public ClienteService(IRepositorioCliente repositorioCliente)
         {
             _repositorioCliente = repositorioCliente;
+            _repositorioRol = repositorioRol;
         }
 
         public ClienteRespuestaDTO CrearCliente(CrearClienteDTO dto)
         {
+            var rolCliente = _repositorioRol.FindByNombre("Cliente")
+                ?? throw new RolException();
+
             var cliente = new Cliente
             {
                 Nombre = dto.Nombre,
@@ -25,7 +32,8 @@ namespace GestionOperacionesAduaneras.Servicios
                 Password = new Password(dto.Password),
                 Rut = dto.Rut,
                 Telefono = dto.Telefono,
-                Direccion = dto.Direccion
+                Direccion = dto.Direccion,
+                Rol = rolCliente
             };
             _repositorioCliente.Add(cliente);
             return MapearARespuesta(cliente);
