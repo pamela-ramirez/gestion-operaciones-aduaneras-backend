@@ -42,13 +42,13 @@ namespace GestionOperacionesAduaneras
             // builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuarioMock>();
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
-            builder.Services.AddScoped<IClienteService, ClienteService>();
+            builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();
 
 
             // Servicios
             builder.Services.AddScoped<IJwtService, JwtService>();
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-            builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+            builder.Services.AddScoped<IClienteService, ClienteService>();
 
             // Casos de uso
             builder.Services.AddScoped<ILogin, Login>();
