@@ -13,7 +13,7 @@ namespace LogicaAccesoDatos.Repositorios
     {
         private List<Usuario> usuarios = new List<Usuario>
     {
-        new Usuario
+        /*new Usuario
         {
             Id = 1,
             Nombre = "Pamela",
@@ -22,7 +22,7 @@ namespace LogicaAccesoDatos.Repositorios
             Password = new Password("Abc123!!"),
             RolId = 1,
             Rol = new Rol("Admin")
-        }
+        }*/
     };
 
         public void Add(Usuario item)

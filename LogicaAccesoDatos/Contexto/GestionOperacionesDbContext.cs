@@ -66,6 +66,7 @@ namespace LogicaAccesoDatos.Contexto
                 .HasValue<Usuario>(0)
                 .HasValue<Cliente>(1)
                 .HasValue<Despachante>(2);
+            //TODO - Agregar clase admin (nuevo rol)
 
             // Configuración de la tabla Usuario
             modelBuilder.Entity<Usuario>(entity =>

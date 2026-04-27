@@ -16,7 +16,7 @@ namespace GestionOperacionesAduaneras.Servicios
         }
         public UsuarioRespuestaDTO CrearUsuario(CrearUsuarioDTO dto)
         {
-            ValidarPassword(dto.Password);
+            ValidarPassword(dto.Password); // TODO - borrar
 
             var emailExistente = _repositorioUsuario.GetByEmail(dto.Email).Result;
             if (emailExistente != null)
@@ -24,10 +24,12 @@ namespace GestionOperacionesAduaneras.Servicios
 
             if (dto.RolId <= 0)
                 throw new Exception("Debe asignar un rol al usuario.");
+            // TODO - try catch agregar para mostrar excepciones de validación de email y password
+            var email = new Email(dto.Email);// mostrar excepciones
+            var password = new Password(dto.Password); //mostrar excepciones de validación de password
 
-            var email = new Email(dto.Email);
-            var password = new Password(dto.Password);
-
+            // TODO - Generar contraseña temporal que luego sera validada x el usuario
+            // TODO - segun el rol es el objeto a crear, modificar
             var usuario = new Usuario(dto.Nombre, dto.Apellido, email, password, null)
             {
                 RolId = dto.RolId
