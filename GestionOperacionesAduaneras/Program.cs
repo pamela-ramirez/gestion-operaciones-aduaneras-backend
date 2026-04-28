@@ -39,19 +39,26 @@ namespace GestionOperacionesAduaneras
 
 
             // Repositorios
-            // builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
-            builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuarioMock>();
+            //builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuarioMock>();
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
             builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();
-
+            builder.Services.AddScoped<IRepositorioRol, RepositorioRol>();
 
             // Servicios
             builder.Services.AddScoped<IJwtService, JwtService>();
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
             builder.Services.AddScoped<IClienteService, ClienteService>();
-            builder.Services.AddScoped<IRepositorioRol, RepositorioRol>();
 
-            // Casos de uso
+
+
+            // Casos de uso usuario
+            builder.Services.AddScoped<ICrearUsuario, CrearUsuario>();
+            builder.Services.AddScoped<IObtenerUsuarios, ObtenerUsuarios>();
+            builder.Services.AddScoped<IObtenerUsuarioPorId, ObtenerUsuarioPorId>();
+            builder.Services.AddScoped<IModificarUsuario, ModificarUsuario>();
+            builder.Services.AddScoped<IEliminarUsuario, EliminarUsuario>();
+
+            // Casos de uso cliente
             builder.Services.AddScoped<ILogin, Login>();
             builder.Services.AddScoped<ICrearCliente, CrearCliente>();
             builder.Services.AddScoped<IObtenerClientes, ObtenerClientes>();
