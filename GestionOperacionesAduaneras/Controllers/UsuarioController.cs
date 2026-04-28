@@ -1,4 +1,5 @@
 ﻿using Compartido.DTOs.Usuarios;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesServicios;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,12 +9,27 @@ namespace GestionOperacionesAduaneras.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private readonly IUsuarioService _usuarioService;
+        private readonly ICrearUsuario _crearUsuario;
+        private readonly IObtenerUsuarios _obtenerUsuarios;
+        private readonly IObtenerUsuarioPorId _obtenerUsuarioPorId;
+        private readonly IModificarUsuario _modificarUsuario;
+        private readonly IEliminarUsuario _eliminarUsuario;
 
-        public UsuarioController(IUsuarioService usuarioService)
+        public UsuarioController(
+            ICrearUsuario crearUsuario,
+            IObtenerUsuarios obtenerUsuarios,
+            IObtenerUsuarioPorId obtenerUsuarioPorId,
+            IModificarUsuario modificarUsuario,
+            IEliminarUsuario eliminarUsuario
+        )
         {
-            _usuarioService = usuarioService;
+            _crearUsuario = crearUsuario;
+            _obtenerUsuarios = obtenerUsuarios;
+            _obtenerUsuarioPorId = obtenerUsuarioPorId;
+            _modificarUsuario = modificarUsuario;
+            _eliminarUsuario = eliminarUsuario;
         }
+
 
         // POST  /api/usuarios - Crear usuarios
         [HttpPost]
@@ -22,7 +38,7 @@ namespace GestionOperacionesAduaneras.Controllers
             try
             {
                 // 201 Created y la ubicacion del nuevo usuario
-                var resultado = _usuarioService.CrearUsuario(dto);
+                var resultado = _crearUsuario.Ejecutar(dto);
                 return CreatedAtAction(
                     nameof(ObtenerPorId),
                     new { id = resultado.Id },
@@ -42,7 +58,7 @@ namespace GestionOperacionesAduaneras.Controllers
         {
             try
             {
-                var resultado = _usuarioService.ObtenerUsuarioPorId(id);
+                var resultado = _obtenerUsuarioPorId.Ejecutar(id);
                 // 200 OK con el usuario encontrado
                 return Ok(resultado);
             }
@@ -59,7 +75,7 @@ namespace GestionOperacionesAduaneras.Controllers
         {
             try
             {
-                var resultado = _usuarioService.ModificarUsuario(id, dto);
+                var resultado = _modificarUsuario.Ejecutar(id, dto);
                 // 200 OK con el usuario modificado
                 return Ok(resultado);
             }
@@ -76,7 +92,7 @@ namespace GestionOperacionesAduaneras.Controllers
         {
             try
             {
-                _usuarioService.EliminarUsuario(id);
+                _eliminarUsuario.Ejecutar(id);
                 // 204 No Content si se eliminó correctamente, no devuelve contenido
                 return NoContent();
             }
