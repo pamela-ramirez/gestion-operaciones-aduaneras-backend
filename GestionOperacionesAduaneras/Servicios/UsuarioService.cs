@@ -86,6 +86,12 @@ namespace GestionOperacionesAduaneras.Servicios
             return MapearARespuesta(usuario);
         }
 
+        public IEnumerable<UsuarioRespuestaDTO> ObtenerUsuarios()
+        {
+            var usuarios = _repositorioUsuario.FindAll();
+            return usuarios.Select(u => MapearARespuesta(u)).ToList();
+        }
+
         private void ValidarPassword(string password)
         {
             if (password.Length < 8)
