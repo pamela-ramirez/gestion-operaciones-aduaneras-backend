@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.Cliente;
 using LogicaNegocio.Entidades;
+using LogicaNegocio.Excepciones.Cliente;
 using LogicaNegocio.Excepciones.Roles;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
@@ -10,10 +11,10 @@ namespace GestionOperacionesAduaneras.Servicios
     public class ClienteService : IClienteService
     {
         private readonly IRepositorioCliente _repositorioCliente;
-        private readonly IRepositorioRol _repositorioRol; // Agregar esta dependencia
+        private readonly IRepositorioRol _repositorioRol;
 
 
-        public ClienteService(IRepositorioCliente repositorioCliente)
+        public ClienteService(IRepositorioCliente repositorioCliente, IRepositorioRol repositorioRol)
         {
             _repositorioCliente = repositorioCliente;
             _repositorioRol = repositorioRol;
@@ -44,7 +45,7 @@ namespace GestionOperacionesAduaneras.Servicios
             var cliente = _repositorioCliente.FindById(id);
 
             if (cliente == null)
-                throw new Exception("Cliente no encontrado.");
+                throw new ClienteNoEncontradoException();
 
             _repositorioCliente.Delete(id);
 
@@ -55,7 +56,7 @@ namespace GestionOperacionesAduaneras.Servicios
             var cliente = _repositorioCliente.FindById(id);
             if (cliente == null)
             {
-                throw new Exception("Cliente no encontrado");
+                throw new ClienteNoEncontradoException();
             }
             cliente.Nombre = dto.Nombre;
             cliente.Apellido = dto.Apellido;
@@ -73,7 +74,7 @@ namespace GestionOperacionesAduaneras.Servicios
             var cliente = _repositorioCliente.FindById(id);
             if (cliente == null)
             {
-                throw new Exception("Cliente no encontrado");
+                throw new ClienteNoEncontradoException();
             }
             return MapearARespuesta(cliente);
         }
