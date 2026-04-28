@@ -13,3 +13,5 @@ Release/
 *.dll
 *.exe
 *.log
+*.txt
+*.cs
