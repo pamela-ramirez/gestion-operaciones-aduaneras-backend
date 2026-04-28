@@ -13,5 +13,6 @@ namespace LogicaNegocio.InterfacesServicios
         UsuarioRespuestaDTO ObtenerUsuarioPorId(int id);
         UsuarioRespuestaDTO ModificarUsuario(int id, ModificarUsuarioDTO dto);
         void EliminarUsuario(int id);
+        IEnumerable<UsuarioRespuestaDTO> ObtenerUsuarios();
     }
 }
