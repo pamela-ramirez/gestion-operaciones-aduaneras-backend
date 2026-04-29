@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Compartido.DTOs.Usuarios
 {
-
+    /*
         /// <summary>
         /// DTO para CREAR un usuario.
         /// Lo usa el frontend cuando manda un POST /api/usuarios.
@@ -29,7 +29,7 @@ namespace Compartido.DTOs.Usuarios
         /// DTO para MODIFICAR un usuario.
         /// Lo usa el frontend cuando manda un PUT /api/usuarios/{id}.
         /// No incluye contraseña porque modificarla será un proceso aparte.
-        /// </summary>
+        /// </summary>*/
         public class ModificarUsuarioDTO
         {
             public string Nombre { get; set; } = string.Empty;
