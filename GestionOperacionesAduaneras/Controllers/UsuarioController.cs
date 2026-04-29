@@ -9,28 +9,28 @@ namespace GestionOperacionesAduaneras.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private readonly ICrearUsuario _crearUsuario;
+        //private readonly ICrearUsuario _crearUsuario;
         private readonly IObtenerUsuarios _obtenerUsuarios;
         private readonly IObtenerUsuarioPorId _obtenerUsuarioPorId;
         private readonly IModificarUsuario _modificarUsuario;
         private readonly IEliminarUsuario _eliminarUsuario;
 
         public UsuarioController(
-            ICrearUsuario crearUsuario,
+            //ICrearUsuario crearUsuario,
             IObtenerUsuarios obtenerUsuarios,
             IObtenerUsuarioPorId obtenerUsuarioPorId,
             IModificarUsuario modificarUsuario,
             IEliminarUsuario eliminarUsuario
         )
         {
-            _crearUsuario = crearUsuario;
+            //_crearUsuario = crearUsuario;
             _obtenerUsuarios = obtenerUsuarios;
             _obtenerUsuarioPorId = obtenerUsuarioPorId;
             _modificarUsuario = modificarUsuario;
             _eliminarUsuario = eliminarUsuario;
         }
 
-
+        /*
         // POST  /api/usuarios - Crear usuarios
         [HttpPost]
         public IActionResult Crear([FromBody] CrearUsuarioDTO dto)
@@ -50,7 +50,7 @@ namespace GestionOperacionesAduaneras.Controllers
                 // 400 Bad Request con el msj de error
                 return BadRequest(new { mensaje = ex.Message });
             }
-        }
+        }*/
 
         // GET /api/usuarios/{id} - Obtener usuario por ID
         [HttpGet("{id}")]
@@ -66,6 +66,23 @@ namespace GestionOperacionesAduaneras.Controllers
             {
                 // 404 Not Found si no se encuentra el usuario
                 return NotFound(new { mensaje = ex.Message });
+            }
+        }
+
+        // GET /api/usuarios - Obtener todos los usuarios
+        [HttpGet]
+        public IActionResult ObtenerTodos()
+        {
+            try
+            {
+                var resultado = _obtenerUsuarios.Ejecutar();
+                // 200 OK con la lista de usuarios
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                // 400 Bad Request con el msj de error
+                return BadRequest(new { mensaje = ex.Message });
             }
         }
 
