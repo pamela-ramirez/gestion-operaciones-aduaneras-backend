@@ -98,6 +98,17 @@ namespace GestionOperacionesAduaneras
                     }
                 });
              });
+            
+            //activar cors para permitir peticiones desde el frontend (React/Vite)
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontend", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5173") // tu React (Vite)
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
 
             var app = builder.Build();
   
@@ -109,6 +120,7 @@ namespace GestionOperacionesAduaneras
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("AllowFrontend"); // <-- habilitar CORS
             app.UseAuthentication(); // <-- primero autenticación
             app.UseAuthorization();  // <-- después autorización
 
