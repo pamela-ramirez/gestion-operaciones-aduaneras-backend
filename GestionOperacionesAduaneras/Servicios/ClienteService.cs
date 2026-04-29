@@ -23,7 +23,7 @@ namespace GestionOperacionesAduaneras.Servicios
         public ClienteRespuestaDTO CrearCliente(CrearClienteDTO dto)
         {
             var rolCliente = _repositorioRol.FindByNombre("Cliente")
-                ?? throw new RolNoEncontradoException();
+                ?? throw new RolException();
 
             var cliente = new Cliente
             {
