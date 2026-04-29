@@ -13,20 +13,19 @@ namespace LogicaAccesoDatos.Repositorios
 {
     public class RepositorioUsuario : IRepositorioUsuario
     {
-        //public GestionOperacionesDbContext Contexto { get; set; }
         private readonly GestionOperacionesDbContext _context;
 
         public RepositorioUsuario(GestionOperacionesDbContext context)
         {
             _context = context;
         }
-
+        
         public void Add(Usuario item)
         {
             _context.Usuarios.Add(item);
             _context.SaveChanges();
         }
-
+        
         public void Delete(int id)
         {
             var usuario = FindById(id);
