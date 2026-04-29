@@ -14,31 +14,6 @@ namespace GestionOperacionesAduaneras.Servicios
         {
             _repositorioUsuario = repositorioUsuario;
         }
-        public UsuarioRespuestaDTO CrearUsuario(CrearUsuarioDTO dto)
-        {
-            ValidarPassword(dto.Password);
-
-            var emailExistente = _repositorioUsuario.GetByEmail(dto.Email).Result;
-            if (emailExistente != null)
-                throw new Exception("El correo electrónico ya está registrado.");
-
-            if (dto.RolId <= 0)
-                throw new Exception("Debe asignar un rol al usuario.");
-
-            var email = new Email(dto.Email);
-            var password = new Password(dto.Password);
-
-            var usuario = new Usuario(dto.Nombre, dto.Apellido, email, password, null)
-            {
-                RolId = dto.RolId
-            };
-
-            _repositorioUsuario.Add(usuario);
-
-            return MapearARespuesta(usuario);
-
-        }
-
         public void EliminarUsuario(int id)
         {
             var usuario = _repositorioUsuario.FindById(id);
@@ -82,6 +57,12 @@ namespace GestionOperacionesAduaneras.Servicios
                 throw new Exception("Usuario no encontrado.");
 
             return MapearARespuesta(usuario);
+        }
+
+        public IEnumerable<UsuarioRespuestaDTO> ObtenerUsuarios()
+        {
+            var usuarios = _repositorioUsuario.FindAll();
+            return usuarios.Select(u => MapearARespuesta(u)).ToList();
         }
 
         private void ValidarPassword(string password)

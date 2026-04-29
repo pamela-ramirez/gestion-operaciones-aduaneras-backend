@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios
 {
-    internal interface IEliminarUsuario
+    public interface IEliminarUsuario
     {
+        void Ejecutar(int id);
     }
 }

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios
+namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente
 {
-    internal interface IBuscarUsuario
+    public interface IEliminarCliente
     {
+        void Ejecutar(int id);
     }
 }

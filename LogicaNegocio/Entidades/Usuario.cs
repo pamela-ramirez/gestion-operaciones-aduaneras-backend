@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Entidades
 {
-    public class Usuario:IEntity
+    public abstract class Usuario:IEntity
     {
         public int Id { get; set; }
         public string Nombre { get; set; } = string.Empty;

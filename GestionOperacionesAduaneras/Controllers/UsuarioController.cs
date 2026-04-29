@@ -1,4 +1,5 @@
 ﻿using Compartido.DTOs.Usuarios;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesServicios;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,33 +9,24 @@ namespace GestionOperacionesAduaneras.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private readonly IUsuarioService _usuarioService;
+        private readonly IObtenerUsuarios _obtenerUsuarios;
+        private readonly IObtenerUsuarioPorId _obtenerUsuarioPorId;
+        private readonly IModificarUsuario _modificarUsuario;
+        private readonly IEliminarUsuario _eliminarUsuario;
 
-        public UsuarioController(IUsuarioService usuarioService)
+        public UsuarioController(
+            IObtenerUsuarios obtenerUsuarios,
+            IObtenerUsuarioPorId obtenerUsuarioPorId,
+            IModificarUsuario modificarUsuario,
+            IEliminarUsuario eliminarUsuario
+        )
         {
-            _usuarioService = usuarioService;
+            _obtenerUsuarios = obtenerUsuarios;
+            _obtenerUsuarioPorId = obtenerUsuarioPorId;
+            _modificarUsuario = modificarUsuario;
+            _eliminarUsuario = eliminarUsuario;
         }
 
-        // POST  /api/usuarios - Crear usuarios
-        [HttpPost]
-        public IActionResult Crear([FromBody] CrearUsuarioDTO dto)
-        {
-            try
-            {
-                // 201 Created y la ubicacion del nuevo usuario
-                var resultado = _usuarioService.CrearUsuario(dto);
-                return CreatedAtAction(
-                    nameof(ObtenerPorId),
-                    new { id = resultado.Id },
-                    resultado
-                );
-            }
-            catch (Exception ex)
-            {
-                // 400 Bad Request con el msj de error
-                return BadRequest(new { mensaje = ex.Message });
-            }
-        }
 
         // GET /api/usuarios/{id} - Obtener usuario por ID
         [HttpGet("{id}")]
@@ -42,7 +34,7 @@ namespace GestionOperacionesAduaneras.Controllers
         {
             try
             {
-                var resultado = _usuarioService.ObtenerUsuarioPorId(id);
+                var resultado = _obtenerUsuarioPorId.Ejecutar(id);
                 // 200 OK con el usuario encontrado
                 return Ok(resultado);
             }
@@ -53,13 +45,30 @@ namespace GestionOperacionesAduaneras.Controllers
             }
         }
 
+        // GET /api/usuarios - Obtener todos los usuarios
+        [HttpGet]
+        public IActionResult ObtenerTodos()
+        {
+            try
+            {
+                var resultado = _obtenerUsuarios.Ejecutar();
+                // 200 OK con la lista de usuarios
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                // 400 Bad Request con el msj de error
+                return BadRequest(new { mensaje = ex.Message });
+            }
+        }
+
         // PUT /api/usuarios/{id} - Modificar usuario
         [HttpPut("{id}")]
         public IActionResult Modificar(int id, [FromBody] ModificarUsuarioDTO dto)
         {
             try
             {
-                var resultado = _usuarioService.ModificarUsuario(id, dto);
+                var resultado = _modificarUsuario.Ejecutar(id, dto);
                 // 200 OK con el usuario modificado
                 return Ok(resultado);
             }
@@ -76,7 +85,7 @@ namespace GestionOperacionesAduaneras.Controllers
         {
             try
             {
-                _usuarioService.EliminarUsuario(id);
+                _eliminarUsuario.Ejecutar(id);
                 // 204 No Content si se eliminó correctamente, no devuelve contenido
                 return NoContent();
             }

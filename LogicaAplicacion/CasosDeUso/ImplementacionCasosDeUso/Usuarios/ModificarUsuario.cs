@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
+﻿using Compartido.DTOs.Usuarios;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesServicios;
 using System;
 using System.Collections.Generic;
@@ -8,17 +9,18 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
 {
-    public class EliminarUsuario : IEliminarUsuario
+    public class ModificarUsuario : IModificarUsuario
     {
         private readonly IUsuarioService _usuarioService;
 
-        public EliminarUsuario(IUsuarioService usuarioService)
+        public ModificarUsuario(IUsuarioService usuarioService)
         {
             _usuarioService = usuarioService;
         }
-        public void Ejecutar(int id)
+
+        public UsuarioRespuestaDTO Ejecutar(int id, ModificarUsuarioDTO dto)
         {
-            _usuarioService.EliminarUsuario(id);
+            return _usuarioService.ModificarUsuario(id, dto);
         }
     }
 }

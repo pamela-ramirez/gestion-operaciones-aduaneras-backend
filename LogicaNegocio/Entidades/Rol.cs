@@ -29,7 +29,7 @@ namespace LogicaNegocio.Entidades
         {
             if (string.IsNullOrEmpty(NombreRol))
             {
-                throw new RolException("El rol debe tener un nombre");
+                throw new RolSinNombreException();
             }
         }
 
