@@ -14,6 +14,7 @@ namespace GestionOperacionesAduaneras.Servicios
         {
             _repositorioUsuario = repositorioUsuario;
         }
+        /*
         public UsuarioRespuestaDTO CrearUsuario(CrearUsuarioDTO dto)
         {
             ValidarPassword(dto.Password); // TODO - borrar
@@ -40,7 +41,7 @@ namespace GestionOperacionesAduaneras.Servicios
             return MapearARespuesta(usuario);
 
         }
-
+        */
         public void EliminarUsuario(int id)
         {
             var usuario = _repositorioUsuario.FindById(id);
