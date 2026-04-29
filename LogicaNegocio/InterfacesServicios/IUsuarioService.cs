@@ -9,7 +9,6 @@ namespace LogicaNegocio.InterfacesServicios
 {
     public interface IUsuarioService
     {
-        //UsuarioRespuestaDTO CrearUsuario(CrearUsuarioDTO dto);
         UsuarioRespuestaDTO ObtenerUsuarioPorId(int id);
         UsuarioRespuestaDTO ModificarUsuario(int id, ModificarUsuarioDTO dto);
         void EliminarUsuario(int id);
