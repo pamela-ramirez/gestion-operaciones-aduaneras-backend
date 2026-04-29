@@ -52,7 +52,7 @@ namespace GestionOperacionesAduaneras
 
 
             // Casos de uso usuario
-            builder.Services.AddScoped<ICrearUsuario, CrearUsuario>();
+            //builder.Services.AddScoped<ICrearUsuario, CrearUsuario>();
             builder.Services.AddScoped<IObtenerUsuarios, ObtenerUsuarios>();
             builder.Services.AddScoped<IObtenerUsuarioPorId, ObtenerUsuarioPorId>();
             builder.Services.AddScoped<IModificarUsuario, ModificarUsuario>();
