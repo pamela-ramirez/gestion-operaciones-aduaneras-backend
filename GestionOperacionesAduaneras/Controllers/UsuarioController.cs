@@ -9,48 +9,24 @@ namespace GestionOperacionesAduaneras.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        //private readonly ICrearUsuario _crearUsuario;
         private readonly IObtenerUsuarios _obtenerUsuarios;
         private readonly IObtenerUsuarioPorId _obtenerUsuarioPorId;
         private readonly IModificarUsuario _modificarUsuario;
         private readonly IEliminarUsuario _eliminarUsuario;
 
         public UsuarioController(
-            //ICrearUsuario crearUsuario,
             IObtenerUsuarios obtenerUsuarios,
             IObtenerUsuarioPorId obtenerUsuarioPorId,
             IModificarUsuario modificarUsuario,
             IEliminarUsuario eliminarUsuario
         )
         {
-            //_crearUsuario = crearUsuario;
             _obtenerUsuarios = obtenerUsuarios;
             _obtenerUsuarioPorId = obtenerUsuarioPorId;
             _modificarUsuario = modificarUsuario;
             _eliminarUsuario = eliminarUsuario;
         }
 
-        /*
-        // POST  /api/usuarios - Crear usuarios
-        [HttpPost]
-        public IActionResult Crear([FromBody] CrearUsuarioDTO dto)
-        {
-            try
-            {
-                // 201 Created y la ubicacion del nuevo usuario
-                var resultado = _crearUsuario.Ejecutar(dto);
-                return CreatedAtAction(
-                    nameof(ObtenerPorId),
-                    new { id = resultado.Id },
-                    resultado
-                );
-            }
-            catch (Exception ex)
-            {
-                // 400 Bad Request con el msj de error
-                return BadRequest(new { mensaje = ex.Message });
-            }
-        }*/
 
         // GET /api/usuarios/{id} - Obtener usuario por ID
         [HttpGet("{id}")]
