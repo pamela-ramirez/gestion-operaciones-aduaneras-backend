@@ -3,8 +3,10 @@ using GestionOperacionesAduaneras.Servicios;
 using LogicaAccesoDatos.Contexto;
 using LogicaAccesoDatos.Repositorios;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente;
+using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
@@ -37,7 +39,6 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddSwaggerGen();
 
 
-
             // Repositorios
             //builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuarioMock>();
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
@@ -48,23 +49,28 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IJwtService, JwtService>();
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
             builder.Services.AddScoped<IClienteService, ClienteService>();
-
-
+            builder.Services.AddScoped<IRolService, RolService>();
 
             // Casos de uso usuario
-            //builder.Services.AddScoped<ICrearUsuario, CrearUsuario>();
             builder.Services.AddScoped<IObtenerUsuarios, ObtenerUsuarios>();
             builder.Services.AddScoped<IObtenerUsuarioPorId, ObtenerUsuarioPorId>();
             builder.Services.AddScoped<IModificarUsuario, ModificarUsuario>();
             builder.Services.AddScoped<IEliminarUsuario, EliminarUsuario>();
 
-            // Casos de uso cliente
+            // Casos de uso cliente 
             builder.Services.AddScoped<ILogin, Login>();
             builder.Services.AddScoped<ICrearCliente, CrearCliente>();
             builder.Services.AddScoped<IObtenerClientes, ObtenerClientes>();
             builder.Services.AddScoped<IObtenerClientePorId, ObtenerClientePorId>();
             builder.Services.AddScoped<IModificarCliente, ModificarCliente>();
             builder.Services.AddScoped<IEliminarCliente, EliminarCliente>();
+
+            // Casos de uso rol
+            builder.Services.AddScoped<ICrearRol, CrearRol>();
+            builder.Services.AddScoped<IObtenerRoles, ObtenerRoles>();
+            builder.Services.AddScoped<IObtenerRolPorId, ObtenerRolPorId>();
+            builder.Services.AddScoped<IModificarRol, ModificarRol>();
+            builder.Services.AddScoped<IEliminarRol, EliminarRol>();
 
             // Autenticación JWT
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -114,8 +120,8 @@ namespace GestionOperacionesAduaneras
                         new string[] {}
                     }
                 });
-             });
-            
+            });
+
             //activar cors para permitir peticiones desde el frontend (React/Vite)
             builder.Services.AddCors(options =>
             {
@@ -128,7 +134,7 @@ namespace GestionOperacionesAduaneras
             });
 
             var app = builder.Build();
-  
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

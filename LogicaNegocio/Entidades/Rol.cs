@@ -12,7 +12,7 @@ namespace LogicaNegocio.Entidades
     {
         public int Id { get; set; }
         public string NombreRol { get; set; }
-        private Rol() { }
+        public Rol() { }
 
         public Rol(string nombreRol)
         {
