@@ -57,7 +57,7 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IModificarUsuario, ModificarUsuario>();
             builder.Services.AddScoped<IEliminarUsuario, EliminarUsuario>();
 
-            // Casos de uso cliente
+            // Casos de uso cliente 
             builder.Services.AddScoped<ILogin, Login>();
             builder.Services.AddScoped<ICrearCliente, CrearCliente>();
             builder.Services.AddScoped<IObtenerClientes, ObtenerClientes>();
@@ -120,10 +120,21 @@ namespace GestionOperacionesAduaneras
                         new string[] {}
                     }
                 });
-             });
+            });
+
+            //activar cors para permitir peticiones desde el frontend (React/Vite)
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontend", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5173") // tu React (Vite)
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
 
             var app = builder.Build();
-  
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -132,6 +143,7 @@ namespace GestionOperacionesAduaneras
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("AllowFrontend"); // <-- habilitar CORS
             app.UseAuthentication(); // <-- primero autenticación
             app.UseAuthorization();  // <-- después autorización
 
