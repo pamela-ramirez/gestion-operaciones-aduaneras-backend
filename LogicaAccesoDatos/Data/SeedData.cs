@@ -7,13 +7,14 @@ namespace LogicaAccesoDatos.Data
     {
         public static void ConfigureSeedData(this ModelBuilder modelBuilder)
         {
+
             // ============================================================================
             // SEED DATA - ROLES
             // ============================================================================
             modelBuilder.Entity<Rol>().HasData(
-                new Rol("Despachante") { Id = 1 },
-                new Rol("Cliente") { Id = 2 },
-                new Rol("Asistente") { Id = 3 }
+                new Rol("Administrador") { Id = 1 },
+                new Rol("Despachante") { Id = 2 },
+                new Rol("Cliente") { Id = 3 }
             );
 
             // ============================================================================

@@ -1,4 +1,6 @@
-﻿using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
+﻿using Compartido.DTOs.Rol;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
+using LogicaNegocio.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using static Compartido.DTOs.Rol.RolDTO;
 
@@ -10,32 +12,24 @@ namespace GestionOperacionesAduaneras.Controllers
     {
         private readonly ICrearRol _crearRol;
         private readonly IObtenerRoles _obtenerRoles;
-        private readonly IObtenerRolPorId _obtenerRolPorId;
-        private readonly IModificarRol _modificarRol;
-        private readonly IEliminarRol _eliminarRol;
 
         public RolController(
             ICrearRol crearRol,
-            IObtenerRoles obtenerRoles,
-            IObtenerRolPorId obtenerRolPorId,
-            IModificarRol modificarRol,
-            IEliminarRol eliminarRol)
+            IObtenerRoles obtenerRoles)
         {
             _crearRol = crearRol;
             _obtenerRoles = obtenerRoles;
-            _obtenerRolPorId = obtenerRolPorId;
-            _modificarRol = modificarRol;
-            _eliminarRol = eliminarRol;
+           
         }
 
         // POST /api/rol
         [HttpPost]
-        public IActionResult Crear([FromBody] CrearRolDTO dto)
+        public IActionResult Crear([FromBody] RolDTO dto)
         {
             try
             {
-                var resultado = _crearRol.Ejecutar(dto);
-                return CreatedAtAction(nameof(ObtenerPorId), new { id = resultado.Id }, resultado);
+                var rol = _crearRol.Ejecutar(dto);
+                return Ok(rol);
             }
             catch (Exception ex)
             {
@@ -58,49 +52,6 @@ namespace GestionOperacionesAduaneras.Controllers
             }
         }
 
-        // GET /api/rol/{id}
-        [HttpGet("{id}")]
-        public IActionResult ObtenerPorId(int id)
-        {
-            try
-            {
-                var resultado = _obtenerRolPorId.Ejecutar(id);
-                return Ok(resultado);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(new { mensaje = ex.Message });
-            }
-        }
-
-        // PUT /api/rol/{id}
-        [HttpPut("{id}")]
-        public IActionResult Modificar(int id, [FromBody] ModificarRolDTO dto)
-        {
-            try
-            {
-                var resultado = _modificarRol.Ejecutar(id, dto);
-                return Ok(resultado);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { mensaje = ex.Message });
-            }
-        }
-
-        // DELETE /api/rol/{id}
-        [HttpDelete("{id}")]
-        public IActionResult Eliminar(int id)
-        {
-            try
-            {
-                _eliminarRol.Ejecutar(id);
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return NotFound(new { mensaje = ex.Message });
-            }
-        }
+    
     }
 }

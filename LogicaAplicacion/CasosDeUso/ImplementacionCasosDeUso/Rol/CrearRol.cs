@@ -1,4 +1,7 @@
-﻿using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
+﻿using Compartido.DTOs.Rol;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
+using LogicaAplicacion.Mappers;
+using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
 using System;
 using System.Collections.Generic;
@@ -11,12 +14,19 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol
 {
     public class CrearRol : ICrearRol
     {
-        private readonly IRolService _rolService;
-        public CrearRol(IRolService rolService) { 
+        public IRepositorioRol RepoRol { get; set; }
+        public CrearRol(IRepositorioRol repoRol)
+        {
+            RepoRol = repoRol;
+        }
+        public RolListadoDTO Ejecutar(RolDTO rolDTO)
+        {
+            var rol = RolMapper.DTORolToRol(rolDTO);
 
-            _rolService = rolService; 
+            RepoRol.Add(rol);
+
+            return RolMapper.RolToDTO(rol);
         }
 
-        public RolRespuestaDTO Ejecutar(CrearRolDTO dto) => _rolService.CrearRol(dto);
     }
 }

@@ -56,6 +56,7 @@ namespace LogicaAccesoDatos.Repositorios
         public IEnumerable<Rol> FindAll()
         {
             return _context.Roles.ToList();
+            //return _context.Roles;
         }
 
         public Rol FindByNombre(string nombreRol)

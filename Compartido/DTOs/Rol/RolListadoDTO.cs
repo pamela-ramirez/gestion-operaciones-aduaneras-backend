@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Compartido.DTOs.Rol
 {
-    public class RolDTO
+    public class RolListadoDTO
     {
+        public int Id { get; set; }
         public string NombreRol { get; set; }
     }
 }

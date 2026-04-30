@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Compartido.DTOs.Rol;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol
 {
     public interface ICrearRol
     {
-        RolRespuestaDTO Ejecutar(CrearRolDTO dto);
+        //RolRespuestaDTO Ejecutar(CrearRolDTO dto);
+        RolListadoDTO Ejecutar(RolDTO rolDTO);
     }
 }
