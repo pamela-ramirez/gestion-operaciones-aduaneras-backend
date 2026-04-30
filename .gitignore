@@ -12,6 +12,7 @@ out/
 
 # Logs
 *.log
+*.txt
 
 <<<<<<< HEAD
 # System files
