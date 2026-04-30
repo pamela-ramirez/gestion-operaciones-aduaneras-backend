@@ -81,6 +81,39 @@ namespace Compartido.DTOs.Cliente
 }
 
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Rol\RolDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Compartido.DTOs.Rol
+{
+    public class RolDTO
+    {
+        public class CrearRolDTO
+        {
+            // Lo que el frontend manda para CREAR un rol
+            public string NombreRol { get; set; } = string.Empty;
+        }
+
+        // Lo que el frontend manda para MODIFICAR un rol
+        public class ModificarRolDTO
+        {
+            public string NombreRol { get; set; } = string.Empty;
+        }
+
+        // Lo que la API DEVUELVE al frontend
+        public class RolRespuestaDTO
+        {
+            public int Id { get; set; }
+            public string NombreRol { get; set; } = string.Empty;
+        }
+    }
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Usuarios\UsuarioDTO.cs ===
 using System;
 using System.Collections.Generic;
@@ -171,7 +204,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b2ffdb2f18d3ea0c361746e36570e39c22b92da7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d6de74f8c5590d8fbb08d7413dd3ac85a401185")]
 [assembly: System.Reflection.AssemblyProductAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -375,6 +408,115 @@ namespace GestionOperacionesAduaneras.Controllers
 }
 
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Controllers\RolController.cs ===
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
+using Microsoft.AspNetCore.Mvc;
+using static Compartido.DTOs.Rol.RolDTO;
+
+namespace GestionOperacionesAduaneras.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class RolController : ControllerBase
+    {
+        private readonly ICrearRol _crearRol;
+        private readonly IObtenerRoles _obtenerRoles;
+        private readonly IObtenerRolPorId _obtenerRolPorId;
+        private readonly IModificarRol _modificarRol;
+        private readonly IEliminarRol _eliminarRol;
+
+        public RolController(
+            ICrearRol crearRol,
+            IObtenerRoles obtenerRoles,
+            IObtenerRolPorId obtenerRolPorId,
+            IModificarRol modificarRol,
+            IEliminarRol eliminarRol)
+        {
+            _crearRol = crearRol;
+            _obtenerRoles = obtenerRoles;
+            _obtenerRolPorId = obtenerRolPorId;
+            _modificarRol = modificarRol;
+            _eliminarRol = eliminarRol;
+        }
+
+        // POST /api/rol
+        [HttpPost]
+        public IActionResult Crear([FromBody] CrearRolDTO dto)
+        {
+            try
+            {
+                var resultado = _crearRol.Ejecutar(dto);
+                return CreatedAtAction(nameof(ObtenerPorId), new { id = resultado.Id }, resultado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensaje = ex.Message });
+            }
+        }
+
+        // GET /api/rol
+        [HttpGet]
+        public IActionResult ObtenerTodos()
+        {
+            try
+            {
+                var resultado = _obtenerRoles.Ejecutar();
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensaje = ex.Message });
+            }
+        }
+
+        // GET /api/rol/{id}
+        [HttpGet("{id}")]
+        public IActionResult ObtenerPorId(int id)
+        {
+            try
+            {
+                var resultado = _obtenerRolPorId.Ejecutar(id);
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+        }
+
+        // PUT /api/rol/{id}
+        [HttpPut("{id}")]
+        public IActionResult Modificar(int id, [FromBody] ModificarRolDTO dto)
+        {
+            try
+            {
+                var resultado = _modificarRol.Ejecutar(id, dto);
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensaje = ex.Message });
+            }
+        }
+
+        // DELETE /api/rol/{id}
+        [HttpDelete("{id}")]
+        public IActionResult Eliminar(int id)
+        {
+            try
+            {
+                _eliminarRol.Ejecutar(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+        }
+    }
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Controllers\UsuarioController.cs ===
 using Compartido.DTOs.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
@@ -537,7 +679,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b2ffdb2f18d3ea0c361746e36570e39c22b92da7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d6de74f8c5590d8fbb08d7413dd3ac85a401185")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -612,7 +754,7 @@ namespace GestionOperacionesAduaneras.Servicios
         public ClienteRespuestaDTO CrearCliente(CrearClienteDTO dto)
         {
             var rolCliente = _repositorioRol.FindByNombre("Cliente")
-                ?? throw new RolException();
+                ?? throw new RolNoEncontradoException();
 
             var cliente = new Cliente
             {
@@ -746,6 +888,90 @@ namespace GestionOperacionesAduaneras.Servicios
     }
 }
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Servicios\RolService.cs ===
+using LogicaNegocio.Entidades;
+using LogicaNegocio.Excepciones.Roles;
+using LogicaNegocio.InterfacesRepositorios;
+using LogicaNegocio.InterfacesServicios;
+using static Compartido.DTOs.Rol.RolDTO;
+
+namespace GestionOperacionesAduaneras.Servicios
+{
+    public class RolService : IRolService
+    {
+        private readonly IRepositorioRol _repositorioRol;
+
+        public RolService(IRepositorioRol repositorioRol)
+        {
+            _repositorioRol = repositorioRol;
+        }
+
+        public RolRespuestaDTO CrearRol(CrearRolDTO dto)
+        {
+            var rolExistente = _repositorioRol.FindByNombre(dto.NombreRol);
+            if (rolExistente != null)
+            {
+                throw new YaExisteRolConEseNombreException();
+            }
+            var rol = new Rol(dto.NombreRol);
+            _repositorioRol.Add(rol);
+            return MapearARespuesta(rol);
+        }
+
+        public void EliminarRol(int id)
+        {
+            var rol = _repositorioRol.FindById(id);
+            if (rol == null)
+            {
+                throw new RolNoEncontradoException();
+            }
+
+            _repositorioRol.Delete(id);
+        }
+
+        public RolRespuestaDTO ModificarRol(int id, ModificarRolDTO dto)
+        {
+            var rol = _repositorioRol.FindById(id);
+            if (rol == null)
+            {
+                throw new RolNoEncontradoException();
+            }
+
+            rol.NombreRol = dto.NombreRol;
+            _repositorioRol.Update(rol, id);
+            return MapearARespuesta(rol);
+        }
+
+        public RolRespuestaDTO ObtenerRolPorId(int id)
+        {
+            var rol = _repositorioRol.FindById(id);
+            if (rol == null)
+            {
+                throw new RolNoEncontradoException();
+            }
+
+            return MapearARespuesta(rol);
+        }
+
+        public IEnumerable<RolRespuestaDTO> ObtenerRoles()
+        {
+            var roles = _repositorioRol.FindAll();
+            return roles.Select(r => MapearARespuesta(r)).ToList();
+        }
+
+        // Método privado reutilizable para convertir Rol → RolRespuestaDTO
+        private RolRespuestaDTO MapearARespuesta(Rol rol)
+        {
+            return new RolRespuestaDTO
+            {
+                Id = rol.Id,
+                NombreRol = rol.NombreRol
+            };
+        }
+    }
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Servicios\UsuarioService.cs ===
 using Compartido.DTOs.Usuarios;
 using LogicaNegocio.Entidades;
@@ -851,8 +1077,10 @@ using GestionOperacionesAduaneras.Servicios;
 using LogicaAccesoDatos.Contexto;
 using LogicaAccesoDatos.Repositorios;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente;
+using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
@@ -885,7 +1113,6 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddSwaggerGen();
 
 
-
             // Repositorios
             //builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuarioMock>();
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
@@ -896,23 +1123,28 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IJwtService, JwtService>();
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
             builder.Services.AddScoped<IClienteService, ClienteService>();
-
-
+            builder.Services.AddScoped<IRolService, RolService>();
 
             // Casos de uso usuario
-            //builder.Services.AddScoped<ICrearUsuario, CrearUsuario>();
             builder.Services.AddScoped<IObtenerUsuarios, ObtenerUsuarios>();
             builder.Services.AddScoped<IObtenerUsuarioPorId, ObtenerUsuarioPorId>();
             builder.Services.AddScoped<IModificarUsuario, ModificarUsuario>();
             builder.Services.AddScoped<IEliminarUsuario, EliminarUsuario>();
 
-            // Casos de uso cliente
+            // Casos de uso cliente 
             builder.Services.AddScoped<ILogin, Login>();
             builder.Services.AddScoped<ICrearCliente, CrearCliente>();
             builder.Services.AddScoped<IObtenerClientes, ObtenerClientes>();
             builder.Services.AddScoped<IObtenerClientePorId, ObtenerClientePorId>();
             builder.Services.AddScoped<IModificarCliente, ModificarCliente>();
             builder.Services.AddScoped<IEliminarCliente, EliminarCliente>();
+
+            // Casos de uso rol
+            builder.Services.AddScoped<ICrearRol, CrearRol>();
+            builder.Services.AddScoped<IObtenerRoles, ObtenerRoles>();
+            builder.Services.AddScoped<IObtenerRolPorId, ObtenerRolPorId>();
+            builder.Services.AddScoped<IModificarRol, ModificarRol>();
+            builder.Services.AddScoped<IEliminarRol, EliminarRol>();
 
             // Autenticación JWT
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -962,10 +1194,21 @@ namespace GestionOperacionesAduaneras
                         new string[] {}
                     }
                 });
-             });
+            });
+
+            //activar cors para permitir peticiones desde el frontend (React/Vite)
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontend", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5173") // tu React (Vite)
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
 
             var app = builder.Build();
-  
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -974,6 +1217,7 @@ namespace GestionOperacionesAduaneras
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("AllowFrontend"); // <-- habilitar CORS
             app.UseAuthentication(); // <-- primero autenticación
             app.UseAuthorization();  // <-- después autorización
 
@@ -1593,6 +1837,32 @@ namespace LogicaAccesoDatos.Contexto
             modelBuilder.ConfigureSeedData();
         }
 
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Contexto\GestionOperacionesDbContextFactory.cs ===
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAccesoDatos.Contexto
+{
+    public class GestionOperacionesDbContextFactory : IDesignTimeDbContextFactory<GestionOperacionesDbContext>
+    {
+        public GestionOperacionesDbContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<GestionOperacionesDbContext>();
+
+            // Cadena de conexión con servidor SQL
+            //optionsBuilder.UseSqlServer("Server=LAPTOP-7HNCQVS5\\SQLEXPRESS1;Database=GestionOperacionesAduaneras;Trusted_Connection=true;TrustServerCertificate=true;");
+
+            return new GestionOperacionesDbContext(optionsBuilder.Options);
+        }
     }
 }
 
@@ -3923,7 +4193,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b2ffdb2f18d3ea0c361746e36570e39c22b92da7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d6de74f8c5590d8fbb08d7413dd3ac85a401185")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -4078,7 +4348,7 @@ namespace LogicaAccesoDatos.Repositorios
             var rol = FindById(id);
             if (rol == null)
             {
-                throw new RolException();
+                throw new RolNoEncontradoException();
             }
             _context.Roles.Remove(rol);
             _context.SaveChanges();
@@ -4089,7 +4359,7 @@ namespace LogicaAccesoDatos.Repositorios
             var rolExistente = FindById(id);
             if (rolExistente == null)
             {
-                throw new RolException();
+                throw new RolNoEncontradoException();
             }
 
             rolExistente.NombreRol = item.NombreRol;
@@ -4400,6 +4670,121 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 }
 
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Rol\CrearRol.cs ===
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
+using LogicaNegocio.InterfacesServicios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static Compartido.DTOs.Rol.RolDTO;
+
+namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol
+{
+    public class CrearRol : ICrearRol
+    {
+        private readonly IRolService _rolService;
+        public CrearRol(IRolService rolService) { 
+
+            _rolService = rolService; 
+        }
+
+        public RolRespuestaDTO Ejecutar(CrearRolDTO dto) => _rolService.CrearRol(dto);
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Rol\EliminarRol.cs ===
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
+using LogicaNegocio.InterfacesServicios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol
+{
+    public class EliminarRol : IEliminarRol
+    {
+        private readonly IRolService _rolService;
+        public EliminarRol(IRolService rolService) { 
+            _rolService = rolService; 
+        }
+
+        public void Ejecutar(int id) => _rolService.EliminarRol(id);
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Rol\ModificarRol.cs ===
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
+using LogicaNegocio.InterfacesServicios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static Compartido.DTOs.Rol.RolDTO;
+
+namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol
+{
+    public class ModificarRol : IModificarRol
+    {
+        private readonly IRolService _rolService;
+        public ModificarRol(IRolService rolService) { _rolService = rolService; }
+
+        public RolRespuestaDTO Ejecutar(int id, ModificarRolDTO dto)
+            => _rolService.ModificarRol(id, dto);
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Rol\ObtenerRoles.cs ===
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
+using LogicaNegocio.InterfacesServicios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static Compartido.DTOs.Rol.RolDTO;
+
+namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol
+{
+    public class ObtenerRoles : IObtenerRoles
+    {
+        private readonly IRolService _rolService;
+        public ObtenerRoles(IRolService rolService) { _rolService = rolService; }
+
+        public IEnumerable<RolRespuestaDTO> Ejecutar() => _rolService.ObtenerRoles();
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Rol\ObtenerRolPorId.cs ===
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
+using LogicaNegocio.InterfacesServicios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static Compartido.DTOs.Rol.RolDTO;
+
+namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol
+{
+    public class ObtenerRolPorId : IObtenerRolPorId
+    {
+        private readonly IRolService _rolService;
+        public ObtenerRolPorId(IRolService rolService) { _rolService = rolService; }
+
+        public RolRespuestaDTO Ejecutar(int id) => _rolService.ObtenerRolPorId(id);
+    }
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\EliminarUsuario.cs ===
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesServicios;
@@ -4674,6 +5059,90 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente
 }
 
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Rol\ICrearRol.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static Compartido.DTOs.Rol.RolDTO;
+
+namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol
+{
+    public interface ICrearRol
+    {
+        RolRespuestaDTO Ejecutar(CrearRolDTO dto);
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Rol\IEliminarRol.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol
+{
+    public interface IEliminarRol
+    {
+        void Ejecutar(int id);
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Rol\IModificarRol.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static Compartido.DTOs.Rol.RolDTO;
+
+namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol
+{
+    public interface IModificarRol
+    {
+        RolRespuestaDTO Ejecutar(int id, ModificarRolDTO dto);
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Rol\IObtenerRoles.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static Compartido.DTOs.Rol.RolDTO;
+
+namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol
+{
+    public interface IObtenerRoles
+    {
+        IEnumerable<RolRespuestaDTO> Ejecutar();
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Rol\IObtenerRolPorId.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static Compartido.DTOs.Rol.RolDTO;
+
+namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol
+{
+    public interface IObtenerRolPorId
+    {
+        RolRespuestaDTO Ejecutar(int id);
+    }
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\IEliminarUsuario.cs ===
 using System;
 using System.Collections.Generic;
@@ -4781,7 +5250,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+31339e7dbddb2a942364b8a3f54e87ffd57fb8c8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d6de74f8c5590d8fbb08d7413dd3ac85a401185")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -5393,7 +5862,7 @@ namespace LogicaNegocio.Entidades
     {
         public int Id { get; set; }
         public string NombreRol { get; set; }
-        private Rol() { }
+        public Rol() { }
 
         public Rol(string nombreRol)
         {
@@ -5621,7 +6090,7 @@ namespace LogicaNegocio.Excepciones.Cliente
 }
 
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolException.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolNoEncontradoException.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5630,10 +6099,9 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Excepciones.Roles
 {
-    public class RolException : ClassException
+    public class RolNoEncontradoException : ClassException
     {
-        public RolException() : base("Rol no encontrado") { }
-
+        public RolNoEncontradoException() : base("Rol no encontrado.") { }
     }
 }
 
@@ -5650,6 +6118,22 @@ namespace LogicaNegocio.Excepciones.Roles
     public class RolSinNombreException : ClassException
     {
         public RolSinNombreException() : base("El rol debe tener un nombre.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\YaExisteRolConEseNombreException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Roles
+{
+    public class YaExisteRolConEseNombreException : ClassException
+    {
+        public YaExisteRolConEseNombreException() : base("Ya existe un rol con ese nombre.") { }
     }
 }
 
@@ -5861,6 +6345,27 @@ namespace LogicaNegocio.InterfacesServicios
 }
 
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesServicios\IRolService.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static Compartido.DTOs.Rol.RolDTO;
+
+namespace LogicaNegocio.InterfacesServicios
+{
+    public interface IRolService
+    {
+        IEnumerable<RolRespuestaDTO> ObtenerRoles();
+        RolRespuestaDTO ObtenerRolPorId(int id);
+        RolRespuestaDTO CrearRol(CrearRolDTO dto);
+        RolRespuestaDTO ModificarRol(int id, ModificarRolDTO dto);
+        void EliminarRol(int id);
+    }
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesServicios\IUsuarioService.cs ===
 using Compartido.DTOs.Usuarios;
 using System;
@@ -5905,7 +6410,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b2ffdb2f18d3ea0c361746e36570e39c22b92da7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d6de74f8c5590d8fbb08d7413dd3ac85a401185")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
