@@ -1,17 +1,21 @@
-# Ignorar archivos temporales de Visual Studio
+# Visual Studio
 .vs/
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
 
-# Ignorar binarios y compilados
+# Build results
 bin/
 obj/
-Debug/
-Release/
-*.dll
-*.exe
+out/
+
+# Logs
 *.log
-*.txt
-*.cs
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Environment settings (IMPORTANTE)
+appsettings.Development.json
