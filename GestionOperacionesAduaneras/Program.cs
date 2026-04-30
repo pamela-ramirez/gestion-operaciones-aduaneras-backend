@@ -1,6 +1,7 @@
 
 using GestionOperacionesAduaneras.Servicios;
 using LogicaAccesoDatos.Contexto;
+using LogicaAccesoDatos.Data;
 using LogicaAccesoDatos.Repositorios;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol;
@@ -147,6 +148,13 @@ namespace GestionOperacionesAduaneras
 
 
             app.MapControllers();
+
+            // Inicializar la base de datos con datos admin
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<GestionOperacionesDbContext>();
+                DbInitializer.Inicializar(context);
+            }
 
             app.Run();
         }
