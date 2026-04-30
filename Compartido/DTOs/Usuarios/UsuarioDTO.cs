@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace Compartido.DTOs.Usuarios
 {
-        public class ModificarUsuarioDTO
+
+    public class UsuarioDTO
+        {
+            public string Nombre { get; set; } = string.Empty;
+            public string Apellido { get; set; } = string.Empty;
+            public string Email { get; set; } = string.Empty;
+            public int RolId { get; set; }
+    }
+
+    public class ModificarUsuarioDTO
         {
             public string Nombre { get; set; } = string.Empty;
             public string Apellido { get; set; } = string.Empty;
