@@ -13,9 +13,13 @@ out/
 # Logs
 *.log
 
+<<<<<<< HEAD
 # System files
 .DS_Store
 Thumbs.db
 
 # Environment settings (IMPORTANTE)
 appsettings.Development.json
+=======
+
+>>>>>>> 0d6de74f8c5590d8fbb08d7413dd3ac85a401185
