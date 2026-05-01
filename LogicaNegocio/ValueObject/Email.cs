@@ -22,7 +22,7 @@ namespace LogicaNegocio.ValueObject
         {
             if ((Valor.Contains("@")) == false || Valor.IndexOf("@") == 0 || Valor.IndexOf("@") == Valor.Length - 1)
             {
-                throw new UsuarioException("Formato de Email no valido");
+                throw new UsuarioEmailFormatoInvalidoException();
             }
 
             //nos falta validar que no exista otro mail
