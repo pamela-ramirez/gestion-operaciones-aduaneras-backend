@@ -12,7 +12,7 @@ namespace LogicaAccesoDatos.Data
             // SEED DATA - ROLES
             // ============================================================================
             modelBuilder.Entity<Rol>().HasData(
-                new Rol("Administrador") { Id = 1 },
+                new Rol("Admin") { Id = 1 },
                 new Rol("Despachante") { Id = 2 },
                 new Rol("Cliente") { Id = 3 }
             );
