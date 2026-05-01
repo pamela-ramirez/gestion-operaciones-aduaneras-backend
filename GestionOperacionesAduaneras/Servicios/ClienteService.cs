@@ -77,6 +77,7 @@ namespace GestionOperacionesAduaneras.Servicios
                 Rol = rolCliente
             };
 
+            cliente.Validar();
             cliente.ValidarCliente();
             
             _repositorioCliente.Add(cliente);
