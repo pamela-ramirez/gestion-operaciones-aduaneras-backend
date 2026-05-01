@@ -23,7 +23,6 @@ namespace LogicaAccesoDatos.Repositorios
 
         public void Add(Cliente item)
         {
-            // Se deberia de validar el cliente primero aqui o ya se manda el cliente validado?
             _context.Clientes.Add(item);
             _context.SaveChanges();
         }
@@ -65,7 +64,7 @@ namespace LogicaAccesoDatos.Repositorios
         public bool ExisteRut(string rut, int? excluirClienteId = null)
         {
             return _context.Clientes
-                .Any(c => c.Rut == rut &&
+                .Any(c => c.Rut.Valor == rut &&
                      (excluirClienteId == null || c.Id != excluirClienteId));
         }
 
@@ -87,7 +86,7 @@ namespace LogicaAccesoDatos.Repositorios
         {
             return _context.Clientes
                 .Include(c => c.Rol)
-                .FirstOrDefault(c => c.Rut == rut);
+                .FirstOrDefault(c => c.Rut.Valor == rut);
         }
 
         public bool TieneOperacionesActivas(int ClienteId)

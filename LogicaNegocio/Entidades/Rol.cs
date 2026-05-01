@@ -31,6 +31,10 @@ namespace LogicaNegocio.Entidades
             {
                 throw new RolSinNombreException();
             }
+            if (NombreRol.Length > 100)
+            { 
+                throw new RolExcesoCaracteresException();
+            }
         }
 
     }

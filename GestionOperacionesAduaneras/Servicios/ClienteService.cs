@@ -1,7 +1,11 @@
 ﻿using Compartido.DTOs.Cliente;
+using LogicaAccesoDatos.Repositorios;
 using LogicaNegocio.Entidades;
+using LogicaNegocio.Excepciones;
 using LogicaNegocio.Excepciones.Cliente;
 using LogicaNegocio.Excepciones.Roles;
+using LogicaNegocio.Excepciones.Rut;
+using LogicaNegocio.Excepciones.Usuarios;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
 using LogicaNegocio.ValueObject;
@@ -12,16 +16,52 @@ namespace GestionOperacionesAduaneras.Servicios
     {
         private readonly IRepositorioCliente _repositorioCliente;
         private readonly IRepositorioRol _repositorioRol;
+        private readonly IRepositorioUsuario _repositorioUsuario;
 
 
-        public ClienteService(IRepositorioCliente repositorioCliente, IRepositorioRol repositorioRol)
+        public ClienteService(IRepositorioCliente repositorioCliente, IRepositorioRol repositorioRol, IRepositorioUsuario repositorioUsuario)
         {
             _repositorioCliente = repositorioCliente;
             _repositorioRol = repositorioRol;
+            _repositorioUsuario = repositorioUsuario;
         }
 
         public ClienteRespuestaDTO CrearCliente(CrearClienteDTO dto)
         {
+            Rut rut;
+            try
+            {
+                rut = new Rut(dto.Rut);
+            }
+            catch (RutVacioException ex)
+            {
+                throw new ClassException(ex.Message);
+            }
+            catch (RutSoloNumerosException ex)
+            {
+                throw new ClassException(ex.Message);
+            }
+            catch (RutSoloConDoceDigitosException ex)
+            {
+                throw new ClassException(ex.Message);
+            }
+            catch (RutNumerosIgualesException ex)
+            {
+                throw new ClassException(ex.Message);
+            }
+            catch (RutNoValidoException ex)
+            {
+                throw new ClassException(ex.Message);
+            }
+
+            if (_repositorioCliente.ExisteRut(rut.Valor))
+                throw new ClienteExistenteConIgualRutException();
+
+            var emailExistente = _repositorioUsuario.GetByEmail(dto.Email).Result;
+            if (emailExistente != null)
+                throw new UsuarioExistenteConMismoCorreoException();
+
+
             var rolCliente = _repositorioRol.FindByNombre("Cliente")
                 ?? throw new RolNoEncontradoException();
 
@@ -31,11 +71,14 @@ namespace GestionOperacionesAduaneras.Servicios
                 Apellido = dto.Apellido,
                 Email = new Email(dto.Email),
                 Password = new Password(dto.Password),
-                Rut = dto.Rut,
+                Rut = rut,
                 Telefono = dto.Telefono,
                 Direccion = dto.Direccion,
                 Rol = rolCliente
             };
+
+            cliente.ValidarCliente();
+            
             _repositorioCliente.Add(cliente);
             return MapearARespuesta(cliente);
         }
@@ -46,6 +89,9 @@ namespace GestionOperacionesAduaneras.Servicios
 
             if (cliente == null)
                 throw new ClienteNoEncontradoException();
+
+            if (_repositorioCliente.TieneOperacionesActivas(id))
+                throw new ClienteConOperacionesActivasException();
 
             _repositorioCliente.Delete(id);
 
@@ -58,12 +104,27 @@ namespace GestionOperacionesAduaneras.Servicios
             {
                 throw new ClienteNoEncontradoException();
             }
+
+            // Verificar email duplicado solo si cambió
+            if (cliente.Email.Valor != dto.Email.Trim().ToLower())
+            {
+                var emailExistente = _repositorioUsuario.GetByEmail(dto.Email).Result;
+                if (emailExistente != null)
+                    throw new UsuarioExistenteConMismoCorreoException();
+            }
+
+            // Verificar RUT duplicado solo si cambió, excluyendo al cliente actual
+            if (cliente.Rut.Valor != dto.Rut && _repositorioCliente.ExisteRut(dto.Rut, id))
+                throw new ClienteExistenteConIgualRutException();
+
             cliente.Nombre = dto.Nombre;
             cliente.Apellido = dto.Apellido;
             cliente.Email = new Email(dto.Email);
-            cliente.Rut = dto.Rut;
+            cliente.Rut = new Rut(dto.Rut);
             cliente.Telefono = dto.Telefono;
             cliente.Direccion = dto.Direccion;
+            
+            cliente.ValidarCliente();
 
             _repositorioCliente.Update(cliente, id);
             return MapearARespuesta(cliente);
@@ -93,7 +154,7 @@ namespace GestionOperacionesAduaneras.Servicios
                 Nombre = cliente.Nombre,
                 Apellido = cliente.Apellido,
                 Email = cliente.Email.Valor,
-                Rut = cliente.Rut,
+                Rut = cliente.Rut.Valor,
                 Telefono = cliente.Telefono,
                 Direccion = cliente.Direccion ?? string.Empty
                 
