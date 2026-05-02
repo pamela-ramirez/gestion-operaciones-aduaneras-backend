@@ -71,5 +71,40 @@ namespace LogicaAccesoDatos.Repositorios
                 _context.SaveChanges();
             }
         }
-    }
+
+        // Metodo update para actualizar el estado del usuario a activo, y para actualizar la contraseña, en el primer login
+        public void UpdateEstado(Usuario item, int id)
+        {
+            var usuarioExistente = FindById(id);
+            if (usuarioExistente != null)
+            {
+                usuarioExistente.Estado = "Activo";
+                _context.SaveChanges();
+            }
+        }
+
+        public void UpdatePassword(Usuario item, int id)
+        {
+            try 
+            { 
+                var usuarioExistente = FindById(id);
+                if (usuarioExistente != null)
+                {
+                    var pass = new Password(item.Password.Valor);
+                    if (pass.Equals(item.Password.Valor))
+                    {
+                        throw new Exception("La contraseña es igual a la anterior. Por favor, elija una contraseña diferente.");
+                    }
+                }
+                usuarioExistente.Password = item.Password;
+                usuarioExistente.PrimerLogin = false;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"Error al validar la contraseña: {ex.Message}");
+            }
+
+        }
+    }    
 }
