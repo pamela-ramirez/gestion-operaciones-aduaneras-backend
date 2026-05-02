@@ -9,6 +9,6 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios
 {
     public interface IObtenerUsuarios
     {
-        IEnumerable<UsuarioRespuestaDTO> Ejecutar();
+        IEnumerable<UsuarioListadoDTO> Ejecutar();
     }
 }

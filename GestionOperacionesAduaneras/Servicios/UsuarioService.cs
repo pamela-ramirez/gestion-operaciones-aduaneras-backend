@@ -23,7 +23,7 @@ namespace GestionOperacionesAduaneras.Servicios
             _repositorioUsuario.Delete(id);
         }
 
-        public UsuarioRespuestaDTO ModificarUsuario(int id, ModificarUsuarioDTO dto)
+        public UsuarioListadoDTO ModificarUsuario(int id, ModificarUsuarioDTO dto)
         {
             var usuario = _repositorioUsuario.FindById(id);
             if (usuario == null)
@@ -50,7 +50,7 @@ namespace GestionOperacionesAduaneras.Servicios
             return MapearARespuesta(usuario);
         }
 
-        public UsuarioRespuestaDTO ObtenerUsuarioPorId(int id)
+        public UsuarioListadoDTO ObtenerUsuarioPorId(int id)
         {
             var usuario = _repositorioUsuario.FindById(id);
             if (usuario == null)
@@ -59,7 +59,7 @@ namespace GestionOperacionesAduaneras.Servicios
             return MapearARespuesta(usuario);
         }
 
-        public IEnumerable<UsuarioRespuestaDTO> ObtenerUsuarios()
+        public IEnumerable<UsuarioListadoDTO> ObtenerUsuarios()
         {
             var usuarios = _repositorioUsuario.FindAll();
             return usuarios.Select(u => MapearARespuesta(u)).ToList();
@@ -80,9 +80,9 @@ namespace GestionOperacionesAduaneras.Servicios
         // Método privado para convertir Usuario a UsuarioRespuestaDTO
         // Lo usamos en varios métodos para no repetir código, si se agregan campos al DTO
         // //solo se cambia en un lugar
-        private UsuarioRespuestaDTO MapearARespuesta(Usuario usuario)
+        private UsuarioListadoDTO MapearARespuesta(Usuario usuario)
         {
-            return new UsuarioRespuestaDTO
+            return new UsuarioListadoDTO
             {
                 Id = usuario.Id,
                 Nombre = usuario.Nombre,

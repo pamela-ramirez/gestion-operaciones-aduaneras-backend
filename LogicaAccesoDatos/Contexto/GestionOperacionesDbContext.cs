@@ -117,6 +117,22 @@ namespace LogicaAccesoDatos.Contexto
                     .HasForeignKey(u => u.RolId)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);
+
+                entity.Property(u => u.FechaCreacion)
+                    .IsRequired()
+                    .HasColumnName("FechaCreacion")
+                    .HasDefaultValue(DateTime.Now);
+
+                entity.Property(u => u.PrimerLogin)
+                    .IsRequired()
+                    .HasColumnName("PrimerLogin")
+                    .HasDefaultValue(true);
+
+                entity.Property(u => u.Estado)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("Estado")
+                    .HasDefaultValue("Pendiente");
             });
 
             // Configuración de la tabla Cliente
@@ -131,8 +147,12 @@ namespace LogicaAccesoDatos.Contexto
                     .IsUnique()
                     .HasDatabaseName("IX_Clientes_RUT_Unique");
 
+                entity.Property(c => c.RazonSocial)
+                   .IsRequired()
+                   .HasMaxLength(200)
+                   .HasColumnName("RazonSocial");
+
                 entity.Property(c => c.Telefono)
-                    .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("Telefono");
 
@@ -144,14 +164,14 @@ namespace LogicaAccesoDatos.Contexto
             // Configuración de la tabla Despachante
             modelBuilder.Entity<Despachante>(entity =>
             {
-                entity.Property(d => d.Rut)
+                entity.Property(d => d.Codigo)
                     .IsRequired()
                     .HasMaxLength(20)
-                    .HasColumnName("RUT");
+                    .HasColumnName("Codigo");
 
-                entity.HasIndex(d => d.Rut)
+                entity.HasIndex(d => d.Codigo)
                     .IsUnique()
-                    .HasDatabaseName("IX_Despachantes_RUT_Unique");
+                    .HasDatabaseName("IX_Despachantes_Codigo_Unique");
             });
 
             // Configuración de la tabla tipo operación

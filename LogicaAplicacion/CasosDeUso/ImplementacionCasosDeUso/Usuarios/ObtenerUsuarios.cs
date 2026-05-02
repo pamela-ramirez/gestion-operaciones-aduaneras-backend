@@ -1,26 +1,33 @@
 ﻿using Compartido.DTOs.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesRepositorios;
-using LogicaNegocio.InterfacesServicios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
 {
     public class ObtenerUsuarios : IObtenerUsuarios
     {
-        private readonly IUsuarioService _usuarioService;
+        private readonly IRepositorioUsuario _repo;
 
-        public ObtenerUsuarios(IUsuarioService usuarioService)
+        public ObtenerUsuarios(IRepositorioUsuario repo)
         {
-            _usuarioService = usuarioService;
+            _repo = repo;
         }
-        public IEnumerable<UsuarioRespuestaDTO> Ejecutar()
+
+        public IEnumerable<UsuarioListadoDTO> Ejecutar()
         {
-            return _usuarioService.ObtenerUsuarios();
+            var usuarios = _repo.FindAll();
+
+            return usuarios.Select(u => new UsuarioListadoDTO
+            {
+                Id = u.Id,
+                Nombre = u.Nombre,
+                Apellido = u.Apellido,
+                Email = u.Email.Valor,
+                Rol = u.Rol.NombreRol,
+                FechaCreacion = u.FechaCreacion,
+                PrimerLogin = u.PrimerLogin,
+                Estado = u.Estado
+            });
         }
     }
 }

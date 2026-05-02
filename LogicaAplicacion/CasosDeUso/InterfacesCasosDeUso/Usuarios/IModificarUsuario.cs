@@ -9,6 +9,6 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios
 {
     public interface IModificarUsuario
     {
-        UsuarioRespuestaDTO Ejecutar(int id, ModificarUsuarioDTO dto);
+        UsuarioListadoDTO Ejecutar(int id, ModificarUsuarioDTO dto);
     }
 }

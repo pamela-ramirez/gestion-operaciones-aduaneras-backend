@@ -18,7 +18,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
             _usuarioService = usuarioService;
         }
 
-        public UsuarioRespuestaDTO Ejecutar(int id, ModificarUsuarioDTO dto)
+        public UsuarioListadoDTO Ejecutar(int id, ModificarUsuarioDTO dto)
         {
             return _usuarioService.ModificarUsuario(id, dto);
         }
