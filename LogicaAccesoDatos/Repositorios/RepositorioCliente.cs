@@ -45,6 +45,7 @@ namespace LogicaAccesoDatos.Repositorios
             if (clienteExistente == null)
             {
                 throw new Exception("Cliente no encontrado.");
+                // TODO cambiar a exception personalizada
             }
 
             // Atributos heredados de Usuario
@@ -56,6 +57,7 @@ namespace LogicaAccesoDatos.Repositorios
             clienteExistente.Telefono = item.Telefono;
             clienteExistente.Direccion = item.Direccion;
             clienteExistente.Rut = item.Rut;
+            // TODO AGREGAR RAZON SOCIAL
 
             _context.SaveChanges();
         }
