@@ -15,7 +15,7 @@ namespace LogicaNegocio.Entidades
 
         public Despachante() { }
 
-        public Despachante(string nombre, string apellido, Email email, Password password, Rol rol, string codigo, DateTime fechaCreacion, bool primerLogin, string estado) : base(nombre, apellido, email, password, rol, fechaCreacion, primerLogin, estado)
+        public Despachante(string nombre, string apellido, Email email, Password password, Rol rol, string codigo) : base(nombre, apellido, email, password, rol)
         {
             this.Codigo = codigo;
         }
