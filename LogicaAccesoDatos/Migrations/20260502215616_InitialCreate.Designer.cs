@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaAccesoDatos.Migrations
 {
     [DbContext(typeof(GestionOperacionesDbContext))]
-    [Migration("20260430080034_InitialCreate")]
+    [Migration("20260502215616_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -82,7 +82,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaEnvio")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 952, DateTimeKind.Local).AddTicks(7149))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 511, DateTimeKind.Local).AddTicks(9876))
                         .HasColumnName("FechaEnvio");
 
                     b.Property<int?>("OperacionId")
@@ -146,7 +146,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 949, DateTimeKind.Local).AddTicks(995))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 510, DateTimeKind.Local).AddTicks(31))
                         .HasColumnName("FechaCarga");
 
                     b.Property<string>("Formato")
@@ -188,7 +188,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 951, DateTimeKind.Local).AddTicks(7875))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 511, DateTimeKind.Local).AddTicks(5561))
                         .HasColumnName("FechaCarga");
 
                     b.Property<int>("LiquidacionId")
@@ -264,7 +264,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaRegistro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 946, DateTimeKind.Local).AddTicks(8852))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 508, DateTimeKind.Local).AddTicks(7498))
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("NroCarpeta")
@@ -374,7 +374,7 @@ namespace LogicaAccesoDatos.Migrations
                         new
                         {
                             Id = 1,
-                            NombreRol = "Administrador"
+                            NombreRol = "Admin"
                         },
                         new
                         {
@@ -515,11 +515,31 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<int>("Discriminator")
                         .HasColumnType("int");
 
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasDefaultValue("Pendiente")
+                        .HasColumnName("Estado");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 507, DateTimeKind.Local).AddTicks(9048))
+                        .HasColumnName("FechaCreacion");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("Nombre");
+
+                    b.Property<bool>("PrimerLogin")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true)
+                        .HasColumnName("PrimerLogin");
 
                     b.Property<int>("RolId")
                         .HasColumnType("int");
@@ -550,7 +570,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaValidacion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 951, DateTimeKind.Local).AddTicks(2350))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 511, DateTimeKind.Local).AddTicks(2033))
                         .HasColumnName("FechaValidacion");
 
                     b.Property<string>("MotivoRechazo")
@@ -583,15 +603,19 @@ namespace LogicaAccesoDatos.Migrations
                         .HasColumnType("nvarchar(300)")
                         .HasColumnName("Direccion");
 
+                    b.Property<string>("RazonSocial")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("RazonSocial");
+
                     b.Property<string>("Rut")
                         .IsRequired()
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("RUT");
 
                     b.Property<string>("Telefono")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("Telefono");
@@ -608,17 +632,15 @@ namespace LogicaAccesoDatos.Migrations
                 {
                     b.HasBaseType("LogicaNegocio.Entidades.Usuario");
 
-                    b.Property<string>("Rut")
-                        .IsRequired()
-                        .ValueGeneratedOnUpdateSometimes()
+                    b.Property<string>("Codigo")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
-                        .HasColumnName("RUT");
+                        .HasColumnName("Codigo");
 
-                    b.HasIndex("Rut")
+                    b.HasIndex("Codigo")
                         .IsUnique()
-                        .HasDatabaseName("IX_Despachantes_RUT_Unique")
-                        .HasFilter("[RUT] IS NOT NULL");
+                        .HasDatabaseName("IX_Despachantes_Codigo_Unique")
+                        .HasFilter("[Codigo] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue(2);
                 });
