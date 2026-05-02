@@ -4,6 +4,7 @@ using LogicaAccesoDatos.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaAccesoDatos.Migrations
 {
     [DbContext(typeof(GestionOperacionesDbContext))]
-    partial class GestionOperacionesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260502043247_CambiosEnCliente2")]
+    partial class CambiosEnCliente2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,7 +82,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaEnvio")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 2, 1, 39, 33, 401, DateTimeKind.Local).AddTicks(2137))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 1, 32, 46, 98, DateTimeKind.Local).AddTicks(1668))
                         .HasColumnName("FechaEnvio");
 
                     b.Property<int?>("OperacionId")
@@ -143,7 +146,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 2, 1, 39, 33, 399, DateTimeKind.Local).AddTicks(57))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 1, 32, 46, 93, DateTimeKind.Local).AddTicks(5403))
                         .HasColumnName("FechaCarga");
 
                     b.Property<string>("Formato")
@@ -185,7 +188,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 2, 1, 39, 33, 400, DateTimeKind.Local).AddTicks(8952))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 1, 32, 46, 97, DateTimeKind.Local).AddTicks(1699))
                         .HasColumnName("FechaCarga");
 
                     b.Property<int>("LiquidacionId")
@@ -261,7 +264,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaRegistro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 2, 1, 39, 33, 397, DateTimeKind.Local).AddTicks(9430))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 1, 32, 46, 91, DateTimeKind.Local).AddTicks(7220))
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("NroCarpeta")
@@ -523,7 +526,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCreacion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 2, 1, 39, 33, 397, DateTimeKind.Local).AddTicks(2106))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 1, 32, 46, 90, DateTimeKind.Local).AddTicks(6772))
                         .HasColumnName("FechaCreacion");
 
                     b.Property<string>("Nombre")
@@ -567,7 +570,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaValidacion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 2, 1, 39, 33, 400, DateTimeKind.Local).AddTicks(6665))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 1, 32, 46, 95, DateTimeKind.Local).AddTicks(6018))
                         .HasColumnName("FechaValidacion");
 
                     b.Property<string>("MotivoRechazo")

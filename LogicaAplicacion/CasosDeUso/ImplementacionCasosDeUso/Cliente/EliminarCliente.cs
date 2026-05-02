@@ -1,4 +1,5 @@
 ﻿using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
+using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,28 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 {
     public class EliminarCliente : IEliminarCliente
     {
-        private readonly IClienteService _clienteService;
-        public EliminarCliente(IClienteService clienteService)
+
+        private readonly IRepositorioCliente _clienteRepo;
+
+        public EliminarCliente(IRepositorioCliente clienteRepo)
         {
-            _clienteService = clienteService;
+            _clienteRepo = clienteRepo;
         }
         public void Ejecutar(int id)
         {
-            _clienteService.EliminarCliente(id);
+            _clienteRepo.Delete(id);
         }
+
+
+        //private readonly IClienteService _clienteService;
+        // public EliminarCliente(IClienteService clienteService)
+        // {
+        //      _clienteService = clienteService;
+        //  }
+        // public void Ejecutar(int id)
+        // {
+        //_clienteService.EliminarCliente(id);
+        // }
+
     }
 }

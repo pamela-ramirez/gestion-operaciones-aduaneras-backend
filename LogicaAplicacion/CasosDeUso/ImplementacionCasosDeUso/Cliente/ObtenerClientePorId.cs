@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
+using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,37 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 {
     public class ObtenerClientePorId : IObtenerClientePorId
     {
-        private readonly IClienteService _clienteService;
-        public ObtenerClientePorId(IClienteService clienteService)
+        private readonly IRepositorioCliente _clienteRepo;
+        public ObtenerClientePorId(IRepositorioCliente clienteRepo)
         {
-            _clienteService = clienteService;
+            _clienteRepo = clienteRepo;
         }
 
-        public ClienteRespuestaDTO Ejecutar(int id)
+        public ClienteDTO Ejecutar(int id)
         {
-            return _clienteService.ObtenerClientePorId(id);
+            var cliente = _clienteRepo.FindById(id);
+            if (cliente == null)
+            {
+                throw new Exception("Cliente no encontrado");
+            }
+
+            return new ClienteDTO
+            {
+                Nombre = cliente.Nombre,
+                Apellido = cliente.Apellido,
+                Email = cliente.Email.Valor,
+                RazonSocial = cliente.RazonSocial,
+                Rut = cliente.Rut,
+                Telefono = cliente.Telefono,
+                Direccion = cliente.Direccion
+            };
         }
+
+
+
+        //public ClienteRespuestaDTO Ejecutar(int id)
+        //{
+        //    return _clienteService.ObtenerClientePorId(id);
+        //}
     }
 }

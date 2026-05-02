@@ -45,6 +45,7 @@ namespace GestionOperacionesAduaneras.Controllers
             {
                 return BadRequest(new { mensaje = ex.Message });
             }
+
         }
 
         // GET /api/cliente - Obtener todos los clientes
@@ -76,6 +77,8 @@ namespace GestionOperacionesAduaneras.Controllers
                 return NotFound(new { mensaje = ex.Message });
             }
         }
+
+    
         // PUT /api/cliente/{id} - Modificar cliente
         [HttpPut("{id}")]
         public IActionResult Modificar(int id, [FromBody] ModificarClienteDTO dto)
@@ -90,6 +93,7 @@ namespace GestionOperacionesAduaneras.Controllers
                 return BadRequest(new { mensaje = ex.Message });
             }
         }
+    
 
         // DELETE /api/cliente/{id} - Eliminar cliente
         [HttpDelete("{id}")]

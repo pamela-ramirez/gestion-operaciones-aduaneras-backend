@@ -49,7 +49,7 @@ namespace GestionOperacionesAduaneras
             // Servicios
             builder.Services.AddScoped<IJwtService, JwtService>();
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-            builder.Services.AddScoped<IClienteService, ClienteService>();
+            //builder.Services.AddScoped<IClienteService, ClienteService>();
            
 
             // Casos de uso usuario
