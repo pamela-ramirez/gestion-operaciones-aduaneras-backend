@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.Despachante;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante;
+using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
 using System.Collections.Generic;
@@ -20,30 +21,16 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Despachante
         }
         public CrearDespachanteRespuestaDTO Ejecutar(CrearDespachanteDTO dto)
         {
-            /*
-             *             var existe = _clienteRepo.ExisteRut(dto.Rut);
-            if (existe)
-                throw new Exception("Ya existe un cliente con ese RUT");
-
-            var rolCliente = _rolRepo.FindById(3);
-
-            var username = $"{dto.Email.Split('@')[0]}";
-            var passwordTemporal = "Despacho100!";
-
-            var cliente = ClienteMapper.ToEntity(dto, rolCliente);
-
-            _clienteRepo.Add(cliente);
-
-            return ClienteMapper.ToDTO(cliente, username, passwordTemporal);
-             */
-
-            var rolDespachante = _repositorioRol.FindById(2);
             var existe = _repositorioDespachante.ExisteEmail(dto.Email);
             if (existe)
                 throw new Exception("Ya existe un despachante con ese email");
 
+            var rolDespachante = _repositorioRol.FindById(2);
             var username = $"{dto.Email.Split('@')[0]}";
             var passwordTemporal = "Despacho100!";
+            var despachante = DespachanteMapper.ToEntity(dto, rolDespachante);
+            _repositorioDespachante.Add(despachante);
+            return DespachanteMapper.ToDTO(despachante, username, passwordTemporal);
 
         }
     }
