@@ -9,10 +9,12 @@ namespace GestionOperacionesAduaneras.Controllers
     public class DespachanteController : ControllerBase
     {
         private readonly ICrearDespachante _crearDespachante;
+        private readonly IObtenerDespachantePorId _obtenerDespachantePorId;
 
-        public DespachanteController(ICrearDespachante crearDespachante)
+        public DespachanteController(ICrearDespachante crearDespachante, IObtenerDespachantePorId obtenerDespachantePorId)
         {
             _crearDespachante = crearDespachante;
+            _obtenerDespachantePorId = obtenerDespachantePorId;
         }
 
         // POST /api/despachante - Crear despachante
@@ -23,7 +25,7 @@ namespace GestionOperacionesAduaneras.Controllers
             {
                 var resultado = _crearDespachante.Ejecutar(dto);
                 return CreatedAtAction(
-                    nameof(Crear),
+                    nameof(ObtenerPorId),
                     new { id = resultado.Id },
                     resultado
                 );
@@ -34,5 +36,19 @@ namespace GestionOperacionesAduaneras.Controllers
             }
         }
 
-    }
+        // GET /api/despachante/{id} - Obtener despachante por id
+        [HttpGet("{id}")]
+        public IActionResult ObtenerPorId(int id)
+        {
+            try
+            {
+                var resultado = _obtenerDespachantePorId.Ejecutar(id);
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+
+        }
 }
