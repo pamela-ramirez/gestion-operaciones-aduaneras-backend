@@ -1,7 +1,9 @@
 ﻿using Compartido.DTOs.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesServicios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace GestionOperacionesAduaneras.Controllers
 {
@@ -13,18 +15,21 @@ namespace GestionOperacionesAduaneras.Controllers
         private readonly IObtenerUsuarioPorId _obtenerUsuarioPorId;
         private readonly IModificarUsuario _modificarUsuario;
         private readonly IEliminarUsuario _eliminarUsuario;
+        private readonly IObtenerUsuarioLogueado _obtenerUsuarioLogueado;
 
         public UsuarioController(
             IObtenerUsuarios obtenerUsuarios,
             IObtenerUsuarioPorId obtenerUsuarioPorId,
             IModificarUsuario modificarUsuario,
-            IEliminarUsuario eliminarUsuario
+            IEliminarUsuario eliminarUsuario,
+            IObtenerUsuarioLogueado obtenerUsuarioLogueado
         )
         {
             _obtenerUsuarios = obtenerUsuarios;
             _obtenerUsuarioPorId = obtenerUsuarioPorId;
             _modificarUsuario = modificarUsuario;
             _eliminarUsuario = eliminarUsuario;
+            _obtenerUsuarioLogueado = obtenerUsuarioLogueado;
         }
 
 
@@ -93,6 +98,31 @@ namespace GestionOperacionesAduaneras.Controllers
             {
                 // 404 Not Found si no se encuentra el usuario
                 return NotFound(new { mensaje = ex.Message });
+            }
+        }
+
+        // GET /api/usuarios/logueado - Obtener usuario logueado
+        [HttpGet("logueado")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerUsuarioLogueado()
+        {
+            try
+            {
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                if (userIdClaim == null)
+                    return Unauthorized();
+
+                int userId = int.Parse(userIdClaim);
+
+                var resultado = await _obtenerUsuarioLogueado.Ejecutar(userId);
+                // 200 OK con el usuario logueado
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                // 401 Unauthorized si no hay un usuario logueado
+                return Unauthorized(new { mensaje = ex.Message });
             }
         }
     }

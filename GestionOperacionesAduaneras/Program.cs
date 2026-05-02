@@ -57,6 +57,7 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IObtenerUsuarioPorId, ObtenerUsuarioPorId>();
             builder.Services.AddScoped<IModificarUsuario, ModificarUsuario>();
             builder.Services.AddScoped<IEliminarUsuario, EliminarUsuario>();
+            builder.Services.AddScoped<IObtenerUsuarioLogueado, ObtenerUsuarioLogueado>();
 
             // Casos de uso cliente 
             builder.Services.AddScoped<ILogin, Login>();
