@@ -4,9 +4,11 @@ using LogicaAccesoDatos.Contexto;
 using LogicaAccesoDatos.Data;
 using LogicaAccesoDatos.Repositorios;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente;
+using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Despachante;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesRepositorios;
@@ -45,6 +47,7 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
             builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();
             builder.Services.AddScoped<IRepositorioRol, RepositorioRol>();
+            builder.Services.AddScoped<IRepositorioDespachante, RepositorioDespachante>();
 
             // Servicios
             builder.Services.AddScoped<IJwtService, JwtService>();
@@ -66,6 +69,11 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IObtenerClientePorId, ObtenerClientePorId>();
             builder.Services.AddScoped<IModificarCliente, ModificarCliente>();
             builder.Services.AddScoped<IEliminarCliente, EliminarCliente>();
+
+            // Casos de uso despachante
+            builder.Services.AddScoped<ICrearDespachante, CrearDespachante>();
+            builder.Services.AddScoped<IObtenerDespachantePorId, ObtenerDespachantePorId>();
+
 
             // Casos de uso rol
             builder.Services.AddScoped<ICrearRol, CrearRol>();
