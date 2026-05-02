@@ -17,7 +17,7 @@ namespace LogicaNegocio.Entidades
 
         public Cliente() { }
 
-        public Cliente(string nombre, string apellido, Email email, Password password, Rol rol, DateTime fechaCreacion, bool primerLogin, string estado, string rut, string razonSocial, string telefono, string? direccion) : base(nombre, apellido, email, password, rol, fechaCreacion, primerLogin, estado )
+        public Cliente(string nombre, string apellido, Email email, Password password, Rol rol, string rut, string razonSocial, string telefono, string? direccion) : base(nombre, apellido, email, password, rol)
         {
             this.Rut = rut;
             this.RazonSocial = razonSocial; 

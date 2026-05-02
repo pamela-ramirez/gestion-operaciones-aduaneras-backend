@@ -28,7 +28,7 @@ namespace LogicaNegocio.Entidades
 
         public Usuario() { }
 
-        public Usuario(string nombre, string apellido, Email email, Password password, Rol rol, DateTime fechaCreacion, bool primerLogin, string estado)
+        public Usuario(string nombre, string apellido, Email email, Password password, Rol rol)
         {
             Nombre = nombre;
             Apellido = apellido;
