@@ -38,11 +38,6 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
             };
         }
 
-
-
-        //public ClienteRespuestaDTO Ejecutar(int id)
-        //{
-        //    return _clienteService.ObtenerClientePorId(id);
-        //}
+        // TODO Pasar el new ClienteDTO a un mapeador para mapearlo a un DTO
     }
 }
