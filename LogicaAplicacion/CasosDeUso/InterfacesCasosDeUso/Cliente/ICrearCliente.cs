@@ -9,6 +9,6 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente
 {
     public interface ICrearCliente
     {
-        ClienteRespuestaDTO Ejecutar(CrearClienteDTO dto);
+        CrearClienteRespuestaDTO Ejecutar(CrearClienteDTO dto);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
+using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,17 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 {
     public class CrearCliente : ICrearCliente
     {
-        private readonly IClienteService _clienteService;
+        //private readonly IClienteService _clienteService;
+        private readonly IRepositorioCliente _clienteRepo;
 
-        public CrearCliente(IClienteService clienteService)
+        public CrearCliente(IRepositorioCliente clienteRepo)
         {
-            _clienteService = clienteService;
+            _clienteRepo = clienteRepo;
         }
-        public ClienteRespuestaDTO Ejecutar(CrearClienteDTO dto)
+        public CrearClienteRespuestaDTO Ejecutar(CrearClienteDTO dto)
         {
-            return _clienteService.CrearCliente(dto);
+            
+            return _clienteRepo.Add(dto);
         }
     }
 }
