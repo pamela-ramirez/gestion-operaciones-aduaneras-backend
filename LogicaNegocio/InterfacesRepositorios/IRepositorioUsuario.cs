@@ -11,5 +11,7 @@ namespace LogicaNegocio.InterfacesRepositorios
     {
         //Usuario Login(string email, string contrasenia);
         Task<Usuario?> GetByEmail(string email);
+        void UpdateEstado(Usuario item, int id);
+        void UpdatePassword(Usuario item, int id);
     }
 }
