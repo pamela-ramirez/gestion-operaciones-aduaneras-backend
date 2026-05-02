@@ -1,10 +1,5 @@
 ﻿using LogicaNegocio.Excepciones.Usuarios;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mail;
 
 namespace LogicaNegocio.ValueObject
 {
@@ -20,12 +15,24 @@ namespace LogicaNegocio.ValueObject
         }
         private void Validar()
         {
-            if ((Valor.Contains("@")) == false || Valor.IndexOf("@") == 0 || Valor.IndexOf("@") == Valor.Length - 1)
+            if (string.IsNullOrWhiteSpace(Valor))
             {
-                throw new UsuarioException("Formato de Email no valido");
+                throw new UsuarioEmailVacioException();
             }
 
-            //nos falta validar que no exista otro mail
+            try
+            {
+                var mailAddress = new MailAddress(Valor);
+
+                if (!mailAddress.Host.Contains("."))
+                {
+                    throw new UsuarioEmailFormatoInvalidoException();
+                }
+            }
+            catch (FormatException)
+            {
+                throw new UsuarioEmailFormatoInvalidoException();
+            }
         }
     }
 }
