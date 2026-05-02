@@ -10,7 +10,7 @@ namespace LogicaNegocio.Entidades
     public class Despachante:Usuario
     {
         //codigo de despachante
-        public string Codigo { get; set; } = string.Empty;
+        public string? Codigo { get; set; } = string.Empty;
 
 
         public Despachante() { }

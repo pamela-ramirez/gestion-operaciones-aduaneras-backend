@@ -165,7 +165,6 @@ namespace LogicaAccesoDatos.Contexto
             modelBuilder.Entity<Despachante>(entity =>
             {
                 entity.Property(d => d.Codigo)
-                    .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("Codigo");
 
