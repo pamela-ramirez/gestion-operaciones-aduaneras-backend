@@ -1,4 +1,4 @@
-﻿// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\Compartido\DTOs\Auth\LoginDTO.cs ===
+﻿// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Auth\LoginDTO.cs ===
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,7 +21,7 @@ namespace Compartido.DTOs.Auth
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\Compartido\DTOs\Auth\LoginResponseDTO.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Auth\LoginResponseDTO.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +38,7 @@ namespace Compartido.DTOs.Auth
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\Compartido\DTOs\Cliente\ClienteDTO.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Cliente\ClienteDTO.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,15 +47,27 @@ using System.Threading.Tasks;
 
 namespace Compartido.DTOs.Cliente
 {
+    public class ClienteDTO
+    {
+        public string Nombre { get; set; } = string.Empty;
+        public string Apellido { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string RazonSocial { get; set; } = string.Empty;
+        public string Rut { get; set; } = string.Empty;
+        public string Telefono { get; set; } = string.Empty;
+        public string Direccion { get; set; } = string.Empty;
+    }
+
     public class CrearClienteDTO
     {
         public string Nombre { get; set; } = string.Empty;
         public string Apellido { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        public string RazonSocial { get; set; } = string.Empty;
+        //public string Password { get; set; } = string.Empty;
         public string Rut { get; set; } = string.Empty;
-        public string Telefono { get; set; } = string.Empty;
-        public string Direccion { get; set; } = string.Empty;
+        public string? Telefono { get; set; } = string.Empty;
+        public string? Direccion { get; set; } = string.Empty;
     }
 
     public class ModificarClienteDTO
@@ -63,25 +75,69 @@ namespace Compartido.DTOs.Cliente
         public string Nombre { get; set; } = string.Empty;
         public string Apellido { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
         public string Rut { get; set; } = string.Empty;
+        public string RazonSocial { get; set; } = string.Empty;
         public string Telefono { get; set; } = string.Empty;
         public string Direccion { get; set; } = string.Empty;
     }
 
-    public class ClienteRespuestaDTO
+    public class CrearClienteRespuestaDTO
     {
         public int Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
         public string Apellido { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Rut { get; set; } = string.Empty;
+        public string RazonSocial { get; set; } = string.Empty;
         public string Telefono { get; set; } = string.Empty;
         public string Direccion { get; set; } = string.Empty;
+
+        // opcional (solo si lo querés mostrar 1 vez)
+        public string Username { get; set; } = string.Empty;
+        public string PasswordTemporal { get; set; } = string.Empty;
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\Compartido\DTOs\Rol\RolDTO.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Despachante\DespachanteDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Compartido.DTOs.Despachante
+{
+    public class DespachanteDTO
+    {
+        public string Nombre { get; set; } = string.Empty;
+        public string Apellido { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Codigo { get; set; } = string.Empty;
+    }
+
+    public class CrearDespachanteDTO
+    {
+        public string Nombre { get; set; } = string.Empty;
+        public string Apellido { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+
+    }
+
+    public class CrearDespachanteRespuestaDTO
+    {
+        public int Id { get; set; }
+        public string Nombre { get; set; } = string.Empty;
+        public string Apellido { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
+        public string PasswordTemporal { get; set; } = string.Empty;
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Rol\RolDTO.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -97,7 +153,7 @@ namespace Compartido.DTOs.Rol
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\Compartido\DTOs\Rol\RolListadoDTO.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Rol\RolListadoDTO.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -114,7 +170,7 @@ namespace Compartido.DTOs.Rol
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\Compartido\DTOs\Usuarios\UsuarioDTO.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Usuarios\ModificarUsuarioDTO.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -123,63 +179,99 @@ using System.Threading.Tasks;
 
 namespace Compartido.DTOs.Usuarios
 {
-        public class ModificarUsuarioDTO
-        {
-            public string Nombre { get; set; } = string.Empty;
-            public string Apellido { get; set; } = string.Empty;
-            public string Email { get; set; } = string.Empty;
-            public int RolId { get; set; }
-        }
-
-        /// <summary>
-        /// DTO de RESPUESTA. 
-        /// Es lo que la API devuelve al frontend después de cualquier operación.
-        /// No se incluye la contraseña, ni siquiera el hash.
-        /// En lugar de devolver el RolId devuelve el nombre del rol (ej: "Despachante").
-        /// </summary>
-        public class UsuarioRespuestaDTO
-        {
-            public int Id { get; set; }
-            public string Nombre { get; set; } = string.Empty;
-            public string Apellido { get; set; } = string.Empty;
-            public string Email { get; set; } = string.Empty;
-
-            // Devolvemos el nombre del rol, no el ID, para que el frontend lo muestre directo
-            public string Rol { get; set; } = string.Empty;
-        }
-    }
-
-
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\Compartido\DTOs\Usuarios\UsuarioLogueadoDTO.cs ===
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Compartido.DTOs.Usuarios
-{
-    internal class UsuarioLogueadoDTO
+    public class ModificarUsuarioDTO
     {
+        public string Nombre { get; set; } = string.Empty;
+        public string Apellido { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public int RolId { get; set; }
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\Compartido\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Usuarios\UsuarioDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Compartido.DTOs.Usuarios
+{
+    public class UsuarioDTO
+    {
+
+    }
+
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Usuarios\UsuarioListadoDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Compartido.DTOs.Usuarios
+{
+    /// <summary>
+    /// DTO de RESPUESTA del obtener todos los usuarios.
+    public class UsuarioListadoDTO
+    {
+        public int Id { get; set; }
+        public string Nombre { get; set; } = string.Empty;
+        public string Apellido { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+
+        // Devolvemos el nombre del rol, no el ID, para que el frontend lo muestre directo
+        public string Rol { get; set; } = string.Empty;
+
+        //agregue estos nuevos atributos porque el frontend los necesita
+        public DateTime FechaCreacion { get; set; }
+
+        public bool PrimerLogin { get; set; }
+
+        public string Estado { get; set; } = string.Empty;
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Usuarios\UsuarioLogueadoDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Compartido.DTOs.Usuarios
+{
+    public class UsuarioLogueadoDTO
+    {
+        public int Id { get; set; }
+        public string Email { get; set; }
+        public string Rol { get; set; }
+        public string Estado { get; set; }
+        public bool PrimerLogin { get; set; }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs ===
 // <autogenerated />
 using System;
 using System.Reflection;
 [assembly: global::System.Runtime.Versioning.TargetFrameworkAttribute(".NETCoreApp,Version=v8.0", FrameworkDisplayName = ".NET 8.0")]
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\Compartido\obj\Debug\net8.0\Compartido.AssemblyInfo.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\obj\Debug\net8.0\Compartido.AssemblyInfo.cs ===
 //------------------------------------------------------------------------------
 // <auto-generated>
-//     This code was generated by a tool.
-//     Runtime Version:4.0.30319.42000
+//     Este cÃ³digo fue generado por una herramienta.
+//     VersiÃ³n de runtime:4.0.30319.42000
 //
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
+//     Los cambios en este archivo podrÃ­an causar un comportamiento incorrecto y se perderÃ¡n si
+//     se vuelve a generar el cÃ³digo.
 // </auto-generated>
 //------------------------------------------------------------------------------
 
@@ -189,16 +281,16 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e345f490d40e0798d009d88b3f496d4d787e58a0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3ab5d44d8d762824287348475b440e59948013c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
-// Generated by the MSBuild WriteCodeFragment class.
+// Generado por la clase WriteCodeFragment de MSBuild.
 
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\Compartido\obj\Debug\net8.0\Compartido.GlobalUsings.g.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\obj\Debug\net8.0\Compartido.GlobalUsings.g.cs ===
 // <auto-generated/>
 global using global::System;
 global using global::System.Collections.Generic;
@@ -209,7 +301,7 @@ global using global::System.Threading;
 global using global::System.Threading.Tasks;
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\Compartido\Class1.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\Class1.cs ===
 namespace Compartido
 {
     public class Class1
@@ -219,7 +311,7 @@ namespace Compartido
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\Controllers\AuthController.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Controllers\AuthController.cs ===
 using Compartido.DTOs.Auth;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.Excepciones.Usuarios.Login;
@@ -281,7 +373,7 @@ namespace GestionOperacionesAduaneras.Controllers
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\Controllers\ClienteController.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Controllers\ClienteController.cs ===
 using Compartido.DTOs.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
 using Microsoft.AspNetCore.Mvc;
@@ -329,6 +421,7 @@ namespace GestionOperacionesAduaneras.Controllers
             {
                 return BadRequest(new { mensaje = ex.Message });
             }
+
         }
 
         // GET /api/cliente - Obtener todos los clientes
@@ -360,6 +453,8 @@ namespace GestionOperacionesAduaneras.Controllers
                 return NotFound(new { mensaje = ex.Message });
             }
         }
+
+    
         // PUT /api/cliente/{id} - Modificar cliente
         [HttpPut("{id}")]
         public IActionResult Modificar(int id, [FromBody] ModificarClienteDTO dto)
@@ -374,6 +469,7 @@ namespace GestionOperacionesAduaneras.Controllers
                 return BadRequest(new { mensaje = ex.Message });
             }
         }
+    
 
         // DELETE /api/cliente/{id} - Eliminar cliente
         [HttpDelete("{id}")]
@@ -393,7 +489,65 @@ namespace GestionOperacionesAduaneras.Controllers
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\Controllers\RolController.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Controllers\DespachanteController.cs ===
+using Compartido.DTOs.Despachante;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante;
+using Microsoft.AspNetCore.Mvc;
+
+namespace GestionOperacionesAduaneras.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class DespachanteController : ControllerBase
+    {
+        private readonly ICrearDespachante _crearDespachante;
+        private readonly IObtenerDespachantePorId _obtenerDespachantePorId;
+
+        public DespachanteController(ICrearDespachante crearDespachante, IObtenerDespachantePorId obtenerDespachantePorId)
+        {
+            _crearDespachante = crearDespachante;
+            _obtenerDespachantePorId = obtenerDespachantePorId;
+        }
+
+        // POST /api/despachante - Crear despachante
+        [HttpPost]
+        public IActionResult Crear([FromBody] CrearDespachanteDTO dto)
+        {
+            try
+            {
+                var resultado = _crearDespachante.Ejecutar(dto);
+                return CreatedAtAction(
+                    nameof(ObtenerPorId),
+                    new { id = resultado.Id },
+                    resultado
+                );
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensaje = ex.Message });
+            }
+        }
+
+        // GET /api/despachante/{id} - Obtener despachante por id
+        [HttpGet("{id}")]
+        public IActionResult ObtenerPorId(int id)
+        {
+            try
+            {
+                var resultado = _obtenerDespachantePorId.Ejecutar(id);
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Controllers\RolController.cs ===
 using Compartido.DTOs.Rol;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
 using LogicaNegocio.Entidades;
@@ -453,11 +607,13 @@ namespace GestionOperacionesAduaneras.Controllers
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\Controllers\UsuarioController.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Controllers\UsuarioController.cs ===
 using Compartido.DTOs.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesServicios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace GestionOperacionesAduaneras.Controllers
 {
@@ -469,18 +625,21 @@ namespace GestionOperacionesAduaneras.Controllers
         private readonly IObtenerUsuarioPorId _obtenerUsuarioPorId;
         private readonly IModificarUsuario _modificarUsuario;
         private readonly IEliminarUsuario _eliminarUsuario;
+        private readonly IObtenerUsuarioLogueado _obtenerUsuarioLogueado;
 
         public UsuarioController(
             IObtenerUsuarios obtenerUsuarios,
             IObtenerUsuarioPorId obtenerUsuarioPorId,
             IModificarUsuario modificarUsuario,
-            IEliminarUsuario eliminarUsuario
+            IEliminarUsuario eliminarUsuario,
+            IObtenerUsuarioLogueado obtenerUsuarioLogueado
         )
         {
             _obtenerUsuarios = obtenerUsuarios;
             _obtenerUsuarioPorId = obtenerUsuarioPorId;
             _modificarUsuario = modificarUsuario;
             _eliminarUsuario = eliminarUsuario;
+            _obtenerUsuarioLogueado = obtenerUsuarioLogueado;
         }
 
 
@@ -551,11 +710,36 @@ namespace GestionOperacionesAduaneras.Controllers
                 return NotFound(new { mensaje = ex.Message });
             }
         }
+
+        // GET /api/usuarios/logueado - Obtener usuario logueado
+        [HttpGet("logueado")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerUsuarioLogueado()
+        {
+            try
+            {
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                if (userIdClaim == null)
+                    return Unauthorized();
+
+                int userId = int.Parse(userIdClaim);
+
+                var resultado = await _obtenerUsuarioLogueado.Ejecutar(userId);
+                // 200 OK con el usuario logueado
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                // 401 Unauthorized si no hay un usuario logueado
+                return Unauthorized(new { mensaje = ex.Message });
+            }
+        }
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\Controllers\WeatherForecastController.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Controllers\WeatherForecastController.cs ===
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestionOperacionesAduaneras.Controllers
@@ -591,21 +775,21 @@ namespace GestionOperacionesAduaneras.Controllers
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs ===
 // <autogenerated />
 using System;
 using System.Reflection;
 [assembly: global::System.Runtime.Versioning.TargetFrameworkAttribute(".NETCoreApp,Version=v8.0", FrameworkDisplayName = ".NET 8.0")]
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\obj\Debug\net8.0\GestionOperacionesAduaneras.AssemblyInfo.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\obj\Debug\net8.0\GestionOperacionesAduaneras.AssemblyInfo.cs ===
 //------------------------------------------------------------------------------
 // <auto-generated>
-//     This code was generated by a tool.
-//     Runtime Version:4.0.30319.42000
+//     Este cÃ³digo fue generado por una herramienta.
+//     VersiÃ³n de runtime:4.0.30319.42000
 //
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
+//     Los cambios en este archivo podrÃ­an causar un comportamiento incorrecto y se perderÃ¡n si
+//     se vuelve a generar el cÃ³digo.
 // </auto-generated>
 //------------------------------------------------------------------------------
 
@@ -615,16 +799,16 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e345f490d40e0798d009d88b3f496d4d787e58a0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3ab5d44d8d762824287348475b440e59948013c")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
-// Generated by the MSBuild WriteCodeFragment class.
+// Generado por la clase WriteCodeFragment de MSBuild.
 
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\obj\Debug\net8.0\GestionOperacionesAduaneras.GlobalUsings.g.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\obj\Debug\net8.0\GestionOperacionesAduaneras.GlobalUsings.g.cs ===
 // <auto-generated/>
 global using global::Microsoft.AspNetCore.Builder;
 global using global::Microsoft.AspNetCore.Hosting;
@@ -644,14 +828,14 @@ global using global::System.Threading;
 global using global::System.Threading.Tasks;
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\obj\Debug\net8.0\GestionOperacionesAduaneras.MvcApplicationPartsAssemblyInfo.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\obj\Debug\net8.0\GestionOperacionesAduaneras.MvcApplicationPartsAssemblyInfo.cs ===
 //------------------------------------------------------------------------------
 // <auto-generated>
-//     This code was generated by a tool.
-//     Runtime Version:4.0.30319.42000
+//     Este cÃ³digo fue generado por una herramienta.
+//     VersiÃ³n de runtime:4.0.30319.42000
 //
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
+//     Los cambios en este archivo podrÃ­an causar un comportamiento incorrecto y se perderÃ¡n si
+//     se vuelve a generar el cÃ³digo.
 // </auto-generated>
 //------------------------------------------------------------------------------
 
@@ -660,183 +844,11 @@ using System.Reflection;
 
 [assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("Swashbuckle.AspNetCore.SwaggerGen")]
 
-// Generated by the MSBuild WriteCodeFragment class.
+// Generado por la clase WriteCodeFragment de MSBuild.
 
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\obj\Debug\net8.0\WebAPI.AssemblyInfo.cs ===
-//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
-//     Runtime Version:4.0.30319.42000
-//
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
-
-using System;
-using System.Reflection;
-
-[assembly: System.Reflection.AssemblyCompanyAttribute("WebAPI")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("WebAPI")]
-[assembly: System.Reflection.AssemblyTitleAttribute("WebAPI")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
-
-// Generated by the MSBuild WriteCodeFragment class.
-
-
-
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\obj\Debug\net8.0\WebAPI.GlobalUsings.g.cs ===
-// <auto-generated/>
-global using global::Microsoft.AspNetCore.Builder;
-global using global::Microsoft.AspNetCore.Hosting;
-global using global::Microsoft.AspNetCore.Http;
-global using global::Microsoft.AspNetCore.Routing;
-global using global::Microsoft.Extensions.Configuration;
-global using global::Microsoft.Extensions.DependencyInjection;
-global using global::Microsoft.Extensions.Hosting;
-global using global::Microsoft.Extensions.Logging;
-global using global::System;
-global using global::System.Collections.Generic;
-global using global::System.IO;
-global using global::System.Linq;
-global using global::System.Net.Http;
-global using global::System.Net.Http.Json;
-global using global::System.Threading;
-global using global::System.Threading.Tasks;
-
-
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\obj\Debug\net8.0\WebAPI.MvcApplicationPartsAssemblyInfo.cs ===
-//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
-//     Runtime Version:4.0.30319.42000
-//
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
-
-using System;
-using System.Reflection;
-
-[assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("Swashbuckle.AspNetCore.SwaggerGen")]
-
-// Generated by the MSBuild WriteCodeFragment class.
-
-
-
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\Servicios\ClienteService.cs ===
-using Compartido.DTOs.Cliente;
-using LogicaNegocio.Entidades;
-using LogicaNegocio.Excepciones.Cliente;
-using LogicaNegocio.Excepciones.Roles;
-using LogicaNegocio.InterfacesRepositorios;
-using LogicaNegocio.InterfacesServicios;
-using LogicaNegocio.ValueObject;
-
-namespace GestionOperacionesAduaneras.Servicios
-{
-    public class ClienteService : IClienteService
-    {
-        private readonly IRepositorioCliente _repositorioCliente;
-        private readonly IRepositorioRol _repositorioRol;
-
-
-        public ClienteService(IRepositorioCliente repositorioCliente, IRepositorioRol repositorioRol)
-        {
-            _repositorioCliente = repositorioCliente;
-            _repositorioRol = repositorioRol;
-        }
-
-        public ClienteRespuestaDTO CrearCliente(CrearClienteDTO dto)
-        {
-            var rolCliente = _repositorioRol.FindByNombre("Cliente")
-                ?? throw new RolNoEncontradoException();
-
-            var cliente = new Cliente
-            {
-                Nombre = dto.Nombre,
-                Apellido = dto.Apellido,
-                Email = new Email(dto.Email),
-                Password = new Password(dto.Password),
-                Rut = dto.Rut,
-                Telefono = dto.Telefono,
-                Direccion = dto.Direccion,
-                Rol = rolCliente
-            };
-            _repositorioCliente.Add(cliente);
-            return MapearARespuesta(cliente);
-        }
-
-        public void EliminarCliente(int id)
-        {
-            var cliente = _repositorioCliente.FindById(id);
-
-            if (cliente == null)
-                throw new ClienteNoEncontradoException();
-
-            _repositorioCliente.Delete(id);
-
-        }
-
-        public ClienteRespuestaDTO ModificarCliente(int id, ModificarClienteDTO dto)
-        {
-            var cliente = _repositorioCliente.FindById(id);
-            if (cliente == null)
-            {
-                throw new ClienteNoEncontradoException();
-            }
-            cliente.Nombre = dto.Nombre;
-            cliente.Apellido = dto.Apellido;
-            cliente.Email = new Email(dto.Email);
-            cliente.Rut = dto.Rut;
-            cliente.Telefono = dto.Telefono;
-            cliente.Direccion = dto.Direccion;
-
-            _repositorioCliente.Update(cliente, id);
-            return MapearARespuesta(cliente);
-        }
-
-        public ClienteRespuestaDTO ObtenerClientePorId(int id)
-        {
-            var cliente = _repositorioCliente.FindById(id);
-            if (cliente == null)
-            {
-                throw new ClienteNoEncontradoException();
-            }
-            return MapearARespuesta(cliente);
-        }
-
-        public IEnumerable<ClienteRespuestaDTO> ObtenerClientes()
-        {
-            var clientes = _repositorioCliente.FindAll();
-            return clientes.Select(c => MapearARespuesta(c)).ToList();
-
-        }
-        private ClienteRespuestaDTO MapearARespuesta(Cliente cliente)
-        {
-            return new ClienteRespuestaDTO
-            {
-                Id = cliente.Id,
-                Nombre = cliente.Nombre,
-                Apellido = cliente.Apellido,
-                Email = cliente.Email.Valor,
-                Rut = cliente.Rut,
-                Telefono = cliente.Telefono,
-                Direccion = cliente.Direccion ?? string.Empty
-                
-            };
-        }
-    }
-}
-
-
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\Servicios\JwtService .cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Servicios\JwtService .cs ===
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesServicios;
 using Microsoft.IdentityModel.Tokens;
@@ -890,7 +902,7 @@ namespace GestionOperacionesAduaneras.Servicios
     }
 }
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\Servicios\UsuarioService.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Servicios\UsuarioService.cs ===
 using Compartido.DTOs.Usuarios;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
@@ -916,7 +928,7 @@ namespace GestionOperacionesAduaneras.Servicios
             _repositorioUsuario.Delete(id);
         }
 
-        public UsuarioRespuestaDTO ModificarUsuario(int id, ModificarUsuarioDTO dto)
+        public UsuarioListadoDTO ModificarUsuario(int id, ModificarUsuarioDTO dto)
         {
             var usuario = _repositorioUsuario.FindById(id);
             if (usuario == null)
@@ -943,7 +955,7 @@ namespace GestionOperacionesAduaneras.Servicios
             return MapearARespuesta(usuario);
         }
 
-        public UsuarioRespuestaDTO ObtenerUsuarioPorId(int id)
+        public UsuarioListadoDTO ObtenerUsuarioPorId(int id)
         {
             var usuario = _repositorioUsuario.FindById(id);
             if (usuario == null)
@@ -952,7 +964,7 @@ namespace GestionOperacionesAduaneras.Servicios
             return MapearARespuesta(usuario);
         }
 
-        public IEnumerable<UsuarioRespuestaDTO> ObtenerUsuarios()
+        public IEnumerable<UsuarioListadoDTO> ObtenerUsuarios()
         {
             var usuarios = _repositorioUsuario.FindAll();
             return usuarios.Select(u => MapearARespuesta(u)).ToList();
@@ -973,9 +985,9 @@ namespace GestionOperacionesAduaneras.Servicios
         // Método privado para convertir Usuario a UsuarioRespuestaDTO
         // Lo usamos en varios métodos para no repetir código, si se agregan campos al DTO
         // //solo se cambia en un lugar
-        private UsuarioRespuestaDTO MapearARespuesta(Usuario usuario)
+        private UsuarioListadoDTO MapearARespuesta(Usuario usuario)
         {
-            return new UsuarioRespuestaDTO
+            return new UsuarioListadoDTO
             {
                 Id = usuario.Id,
                 Nombre = usuario.Nombre,
@@ -989,10 +1001,11 @@ namespace GestionOperacionesAduaneras.Servicios
 
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\Program.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Program.cs ===
 
 using GestionOperacionesAduaneras.Servicios;
 using LogicaAccesoDatos.Contexto;
+using LogicaAccesoDatos.Data;
 using LogicaAccesoDatos.Repositorios;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol;
@@ -1040,7 +1053,7 @@ namespace GestionOperacionesAduaneras
             // Servicios
             builder.Services.AddScoped<IJwtService, JwtService>();
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-            builder.Services.AddScoped<IClienteService, ClienteService>();
+            //builder.Services.AddScoped<IClienteService, ClienteService>();
            
 
             // Casos de uso usuario
@@ -1048,6 +1061,7 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IObtenerUsuarioPorId, ObtenerUsuarioPorId>();
             builder.Services.AddScoped<IModificarUsuario, ModificarUsuario>();
             builder.Services.AddScoped<IEliminarUsuario, EliminarUsuario>();
+            builder.Services.AddScoped<IObtenerUsuarioLogueado, ObtenerUsuarioLogueado>();
 
             // Casos de uso cliente 
             builder.Services.AddScoped<ILogin, Login>();
@@ -1140,13 +1154,20 @@ namespace GestionOperacionesAduaneras
 
             app.MapControllers();
 
+            // Inicializar la base de datos con datos admin
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<GestionOperacionesDbContext>();
+                DbInitializer.Inicializar(context);
+            }
+
             app.Run();
         }
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\GestionOperacionesAduaneras\WeatherForecast.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\WeatherForecast.cs ===
 namespace GestionOperacionesAduaneras
 {
     public class WeatherForecast
@@ -1162,7 +1183,7 @@ namespace GestionOperacionesAduaneras
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAccesoDatos\Contexto\GestionOperacionesDbContext.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Contexto\GestionOperacionesDbContext.cs ===
 using LogicaAccesoDatos.Data;
 using LogicaNegocio.Entidades;
 using Microsoft.EntityFrameworkCore;
@@ -1282,6 +1303,22 @@ namespace LogicaAccesoDatos.Contexto
                     .HasForeignKey(u => u.RolId)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);
+
+                entity.Property(u => u.FechaCreacion)
+                    .IsRequired()
+                    .HasColumnName("FechaCreacion")
+                    .HasDefaultValue(DateTime.Now);
+
+                entity.Property(u => u.PrimerLogin)
+                    .IsRequired()
+                    .HasColumnName("PrimerLogin")
+                    .HasDefaultValue(true);
+
+                entity.Property(u => u.Estado)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("Estado")
+                    .HasDefaultValue("Pendiente");
             });
 
             // Configuración de la tabla Cliente
@@ -1296,8 +1333,12 @@ namespace LogicaAccesoDatos.Contexto
                     .IsUnique()
                     .HasDatabaseName("IX_Clientes_RUT_Unique");
 
+                entity.Property(c => c.RazonSocial)
+                   .IsRequired()
+                   .HasMaxLength(200)
+                   .HasColumnName("RazonSocial");
+
                 entity.Property(c => c.Telefono)
-                    .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("Telefono");
 
@@ -1309,14 +1350,13 @@ namespace LogicaAccesoDatos.Contexto
             // Configuración de la tabla Despachante
             modelBuilder.Entity<Despachante>(entity =>
             {
-                entity.Property(d => d.Rut)
-                    .IsRequired()
+                entity.Property(d => d.Codigo)
                     .HasMaxLength(20)
-                    .HasColumnName("RUT");
+                    .HasColumnName("Codigo");
 
-                entity.HasIndex(d => d.Rut)
+                entity.HasIndex(d => d.Codigo)
                     .IsUnique()
-                    .HasDatabaseName("IX_Despachantes_RUT_Unique");
+                    .HasDatabaseName("IX_Despachantes_Codigo_Unique");
             });
 
             // Configuración de la tabla tipo operación
@@ -1757,7 +1797,7 @@ namespace LogicaAccesoDatos.Contexto
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAccesoDatos\Contexto\GestionOperacionesDbContextFactory.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Contexto\GestionOperacionesDbContextFactory.cs ===
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using System;
@@ -1775,17 +1815,52 @@ namespace LogicaAccesoDatos.Contexto
             var optionsBuilder = new DbContextOptionsBuilder<GestionOperacionesDbContext>();
 
             // Cadena de conexión con servidor SQL
-            //optionsBuilder.UseSqlServer("Server=LAPTOP-7HNCQVS5\\SQLEXPRESS1;Database=GestionOperacionesAduaneras;Trusted_Connection=true;TrustServerCertificate=true;");
-            optionsBuilder.UseSqlServer(
+            optionsBuilder.UseSqlServer("Server=LAPTOP-7HNCQVS5\\SQLEXPRESS1;Database=GestionOperacionesAduaneras;Trusted_Connection=true;TrustServerCertificate=true;");
+            /*optionsBuilder.UseSqlServer(
             "Server=(localdb)\\MSSQLLocalDB;Database=GestionOperacionesAduaneras;Trusted_Connection=true;TrustServerCertificate=true;"
-            );
+            );*/
             return new GestionOperacionesDbContext(optionsBuilder.Options);
         }
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAccesoDatos\Data\SeedData.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Data\DbInitializer.cs ===
+using LogicaAccesoDatos.Contexto;
+using LogicaNegocio.Entidades;
+using LogicaNegocio.ValueObject;
+
+namespace LogicaAccesoDatos.Data
+{
+    public static class DbInitializer
+    {
+        public static void Inicializar(GestionOperacionesDbContext context)
+        {
+            // 1. Verificar si ya existe el admin
+            if (context.Usuarios.Any(u => u.Email.Valor == "admin@admin.com"))
+                return;
+
+            // 2. Obtener rol administrador
+            var rolAdmin = context.Roles.FirstOrDefault(r => r.NombreRol == "Administrador");
+
+            if (rolAdmin == null)
+                return; // seguridad
+
+            // 3. Crear usuario admin
+            var admin = new Despachante
+            {
+                Email = new Email("admin@admin.com"),
+                Password = new Password("Admin123!!"),
+                RolId = rolAdmin.Id
+            };
+
+            context.Usuarios.Add(admin);
+            context.SaveChanges();
+        }
+    }
+}
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Data\SeedData.cs ===
 using LogicaNegocio.Entidades;
 using Microsoft.EntityFrameworkCore;
 
@@ -1800,7 +1875,7 @@ namespace LogicaAccesoDatos.Data
             // SEED DATA - ROLES
             // ============================================================================
             modelBuilder.Entity<Rol>().HasData(
-                new Rol("Administrador") { Id = 1 },
+                new Rol("Admin") { Id = 1 },
                 new Rol("Despachante") { Id = 2 },
                 new Rol("Cliente") { Id = 3 }
             );
@@ -1826,7 +1901,7 @@ namespace LogicaAccesoDatos.Data
     }
 }
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAccesoDatos\Migrations\20260430080034_InitialCreate.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Migrations\20260502215616_InitialCreate.cs ===
 using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
@@ -1929,10 +2004,15 @@ namespace LogicaAccesoDatos.Migrations
                     Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     RolId = table.Column<int>(type: "int", nullable: false),
+                    FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 2, 18, 56, 15, 507, DateTimeKind.Local).AddTicks(9048)),
+                    PrimerLogin = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                    Estado = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, defaultValue: "Pendiente"),
                     Discriminator = table.Column<int>(type: "int", nullable: false),
                     RUT = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    RazonSocial = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     Telefono = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    Direccion = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true)
+                    Direccion = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Codigo = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1952,7 +2032,7 @@ namespace LogicaAccesoDatos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NroCarpeta = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 4, 30, 5, 0, 32, 946, DateTimeKind.Local).AddTicks(8852)),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 2, 18, 56, 15, 508, DateTimeKind.Local).AddTicks(7498)),
                     Estado = table.Column<int>(type: "int", nullable: false),
                     TipoOperacionId = table.Column<int>(type: "int", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
@@ -1990,7 +2070,7 @@ namespace LogicaAccesoDatos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Contenido = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
-                    FechaEnvio = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 4, 30, 5, 0, 32, 952, DateTimeKind.Local).AddTicks(7149)),
+                    FechaEnvio = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 2, 18, 56, 15, 511, DateTimeKind.Local).AddTicks(9876)),
                     Enviado = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     UsuarioEnvioId = table.Column<int>(type: "int", nullable: false),
                     OperacionId = table.Column<int>(type: "int", nullable: true),
@@ -2035,7 +2115,7 @@ namespace LogicaAccesoDatos.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     RutaArchivo = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Formato = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    FechaCarga = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 4, 30, 5, 0, 32, 949, DateTimeKind.Local).AddTicks(995)),
+                    FechaCarga = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 2, 18, 56, 15, 510, DateTimeKind.Local).AddTicks(31)),
                     OperacionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -2101,7 +2181,7 @@ namespace LogicaAccesoDatos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RutaArchivo = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    FechaCarga = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 4, 30, 5, 0, 32, 951, DateTimeKind.Local).AddTicks(7875)),
+                    FechaCarga = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 2, 18, 56, 15, 511, DateTimeKind.Local).AddTicks(5561)),
                     LiquidacionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -2146,7 +2226,7 @@ namespace LogicaAccesoDatos.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FechaValidacion = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 4, 30, 5, 0, 32, 951, DateTimeKind.Local).AddTicks(2350)),
+                    FechaValidacion = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 2, 18, 56, 15, 511, DateTimeKind.Local).AddTicks(2033)),
                     Aprobado = table.Column<bool>(type: "bit", nullable: false),
                     MotivoRechazo = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     UsuarioValidacionId = table.Column<int>(type: "int", nullable: false),
@@ -2174,7 +2254,7 @@ namespace LogicaAccesoDatos.Migrations
                 columns: new[] { "Id", "NombreRol" },
                 values: new object[,]
                 {
-                    { 1, "Administrador" },
+                    { 1, "Admin" },
                     { 2, "Despachante" },
                     { 3, "Cliente" }
                 });
@@ -2297,11 +2377,11 @@ namespace LogicaAccesoDatos.Migrations
                 filter: "[RUT] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Despachantes_RUT_Unique",
+                name: "IX_Despachantes_Codigo_Unique",
                 table: "Usuarios",
-                column: "RUT",
+                column: "Codigo",
                 unique: true,
-                filter: "[RUT] IS NOT NULL");
+                filter: "[Codigo] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Usuarios_Email_Unique",
@@ -2375,7 +2455,7 @@ namespace LogicaAccesoDatos.Migrations
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAccesoDatos\Migrations\20260430080034_InitialCreate.Designer.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Migrations\20260502215616_InitialCreate.Designer.cs ===
 // <auto-generated />
 using System;
 using LogicaAccesoDatos.Contexto;
@@ -2390,7 +2470,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaAccesoDatos.Migrations
 {
     [DbContext(typeof(GestionOperacionesDbContext))]
-    [Migration("20260430080034_InitialCreate")]
+    [Migration("20260502215616_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -2460,7 +2540,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaEnvio")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 952, DateTimeKind.Local).AddTicks(7149))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 511, DateTimeKind.Local).AddTicks(9876))
                         .HasColumnName("FechaEnvio");
 
                     b.Property<int?>("OperacionId")
@@ -2524,7 +2604,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 949, DateTimeKind.Local).AddTicks(995))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 510, DateTimeKind.Local).AddTicks(31))
                         .HasColumnName("FechaCarga");
 
                     b.Property<string>("Formato")
@@ -2566,7 +2646,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 951, DateTimeKind.Local).AddTicks(7875))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 511, DateTimeKind.Local).AddTicks(5561))
                         .HasColumnName("FechaCarga");
 
                     b.Property<int>("LiquidacionId")
@@ -2642,7 +2722,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaRegistro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 946, DateTimeKind.Local).AddTicks(8852))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 508, DateTimeKind.Local).AddTicks(7498))
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("NroCarpeta")
@@ -2752,7 +2832,7 @@ namespace LogicaAccesoDatos.Migrations
                         new
                         {
                             Id = 1,
-                            NombreRol = "Administrador"
+                            NombreRol = "Admin"
                         },
                         new
                         {
@@ -2893,11 +2973,31 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<int>("Discriminator")
                         .HasColumnType("int");
 
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasDefaultValue("Pendiente")
+                        .HasColumnName("Estado");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 507, DateTimeKind.Local).AddTicks(9048))
+                        .HasColumnName("FechaCreacion");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("Nombre");
+
+                    b.Property<bool>("PrimerLogin")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true)
+                        .HasColumnName("PrimerLogin");
 
                     b.Property<int>("RolId")
                         .HasColumnType("int");
@@ -2928,7 +3028,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaValidacion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 951, DateTimeKind.Local).AddTicks(2350))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 511, DateTimeKind.Local).AddTicks(2033))
                         .HasColumnName("FechaValidacion");
 
                     b.Property<string>("MotivoRechazo")
@@ -2961,15 +3061,19 @@ namespace LogicaAccesoDatos.Migrations
                         .HasColumnType("nvarchar(300)")
                         .HasColumnName("Direccion");
 
+                    b.Property<string>("RazonSocial")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("RazonSocial");
+
                     b.Property<string>("Rut")
                         .IsRequired()
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("RUT");
 
                     b.Property<string>("Telefono")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("Telefono");
@@ -2986,17 +3090,15 @@ namespace LogicaAccesoDatos.Migrations
                 {
                     b.HasBaseType("LogicaNegocio.Entidades.Usuario");
 
-                    b.Property<string>("Rut")
-                        .IsRequired()
-                        .ValueGeneratedOnUpdateSometimes()
+                    b.Property<string>("Codigo")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
-                        .HasColumnName("RUT");
+                        .HasColumnName("Codigo");
 
-                    b.HasIndex("Rut")
+                    b.HasIndex("Codigo")
                         .IsUnique()
-                        .HasDatabaseName("IX_Despachantes_RUT_Unique")
-                        .HasFilter("[RUT] IS NOT NULL");
+                        .HasDatabaseName("IX_Despachantes_Codigo_Unique")
+                        .HasFilter("[Codigo] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue(2);
                 });
@@ -3233,7 +3335,7 @@ namespace LogicaAccesoDatos.Migrations
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAccesoDatos\Migrations\GestionOperacionesDbContextModelSnapshot.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Migrations\GestionOperacionesDbContextModelSnapshot.cs ===
 // <auto-generated />
 using System;
 using LogicaAccesoDatos.Contexto;
@@ -3315,7 +3417,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaEnvio")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 952, DateTimeKind.Local).AddTicks(7149))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 511, DateTimeKind.Local).AddTicks(9876))
                         .HasColumnName("FechaEnvio");
 
                     b.Property<int?>("OperacionId")
@@ -3379,7 +3481,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 949, DateTimeKind.Local).AddTicks(995))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 510, DateTimeKind.Local).AddTicks(31))
                         .HasColumnName("FechaCarga");
 
                     b.Property<string>("Formato")
@@ -3421,7 +3523,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 951, DateTimeKind.Local).AddTicks(7875))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 511, DateTimeKind.Local).AddTicks(5561))
                         .HasColumnName("FechaCarga");
 
                     b.Property<int>("LiquidacionId")
@@ -3497,7 +3599,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaRegistro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 946, DateTimeKind.Local).AddTicks(8852))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 508, DateTimeKind.Local).AddTicks(7498))
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("NroCarpeta")
@@ -3607,7 +3709,7 @@ namespace LogicaAccesoDatos.Migrations
                         new
                         {
                             Id = 1,
-                            NombreRol = "Administrador"
+                            NombreRol = "Admin"
                         },
                         new
                         {
@@ -3748,11 +3850,31 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<int>("Discriminator")
                         .HasColumnType("int");
 
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasDefaultValue("Pendiente")
+                        .HasColumnName("Estado");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 507, DateTimeKind.Local).AddTicks(9048))
+                        .HasColumnName("FechaCreacion");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("Nombre");
+
+                    b.Property<bool>("PrimerLogin")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true)
+                        .HasColumnName("PrimerLogin");
 
                     b.Property<int>("RolId")
                         .HasColumnType("int");
@@ -3783,7 +3905,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaValidacion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 4, 30, 5, 0, 32, 951, DateTimeKind.Local).AddTicks(2350))
+                        .HasDefaultValue(new DateTime(2026, 5, 2, 18, 56, 15, 511, DateTimeKind.Local).AddTicks(2033))
                         .HasColumnName("FechaValidacion");
 
                     b.Property<string>("MotivoRechazo")
@@ -3816,15 +3938,19 @@ namespace LogicaAccesoDatos.Migrations
                         .HasColumnType("nvarchar(300)")
                         .HasColumnName("Direccion");
 
+                    b.Property<string>("RazonSocial")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("RazonSocial");
+
                     b.Property<string>("Rut")
                         .IsRequired()
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("RUT");
 
                     b.Property<string>("Telefono")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("Telefono");
@@ -3841,17 +3967,15 @@ namespace LogicaAccesoDatos.Migrations
                 {
                     b.HasBaseType("LogicaNegocio.Entidades.Usuario");
 
-                    b.Property<string>("Rut")
-                        .IsRequired()
-                        .ValueGeneratedOnUpdateSometimes()
+                    b.Property<string>("Codigo")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
-                        .HasColumnName("RUT");
+                        .HasColumnName("Codigo");
 
-                    b.HasIndex("Rut")
+                    b.HasIndex("Codigo")
                         .IsUnique()
-                        .HasDatabaseName("IX_Despachantes_RUT_Unique")
-                        .HasFilter("[RUT] IS NOT NULL");
+                        .HasDatabaseName("IX_Despachantes_Codigo_Unique")
+                        .HasFilter("[Codigo] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue(2);
                 });
@@ -4088,21 +4212,21 @@ namespace LogicaAccesoDatos.Migrations
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAccesoDatos\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs ===
 // <autogenerated />
 using System;
 using System.Reflection;
 [assembly: global::System.Runtime.Versioning.TargetFrameworkAttribute(".NETCoreApp,Version=v8.0", FrameworkDisplayName = ".NET 8.0")]
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAccesoDatos\obj\Debug\net8.0\LogicaAccesoDatos.AssemblyInfo.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\obj\Debug\net8.0\LogicaAccesoDatos.AssemblyInfo.cs ===
 //------------------------------------------------------------------------------
 // <auto-generated>
-//     This code was generated by a tool.
-//     Runtime Version:4.0.30319.42000
+//     Este cÃ³digo fue generado por una herramienta.
+//     VersiÃ³n de runtime:4.0.30319.42000
 //
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
+//     Los cambios en este archivo podrÃ­an causar un comportamiento incorrecto y se perderÃ¡n si
+//     se vuelve a generar el cÃ³digo.
 // </auto-generated>
 //------------------------------------------------------------------------------
 
@@ -4112,16 +4236,16 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e345f490d40e0798d009d88b3f496d4d787e58a0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3ab5d44d8d762824287348475b440e59948013c")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
-// Generated by the MSBuild WriteCodeFragment class.
+// Generado por la clase WriteCodeFragment de MSBuild.
 
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAccesoDatos\obj\Debug\net8.0\LogicaAccesoDatos.GlobalUsings.g.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\obj\Debug\net8.0\LogicaAccesoDatos.GlobalUsings.g.cs ===
 // <auto-generated/>
 global using global::System;
 global using global::System.Collections.Generic;
@@ -4132,7 +4256,7 @@ global using global::System.Threading;
 global using global::System.Threading.Tasks;
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAccesoDatos\Repositorios\RepositorioCliente.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Repositorios\RepositorioCliente.cs ===
 using LogicaAccesoDatos.Contexto;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
@@ -4234,7 +4358,63 @@ namespace LogicaAccesoDatos.Repositorios
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAccesoDatos\Repositorios\RepositorioRol.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Repositorios\RepositorioDespachante.cs ===
+using LogicaAccesoDatos.Contexto;
+using LogicaNegocio.Entidades;
+using LogicaNegocio.InterfacesRepositorios;
+using LogicaNegocio.ValueObject;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAccesoDatos.Repositorios
+{
+    public class RepositorioDespachante : IRepositorioDespachante
+    {
+        private readonly GestionOperacionesDbContext _context;
+        public RepositorioDespachante(GestionOperacionesDbContext context)
+        {
+            _context = context;
+        }
+        public void Add(Despachante item)
+        {
+            _context.Despachantes.Add(item);
+            _context.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ExisteEmail(string email)
+        {
+            return _context.Despachantes
+                .Any(d => d.Email.Valor == email);
+        }
+
+        public IEnumerable<Despachante> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Despachante FindById(int id)
+        {
+            return _context.Despachantes
+                .FirstOrDefault(d => d.Id == id);
+        }
+
+        public void Update(Despachante item, int id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Repositorios\RepositorioRol.cs ===
 using LogicaAccesoDatos.Contexto;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.Excepciones.Roles;
@@ -4303,7 +4483,7 @@ namespace LogicaAccesoDatos.Repositorios
     }
 }
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAccesoDatos\Repositorios\RepositorioUsuario.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Repositorios\RepositorioUsuario.cs ===
 using LogicaAccesoDatos.Contexto;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
@@ -4381,7 +4561,7 @@ namespace LogicaAccesoDatos.Repositorios
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAccesoDatos\Repositorios\RepositorioUsuarioMock.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Repositorios\RepositorioUsuarioMock.cs ===
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.ValueObject;
@@ -4443,7 +4623,7 @@ namespace LogicaAccesoDatos.Repositorios
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAccesoDatos\Class1.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Class1.cs ===
 namespace LogicaAccesoDatos
 {
     public class Class1
@@ -4453,10 +4633,11 @@ namespace LogicaAccesoDatos
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Cliente\CrearCliente.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Cliente\CrearCliente.cs ===
 using Compartido.DTOs.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
-using LogicaNegocio.InterfacesServicios;
+using LogicaAplicacion.Mappers;
+using LogicaNegocio.InterfacesRepositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4467,22 +4648,41 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 {
     public class CrearCliente : ICrearCliente
     {
-        private readonly IClienteService _clienteService;
+        private readonly IRepositorioCliente _clienteRepo;
+        private readonly IRepositorioRol _rolRepo;
 
-        public CrearCliente(IClienteService clienteService)
+        public CrearCliente(IRepositorioCliente clienteRepo, IRepositorioRol rolRepo    )
         {
-            _clienteService = clienteService;
+            _clienteRepo = clienteRepo;
+            _rolRepo = rolRepo;
         }
-        public ClienteRespuestaDTO Ejecutar(CrearClienteDTO dto)
+        public CrearClienteRespuestaDTO Ejecutar(CrearClienteDTO dto)
         {
-            return _clienteService.CrearCliente(dto);
+            //validar si existe email
+
+            var existe = _clienteRepo.ExisteRut(dto.Rut);
+            if (existe)
+                throw new Exception("Ya existe un cliente con ese RUT");
+
+            var rolCliente = _rolRepo.FindById(3);
+
+            var username = $"{dto.Email.Split('@')[0]}";
+            var passwordTemporal = "Despacho100!";
+
+            var cliente = ClienteMapper.ToEntity(dto, rolCliente);
+
+            _clienteRepo.Add(cliente);
+
+            return ClienteMapper.ToDTO(cliente, username, passwordTemporal);
+            
         }
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Cliente\EliminarCliente.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Cliente\EliminarCliente.cs ===
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
+using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
 using System;
 using System.Collections.Generic;
@@ -4494,22 +4694,37 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 {
     public class EliminarCliente : IEliminarCliente
     {
-        private readonly IClienteService _clienteService;
-        public EliminarCliente(IClienteService clienteService)
+
+        private readonly IRepositorioCliente _clienteRepo;
+
+        public EliminarCliente(IRepositorioCliente clienteRepo)
         {
-            _clienteService = clienteService;
+            _clienteRepo = clienteRepo;
         }
         public void Ejecutar(int id)
         {
-            _clienteService.EliminarCliente(id);
+            _clienteRepo.Delete(id);
         }
+
+
+        //private readonly IClienteService _clienteService;
+        // public EliminarCliente(IClienteService clienteService)
+        // {
+        //      _clienteService = clienteService;
+        //  }
+        // public void Ejecutar(int id)
+        // {
+        //_clienteService.EliminarCliente(id);
+        // }
+
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Cliente\ModificarCliente.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Cliente\ModificarCliente.cs ===
 using Compartido.DTOs.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
+using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
 using System;
 using System.Collections.Generic;
@@ -4521,22 +4736,46 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 {
     public class ModificarCliente : IModificarCliente
     {
-        private readonly IClienteService _clienteService;
-        public ModificarCliente(IClienteService clienteService)
+        private readonly IRepositorioCliente _clienteRepo;
+        public ModificarCliente(IRepositorioCliente clienteRepo)
         {
-            _clienteService = clienteService;
+            _clienteRepo = clienteRepo;
         }
-        public ClienteRespuestaDTO Ejecutar(int id,ModificarClienteDTO dto)
+
+        public ModificarClienteDTO Ejecutar(int id, ModificarClienteDTO dto)
         {
-            return _clienteService.ModificarCliente(id, dto);
+            return new ModificarClienteDTO {
+                Nombre = dto.Nombre,
+                Apellido = dto.Apellido,
+                Email = dto.Email,
+                Telefono = dto.Telefono,
+                    Direccion = dto.Direccion,
+                    Rut = dto.Rut,
+                    RazonSocial = dto.RazonSocial,
+                    Password = dto.Password
+            };
         }
+
+
+
+
+        //private readonly IClienteService _clienteService;
+        // public ModificarCliente(IClienteService clienteService)
+        // {
+        //     _clienteService = clienteService;
+        // }
+        //public ClienteRespuestaDTO Ejecutar(int id,ModificarClienteDTO dto)
+        // {
+        //    return _clienteService.ModificarCliente(id, dto);
+        // }
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Cliente\ObtenerClientePorId.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Cliente\ObtenerClientePorId.cs ===
 using Compartido.DTOs.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
+using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
 using System;
 using System.Collections.Generic;
@@ -4548,23 +4787,41 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 {
     public class ObtenerClientePorId : IObtenerClientePorId
     {
-        private readonly IClienteService _clienteService;
-        public ObtenerClientePorId(IClienteService clienteService)
+        private readonly IRepositorioCliente _clienteRepo;
+        public ObtenerClientePorId(IRepositorioCliente clienteRepo)
         {
-            _clienteService = clienteService;
+            _clienteRepo = clienteRepo;
         }
 
-        public ClienteRespuestaDTO Ejecutar(int id)
+        public ClienteDTO Ejecutar(int id)
         {
-            return _clienteService.ObtenerClientePorId(id);
+            var cliente = _clienteRepo.FindById(id);
+            if (cliente == null)
+            {
+                throw new Exception("Cliente no encontrado");
+            }
+
+            return new ClienteDTO
+            {
+                Nombre = cliente.Nombre,
+                Apellido = cliente.Apellido,
+                Email = cliente.Email.Valor,
+                RazonSocial = cliente.RazonSocial,
+                Rut = cliente.Rut,
+                Telefono = cliente.Telefono,
+                Direccion = cliente.Direccion
+            };
         }
+
+        // TODO Pasar el new ClienteDTO a un mapeador para mapearlo a un DTO
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Cliente\ObtenerClientes.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Cliente\ObtenerClientes.cs ===
 using Compartido.DTOs.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
+using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
 using System;
 using System.Collections.Generic;
@@ -4576,21 +4833,127 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 {
     public class ObtenerClientes : IObtenerClientes
     {
-        private readonly IClienteService _clienteService;
+       
+        private readonly IRepositorioCliente _clienteRepo;
 
-        public ObtenerClientes(IClienteService clienteService)
+        public ObtenerClientes(IRepositorioCliente clienteRepo)
         {
-            _clienteService = clienteService;
+            _clienteRepo = clienteRepo;
         }
-        public IEnumerable<ClienteRespuestaDTO> Ejecutar()
+
+        public IEnumerable<ClienteDTO> Ejecutar()
         {
-            return _clienteService.ObtenerClientes();
+            var clientes = _clienteRepo.FindAll();
+            return clientes.Select(c => new ClienteDTO
+            {
+                Nombre = c.Nombre,
+                Apellido = c.Apellido,
+                Email = c.Email.Valor,
+                RazonSocial = c.RazonSocial,
+                Rut = c.Rut,
+                Telefono = c.Telefono,
+                Direccion = c.Direccion
+            }).ToList();
+        }
+
+
+
+        // private readonly IClienteService _clienteService;
+
+        // public ObtenerClientes(IClienteService clienteService)
+        //{
+        //     _clienteService = clienteService;
+        // }
+        // public IEnumerable<ClienteRespuestaDTO> Ejecutar()
+        // {
+        //    return _clienteService.ObtenerClientes();
+        //}
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Despachante\CrearDespachante.cs ===
+using Compartido.DTOs.Despachante;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante;
+using LogicaAplicacion.Mappers;
+using LogicaNegocio.InterfacesRepositorios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Despachante
+{
+    public class CrearDespachante : ICrearDespachante
+    {
+        private readonly IRepositorioDespachante _repositorioDespachante;
+        private readonly IRepositorioRol _repositorioRol;
+        public CrearDespachante(IRepositorioDespachante repositorioDespachante, IRepositorioRol repositorioRol)
+        {
+            _repositorioDespachante = repositorioDespachante;
+            _repositorioRol = repositorioRol;
+        }
+        public CrearDespachanteRespuestaDTO Ejecutar(CrearDespachanteDTO dto)
+        {
+            var existe = _repositorioDespachante.ExisteEmail(dto.Email);
+            if (existe)
+                throw new Exception("Ya existe un despachante con ese email");
+
+            var rolDespachante = _repositorioRol.FindById(2);
+            var username = $"{dto.Email.Split('@')[0]}";
+            var passwordTemporal = "Despacho100!";
+            var despachante = DespachanteMapper.ToEntity(dto, rolDespachante);
+            _repositorioDespachante.Add(despachante);
+            return DespachanteMapper.ToDTO(despachante, username, passwordTemporal);
+
         }
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Rol\CrearRol.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Despachante\ObtenerDespachantePorId.cs ===
+using Compartido.DTOs.Despachante;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante;
+using LogicaNegocio.InterfacesRepositorios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Despachante
+{
+    public class ObtenerDespachantePorId : IObtenerDespachantePorId
+    {
+        private readonly IRepositorioDespachante _repositorioDespachante;
+
+        public ObtenerDespachantePorId(IRepositorioDespachante repositorioDespachante)
+        {
+            _repositorioDespachante = repositorioDespachante;
+        }
+        public DespachanteDTO Ejecutar(int id)
+        {
+            var despachante = _repositorioDespachante.FindById(id);
+            if (despachante == null)
+            {
+                throw new Exception("Despachante no encontrado");
+            }
+            return new DespachanteDTO 
+            {
+                Nombre = despachante.Nombre,
+                Apellido = despachante.Apellido,
+                Email = despachante.Email.Valor,
+                Codigo = despachante.Codigo
+            };
+
+            // TODO Pasar el new DespachanteDTO a un mapeador para mapearlo a un DTO
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Rol\CrearRol.cs ===
 using Compartido.DTOs.Rol;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
 using LogicaAplicacion.Mappers;
@@ -4625,7 +4988,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Rol\ObtenerRoles.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Rol\ObtenerRoles.cs ===
 using Compartido.DTOs.Rol;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
 using LogicaAplicacion.Mappers;
@@ -4658,7 +5021,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\EliminarUsuario.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\EliminarUsuario.cs ===
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesServicios;
 using System;
@@ -4685,7 +5048,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\Login.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\Login.cs ===
 using BCrypt.Net;
 using Compartido.DTOs.Auth;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
@@ -4762,7 +5125,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
 
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\ModificarUsuario.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\ModificarUsuario.cs ===
 using Compartido.DTOs.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesServicios;
@@ -4783,7 +5146,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
             _usuarioService = usuarioService;
         }
 
-        public UsuarioRespuestaDTO Ejecutar(int id, ModificarUsuarioDTO dto)
+        public UsuarioListadoDTO Ejecutar(int id, ModificarUsuarioDTO dto)
         {
             return _usuarioService.ModificarUsuario(id, dto);
         }
@@ -4791,7 +5154,50 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\ObtenerUsuarioPorId.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\ObtenerUsuarioLogueado.cs ===
+using Compartido.DTOs.Usuarios;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
+using LogicaNegocio.InterfacesRepositorios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
+{
+    public class ObtenerUsuarioLogueado : IObtenerUsuarioLogueado
+    {
+        private readonly IRepositorioUsuario _repo;
+
+        public ObtenerUsuarioLogueado(IRepositorioUsuario repo)
+        {
+            _repo = repo;
+        }
+
+        public async Task<UsuarioLogueadoDTO> Ejecutar(int id)
+        {
+            var usuario = _repo.FindById(id);
+
+            if (usuario == null)
+                throw new Exception("Usuario no encontrado");
+
+            return new UsuarioLogueadoDTO
+            {
+                Id = usuario.Id,
+                Email = usuario.Email.Valor,
+                Rol = usuario.Rol.NombreRol,
+                Estado = usuario.Estado,
+                PrimerLogin = usuario.PrimerLogin
+            };
+        }
+
+
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\ObtenerUsuarioPorId.cs ===
 using Compartido.DTOs.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesServicios;
@@ -4811,7 +5217,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
         {
             _usuarioService = usuarioService;
         }
-        public UsuarioRespuestaDTO Ejecutar(int id)
+        public UsuarioListadoDTO Ejecutar(int id)
         {
             return _usuarioService.ObtenerUsuarioPorId(id);
         }
@@ -4819,36 +5225,42 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\ObtenerUsuarios.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\ObtenerUsuarios.cs ===
 using Compartido.DTOs.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesRepositorios;
-using LogicaNegocio.InterfacesServicios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
 {
     public class ObtenerUsuarios : IObtenerUsuarios
     {
-        private readonly IUsuarioService _usuarioService;
+        private readonly IRepositorioUsuario _repo;
 
-        public ObtenerUsuarios(IUsuarioService usuarioService)
+        public ObtenerUsuarios(IRepositorioUsuario repo)
         {
-            _usuarioService = usuarioService;
+            _repo = repo;
         }
-        public IEnumerable<UsuarioRespuestaDTO> Ejecutar()
+
+        public IEnumerable<UsuarioListadoDTO> Ejecutar()
         {
-            return _usuarioService.ObtenerUsuarios();
+            var usuarios = _repo.FindAll();
+
+            return usuarios.Select(u => new UsuarioListadoDTO
+            {
+                Id = u.Id,
+                Nombre = u.Nombre,
+                Apellido = u.Apellido,
+                Email = u.Email.Valor,
+                Rol = u.Rol.NombreRol,
+                FechaCreacion = u.FechaCreacion,
+                PrimerLogin = u.PrimerLogin,
+                Estado = u.Estado
+            });
         }
     }
 }
 
-
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Cliente\ICrearCliente.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Cliente\ICrearCliente.cs ===
 using Compartido.DTOs.Cliente;
 using System;
 using System.Collections.Generic;
@@ -4860,12 +5272,12 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente
 {
     public interface ICrearCliente
     {
-        ClienteRespuestaDTO Ejecutar(CrearClienteDTO dto);
+        CrearClienteRespuestaDTO Ejecutar(CrearClienteDTO dto);
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Cliente\IEliminarCliente.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Cliente\IEliminarCliente.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4881,7 +5293,7 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Cliente\IModificarCliente.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Cliente\IModificarCliente.cs ===
 using Compartido.DTOs.Cliente;
 using System;
 using System.Collections.Generic;
@@ -4893,12 +5305,12 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente
 {
     public interface IModificarCliente
     {
-        ClienteRespuestaDTO Ejecutar(int id, ModificarClienteDTO dto);
+        ModificarClienteDTO Ejecutar(int id, ModificarClienteDTO dto);
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Cliente\IObtenerClientePorId.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Cliente\IObtenerClientePorId.cs ===
 using Compartido.DTOs.Cliente;
 using System;
 using System.Collections.Generic;
@@ -4910,12 +5322,12 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente
 {
     public interface IObtenerClientePorId
     {
-        ClienteRespuestaDTO Ejecutar(int id);
+        ClienteDTO Ejecutar(int id);
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Cliente\IObtenerClientes.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Cliente\IObtenerClientes.cs ===
 using Compartido.DTOs.Cliente;
 using System;
 using System.Collections.Generic;
@@ -4927,12 +5339,46 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente
 {
     public interface IObtenerClientes
     {
-        IEnumerable<ClienteRespuestaDTO> Ejecutar();
+       IEnumerable<ClienteDTO> Ejecutar();
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Rol\ICrearRol.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Despachante\ICrearDespachante.cs ===
+using Compartido.DTOs.Despachante;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante
+{
+    public interface ICrearDespachante
+    {
+        CrearDespachanteRespuestaDTO Ejecutar(CrearDespachanteDTO dto);
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Despachante\IObtenerDespachantePorId.cs ===
+using Compartido.DTOs.Despachante;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante
+{
+    public interface IObtenerDespachantePorId
+    {
+        DespachanteDTO Ejecutar(int id);
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Rol\ICrearRol.cs ===
 using Compartido.DTOs.Rol;
 using System;
 using System.Collections.Generic;
@@ -4951,7 +5397,7 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Rol\IObtenerRoles.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Rol\IObtenerRoles.cs ===
 using Compartido.DTOs.Rol;
 using System;
 using System.Collections.Generic;
@@ -4970,7 +5416,7 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\IEliminarUsuario.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\IEliminarUsuario.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4986,7 +5432,7 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\ILogin.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\ILogin.cs ===
 using Compartido.DTOs.Auth;
 using System;
 using System.Collections.Generic;
@@ -5003,7 +5449,7 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\IModificarUsuario.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\IModificarUsuario.cs ===
 using Compartido.DTOs.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -5015,11 +5461,28 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios
 {
     public interface IModificarUsuario
     {
-        UsuarioRespuestaDTO Ejecutar(int id, ModificarUsuarioDTO dto);
+        UsuarioListadoDTO Ejecutar(int id, ModificarUsuarioDTO dto);
     }
 }
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\IObtenerUsuarioPorId.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\IObtenerUsuarioLogueado.cs ===
+using Compartido.DTOs.Usuarios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios
+{
+    public interface IObtenerUsuarioLogueado
+    {
+        Task<UsuarioLogueadoDTO> Ejecutar(int id);
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\IObtenerUsuarioPorId.cs ===
 using Compartido.DTOs.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -5031,12 +5494,12 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios
 {
     public interface IObtenerUsuarioPorId
     {
-        UsuarioRespuestaDTO Ejecutar(int id);
+        UsuarioListadoDTO Ejecutar(int id);
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\IObtenerUsuarios.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\IObtenerUsuarios.cs ===
 using Compartido.DTOs.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -5048,12 +5511,102 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios
 {
     public interface IObtenerUsuarios
     {
-        IEnumerable<UsuarioRespuestaDTO> Ejecutar();
+        IEnumerable<UsuarioListadoDTO> Ejecutar();
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\Mappers\RolMapper.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\Mappers\ClienteMapper.cs ===
+using Compartido.DTOs.Cliente;
+using LogicaNegocio.Entidades;
+using LogicaNegocio.ValueObject;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.Mappers
+{
+    public static class ClienteMapper
+    {
+        public static Cliente ToEntity(CrearClienteDTO dto, Rol rol)
+        {
+            return new Cliente(
+               dto.Nombre,
+               dto.Apellido,
+               new Email(dto.Email),
+               new Password("Despacho100!"), // password default
+               rol,
+               dto.Rut,
+               dto.RazonSocial,
+               dto.Telefono,
+               dto.Direccion
+           );
+        }
+
+        public static CrearClienteRespuestaDTO ToDTO(Cliente cliente, string username, string passwordTemporal)
+        {
+            return new CrearClienteRespuestaDTO
+            {
+                Id = cliente.Id,
+                Nombre = cliente.Nombre,
+                Apellido = cliente.Apellido,
+                Email = cliente.Email.Valor,
+                Rut = cliente.Rut,
+                RazonSocial = cliente.RazonSocial,
+                Telefono = cliente.Telefono,
+                Direccion = cliente.Direccion,
+                Username = username,
+                PasswordTemporal = passwordTemporal
+            };
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\Mappers\DespachanteMapper.cs ===
+using Compartido.DTOs.Despachante;
+using LogicaNegocio.Entidades;
+using LogicaNegocio.ValueObject;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.Mappers
+{
+    public class DespachanteMapper
+    {
+        public static Despachante ToEntity(CrearDespachanteDTO dto, Rol rol)
+        {
+            return new Despachante(
+               dto.Nombre,
+               dto.Apellido,
+               new Email(dto.Email),
+               new Password("Despacho100!"), // password default
+               rol
+            );
+        }
+
+        public static CrearDespachanteRespuestaDTO ToDTO(Despachante despachante, string username, string passwordTemporal)
+        {
+            return new CrearDespachanteRespuestaDTO
+            {
+                Id = despachante.Id,
+                Nombre = despachante.Nombre,
+                Apellido = despachante.Apellido,
+                Email = despachante.Email.Valor,
+                Username = username,
+                PasswordTemporal = passwordTemporal
+            };
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\Mappers\RolMapper.cs ===
 using Compartido.DTOs.Rol;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.Excepciones.Roles;
@@ -5093,21 +5646,21 @@ namespace LogicaAplicacion.Mappers
     }
 }
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs ===
 // <autogenerated />
 using System;
 using System.Reflection;
 [assembly: global::System.Runtime.Versioning.TargetFrameworkAttribute(".NETCoreApp,Version=v8.0", FrameworkDisplayName = ".NET 8.0")]
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\obj\Debug\net8.0\LogicaAplicacion.AssemblyInfo.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\obj\Debug\net8.0\LogicaAplicacion.AssemblyInfo.cs ===
 //------------------------------------------------------------------------------
 // <auto-generated>
-//     This code was generated by a tool.
-//     Runtime Version:4.0.30319.42000
+//     Este cÃ³digo fue generado por una herramienta.
+//     VersiÃ³n de runtime:4.0.30319.42000
 //
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
+//     Los cambios en este archivo podrÃ­an causar un comportamiento incorrecto y se perderÃ¡n si
+//     se vuelve a generar el cÃ³digo.
 // </auto-generated>
 //------------------------------------------------------------------------------
 
@@ -5117,16 +5670,16 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e345f490d40e0798d009d88b3f496d4d787e58a0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3ab5d44d8d762824287348475b440e59948013c")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
-// Generated by the MSBuild WriteCodeFragment class.
+// Generado por la clase WriteCodeFragment de MSBuild.
 
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\obj\Debug\net8.0\LogicaAplicacion.GlobalUsings.g.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\obj\Debug\net8.0\LogicaAplicacion.GlobalUsings.g.cs ===
 // <auto-generated/>
 global using global::System;
 global using global::System.Collections.Generic;
@@ -5137,7 +5690,7 @@ global using global::System.Threading;
 global using global::System.Threading.Tasks;
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaAplicacion\Class1.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\Class1.cs ===
 namespace LogicaAplicacion
 {
     public class Class1
@@ -5147,7 +5700,7 @@ namespace LogicaAplicacion
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\Asistente.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Asistente.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5162,7 +5715,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\Asunto.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Asunto.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5208,7 +5761,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\Cliente.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Cliente.cs ===
 using LogicaNegocio.ValueObject;
 using System;
 using System.Collections.Generic;
@@ -5221,15 +5774,17 @@ namespace LogicaNegocio.Entidades
     public class Cliente:Usuario
     {
         public string Rut { get; set; } = string.Empty;
-        public string Telefono { get; set; } = string.Empty;
+        public string RazonSocial { get; set; } = string.Empty;
+        public string? Telefono { get; set; } = string.Empty;
         public string? Direccion { get; set; }
 
 
         public Cliente() { }
 
-        public Cliente(string nombre, string apellido, Email email, Password password, Rol rol, string rut, string telefono, string? direccion) : base(nombre, apellido, email, password, rol)
+        public Cliente(string nombre, string apellido, Email email, Password password, Rol rol, string rut, string razonSocial, string telefono, string? direccion) : base(nombre, apellido, email, password, rol)
         {
             this.Rut = rut;
+            this.RazonSocial = razonSocial; 
             this.Telefono = telefono;
             this.Direccion = direccion;
         }
@@ -5239,7 +5794,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\Comunicacion.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Comunicacion.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5289,7 +5844,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\Despachante.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Despachante.cs ===
 using LogicaNegocio.ValueObject;
 using System;
 using System.Collections.Generic;
@@ -5301,14 +5856,15 @@ namespace LogicaNegocio.Entidades
 {
     public class Despachante:Usuario
     {
-        public string Rut { get; set; } = string.Empty;
+        //codigo de despachante
+        public string? Codigo { get; set; } = string.Empty;
 
 
         public Despachante() { }
 
-        public Despachante(string nombre, string apellido, Email email, Password password, Rol rol, string rut) : base(nombre, apellido, email, password, rol)
+        public Despachante(string nombre, string apellido, Email email, Password password, Rol rol) : base(nombre, apellido, email, password, rol)
         {
-            this.Rut = rut;
+            this.Codigo = string.Empty;
         }
 
 
@@ -5316,7 +5872,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\DetalleLiquidacion.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\DetalleLiquidacion.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5344,7 +5900,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\Documento.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Documento.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5378,7 +5934,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\EstadoLiquidacion.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\EstadoLiquidacion.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5396,7 +5952,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\EstadoOperacion.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\EstadoOperacion.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5415,7 +5971,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\Factura.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Factura.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5444,7 +6000,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\Liquidacion.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Liquidacion.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5511,7 +6067,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\Nomenclatura.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Nomenclatura.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5529,7 +6085,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\Notificacion.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Notificacion.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5570,7 +6126,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\Operacion.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Operacion.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5669,7 +6225,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\Pago.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Pago.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5714,7 +6270,7 @@ namespace LogicaNegocio.Entidades
 
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\Rol.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Rol.cs ===
 using LogicaNegocio.Excepciones.Roles;
 using LogicaNegocio.InterfacesEntidades;
 using System;
@@ -5754,7 +6310,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\TipoComunicacion.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoComunicacion.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5784,7 +6340,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\TipoConocimiento.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoConocimiento.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5807,7 +6363,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\TipoNotificacion.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoNotificacion.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5826,7 +6382,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\TipoOperacion.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoOperacion.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5849,7 +6405,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\TipoPago.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoPago.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5866,7 +6422,7 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\Usuario.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Usuario.cs ===
 using LogicaNegocio.InterfacesEntidades;
 using LogicaNegocio.ValueObject;
 using System;
@@ -5887,6 +6443,14 @@ namespace LogicaNegocio.Entidades
         public int RolId { get; set; }
         public Rol Rol { get; set; }
 
+        //agregue estos nuevos atributos porque el frontend los necesita
+        //para mostrar la fecha de creación del usuario, y
+        //para saber si es su primer login o no, y
+        //también para mostrar el estado del usuario (activo o inactivo)
+        public DateTime FechaCreacion { get; set; }
+        public bool PrimerLogin { get; set; }
+        public string Estado { get; set; }
+
         public Usuario() { }
 
         public Usuario(string nombre, string apellido, Email email, Password password, Rol rol)
@@ -5896,13 +6460,16 @@ namespace LogicaNegocio.Entidades
             Email = email;
             Password = password;
             Rol = rol;
+            FechaCreacion = DateTime.Now;
+            PrimerLogin = true; // Por defecto, es el primer login al crear el usuario}
+            Estado = "Pendiente"; // Por defecto, el usuario se crea como pendiente
         } 
 
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Entidades\ValidacionPago.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\ValidacionPago.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5941,7 +6508,55 @@ namespace LogicaNegocio.Entidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Excepciones\Cliente\ClienteNoEncontradoException.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteConOperacionesActivasException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Cliente
+{
+    public class ClienteConOperacionesActivasException : ClassException
+    {
+        public ClienteConOperacionesActivasException() : base("El cliente no puede ser eliminado porque tiene operaciones activas.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteDireccionExcesoCaracteresException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Cliente
+{
+    public class ClienteDireccionExcesoCaracteresException : ClassException
+    {
+        public ClienteDireccionExcesoCaracteresException() : base("La dirección no puede superar 300 caracteres.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteExistenteConIgualRutException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Cliente
+{
+    public class ClienteExistenteConIgualRutException : ClassException
+    {
+        public ClienteExistenteConIgualRutException() : base("Ya existe un cliente con ese RUT.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteNoEncontradoException.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5957,7 +6572,39 @@ namespace LogicaNegocio.Excepciones.Cliente
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Excepciones\Roles\RolDatosIncorrectosException.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteTelefonoMasVeinteCaracteresException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Cliente
+{
+    public class ClienteTelefonoMasVeinteCaracteresException : ClassException
+    {
+        public ClienteTelefonoMasVeinteCaracteresException() : base("El teléfono no puede superar 20 caracteres.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteTelefonoVacioException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Cliente
+{
+    public class ClienteTelefonoVacioException : ClassException
+    {
+        public ClienteTelefonoVacioException() : base("El teléfono no puede estar vacío.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolDatosIncorrectosException.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5973,7 +6620,41 @@ namespace LogicaNegocio.Excepciones.Roles
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Excepciones\Roles\RolNoEncontradoException.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolDebeSerAsignadoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Roles
+{
+    public class RolDebeSerAsignadoException : ClassException
+    {
+        public RolDebeSerAsignadoException() : base("Debe asignar un rol al usuario.")
+        {
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolExcesoCaracteresException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Roles
+{
+    public class RolExcesoCaracteresException : ClassException
+    {
+        public RolExcesoCaracteresException() : base("El nombre del rol no puede superar 100 caracteres.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolNoEncontradoException.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5989,7 +6670,7 @@ namespace LogicaNegocio.Excepciones.Roles
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Excepciones\Roles\RolSinNombreException.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolSinNombreException.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6005,7 +6686,7 @@ namespace LogicaNegocio.Excepciones.Roles
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Excepciones\Roles\YaExisteRolConEseNombreException.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\YaExisteRolConEseNombreException.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6021,7 +6702,89 @@ namespace LogicaNegocio.Excepciones.Roles
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Excepciones\Usuarios\Login\CredencialesInvalidasException.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutNoValidoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Rut
+{
+    public class RutNoValidoException : ClassException
+    {
+        public RutNoValidoException() : base("El RUT no es válido (fallo en dígito verificador).") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutNumerosIgualesException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Rut
+{
+    public class RutNumerosIgualesException : ClassException
+    {
+        public RutNumerosIgualesException() : base("El RUT no puede tener todos los dígitos iguales.")
+        {
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutSoloConDoceDigitosException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Rut
+{
+    public class RutSoloConDoceDigitosException : ClassException
+    {
+        public RutSoloConDoceDigitosException() : base("El RUT debe tener exactamente 12 dígitos.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutSoloNumerosException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Rut
+{
+    public class RutSoloNumerosException : ClassException
+    {
+        public RutSoloNumerosException() : base("El RUT debe contener solo números (sin puntos ni guiones).") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutVacioException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Rut
+{
+    public class RutVacioException : ClassException
+    {
+        public RutVacioException() : base("El RUT no puede estar vacío.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\Login\CredencialesInvalidasException.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6037,7 +6800,7 @@ namespace LogicaNegocio.Excepciones.Usuarios.Login
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Excepciones\Usuarios\Login\UsuarioNoEncontradoException.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\Login\UsuarioNoEncontradoException.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6053,7 +6816,107 @@ namespace LogicaNegocio.Excepciones.Usuarios.Login
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Excepciones\Usuarios\UsuarioException.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\ApellidoUsuarioSuperaCaracteresException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Usuarios
+{
+    public class ApellidoUsuarioSuperaCaracteresException : ClassException
+    {
+        public ApellidoUsuarioSuperaCaracteresException() : base("El apellido no puede superar 100 caracteres.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\ApellidoVacioUsuarioException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Usuarios
+{
+    public class ApellidoVacioUsuarioException : ClassException
+    {
+        public ApellidoVacioUsuarioException() : base("El apellido no puede estar vacío.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\NombreUsuarioSuperaCaracteresException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Usuarios
+{
+    public class NombreUsuarioSuperaCaracteresException : ClassException
+    {
+        public NombreUsuarioSuperaCaracteresException() : base("El nombre no puede superar 100 caracteres.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\NombreVacioUsuarioException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Usuarios
+{
+    public class NombreVacioUsuarioException : ClassException
+    {
+        public NombreVacioUsuarioException() : base("El nombre no puede estar vacío.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\UsuarioEmailFormatoInvalidoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Usuarios
+{
+    public class UsuarioEmailFormatoInvalidoException : ClassException
+    {
+        public UsuarioEmailFormatoInvalidoException() : base("El formato del email es inválido.")
+        {
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\UsuarioEmailVacioException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Usuarios
+{
+    public class UsuarioEmailVacioException : ClassException
+    {
+        public UsuarioEmailVacioException() : base("El email no puede estar vacío.")
+        {
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\UsuarioException.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6074,7 +6937,23 @@ namespace LogicaNegocio.Excepciones.Usuarios
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Excepciones\ClassException.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\UsuarioExistenteConMismoCorreoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Usuarios
+{
+    public class UsuarioExistenteConMismoCorreoException : ClassException
+    {
+        public UsuarioExistenteConMismoCorreoException() : base("Ya existe un usuario con ese correo electrónico.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\ClassException.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6095,7 +6974,7 @@ namespace LogicaNegocio.Excepciones
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\InterfacesEntidades\IEntity.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesEntidades\IEntity.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6111,7 +6990,7 @@ namespace LogicaNegocio.InterfacesEntidades
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\InterfacesRepositorios\IRepositorio.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesRepositorios\IRepositorio.cs ===
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6135,7 +7014,7 @@ namespace LogicaNegocio.InterfacesRepositorios
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\InterfacesRepositorios\IRepositorioCliente.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesRepositorios\IRepositorioCliente.cs ===
 using LogicaNegocio.Entidades;
 using System;
 using System.Collections.Generic;
@@ -6155,7 +7034,24 @@ namespace LogicaNegocio.InterfacesRepositorios
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\InterfacesRepositorios\IRepositorioRol.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesRepositorios\IRepositorioDespachante.cs ===
+using LogicaNegocio.Entidades;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.InterfacesRepositorios
+{
+    public interface IRepositorioDespachante : IRepositorio<Despachante>
+    {
+        bool ExisteEmail(string email);
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesRepositorios\IRepositorioRol.cs ===
 using LogicaNegocio.Entidades;
 using System;
 using System.Collections.Generic;
@@ -6174,7 +7070,7 @@ namespace LogicaNegocio.InterfacesRepositorios
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\InterfacesRepositorios\IRepositorioUsuario.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesRepositorios\IRepositorioUsuario.cs ===
 using LogicaNegocio.Entidades;
 using System;
 using System.Collections.Generic;
@@ -6192,28 +7088,7 @@ namespace LogicaNegocio.InterfacesRepositorios
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\InterfacesServicios\IClienteService.cs ===
-using Compartido.DTOs.Cliente;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LogicaNegocio.InterfacesServicios
-{
-    public interface IClienteService
-    {
-        IEnumerable<ClienteRespuestaDTO> ObtenerClientes();
-        ClienteRespuestaDTO ObtenerClientePorId(int id);
-        ClienteRespuestaDTO CrearCliente(CrearClienteDTO dto);
-        ClienteRespuestaDTO ModificarCliente(int id, ModificarClienteDTO dto);
-        void EliminarCliente(int id);
-    }
-}
-
-
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\InterfacesServicios\IJwtService.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesServicios\IJwtService.cs ===
 using LogicaNegocio.Entidades;
 using System;
 using System.Collections.Generic;
@@ -6230,7 +7105,7 @@ namespace LogicaNegocio.InterfacesServicios
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\InterfacesServicios\IUsuarioService.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesServicios\IUsuarioService.cs ===
 using Compartido.DTOs.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -6242,29 +7117,29 @@ namespace LogicaNegocio.InterfacesServicios
 {
     public interface IUsuarioService
     {
-        UsuarioRespuestaDTO ObtenerUsuarioPorId(int id);
-        UsuarioRespuestaDTO ModificarUsuario(int id, ModificarUsuarioDTO dto);
+        UsuarioListadoDTO ObtenerUsuarioPorId(int id);
+        UsuarioListadoDTO ModificarUsuario(int id, ModificarUsuarioDTO dto);
         void EliminarUsuario(int id);
-        IEnumerable<UsuarioRespuestaDTO> ObtenerUsuarios();
+        IEnumerable<UsuarioListadoDTO> ObtenerUsuarios();
     }
 }
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs ===
 // <autogenerated />
 using System;
 using System.Reflection;
 [assembly: global::System.Runtime.Versioning.TargetFrameworkAttribute(".NETCoreApp,Version=v8.0", FrameworkDisplayName = ".NET 8.0")]
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\obj\Debug\net8.0\LogicaNegocio.AssemblyInfo.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\obj\Debug\net8.0\LogicaNegocio.AssemblyInfo.cs ===
 //------------------------------------------------------------------------------
 // <auto-generated>
-//     This code was generated by a tool.
-//     Runtime Version:4.0.30319.42000
+//     Este cÃ³digo fue generado por una herramienta.
+//     VersiÃ³n de runtime:4.0.30319.42000
 //
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
+//     Los cambios en este archivo podrÃ­an causar un comportamiento incorrecto y se perderÃ¡n si
+//     se vuelve a generar el cÃ³digo.
 // </auto-generated>
 //------------------------------------------------------------------------------
 
@@ -6274,16 +7149,16 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e345f490d40e0798d009d88b3f496d4d787e58a0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3ab5d44d8d762824287348475b440e59948013c")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
-// Generated by the MSBuild WriteCodeFragment class.
+// Generado por la clase WriteCodeFragment de MSBuild.
 
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\obj\Debug\net8.0\LogicaNegocio.GlobalUsings.g.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\obj\Debug\net8.0\LogicaNegocio.GlobalUsings.g.cs ===
 // <auto-generated/>
 global using global::System;
 global using global::System.Collections.Generic;
@@ -6294,14 +7169,9 @@ global using global::System.Threading;
 global using global::System.Threading.Tasks;
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\ValueObject\Email.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\ValueObject\Email.cs ===
 using LogicaNegocio.Excepciones.Usuarios;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mail;
 
 namespace LogicaNegocio.ValueObject
 {
@@ -6317,19 +7187,31 @@ namespace LogicaNegocio.ValueObject
         }
         private void Validar()
         {
-            if ((Valor.Contains("@")) == false || Valor.IndexOf("@") == 0 || Valor.IndexOf("@") == Valor.Length - 1)
+            if (string.IsNullOrWhiteSpace(Valor))
             {
-                throw new UsuarioException("Formato de Email no valido");
+                throw new UsuarioEmailVacioException();
             }
 
-            //nos falta validar que no exista otro mail
+            try
+            {
+                var mailAddress = new MailAddress(Valor);
+
+                if (!mailAddress.Host.Contains("."))
+                {
+                    throw new UsuarioEmailFormatoInvalidoException();
+                }
+            }
+            catch (FormatException)
+            {
+                throw new UsuarioEmailFormatoInvalidoException();
+            }
         }
     }
 }
 
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\ValueObject\Password.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\ValueObject\Password.cs ===
 using LogicaNegocio.Excepciones.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -6432,7 +7314,72 @@ namespace LogicaNegocio.ValueObject
 
 
 
-// === C:\Users\acer\OneDrive\Desktop\ORT\Proyecto Integrador\ProyectoIntegrador-Desarrollo\GestionOperacionesAduaneras\LogicaNegocio\Class1.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\ValueObject\Rut.cs ===
+using LogicaNegocio.Excepciones.Rut;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.ValueObject
+{
+    public record Rut
+    {
+        public string Valor { get; }
+
+        public Rut(string valor)
+        {
+            if (string.IsNullOrWhiteSpace(valor))
+
+                throw new RutVacioException();
+
+            if (!valor.All(char.IsDigit))
+                throw new RutSoloNumerosException();
+
+            if (valor.Length != 12)
+                throw new RutSoloConDoceDigitosException();
+
+            if (valor.Distinct().Count() == 1)
+                throw new RutNumerosIgualesException();
+
+            if (!ValidarDigitoVerificador(valor))
+                throw new RutNoValidoException();
+
+            Valor = valor;
+        }
+
+        private static bool ValidarDigitoVerificador(string rut)
+        {
+            int[] multiplicadores = { 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+
+            int suma = 0;
+
+            for (int i = 0; i < 11; i++)
+            {
+                int digito = rut[i] - '0';
+                suma += digito * multiplicadores[i];
+            }
+
+            int resto = suma % 11;
+            int digitoCalculado = 11 - resto;
+
+            if (digitoCalculado == 11)
+                digitoCalculado = 0;
+            else if (digitoCalculado == 10)
+                digitoCalculado = 1;
+
+            int digitoReal = rut[11] - '0';
+
+            return digitoCalculado == digitoReal;
+        }
+
+        public override string ToString() => Valor;
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Class1.cs ===
 namespace LogicaNegocio
 {
     public class Class1
