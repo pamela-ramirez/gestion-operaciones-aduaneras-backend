@@ -41,7 +41,8 @@ namespace LogicaAccesoDatos.Repositorios
 
         public Despachante FindById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Despachantes
+                .FirstOrDefault(d => d.Id == id);
         }
 
         public void Update(Despachante item, int id)
