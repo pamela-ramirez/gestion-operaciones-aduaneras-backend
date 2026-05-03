@@ -59,7 +59,7 @@ namespace GestionOperacionesAduaneras.Controllers
         }
 
         [Authorize]
-        [HttpPost("consentimiento")]
+        [HttpPost("aceptar-consentimiento")]
         public async Task<IActionResult> AceptarConsentimiento(
         [FromServices] IAceptarConsentimientoUsuario casoUso)
             {
