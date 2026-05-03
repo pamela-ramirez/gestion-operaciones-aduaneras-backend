@@ -799,7 +799,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d7b4826d8ff928676eedd063ecb719af52f6690")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a83e995bf315c78db5d54440bbf0d7634558c469")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -1430,6 +1430,7 @@ namespace LogicaAccesoDatos.Contexto
 
                 entity.HasIndex(d => d.Codigo)
                     .IsUnique()
+                    .HasFilter("[Codigo] IS NOT NULL")
                     .HasDatabaseName("IX_Despachantes_Codigo_Unique");
             });
 
@@ -4310,7 +4311,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d7b4826d8ff928676eedd063ecb719af52f6690")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a83e995bf315c78db5d54440bbf0d7634558c469")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -5823,7 +5824,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d7b4826d8ff928676eedd063ecb719af52f6690")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a83e995bf315c78db5d54440bbf0d7634558c469")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -6010,14 +6011,14 @@ namespace LogicaNegocio.Entidades
     public class Despachante:Usuario
     {
         //codigo de despachante
-        public string? Codigo { get; set; } = string.Empty;
+        public string? Codigo { get; set; }
 
 
         public Despachante() { }
 
         public Despachante(string nombre, string apellido, Email email, Password password, Rol rol) : base(nombre, apellido, email, password, rol)
         {
-            this.Codigo = string.Empty;
+          
         }
 
 
@@ -7304,7 +7305,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d7b4826d8ff928676eedd063ecb719af52f6690")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a83e995bf315c78db5d54440bbf0d7634558c469")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
