@@ -170,6 +170,7 @@ namespace LogicaAccesoDatos.Contexto
 
                 entity.HasIndex(d => d.Codigo)
                     .IsUnique()
+                    .HasFilter("[Codigo] IS NOT NULL")
                     .HasDatabaseName("IX_Despachantes_Codigo_Unique");
             });
 
