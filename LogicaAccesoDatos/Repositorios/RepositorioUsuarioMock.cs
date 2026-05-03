@@ -55,5 +55,15 @@ namespace LogicaAccesoDatos.Repositorios
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateEstado(Usuario item, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdatePassword(Usuario item, int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
