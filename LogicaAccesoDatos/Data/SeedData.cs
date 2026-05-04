@@ -33,7 +33,18 @@ namespace LogicaAccesoDatos.Data
                 new TipoConocimiento("Guía Aérea") { Id = 2 },
                 new TipoConocimiento("Carta de Porte Terrestre") { Id = 3 },
                 new TipoConocimiento("Declaración de Tránsito") { Id = 4 }
+                //Tipos de conocimiento (marítimo, terrestre, aéreo)
             );
+
+            // ============================================================================
+            // SEED DATA - TIPOS DE COMUNICACIÓN
+            // ============================================================================
+            /*modelBuilder.Entity<TipoComunicacion>().HasData(
+                new TipoComunicacion("Cotización") { Id = 1 },
+                new TipoComunicacion("Liquidación") { Id = 2 },
+                new TipoComunicacion("Documentación y Facturación") { Id = 3 }
+
+            );*/
         }
     }
 }
