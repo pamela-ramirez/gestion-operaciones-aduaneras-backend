@@ -31,7 +31,8 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
                 RazonSocial = c.RazonSocial,
                 Rut = c.Rut,
                 Telefono = c.Telefono,
-                Direccion = c.Direccion
+                Direccion = c.Direccion,
+                Estado = c.Estado
             }).ToList();
         }
 
