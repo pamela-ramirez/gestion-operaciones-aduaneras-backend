@@ -10,6 +10,6 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios
 {
     public interface ICambiarPasswordUsuario
     {
-        Task Ejecutar(int userId, string nuevaPassword);
+        void Ejecutar(int userId, string nuevaPassword);
     }
 }

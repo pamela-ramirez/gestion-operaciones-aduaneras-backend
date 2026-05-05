@@ -61,50 +61,53 @@ namespace LogicaAccesoDatos.Repositorios
 
         public void Update(Usuario item, int id)
         {
-            var usuarioExistente = FindById(id);
-            if (usuarioExistente != null)
-            {
-                usuarioExistente.Nombre = item.Nombre;
-                usuarioExistente.Apellido = item.Apellido;
-                usuarioExistente.Email = new Email(item.Email.Valor);
-                usuarioExistente.RolId = item.RolId;
-                _context.SaveChanges();
-            }
+            var usuario = FindById(id);
+
+            if (usuario == null)
+                throw new Exception("Usuario no encontrado.");
+
+            usuario.Nombre = item.Nombre;
+            usuario.Apellido = item.Apellido;
+            usuario.Email = new Email(item.Email.Valor);
+            usuario.RolId = item.RolId;
+
+            _context.SaveChanges();
         }
 
         // Metodo update para actualizar el estado del usuario a activo, y para actualizar la contraseña, en el primer login
-        public void UpdateEstado(Usuario item, int id)
-        {
-            var usuarioExistente = FindById(id);
-            if (usuarioExistente != null)
-            {
-                usuarioExistente.Estado = "Activo";
-                _context.SaveChanges();
-            }
-        }
-
+        /*     public void UpdateEstado(Usuario item, int id)
+             {
+                 var usuarioExistente = FindById(id);
+                 if (usuarioExistente != null)
+                 {
+                     usuarioExistente.Estado = "Activo";
+                     _context.SaveChanges();
+                 }
+             }
+        */
         public void UpdatePassword(Usuario item, int id)
         {
-            try 
-            { 
-                var usuarioExistente = FindById(id);
-                if (usuarioExistente != null)
-                {
-                    var pass = new Password(item.Password.Valor);
-                    if (pass.Equals(item.Password.Valor))
-                    {
-                        throw new Exception("La contraseña es igual a la anterior. Por favor, elija una contraseña diferente.");
-                    }
-                }
-                usuarioExistente.Password = item.Password;
-                usuarioExistente.PrimerLogin = false;
-            }
-            catch (Exception ex)
-            {
+            var usuario = FindById(id);
 
-                throw new Exception($"Error al validar la contraseña: {ex.Message}");
-            }
+            if (usuario == null)
+                throw new Exception("Usuario no encontrado.");
 
+            usuario.Password = item.Password;
+            usuario.PrimerLogin = false;
+
+            _context.SaveChanges();
+        }
+
+        public void AceptarConsentimeinto(int id)
+        {
+            var usuario = FindById(id);
+
+            if (usuario == null)
+                throw new Exception("Usuario no encontrado.");
+
+            usuario.Estado = "Activo";
+
+            _context.SaveChanges();
         }
     }    
 }

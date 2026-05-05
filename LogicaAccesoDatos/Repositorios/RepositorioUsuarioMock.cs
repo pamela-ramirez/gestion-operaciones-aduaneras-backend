@@ -25,6 +25,11 @@ namespace LogicaAccesoDatos.Repositorios
         }*/
     };
 
+        public void AceptarConsentimeinto(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Add(Usuario item)
         {
             throw new NotImplementedException();

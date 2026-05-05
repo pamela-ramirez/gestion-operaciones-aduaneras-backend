@@ -14,11 +14,13 @@ namespace GestionOperacionesAduaneras.Controllers
     {
         private readonly ILogin _loginCasoDeUso;
         private readonly IAceptarConsentimientoUsuario _aceptarConsentimientoCasoDeUso;
+        private readonly ICambiarPasswordUsuario _cambiarPasswordCasoDeUso;
 
-        public AuthController(ILogin loginCasoDeUso, IAceptarConsentimientoUsuario aceptarConsentimientoCasoDeUso)
+        public AuthController(ILogin loginCasoDeUso, IAceptarConsentimientoUsuario aceptarConsentimientoCasoDeUso, ICambiarPasswordUsuario cambiarPasswordCasoDeUso)
         {
             _loginCasoDeUso = loginCasoDeUso;
             _aceptarConsentimientoCasoDeUso = aceptarConsentimientoCasoDeUso;
+            _cambiarPasswordCasoDeUso = cambiarPasswordCasoDeUso;
         }
 
         [HttpPost("login")]
@@ -60,14 +62,13 @@ namespace GestionOperacionesAduaneras.Controllers
 
         [Authorize]
         [HttpPost("aceptar-consentimiento")]
-        public async Task<IActionResult> AceptarConsentimiento(
-        [FromServices] IAceptarConsentimientoUsuario casoUso)
+        public IActionResult AceptarConsentimiento()
             {
             try
             {
                 var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await casoUso.Ejecutar(userId);
+                _aceptarConsentimientoCasoDeUso.Ejecutar(userId);
 
                 return Ok();
             }
@@ -79,21 +80,21 @@ namespace GestionOperacionesAduaneras.Controllers
 
         [Authorize]
         [HttpPost("cambiar-password")]
-        public async Task<IActionResult> CambiarPassword(
-        [FromBody] CambiarPasswordDTO dto,
-        [FromServices] ICambiarPasswordUsuario casoUso)
+        public IActionResult CambiarPassword(
+        [FromBody] CambiarPasswordDTO dto)
         {
             try
             {
                 var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await casoUso.Ejecutar(userId, dto.NuevaPassword);
+                _cambiarPasswordCasoDeUso.Ejecutar(userId, dto.NuevaPassword);
 
                 return Ok();
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                //return BadRequest(ex.Message);
+                return BadRequest(ModelState);
             }
         }
     }

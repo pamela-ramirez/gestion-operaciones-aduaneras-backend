@@ -12,21 +12,21 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
     {
         private readonly IRepositorioUsuario _repo;
 
-        public AceptarConsentimientoUsuario (IRepositorioUsuario repo)
+        public AceptarConsentimientoUsuario(IRepositorioUsuario repo)
         {
             _repo = repo;
         }
 
-        public async Task Ejecutar(int userId)
+        public void Ejecutar(int userId)
         {
             var usuario = _repo.FindById(userId);
 
             if (usuario == null)
                 throw new Exception("Usuario no encontrado");
 
-            usuario.Estado = "Activo";
+            _repo.AceptarConsentimeinto(userId);
 
-            _repo.Update(usuario, userId);
+
         }
     }
 }

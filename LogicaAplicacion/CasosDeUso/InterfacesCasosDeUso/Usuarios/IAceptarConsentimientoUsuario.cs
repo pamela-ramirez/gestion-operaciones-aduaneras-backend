@@ -8,6 +8,6 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios
 {
     public interface IAceptarConsentimientoUsuario
     {
-        Task Ejecutar(int userId);
+        void Ejecutar(int userId);
     }
 }

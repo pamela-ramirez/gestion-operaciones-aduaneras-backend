@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
 {
-    public class CambiarPasswordUsuario : ICambiarPasswordUsuario   
+    public class CambiarPasswordUsuario : ICambiarPasswordUsuario
     {
         private readonly IRepositorioUsuario _repo;
 
@@ -18,21 +18,24 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
             _repo = repo;
         }
 
-        public async Task Ejecutar(int userId, string nuevaPassword)
+        public void Ejecutar(int userId, string nuevaPassword)
         {
             var usuario = _repo.FindById(userId);
 
             if (usuario == null)
                 throw new Exception("Usuario no encontrado");
 
-            // validación (podés reutilizar la que ya tenés)
             if (nuevaPassword.Length < 8)
                 throw new Exception("Debe tener al menos 8 caracteres");
 
+            if (usuario.Password.Valor == nuevaPassword)
+                throw new Exception("No puede repetir contraseña");
+
             usuario.Password = new Password(nuevaPassword);
+            // usuario.PasswordHash = PasswordHasher.Hash(newPassword);
             usuario.PrimerLogin = false;
 
-            _repo.Update(usuario, userId);
+            _repo.UpdatePassword(usuario, userId);
         }
     }
 }
