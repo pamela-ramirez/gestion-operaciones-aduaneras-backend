@@ -104,5 +104,10 @@ namespace LogicaAccesoDatos.Repositorios
             return _context.Operaciones
                 .Any(o => o.ClienteId == ClienteId && o.Estado != EstadoOperacion.Finalizado);
         }
+
+        public void Update(Cliente item, int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
