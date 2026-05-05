@@ -15,6 +15,9 @@ namespace Compartido.DTOs.Cliente
         public string Rut { get; set; } = string.Empty;
         public string Telefono { get; set; } = string.Empty;
         public string Direccion { get; set; } = string.Empty;
+
+        //agrego 
+        public string Estado { get; set; } = string.Empty;
     }
 
     public class CrearClienteDTO
@@ -29,16 +32,15 @@ namespace Compartido.DTOs.Cliente
         public string? Direccion { get; set; } = string.Empty;
     }
 
+    //DESPACHANTE 
     public class ModificarClienteDTO
     {
         public string Nombre { get; set; } = string.Empty;
         public string Apellido { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public string Rut { get; set; } = string.Empty;
-        public string RazonSocial { get; set; } = string.Empty;
+ 
         public string Telefono { get; set; } = string.Empty;
-        public string Direccion { get; set; } = string.Empty;
+ 
     }
 
     public class CrearClienteRespuestaDTO

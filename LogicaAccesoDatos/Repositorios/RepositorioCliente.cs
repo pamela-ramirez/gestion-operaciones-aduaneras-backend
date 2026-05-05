@@ -39,28 +39,35 @@ namespace LogicaAccesoDatos.Repositorios
             _context.SaveChanges();
         }
 
-        public void Update(Cliente item, int id)
+        /*   public void Update(Cliente item, int id)
+             {
+                 Cliente clienteExistente = FindById(id);
+                 if (clienteExistente == null)
+                 {
+                     throw new Exception("Cliente no encontrado.");
+                     // TODO cambiar a exception personalizada
+                 }
+
+                 // Atributos heredados de Usuario
+                 clienteExistente.Nombre = item.Nombre;
+                 clienteExistente.Apellido = item.Apellido;
+                 clienteExistente.Email = new Email(item.Email.Valor); // Porque es value objet
+
+                 // Atributos propios de Cliente
+                 clienteExistente.Telefono = item.Telefono;
+                 clienteExistente.Direccion = item.Direccion;
+                 clienteExistente.Rut = item.Rut;
+                 // TODO AGREGAR RAZON SOCIAL
+
+                 _context.SaveChanges();
+             }
+     */
+
+        public void Update(Cliente cliente)
         {
-            Cliente clienteExistente = FindById(id);
-            if (clienteExistente == null)
-            {
-                throw new Exception("Cliente no encontrado.");
-                // TODO cambiar a exception personalizada
-            }
-
-            // Atributos heredados de Usuario
-            clienteExistente.Nombre = item.Nombre;
-            clienteExistente.Apellido = item.Apellido;
-            clienteExistente.Email = new Email(item.Email.Valor); // Porque es value objet
-            
-            // Atributos propios de Cliente
-            clienteExistente.Telefono = item.Telefono;
-            clienteExistente.Direccion = item.Direccion;
-            clienteExistente.Rut = item.Rut;
-            // TODO AGREGAR RAZON SOCIAL
-
             _context.SaveChanges();
         }
+
 
         // Cuando hacemos update de un cliente, podemos usar el excluirClienteId,
         // para no comparar, en la busqueda, el rut de ese cliente consigo mismo
@@ -96,6 +103,11 @@ namespace LogicaAccesoDatos.Repositorios
         {
             return _context.Operaciones
                 .Any(o => o.ClienteId == ClienteId && o.Estado != EstadoOperacion.Finalizado);
+        }
+
+        public void Update(Cliente item, int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

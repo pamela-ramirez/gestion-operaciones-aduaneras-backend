@@ -2,6 +2,7 @@
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
+using LogicaNegocio.ValueObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,29 +21,28 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 
         public ModificarClienteDTO Ejecutar(int id, ModificarClienteDTO dto)
         {
-            return new ModificarClienteDTO {
-                Nombre = dto.Nombre,
-                Apellido = dto.Apellido,
-                Email = dto.Email,
-                Telefono = dto.Telefono,
-                    Direccion = dto.Direccion,
-                    Rut = dto.Rut,
-                    RazonSocial = dto.RazonSocial,
-                    Password = dto.Password
-            };
+            var cliente = _clienteRepo.FindById(id);
+
+            if (cliente == null)
+                throw new Exception("Cliente no encontrado");
+
+            // Update parcial
+            if (!string.IsNullOrWhiteSpace(dto.Nombre))
+                cliente.Nombre = dto.Nombre;
+
+            if (!string.IsNullOrWhiteSpace(dto.Apellido))
+                cliente.Apellido = dto.Apellido;
+
+            if (!string.IsNullOrWhiteSpace(dto.Email))
+                cliente.Email = new Email(dto.Email);
+
+            if (!string.IsNullOrWhiteSpace(dto.Telefono))
+                cliente.Telefono = dto.Telefono;
+
+            _clienteRepo.Update(cliente, id);
+
+            return dto;
         }
 
-
-
-
-        //private readonly IClienteService _clienteService;
-        // public ModificarCliente(IClienteService clienteService)
-        // {
-        //     _clienteService = clienteService;
-        // }
-        //public ClienteRespuestaDTO Ejecutar(int id,ModificarClienteDTO dto)
-        // {
-        //    return _clienteService.ModificarCliente(id, dto);
-        // }
     }
 }
