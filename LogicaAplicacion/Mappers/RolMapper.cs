@@ -1,6 +1,6 @@
 ﻿using Compartido.DTOs.Rol;
+using LogicaAplicacion.Excepciones.Rol;
 using LogicaNegocio.Entidades;
-using LogicaNegocio.Excepciones.Roles;
 
 namespace LogicaAplicacion.Mappers
 {
