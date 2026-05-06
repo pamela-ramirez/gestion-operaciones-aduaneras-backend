@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LogicaNegocio.Excepciones.Operacion;
+using LogicaNegocio.InterfacesEntidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Entidades
 {
-    public class Operacion
+    public class Operacion: IEntity, IValidable
     {
         public int Id { get; set; }
         public string NroCarpeta { get; set; }
@@ -55,13 +57,34 @@ namespace LogicaNegocio.Entidades
         }
 
         // Metodo para actualizar datos aduaneros, cuando el despachante completa la informacion
-        public void ActualizarDatosAduaneros(string nroDua,
-            TipoConocimiento tipoConocimiento, int nroConocimiento)
+        public void ActualizarDatosAduaneros(string? nroDua,
+            TipoConocimiento? tipoConocimiento, int? nroConocimiento)
         {
-            NroDua = nroDua;
-            TipoConocimiento = tipoConocimiento;
-            NroConocimiento = nroConocimiento;
 
+            // Solo valida y actualiza los campos que llegaron con valor
+            if (nroDua != null)
+            {
+                if (string.IsNullOrWhiteSpace(nroDua))
+                    throw new NroDuaVacioOperacionException();
+
+                NroDua = nroDua;
+            }
+
+            if (tipoConocimiento != null)
+            {
+                TipoConocimiento = tipoConocimiento;
+                TipoConocimientoId = tipoConocimiento.Id;
+            }
+
+            if (nroConocimiento != null)
+            {
+                if (nroConocimiento <= 0)
+                    throw new NumConocimientoInvalidoException();
+
+                NroConocimiento = nroConocimiento;
+            }
+
+            // Después de aplicar los cambios, se actualiza el estado
             ActualizarEstado();
         }
 
@@ -90,7 +113,24 @@ namespace LogicaNegocio.Entidades
             Estado = EstadoOperacion.Finalizado;
         }
 
+        public void Validar()
+        {
+            if (string.IsNullOrWhiteSpace(NroCarpeta))
+                throw new NumCarpetaObligatorioException();
 
+            if (NroCarpeta.Length > 50)
+                    throw new NumCarpetaSuperaCaracteresException();
 
+            if (ClienteId <= 0)
+                    throw new ClienteSeleccionadoInvalidoException();
+            
+            if (TipoOperacionId <= 0)
+                    throw new SeleccionarTipoOperacionException();
+
+            if (Estado <= 0)
+                throw new IngresarEstadoOperacionException();
+            
+        }
     }
+    
 }
