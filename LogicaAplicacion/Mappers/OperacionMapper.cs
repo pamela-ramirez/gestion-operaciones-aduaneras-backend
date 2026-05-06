@@ -4,15 +4,9 @@ using static Compartido.DTOs.Operacion.OperacionDTO;
 
 namespace LogicaAplicacion.Mappers
 {
-    /// <summary>
-    /// Convierte entre la entidad Operacion y sus DTOs.
-    /// Centraliza el mapeo para no repetirlo en cada caso de uso.
-    /// </summary>
     public static class OperacionMapper
     {
-        /// <summary>
-        /// Convierte una entidad Operacion al DTO de respuesta.
-        /// </summary>
+        // Convierte una entidad Operacion al DTO de respuesta.
         public static OperacionRespuestaDTO ToDTO(Operacion operacion)
         {
             return new OperacionRespuestaDTO
@@ -46,9 +40,7 @@ namespace LogicaAplicacion.Mappers
             };
         }
 
-        /// <summary>
-        /// Convierte al DTO de listado (mismo contenido, nombre diferente para claridad).
-        /// </summary>
+        // Convierte al DTO de listado (mismo contenido, nombre diferente para claridad).
         public static OperacionListadoDTO ToListadoDTO(Operacion operacion)
         {
             var dto = ToDTO(operacion);
