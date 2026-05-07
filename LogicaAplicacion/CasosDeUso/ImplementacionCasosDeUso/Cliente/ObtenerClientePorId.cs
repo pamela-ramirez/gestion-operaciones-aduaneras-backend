@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
+using LogicaAplicacion.Excepciones.Cliente;
 using LogicaNegocio.InterfacesRepositorios;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
@@ -17,7 +18,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
             var cliente = _clienteRepo.FindById(id);
             if (cliente == null)
             {
-                throw new Exception("Cliente no encontrado");
+                throw new ClienteNoEncontradoException();
             }
 
             return new ClienteDTO
