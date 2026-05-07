@@ -16,17 +16,5 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
         {
             _clienteRepo.Delete(id);
         }
-
-
-        //private readonly IClienteService _clienteService;
-        // public EliminarCliente(IClienteService clienteService)
-        // {
-        //      _clienteService = clienteService;
-        //  }
-        // public void Ejecutar(int id)
-        // {
-        //_clienteService.EliminarCliente(id);
-        // }
-
     }
 }
