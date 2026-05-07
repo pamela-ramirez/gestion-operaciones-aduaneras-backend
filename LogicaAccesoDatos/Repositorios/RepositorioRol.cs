@@ -25,7 +25,8 @@ namespace LogicaAccesoDatos.Repositorios
             var rol = FindById(id);
             if (rol == null)
             {
-                throw new RolNoEncontradoException();
+                //throw new RolNoEncontradoException();
+                throw new Exception("El rol no ha sido encontrado.");
             }
             _context.Roles.Remove(rol);
             _context.SaveChanges();
@@ -36,7 +37,8 @@ namespace LogicaAccesoDatos.Repositorios
             var rolExistente = FindById(id);
             if (rolExistente == null)
             {
-                throw new RolNoEncontradoException();
+                //throw new RolNoEncontradoException();
+                throw new Exception("El rol no ha sido encontrado.");
             }
 
             rolExistente.NombreRol = item.NombreRol;

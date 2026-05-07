@@ -9,7 +9,8 @@ namespace LogicaAplicacion.Mappers
         public static Rol DTORolToRol(RolDTO dto)
         {
             if (dto == null || string.IsNullOrWhiteSpace(dto.NombreRol))
-                throw new RolDatosIncorrectosException();
+                //throw new RolDatosIncorrectosException();
+                throw new Exception("El nombre del rol no puede ser nulo o vacío.");
 
             return new Rol(dto.NombreRol);
         }
@@ -17,7 +18,8 @@ namespace LogicaAplicacion.Mappers
         public static RolListadoDTO RolToDTO(Rol rol)
         {
             if (rol == null)
-                throw new RolDatosIncorrectosException();
+                //throw new RolDatosIncorrectosException();
+                throw new Exception("El nombre del rol no puede ser nulo o vacío.");
 
             return new RolListadoDTO
             {
