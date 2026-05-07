@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Compartido.DTOs.Operacion
 {
-    public class OperacionDTO
-    {
+
+
         // Datos que manda el frontend al registrar una nueva operación.
         // Solo los campos iniciales: el estado y la fecha los asigna el sistema.
         public class CrearOperacionDTO
@@ -55,4 +55,3 @@ namespace Compartido.DTOs.Operacion
         public class OperacionRespuestaDTO : OperacionListadoDTO { }
     }
 
-}
