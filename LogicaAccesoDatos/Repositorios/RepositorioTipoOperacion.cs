@@ -20,27 +20,40 @@ namespace LogicaAccesoDatos.Repositorios
         }
         public void Add(TipoOperacion item)
         {
-            throw new NotImplementedException();
+            _context.TiposOperacion.Add(item);
+            _context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var tipo = FindById(id);
+            if (tipo == null)
+                throw new Exception("Tipo de operación no encontrado.");
+
+            _context.TiposOperacion.Remove(tipo);
+            _context.SaveChanges();
         }
 
         public IEnumerable<TipoOperacion> FindAll()
         {
-            throw new NotImplementedException();
+            return _context.TiposOperacion.ToList();
+        }
+
+        public TipoOperacion FindByDescripcion(string descripcion)
+        {
+            return _context.TiposOperacion
+                .FirstOrDefault(t => t.Descripcion == descripcion);
         }
 
         public TipoOperacion FindById(int id)
         {
-            throw new NotImplementedException();
+            return _context.TiposOperacion.FirstOrDefault(t => t.Id == id);
+
         }
 
         public void Update(TipoOperacion item, int id)
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
     }
 }
