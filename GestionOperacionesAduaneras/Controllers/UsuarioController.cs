@@ -9,6 +9,7 @@ namespace GestionOperacionesAduaneras.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsuarioController : ControllerBase
     {
         private readonly IObtenerUsuarios _obtenerUsuarios;
@@ -35,6 +36,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // GET /api/usuarios/{id} - Obtener usuario por ID
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult ObtenerPorId(int id)
         {
             try
@@ -52,6 +54,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // GET /api/usuarios - Obtener todos los usuarios
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult ObtenerTodos()
         {
             try
@@ -69,6 +72,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // PUT /api/usuarios/{id} - Modificar usuario
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Modificar(int id, [FromBody] ModificarUsuarioDTO dto)
         {
             try
@@ -86,6 +90,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // DELETE /api/usuarios/{id} - Eliminar usuario
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Eliminar(int id)
         {
             try
@@ -103,7 +108,6 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // GET /api/usuarios/logueado - Obtener usuario logueado
         [HttpGet("logueado")]
-        [Authorize]
         public async Task<IActionResult> ObtenerUsuarioLogueado()
         {
             try
