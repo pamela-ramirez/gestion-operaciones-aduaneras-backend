@@ -1,5 +1,8 @@
 ﻿using Compartido.DTOs.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
+using LogicaAplicacion.Excepciones.Cliente;
+using LogicaAplicacion.Excepciones.Rol;
+using LogicaAplicacion.Excepciones.Usuario;
 using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 
@@ -9,21 +12,27 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
     {
         private readonly IRepositorioCliente _clienteRepo;
         private readonly IRepositorioRol _rolRepo;
+        private readonly IRepositorioUsuario _usuarioRepo;
 
-        public CrearCliente(IRepositorioCliente clienteRepo, IRepositorioRol rolRepo)
+        public CrearCliente(IRepositorioCliente clienteRepo, IRepositorioRol rolRepo, IRepositorioUsuario usuarioRepo)
         {
             _clienteRepo = clienteRepo;
             _rolRepo = rolRepo;
+            _usuarioRepo = usuarioRepo;
         }
         public CrearClienteRespuestaDTO Ejecutar(CrearClienteDTO dto)
         {
-            //validar si existe email
-
             var existe = _clienteRepo.ExisteRut(dto.Rut);
             if (existe)
-                throw new Exception("Ya existe un cliente con ese RUT");
+                throw new ClienteExistenteConIgualRutException();
+
+            var existeEmail = _usuarioRepo.GetByEmail(dto.Email) != null;
+            if (existeEmail)
+                throw new UsuarioExistenteConMismoCorreoException();
 
             var rolCliente = _rolRepo.FindById(3);
+            if (rolCliente == null)
+                throw new RolNoEncontradoException();
 
             var username = $"{dto.Email.Split('@')[0]}";
             var passwordTemporal = "Despacho100!";
