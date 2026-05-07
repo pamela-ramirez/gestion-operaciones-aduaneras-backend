@@ -3,11 +3,6 @@ using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.ValueObject;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicaAccesoDatos.Repositorios
 {
@@ -19,13 +14,13 @@ namespace LogicaAccesoDatos.Repositorios
         {
             _context = context;
         }
-        
+
         public void Add(Usuario item)
         {
             _context.Usuarios.Add(item);
             _context.SaveChanges();
         }
-        
+
         public void Delete(int id)
         {
             var usuario = FindById(id);
@@ -85,8 +80,8 @@ namespace LogicaAccesoDatos.Repositorios
 
         public void UpdatePassword(Usuario item, int id)
         {
-            try 
-            { 
+            try
+            {
                 var usuarioExistente = FindById(id);
                 if (usuarioExistente != null)
                 {
@@ -106,5 +101,5 @@ namespace LogicaAccesoDatos.Repositorios
             }
 
         }
-    }    
+    }
 }

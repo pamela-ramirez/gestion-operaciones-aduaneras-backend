@@ -1,9 +1,4 @@
 ﻿using LogicaNegocio.Entidades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicaNegocio.InterfacesRepositorios
 {
@@ -12,6 +7,6 @@ namespace LogicaNegocio.InterfacesRepositorios
         bool ExisteRut(string rut, int? excluirClienteId = null);
         bool TieneOperacionesActivas(int ClienteId);
         Cliente FindByRut(string rut);
-        
+
     }
 }

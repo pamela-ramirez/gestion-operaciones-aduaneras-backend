@@ -2,11 +2,6 @@
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
 using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 {
@@ -15,7 +10,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
         private readonly IRepositorioCliente _clienteRepo;
         private readonly IRepositorioRol _rolRepo;
 
-        public CrearCliente(IRepositorioCliente clienteRepo, IRepositorioRol rolRepo    )
+        public CrearCliente(IRepositorioCliente clienteRepo, IRepositorioRol rolRepo)
         {
             _clienteRepo = clienteRepo;
             _rolRepo = rolRepo;
@@ -38,7 +33,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
             _clienteRepo.Add(cliente);
 
             return ClienteMapper.ToDTO(cliente, username, passwordTemporal);
-            
+
         }
     }
 }

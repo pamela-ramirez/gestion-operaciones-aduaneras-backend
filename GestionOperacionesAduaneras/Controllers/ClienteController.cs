@@ -78,7 +78,7 @@ namespace GestionOperacionesAduaneras.Controllers
             }
         }
 
-    
+
         // PUT /api/cliente/{id} - Modificar cliente
         [HttpPut("{id}")]
         public IActionResult Modificar(int id, [FromBody] ModificarClienteDTO dto)
@@ -93,7 +93,7 @@ namespace GestionOperacionesAduaneras.Controllers
                 return BadRequest(new { mensaje = ex.Message });
             }
         }
-    
+
 
         // DELETE /api/cliente/{id} - Eliminar cliente
         [HttpDelete("{id}")]

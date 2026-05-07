@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Compartido.DTOs.TipoOperacion
+﻿namespace Compartido.DTOs.TipoOperacion
 {
     // DTO para CREAR un tipo de operación.
     public class CrearTipoOperacionDTO

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LogicaNegocio.Entidades
+﻿namespace LogicaNegocio.Entidades
 {
     public class Comunicacion
     {
@@ -17,7 +11,7 @@ namespace LogicaNegocio.Entidades
         public int UsuarioEnvioId { get; set; }
         public Usuario UsuarioEnvio { get; set; } = null!;
 
- 
+
         public int? OperacionId { get; set; } // puede ser null para cotizacion RN-13.1
         public Operacion? Operacion { get; set; }
 

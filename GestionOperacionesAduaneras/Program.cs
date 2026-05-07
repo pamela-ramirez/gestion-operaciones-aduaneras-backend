@@ -39,7 +39,7 @@ namespace GestionOperacionesAduaneras
             // Agregar DbContext
             //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             //builder.Services.AddDbContext<GestionOperacionesDbContext>(options =>
-             //   options.UseSqlServer(connectionString));
+            //   options.UseSqlServer(connectionString));
 
             //builder.Services.AddControllers();
             //builder.Services.AddEndpointsApiExplorer();
@@ -61,7 +61,7 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IJwtService, JwtService>();
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
             //builder.Services.AddScoped<IClienteService, ClienteService>();
-           
+
 
             // Casos de uso usuario
             builder.Services.AddScoped<IObtenerUsuarios, ObtenerUsuarios>();

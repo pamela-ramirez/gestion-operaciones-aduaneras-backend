@@ -1,11 +1,6 @@
 ﻿using LogicaAccesoDatos.Data;
 using LogicaNegocio.Entidades;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicaAccesoDatos.Contexto
 {
@@ -96,7 +91,7 @@ namespace LogicaAccesoDatos.Contexto
                         .HasMaxLength(150);
                 });
 
-                
+
                 //
                 entity.OwnsOne(u => u.Email)
                     .HasIndex(e => e.Valor)
@@ -111,7 +106,7 @@ namespace LogicaAccesoDatos.Contexto
                         .HasColumnName("PasswordHash")
                         .IsRequired();
                 });
-                
+
                 entity.HasOne(u => u.Rol)
                     .WithMany()
                     .HasForeignKey(u => u.RolId)

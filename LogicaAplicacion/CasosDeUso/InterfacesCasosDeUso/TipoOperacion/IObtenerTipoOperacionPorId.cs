@@ -1,10 +1,4 @@
-﻿using Compartido.DTOs.Operacion;
-using Compartido.DTOs.TipoOperacion;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Compartido.DTOs.TipoOperacion;
 
 namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.TipoOperacion
 {

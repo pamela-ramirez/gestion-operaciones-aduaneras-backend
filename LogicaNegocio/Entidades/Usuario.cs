@@ -1,19 +1,14 @@
 ﻿using LogicaNegocio.InterfacesEntidades;
 using LogicaNegocio.ValueObject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicaNegocio.Entidades
 {
-    public abstract class Usuario:IEntity
+    public abstract class Usuario : IEntity
     {
         public int Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
         public string Apellido { get; set; } = string.Empty;
-        public Email Email { get; set; } 
+        public Email Email { get; set; }
         public Password Password { get; set; }
         public int RolId { get; set; }
         public Rol Rol { get; set; }
@@ -38,7 +33,7 @@ namespace LogicaNegocio.Entidades
             FechaCreacion = DateTime.Now;
             PrimerLogin = true; // Por defecto, es el primer login al crear el usuario}
             Estado = "Pendiente"; // Por defecto, el usuario se crea como pendiente
-        } 
+        }
 
     }
 }

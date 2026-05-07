@@ -1,7 +1,7 @@
-﻿using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
+﻿using Compartido.DTOs.Operacion;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static Compartido.DTOs.Operacion.OperacionDTO;
 
 namespace GestionOperacionesAduaneras.Controllers
 {
@@ -15,7 +15,7 @@ namespace GestionOperacionesAduaneras.Controllers
         private readonly IObtenerOperacionesPorCliente _obtenerOperacionesPorCliente;
         private readonly IObtenerOperacionPorId _obtenerOperacionPorId;
 
-        public OperacionController( 
+        public OperacionController(
             ICrearOperacion crearOperacion,
             IObtenerOperaciones obtenerOperaciones,
             IObtenerOperacionesPorCliente obtenerOperacionesPorCliente,

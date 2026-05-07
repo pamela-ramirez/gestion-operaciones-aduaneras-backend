@@ -1,14 +1,9 @@
 ﻿using LogicaNegocio.Excepciones.Operacion;
 using LogicaNegocio.InterfacesEntidades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicaNegocio.Entidades
 {
-    public class Operacion: IEntity, IValidable
+    public class Operacion : IEntity, IValidable
     {
         public int Id { get; set; }
         public string NroCarpeta { get; set; }
@@ -119,18 +114,18 @@ namespace LogicaNegocio.Entidades
                 throw new NumCarpetaObligatorioException();
 
             if (NroCarpeta.Length > 50)
-                    throw new NumCarpetaSuperaCaracteresException();
+                throw new NumCarpetaSuperaCaracteresException();
 
             if (ClienteId <= 0)
-                    throw new ClienteSeleccionadoInvalidoException();
-            
+                throw new ClienteSeleccionadoInvalidoException();
+
             if (TipoOperacionId <= 0)
-                    throw new SeleccionarTipoOperacionException();
+                throw new SeleccionarTipoOperacionException();
 
             if (Estado <= 0)
                 throw new IngresarEstadoOperacionException();
-            
+
         }
     }
-    
+
 }

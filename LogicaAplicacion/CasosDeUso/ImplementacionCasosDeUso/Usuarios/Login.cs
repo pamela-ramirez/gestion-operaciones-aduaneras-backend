@@ -1,14 +1,8 @@
-﻿using BCrypt.Net;
-using Compartido.DTOs.Auth;
+﻿using Compartido.DTOs.Auth;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.Excepciones.Usuarios.Login;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
 {
@@ -16,7 +10,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
     {
         private readonly IRepositorioUsuario _repoUsuario;
         private readonly IJwtService _jwtService;
-        
+
 
         public Login(IRepositorioUsuario repoUsuario, IJwtService jwtService)
         {
@@ -37,7 +31,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
             // Paso 3: verificar que la contraseña coincida con el hash guardado
             //produccion:
             //bool passwordCorrecta = BCrypt.Net.BCrypt.Verify(dto.Password, usuario.Password.Valor);
-            
+
             //empieza desarrollo/testing
             bool passwordCorrecta;
 

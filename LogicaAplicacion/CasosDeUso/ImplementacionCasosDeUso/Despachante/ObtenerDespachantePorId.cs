@@ -1,11 +1,6 @@
 ﻿using Compartido.DTOs.Despachante;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante;
 using LogicaNegocio.InterfacesRepositorios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Despachante
 {
@@ -24,7 +19,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Despachante
             {
                 throw new Exception("Despachante no encontrado");
             }
-            return new DespachanteDTO 
+            return new DespachanteDTO
             {
                 Nombre = despachante.Nombre,
                 Apellido = despachante.Apellido,

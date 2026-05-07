@@ -1,8 +1,6 @@
 ﻿using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
 using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
-using static Compartido.DTOs.Operacion.OperacionDTO;
-using LogicaNegocio.Entidades;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
 {

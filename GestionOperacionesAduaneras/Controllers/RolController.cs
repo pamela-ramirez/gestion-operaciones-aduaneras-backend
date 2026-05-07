@@ -1,8 +1,6 @@
 ﻿using Compartido.DTOs.Rol;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
-using LogicaNegocio.Entidades;
 using Microsoft.AspNetCore.Mvc;
-using static Compartido.DTOs.Rol.RolDTO;
 
 namespace GestionOperacionesAduaneras.Controllers
 {
@@ -19,7 +17,7 @@ namespace GestionOperacionesAduaneras.Controllers
         {
             _crearRol = crearRol;
             _obtenerRoles = obtenerRoles;
-           
+
         }
 
         // POST /api/rol
@@ -52,6 +50,6 @@ namespace GestionOperacionesAduaneras.Controllers
             }
         }
 
-    
+
     }
 }

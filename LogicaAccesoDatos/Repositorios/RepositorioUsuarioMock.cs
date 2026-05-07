@@ -1,29 +1,23 @@
 ﻿using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
-using LogicaNegocio.ValueObject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicaAccesoDatos.Repositorios
 {
     public class RepositorioUsuarioMock : IRepositorioUsuario
     {
         private List<Usuario> usuarios = new List<Usuario>
-    {
-        /*new Usuario
         {
-            Id = 1,
-            Nombre = "Pamela",
-            Apellido = "Test",
-            Email = new Email("pamela@test.com"),
-            Password = new Password("Abc123!!"),
-            RolId = 1,
-            Rol = new Rol("Admin")
-        }*/
-    };
+            /*new Usuario
+            {
+                Id = 1,
+                Nombre = "Pamela",
+                Apellido = "Test",
+                Email = new Email("pamela@test.com"),
+                Password = new Password("Abc123!!"),
+                RolId = 1,
+                Rol = new Rol("Admin")
+            }*/
+        };
 
         public void Add(Usuario item)
         {
