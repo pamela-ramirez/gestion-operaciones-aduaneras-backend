@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
+﻿using Compartido.DTOs.Operacion;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
 using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
@@ -6,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Compartido.DTOs.Operacion.OperacionDTO;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
 {
