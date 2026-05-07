@@ -29,18 +29,5 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
                 Estado = c.Estado
             }).ToList();
         }
-
-
-
-        // private readonly IClienteService _clienteService;
-
-        // public ObtenerClientes(IClienteService clienteService)
-        //{
-        //     _clienteService = clienteService;
-        // }
-        // public IEnumerable<ClienteRespuestaDTO> Ejecutar()
-        // {
-        //    return _clienteService.ObtenerClientes();
-        //}
     }
 }
