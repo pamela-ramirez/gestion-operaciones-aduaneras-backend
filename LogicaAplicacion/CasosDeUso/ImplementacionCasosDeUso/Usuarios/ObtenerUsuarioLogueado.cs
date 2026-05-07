@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
+using LogicaAplicacion.Excepciones.Usuario;
 using LogicaNegocio.InterfacesRepositorios;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
@@ -18,7 +19,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
             var usuario = _repo.FindById(id);
 
             if (usuario == null)
-                throw new Exception("Usuario no encontrado");
+                throw new UsuarioNoEncontradoException();
 
             return new UsuarioLogueadoDTO
             {
