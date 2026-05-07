@@ -5,10 +5,12 @@ using LogicaAccesoDatos.Data;
 using LogicaAccesoDatos.Repositorios;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Despachante;
+using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesRepositorios;
@@ -37,9 +39,9 @@ namespace GestionOperacionesAduaneras
             //builder.Services.AddDbContext<GestionOperacionesDbContext>(options =>
              //   options.UseSqlServer(connectionString));
 
-            builder.Services.AddControllers();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            //builder.Services.AddControllers();
+            //builder.Services.AddEndpointsApiExplorer();
+            //builder.Services.AddSwaggerGen();
 
 
             // Repositorios
@@ -48,6 +50,9 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();
             builder.Services.AddScoped<IRepositorioRol, RepositorioRol>();
             builder.Services.AddScoped<IRepositorioDespachante, RepositorioDespachante>();
+            builder.Services.AddScoped<IRepositorioOperacion, RepositorioOperacion>();
+            builder.Services.AddScoped<IRepositorioTipoOperacion, RepositorioTipoOperacion>();
+            //builder.Services.AddScoped<IRepositorioTipoConocimiento, RepositorioTipoConocimiento>();
 
             // Servicios
             builder.Services.AddScoped<IJwtService, JwtService>();
@@ -78,7 +83,15 @@ namespace GestionOperacionesAduaneras
             // Casos de uso rol
             builder.Services.AddScoped<ICrearRol, CrearRol>();
             builder.Services.AddScoped<IObtenerRoles, ObtenerRoles>();
-            
+
+            // Casos de uso de Operacion
+            builder.Services.AddScoped<ICrearOperacion, CrearOperacion>();
+            builder.Services.AddScoped<IObtenerOperaciones, ObtenerOperaciones>();
+            builder.Services.AddScoped<IObtenerOperacionesPorCliente, ObtenerOperacionesPorCliente>();
+            builder.Services.AddScoped<IObtenerOperacionPorId, ObtenerOperacionPorId>();
+            //builder.Services.AddScoped<IActualizarDatosAduaneros, ActualizarDatosAduaneros>();
+            //builder.Services.AddScoped<IFinalizarOperacion, FinalizarOperacion>();
+
 
             // Autenticación JWT
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -101,7 +114,6 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            //builder.Services.AddSwaggerGen();
             builder.Services.AddSwaggerGen(options =>
             {
                 options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
