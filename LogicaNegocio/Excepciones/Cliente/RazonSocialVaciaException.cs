@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Excepciones.Cliente
 {
-    public class ClienteTelefonoVacioException : ClassException
+    public class RazonSocialVaciaException : ClassException
     {
-        public ClienteTelefonoVacioException() : base("El teléfono no puede estar vacío.") { }
+        public RazonSocialVaciaException()  : base("La razón social no puede estar vacía.") { }
     }
 }
