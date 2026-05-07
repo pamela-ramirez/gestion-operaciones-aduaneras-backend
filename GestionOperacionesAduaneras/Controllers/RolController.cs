@@ -1,6 +1,7 @@
 ﻿using Compartido.DTOs.Rol;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
 using LogicaNegocio.Entidades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static Compartido.DTOs.Rol.RolDTO;
 
@@ -8,6 +9,7 @@ namespace GestionOperacionesAduaneras.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RolController : ControllerBase
     {
         private readonly ICrearRol _crearRol;
@@ -24,6 +26,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // POST /api/rol
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Crear([FromBody] RolDTO dto)
         {
             try
@@ -39,6 +42,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // GET /api/rol
         [HttpGet]
+        [Authorize(Roles = "Admin, Despachante")]
         public IActionResult ObtenerTodos()
         {
             try

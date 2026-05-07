@@ -1,11 +1,13 @@
 ﻿using Compartido.DTOs.Despachante;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestionOperacionesAduaneras.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DespachanteController : ControllerBase
     {
         private readonly ICrearDespachante _crearDespachante;
@@ -19,6 +21,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // POST /api/despachante - Crear despachante
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Crear([FromBody] CrearDespachanteDTO dto)
         {
             try
@@ -38,6 +41,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // GET /api/despachante/{id} - Obtener despachante por id
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult ObtenerPorId(int id)
         {
             try
