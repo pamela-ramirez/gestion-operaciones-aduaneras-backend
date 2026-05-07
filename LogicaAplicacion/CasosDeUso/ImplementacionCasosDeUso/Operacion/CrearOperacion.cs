@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
+﻿using Compartido.DTOs.Operacion;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
 using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 
@@ -38,5 +39,6 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
 
             return OperacionMapper.ToDTO(operacion);
         }
+
     }
 }
