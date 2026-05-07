@@ -7,11 +7,13 @@ using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Despachante;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol;
+using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.TipoOperacion;
 using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.TipoOperacion;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.InterfacesServicios;
@@ -52,6 +54,7 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IRepositorioDespachante, RepositorioDespachante>();
             builder.Services.AddScoped<IRepositorioOperacion, RepositorioOperacion>();
             builder.Services.AddScoped<IRepositorioTipoOperacion, RepositorioTipoOperacion>();
+            builder.Services.AddScoped<IRepositorioTipoOperacion, RepositorioTipoOperacion>();
             //builder.Services.AddScoped<IRepositorioTipoConocimiento, RepositorioTipoConocimiento>();
 
             // Servicios
@@ -79,7 +82,6 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<ICrearDespachante, CrearDespachante>();
             builder.Services.AddScoped<IObtenerDespachantePorId, ObtenerDespachantePorId>();
 
-
             // Casos de uso rol
             builder.Services.AddScoped<ICrearRol, CrearRol>();
             builder.Services.AddScoped<IObtenerRoles, ObtenerRoles>();
@@ -91,6 +93,11 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IObtenerOperacionPorId, ObtenerOperacionPorId>();
             //builder.Services.AddScoped<IActualizarDatosAduaneros, ActualizarDatosAduaneros>();
             //builder.Services.AddScoped<IFinalizarOperacion, FinalizarOperacion>();
+
+            // Casos de uso de uso de TipoOperacion
+            builder.Services.AddScoped<ICrearTipoOperacion, CrearTipoOperacion>();
+            builder.Services.AddScoped<IObtenerTiposOperacion, ObtenerTiposOperacion>();
+            builder.Services.AddScoped<IObtenerTipoOperacionPorId, ObtenerTipoOperacionPorId>();
 
 
             // Autenticación JWT
