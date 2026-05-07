@@ -23,7 +23,6 @@ namespace LogicaAccesoDatos.Repositorios
 
         public void Add(Cliente item)
         {
-            // Se deberia de validar el cliente primero aqui o ya se manda el cliente validado?
             _context.Clientes.Add(item);
             _context.SaveChanges();
         }
