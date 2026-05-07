@@ -54,7 +54,6 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IRepositorioDespachante, RepositorioDespachante>();
             builder.Services.AddScoped<IRepositorioOperacion, RepositorioOperacion>();
             builder.Services.AddScoped<IRepositorioTipoOperacion, RepositorioTipoOperacion>();
-            builder.Services.AddScoped<IRepositorioTipoOperacion, RepositorioTipoOperacion>();
             //builder.Services.AddScoped<IRepositorioTipoConocimiento, RepositorioTipoConocimiento>();
 
             // Servicios
