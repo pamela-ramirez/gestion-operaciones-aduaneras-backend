@@ -32,12 +32,16 @@ namespace LogicaAccesoDatos.Repositorios
 
         public bool ExisteNroCarpeta(string nroCarpeta, int? excluirId = null)
         {
-            throw new NotImplementedException();
+            return _context.Operaciones
+                .Any(o => o.NroCarpeta == nroCarpeta &&
+                    (excluirId == null || o.Id != excluirId));
         }
 
         public bool ExisteNroDua(string nroDua, int? excluirId = null)
         {
-            throw new NotImplementedException();
+            return _context.Operaciones
+                .Any(o => o.NroDua == nroDua &&
+                     (excluirId == null || o.Id != excluirId));
         }
 
         public IEnumerable<Operacion> FindAll()
@@ -51,7 +55,12 @@ namespace LogicaAccesoDatos.Repositorios
 
         public IEnumerable<Operacion> FindByClienteId(int clienteId)
         {
-            throw new NotImplementedException();
+            return _context.Operaciones
+                .Include(o => o.TipoOperacion)
+                .Include(o => o.Cliente)
+                .Include(o => o.TipoConocimiento)
+                .Where(o => o.ClienteId == clienteId)
+                .ToList();
         }
 
         public IEnumerable<Operacion> FindByEstado(EstadoOperacion estado)

@@ -296,7 +296,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28701d450db13e98d9131df3cd800ef988dd1277")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b710987207a5bc03a2d32100d79b73bd4010b2fe")]
 [assembly: System.Reflection.AssemblyProductAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -1005,7 +1005,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28701d450db13e98d9131df3cd800ef988dd1277")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b710987207a5bc03a2d32100d79b73bd4010b2fe")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -1243,7 +1243,6 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IRepositorioRol, RepositorioRol>();
             builder.Services.AddScoped<IRepositorioDespachante, RepositorioDespachante>();
             builder.Services.AddScoped<IRepositorioOperacion, RepositorioOperacion>();
-            builder.Services.AddScoped<IRepositorioTipoOperacion, RepositorioTipoOperacion>();
             builder.Services.AddScoped<IRepositorioTipoOperacion, RepositorioTipoOperacion>();
             //builder.Services.AddScoped<IRepositorioTipoConocimiento, RepositorioTipoConocimiento>();
 
@@ -4452,7 +4451,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28701d450db13e98d9131df3cd800ef988dd1277")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b710987207a5bc03a2d32100d79b73bd4010b2fe")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -5305,6 +5304,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Despachante
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Operacion\CrearOperacion.cs ===
+using Compartido.DTOs.Operacion;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
 using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
@@ -5345,6 +5345,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
 
             return OperacionMapper.ToDTO(operacion);
         }
+
     }
 }
 
@@ -6396,7 +6397,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28701d450db13e98d9131df3cd800ef988dd1277")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b710987207a5bc03a2d32100d79b73bd4010b2fe")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -7712,7 +7713,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28701d450db13e98d9131df3cd800ef988dd1277")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b710987207a5bc03a2d32100d79b73bd4010b2fe")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
