@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.Mappers;
+﻿using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
+using LogicaAplicacion.Mappers;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
@@ -10,7 +11,7 @@ using static Compartido.DTOs.Operacion.OperacionDTO;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
 {
-    public class ObtenerOperaciones
+    public class ObtenerOperaciones : IObtenerOperaciones
     {
         private readonly IRepositorioOperacion _operacionRepo;
 
