@@ -13,7 +13,7 @@ namespace LogicaAccesoDatos.Data
                 return;
 
             // 2. Obtener rol administrador
-            var rolAdmin = context.Roles.FirstOrDefault(r => r.NombreRol == "Administrador");
+            var rolAdmin = context.Roles.FirstOrDefault(r => r.NombreRol == "Admin");
 
             if (rolAdmin == null)
                 return; // seguridad
