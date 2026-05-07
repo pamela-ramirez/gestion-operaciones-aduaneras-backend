@@ -1,6 +1,5 @@
 ﻿using Compartido.DTOs.Operacion;
 using LogicaNegocio.Entidades;
-using static Compartido.DTOs.Operacion.OperacionDTO;
 
 namespace LogicaAplicacion.Mappers
 {
