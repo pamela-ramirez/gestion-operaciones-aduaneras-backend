@@ -46,7 +46,9 @@ namespace LogicaNegocio.Entidades
         {
             NroCarpeta = nroCarpeta;
             TipoOperacion = tipoOperacion;
+            TipoOperacionId = tipoOperacion.Id;
             Cliente = cliente;
+            ClienteId = cliente.Id;
             Estado = EstadoOperacion.Iniciado;
             FechaRegistro = DateTime.Now;
         }
