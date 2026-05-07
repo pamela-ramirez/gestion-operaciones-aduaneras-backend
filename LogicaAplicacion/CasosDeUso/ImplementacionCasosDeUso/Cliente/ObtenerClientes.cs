@@ -25,6 +25,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
             var clientes = _clienteRepo.FindAll();
             return clientes.Select(c => new ClienteDTO
             {
+                Id = c.Id,
                 Nombre = c.Nombre,
                 Apellido = c.Apellido,
                 Email = c.Email.Valor,
