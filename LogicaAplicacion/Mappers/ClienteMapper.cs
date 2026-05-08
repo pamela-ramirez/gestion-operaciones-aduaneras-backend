@@ -19,7 +19,7 @@ namespace LogicaAplicacion.Mappers
                new Email(dto.Email),
                new Password("Despacho100!"), // password default
                rol,
-               dto.Rut,
+               new Rut(dto.Rut),
                dto.RazonSocial,
                dto.Telefono,
                dto.Direccion
@@ -34,7 +34,7 @@ namespace LogicaAplicacion.Mappers
                 Nombre = cliente.Nombre,
                 Apellido = cliente.Apellido,
                 Email = cliente.Email.Valor,
-                Rut = cliente.Rut,
+                Rut = cliente.Rut.Valor,
                 RazonSocial = cliente.RazonSocial,
                 Telefono = cliente.Telefono,
                 Direccion = cliente.Direccion,
