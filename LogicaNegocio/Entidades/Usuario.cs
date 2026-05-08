@@ -1,9 +1,11 @@
-﻿using LogicaNegocio.InterfacesEntidades;
+﻿using LogicaNegocio.Excepciones.Roles;
+using LogicaNegocio.Excepciones.Usuarios;
+using LogicaNegocio.InterfacesEntidades;
 using LogicaNegocio.ValueObject;
 
 namespace LogicaNegocio.Entidades
 {
-    public abstract class Usuario : IEntity
+    public abstract class Usuario : IEntity, IValidable
     {
         public int Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
@@ -21,6 +23,9 @@ namespace LogicaNegocio.Entidades
         public bool PrimerLogin { get; set; }
         public string Estado { get; set; }
 
+        // TODO ver si funciona todo con enum estado
+        //public EstadoUsuario Estado { get; set; }
+
         public Usuario() { }
 
         public Usuario(string nombre, string apellido, Email email, Password password, Rol rol)
@@ -33,6 +38,36 @@ namespace LogicaNegocio.Entidades
             FechaCreacion = DateTime.Now;
             PrimerLogin = true; // Por defecto, es el primer login al crear el usuario}
             Estado = "Pendiente"; // Por defecto, el usuario se crea como pendiente
+            //Estado = EstadoUsuario.Pendiente;
+            Validar();
+        }
+
+        public virtual void Validar()
+        {
+            if (string.IsNullOrWhiteSpace(Nombre))
+                throw new NombreVacioUsuarioException();
+
+            if (Nombre.Length > 100)
+                throw new NombreUsuarioSuperaCaracteresException();
+
+            if (string.IsNullOrWhiteSpace(Apellido))
+                throw new ApellidoVacioUsuarioException();
+
+            if (Apellido.Length > 100)
+                throw new ApellidoUsuarioSuperaCaracteresException();
+
+            if (Password == null)
+                throw new PasswordObligatoriaException();
+
+            if (Rol == null)
+                throw new RolObligatorioException();
+
+            if (FechaCreacion == default)
+                throw new FechaCreacionInvalidaException();
+
+            // TODO validar que funcione estado enum y descomentar esto
+            //if (!Enum.IsDefined(typeof(EstadoUsuario), Estado))
+            //  throw new EstadoUsuarioInvalidoException();
         }
 
     }
