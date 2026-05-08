@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Roles
+{
+    public class RolObligatorioException : ClassException
+    {
+        public RolObligatorioException() : base("El rol es obligatorio.")
+        {
+        }
+    }
+}
