@@ -11,18 +11,18 @@ namespace GestionOperacionesAduaneras.Controllers
     public class OperacionController : ControllerBase
     {
         private readonly ICrearOperacion _crearOperacion;
-        private readonly IObtenerOperaciones _obtenerOperaciones;
+        private readonly IObtenerOperacionesConFiltros _obtenerOperacionesConFiltros;
         private readonly IObtenerOperacionesPorCliente _obtenerOperacionesPorCliente;
         private readonly IObtenerOperacionPorId _obtenerOperacionPorId;
 
         public OperacionController(
             ICrearOperacion crearOperacion,
-            IObtenerOperaciones obtenerOperaciones,
+            IObtenerOperacionesConFiltros obtenerOperacionesConFiltros,
             IObtenerOperacionesPorCliente obtenerOperacionesPorCliente,
             IObtenerOperacionPorId obtenerOperacionPorId)
         {
             _crearOperacion = crearOperacion;
-            _obtenerOperaciones = obtenerOperaciones;
+            _obtenerOperacionesConFiltros = obtenerOperacionesConFiltros;
             _obtenerOperacionesPorCliente = obtenerOperacionesPorCliente;
             _obtenerOperacionPorId = obtenerOperacionPorId;
         }
@@ -64,7 +64,6 @@ namespace GestionOperacionesAduaneras.Controllers
         }
 
         // GET /api/operacion
-        // Ejemplo: /api/operacion?clienteId=1&tipoOperacionId=2&estado=pendiente&fechaDesde=2024-01-01&fechaHasta=2024-12-31
         [HttpGet]
         [Authorize(Roles = "Despachante,Admin")]
         public IActionResult ObtenerTodos(
@@ -76,7 +75,7 @@ namespace GestionOperacionesAduaneras.Controllers
         {
             try
             {
-                var resultado = _obtenerOperaciones.Ejecutar(
+                var resultado = _obtenerOperacionesConFiltros.Ejecutar(
                     clienteId,
                     tipoOperacionId,
                     estado,

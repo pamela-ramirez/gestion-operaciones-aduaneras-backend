@@ -87,7 +87,7 @@ namespace GestionOperacionesAduaneras
 
             // Casos de uso de Operacion
             builder.Services.AddScoped<ICrearOperacion, CrearOperacion>();
-            builder.Services.AddScoped<IObtenerOperaciones, ObtenerOperaciones>();
+            builder.Services.AddScoped<IObtenerOperacionesConFiltros, ObtenerOperacionesConFiltros>();
             builder.Services.AddScoped<IObtenerOperacionesPorCliente, ObtenerOperacionesPorCliente>();
             builder.Services.AddScoped<IObtenerOperacionPorId, ObtenerOperacionPorId>();
             //builder.Services.AddScoped<IActualizarDatosAduaneros, ActualizarDatosAduaneros>();
