@@ -1,4 +1,6 @@
-﻿using LogicaNegocio.ValueObject;
+﻿using LogicaNegocio.Excepciones.Cliente;
+using LogicaNegocio.InterfacesEntidades;
+using LogicaNegocio.ValueObject;
 
 namespace LogicaNegocio.Entidades
 {
@@ -6,7 +8,7 @@ namespace LogicaNegocio.Entidades
     {
         public Rut Rut { get; set; }
         public string RazonSocial { get; set; } = string.Empty;
-        public string? Telefono { get; set; } = string.Empty;
+        public string? Telefono { get; set; }
         public string? Direccion { get; set; }
 
 
@@ -18,8 +20,33 @@ namespace LogicaNegocio.Entidades
             this.RazonSocial = razonSocial;
             this.Telefono = telefono;
             this.Direccion = direccion;
+
+            Validar();
         }
 
+        public override void Validar()
+        {
+            // Valida todo lo de Usuario
+            base.Validar();
 
+            // Valida lo propio de Cliente
+            if (string.IsNullOrWhiteSpace(Telefono))
+                throw new ClienteTelefonoVacioException();
+
+            if (Telefono.Length > 20)
+                throw new ClienteTelefonoMasVeinteCaracteresException();
+
+            if (Direccion != null && Direccion.Length > 300)
+                throw new ClienteDireccionExcesoCaracteresException();
+
+            if (string.IsNullOrWhiteSpace(RazonSocial))
+                throw new RazonSocialVaciaException();
+
+            if (RazonSocial.Length < 2)
+                throw new RazonSocialMinimaCaracteresException();
+
+            if (RazonSocial.Length > 200)
+                throw new RazonSocialExcesoCaracteresException();
+        }
     }
 }
