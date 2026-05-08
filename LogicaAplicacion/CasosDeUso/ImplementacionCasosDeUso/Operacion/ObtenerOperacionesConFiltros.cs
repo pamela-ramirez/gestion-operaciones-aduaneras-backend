@@ -7,11 +7,11 @@ using LogicaNegocio.InterfacesRepositorios;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
 {
-    public class ObtenerOperaciones : IObtenerOperaciones
+    public class ObtenerOperacionesConFiltros : IObtenerOperacionesConFiltros
     {
         private readonly IRepositorioOperacion _operacionRepo;
 
-        public ObtenerOperaciones(IRepositorioOperacion operacionRepo)
+        public ObtenerOperacionesConFiltros(IRepositorioOperacion operacionRepo)
         {
             _operacionRepo = operacionRepo;
         }

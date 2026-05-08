@@ -2,7 +2,7 @@
 
 namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion
 {
-    public interface IObtenerOperaciones
+    public interface IObtenerOperacionesConFiltros
     {
         IEnumerable<OperacionListadoDTO> Ejecutar(
            int? clienteId,
