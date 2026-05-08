@@ -30,7 +30,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
                 Apellido = c.Apellido,
                 Email = c.Email.Valor,
                 RazonSocial = c.RazonSocial,
-                Rut = c.Rut,
+                Rut = c.Rut.Valor,
                 Telefono = c.Telefono,
                 Direccion = c.Direccion,
                 Estado = c.Estado
