@@ -23,11 +23,12 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 
             return new ClienteDTO
             {
+                Id = cliente.Id,
                 Nombre = cliente.Nombre,
                 Apellido = cliente.Apellido,
                 Email = cliente.Email.Valor,
                 RazonSocial = cliente.RazonSocial,
-                Rut = cliente.Rut,
+                Rut = cliente.Rut.Valor,
                 Telefono = cliente.Telefono,
                 Direccion = cliente.Direccion
             };

@@ -12,10 +12,14 @@ namespace GestionOperacionesAduaneras.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ILogin _loginCasoDeUso;
+        private readonly IAceptarConsentimientoUsuario _aceptarConsentimientoCasoDeUso;
+        private readonly ICambiarPasswordUsuario _cambiarPasswordCasoDeUso;
 
-        public AuthController(ILogin loginCasoDeUso)
+        public AuthController(ILogin loginCasoDeUso, IAceptarConsentimientoUsuario aceptarConsentimientoCasoDeUso, ICambiarPasswordUsuario cambiarPasswordCasoDeUso)
         {
             _loginCasoDeUso = loginCasoDeUso;
+            _aceptarConsentimientoCasoDeUso = aceptarConsentimientoCasoDeUso;
+            _cambiarPasswordCasoDeUso = cambiarPasswordCasoDeUso;
         }
 
         [HttpPost("login")]
@@ -53,6 +57,44 @@ namespace GestionOperacionesAduaneras.Controllers
                 email,
                 rol
             });
+        }
+
+        [Authorize]
+        [HttpPost("aceptar-consentimiento")]
+        public IActionResult AceptarConsentimiento()
+            {
+            try
+            {
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                _aceptarConsentimientoCasoDeUso.Ejecutar(userId);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpPost("cambiar-password")]
+        public IActionResult CambiarPassword(
+        [FromBody] CambiarPasswordDTO dto)
+        {
+            try
+            {
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                _cambiarPasswordCasoDeUso.Ejecutar(userId, dto.NuevaPassword);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                //return BadRequest(ex.Message);
+                return BadRequest(ModelState);
+            }
         }
     }
 }

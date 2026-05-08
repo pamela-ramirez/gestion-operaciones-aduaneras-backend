@@ -1,5 +1,6 @@
 ﻿using LogicaAccesoDatos.Data;
 using LogicaNegocio.Entidades;
+using LogicaNegocio.ValueObject;
 using Microsoft.EntityFrameworkCore;
 
 namespace LogicaAccesoDatos.Contexto
@@ -133,12 +134,17 @@ namespace LogicaAccesoDatos.Contexto
             // Configuración de la tabla Cliente
             modelBuilder.Entity<Cliente>(entity =>
             {
-                entity.Property(c => c.Rut)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .HasColumnName("RUT");
+                // Configuración del value object rut
+                entity.OwnsOne(c => c.Rut, rut =>
+                {
+                    rut.Property(r => r.Valor)
+                        .HasColumnName("Rut")
+                        .IsRequired()
+                        .HasMaxLength(20);
+                });
 
-                entity.HasIndex(c => c.Rut)
+                entity.OwnsOne(c => c.Rut)
+                    .HasIndex(r => r.Valor)
                     .IsUnique()
                     .HasDatabaseName("IX_Clientes_RUT_Unique");
 

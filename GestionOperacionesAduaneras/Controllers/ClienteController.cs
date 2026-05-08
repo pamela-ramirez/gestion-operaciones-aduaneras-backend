@@ -1,11 +1,13 @@
 ﻿using Compartido.DTOs.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestionOperacionesAduaneras.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ClienteController : ControllerBase
     {
         private readonly ICrearCliente _crearCliente;
@@ -30,6 +32,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // POST /api/cliente - Crear cliente
         [HttpPost]
+        [Authorize(Roles = "Admin, Despachante")] // TODO - VER SI VAN LOS DOS O SOLO ADMIN
         public IActionResult Crear([FromBody] CrearClienteDTO dto)
         {
             try
@@ -50,6 +53,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // GET /api/cliente - Obtener todos los clientes
         [HttpGet]
+        [Authorize(Roles = "Admin, Despachante")]
         public IActionResult ObtenerTodos()
         {
             try
@@ -65,6 +69,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // GET /api/cliente/{id} - Obtener cliente por ID
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin, Despachante")]
         public IActionResult ObtenerPorId(int id)
         {
             try
@@ -81,6 +86,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // PUT /api/cliente/{id} - Modificar cliente
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin, Despachante")]
         public IActionResult Modificar(int id, [FromBody] ModificarClienteDTO dto)
         {
             try
@@ -97,6 +103,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // DELETE /api/cliente/{id} - Eliminar cliente
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Eliminar(int id)
         {
             try

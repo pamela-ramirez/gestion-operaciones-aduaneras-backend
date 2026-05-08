@@ -1,4 +1,39 @@
-﻿// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Auth\LoginDTO.cs ===
+﻿// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Auth\AceptarConsentimientoDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Compartido.DTOs.Auth
+{
+    public class AceptarConsentimientoDTO
+    {
+        public string Estado { get; set; }
+    }
+
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Auth\CambiarPasswordDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Compartido.DTOs.Auth
+{
+    public class CambiarPasswordDTO
+    {
+        public string NuevaPassword { get; set; }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Auth\LoginDTO.cs ===
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Compartido.DTOs.Auth
@@ -17,6 +52,12 @@ namespace Compartido.DTOs.Auth
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Auth\LoginResponseDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Compartido.DTOs.Auth
 {
     public class LoginResponseDTO
@@ -28,6 +69,12 @@ namespace Compartido.DTOs.Auth
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Cliente\ClienteDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Compartido.DTOs.Cliente
 {
     public class ClienteDTO
@@ -62,9 +109,9 @@ namespace Compartido.DTOs.Cliente
         public string Nombre { get; set; } = string.Empty;
         public string Apellido { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-
+ 
         public string Telefono { get; set; } = string.Empty;
-
+ 
     }
 
     public class CrearClienteRespuestaDTO
@@ -86,6 +133,12 @@ namespace Compartido.DTOs.Cliente
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Despachante\DespachanteDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Compartido.DTOs.Despachante
 {
     public class DespachanteDTO
@@ -116,9 +169,12 @@ namespace Compartido.DTOs.Despachante
 }
 
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Operacion\OperacionDTO.cs ===
-namespace Compartido.DTOs.Operacion
-{
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Rol\RolDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 
     // Datos que manda el frontend al registrar una nueva operación.
@@ -181,6 +237,12 @@ namespace Compartido.DTOs.Rol
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Rol\RolListadoDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Compartido.DTOs.Rol
 {
     public class RolListadoDTO
@@ -191,14 +253,12 @@ namespace Compartido.DTOs.Rol
 }
 
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\TipoOperacion\TipoOperacionDTO.cs ===
-namespace Compartido.DTOs.TipoOperacion
-{
-    // DTO para CREAR un tipo de operación.
-    public class CrearTipoOperacionDTO
-    {
-        public string Descripcion { get; set; } = string.Empty;
-    }
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Usuarios\ModificarUsuarioDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
     // DTO de RESPUESTA. Se usa tanto al crear como al listar. Incluye el ID para que el frontend pueda referenciarlo.
     public class TipoOperacionListadoDTO
@@ -223,6 +283,12 @@ namespace Compartido.DTOs.Usuarios
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Usuarios\UsuarioDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Compartido.DTOs.Usuarios
 {
     public class UsuarioDTO
@@ -234,6 +300,12 @@ namespace Compartido.DTOs.Usuarios
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Usuarios\UsuarioListadoDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Compartido.DTOs.Usuarios
 {
     /// <summary>
@@ -259,6 +331,12 @@ namespace Compartido.DTOs.Usuarios
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Usuarios\UsuarioLogueadoDTO.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Compartido.DTOs.Usuarios
 {
     public class UsuarioLogueadoDTO
@@ -296,7 +374,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b710987207a5bc03a2d32100d79b73bd4010b2fe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd9de5588469460061de776d8e0ee2d75e9a40b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -341,10 +419,14 @@ namespace GestionOperacionesAduaneras.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ILogin _loginCasoDeUso;
+        private readonly IAceptarConsentimientoUsuario _aceptarConsentimientoCasoDeUso;
+        private readonly ICambiarPasswordUsuario _cambiarPasswordCasoDeUso;
 
-        public AuthController(ILogin loginCasoDeUso)
+        public AuthController(ILogin loginCasoDeUso, IAceptarConsentimientoUsuario aceptarConsentimientoCasoDeUso, ICambiarPasswordUsuario cambiarPasswordCasoDeUso)
         {
             _loginCasoDeUso = loginCasoDeUso;
+            _aceptarConsentimientoCasoDeUso = aceptarConsentimientoCasoDeUso;
+            _cambiarPasswordCasoDeUso = cambiarPasswordCasoDeUso;
         }
 
         [HttpPost("login")]
@@ -382,6 +464,44 @@ namespace GestionOperacionesAduaneras.Controllers
                 email,
                 rol
             });
+        }
+
+        [Authorize]
+        [HttpPost("aceptar-consentimiento")]
+        public IActionResult AceptarConsentimiento()
+            {
+            try
+            {
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                _aceptarConsentimientoCasoDeUso.Ejecutar(userId);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpPost("cambiar-password")]
+        public IActionResult CambiarPassword(
+        [FromBody] CambiarPasswordDTO dto)
+        {
+            try
+            {
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                _cambiarPasswordCasoDeUso.Ejecutar(userId, dto.NuevaPassword);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                //return BadRequest(ex.Message);
+                return BadRequest(ModelState);
+            }
         }
     }
 }
@@ -561,120 +681,6 @@ namespace GestionOperacionesAduaneras.Controllers
 }
 
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Controllers\OperacionController.cs ===
-using Compartido.DTOs.Operacion;
-using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace GestionOperacionesAduaneras.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    [Authorize]
-    public class OperacionController : ControllerBase
-    {
-        private readonly ICrearOperacion _crearOperacion;
-        private readonly IObtenerOperaciones _obtenerOperaciones;
-        private readonly IObtenerOperacionesPorCliente _obtenerOperacionesPorCliente;
-        private readonly IObtenerOperacionPorId _obtenerOperacionPorId;
-
-        public OperacionController(
-            ICrearOperacion crearOperacion,
-            IObtenerOperaciones obtenerOperaciones,
-            IObtenerOperacionesPorCliente obtenerOperacionesPorCliente,
-            IObtenerOperacionPorId obtenerOperacionPorId)
-        {
-            _crearOperacion = crearOperacion;
-            _obtenerOperaciones = obtenerOperaciones;
-            _obtenerOperacionesPorCliente = obtenerOperacionesPorCliente;
-            _obtenerOperacionPorId = obtenerOperacionPorId;
-        }
-
-        // POST /api/operacion
-        [HttpPost]
-        [Authorize(Roles = "Despachante,Admin")]
-        public IActionResult Crear([FromBody] CrearOperacionDTO dto)
-        {
-            try
-            {
-                var resultado = _crearOperacion.Ejecutar(dto);
-                // 201 Created + la operación creada
-                return CreatedAtAction(
-                    nameof(ObtenerPorId),
-                    new { id = resultado.Id },
-                    resultado
-                );
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { mensaje = ex.Message });
-            }
-        }
-
-        // GET /api/operacion/{id}
-        [HttpGet("{id}")]
-        public IActionResult ObtenerPorId(int id)
-        {
-            try
-            {
-                var resultado = _obtenerOperacionPorId.Ejecutar(id);
-                return Ok(resultado);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(new { mensaje = ex.Message });
-            }
-        }
-
-        // GET /api/operacion
-        // Ejemplo: /api/operacion?clienteId=1&tipoOperacionId=2&estado=pendiente&fechaDesde=2024-01-01&fechaHasta=2024-12-31
-        [HttpGet]
-        [Authorize(Roles = "Despachante,Admin")]
-        public IActionResult ObtenerTodos(
-            [FromQuery] int? clienteId,
-            [FromQuery] int? tipoOperacionId,
-            [FromQuery] string? estado,
-            [FromQuery] DateTime? fechaDesde,
-            [FromQuery] DateTime? fechaHasta)
-        {
-            try
-            {
-                var resultado = _obtenerOperaciones.Ejecutar(
-                    clienteId,
-                    tipoOperacionId,
-                    estado,
-                    fechaDesde,
-                    fechaHasta);
-
-                return Ok(resultado);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { mensaje = ex.Message });
-            }
-        }
-
-        // GET /api/operacion/cliente/{clienteId}
-        [HttpGet("cliente/{clienteId}")]
-        public IActionResult ObtenerPorCliente(int clienteId)
-        {
-            try
-            {
-                var resultado = _obtenerOperacionesPorCliente.Ejecutar(clienteId);
-                return Ok(resultado);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(new { mensaje = ex.Message });
-            }
-        }
-
-
-    }
-}
-
-
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Controllers\RolController.cs ===
 using Compartido.DTOs.Rol;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
@@ -733,87 +739,6 @@ namespace GestionOperacionesAduaneras.Controllers
 }
 
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Controllers\TipoOperacionController.cs ===
-using Compartido.DTOs.TipoOperacion;
-using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.TipoOperacion;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace GestionOperacionesAduaneras.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    [Authorize]
-    public class TipoOperacionController : ControllerBase
-    {
-        private readonly ICrearTipoOperacion _crearTipoOperacion;
-        private readonly IObtenerTiposOperacion _obtenerTiposOperacion;
-        private readonly IObtenerTipoOperacionPorId _obtenerTipoOperacionPorId;
-
-        public TipoOperacionController(
-            ICrearTipoOperacion crearTipoOperacion,
-            IObtenerTiposOperacion obtenerTiposOperacion,
-            IObtenerTipoOperacionPorId obtenerTipoOperacionPorId)
-        {
-            _crearTipoOperacion = crearTipoOperacion;
-            _obtenerTiposOperacion = obtenerTiposOperacion;
-            _obtenerTipoOperacionPorId = obtenerTipoOperacionPorId;
-        }
-
-        // POST /api/tipooperacion
-        // Solo admin puede crear nuevos tipos de operación
-        [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public IActionResult Crear([FromBody] CrearTipoOperacionDTO dto)
-        {
-            try
-            {
-                var resultado = _crearTipoOperacion.Ejecutar(dto);
-                return Ok(resultado);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { mensaje = ex.Message });
-            }
-        }
-
-        // GET /api/tipooperacion
-        [HttpGet]
-        [Authorize(Roles = "Despachante,Admin")]
-        public IActionResult ObtenerTodos()
-        {
-            try
-            {
-                var resultado = _obtenerTiposOperacion.Ejecutar();
-                return Ok(resultado);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { mensaje = ex.Message });
-            }
-        }
-
-        // GET /api/tipooperacion/{id}
-        [HttpGet("{id}")]
-        [Authorize(Roles = "Despachante,Admin")]
-        public IActionResult ObtenerPorId(int id)
-        {
-            try
-            {
-                var resultado = _obtenerTipoOperacionPorId.Ejecutar(id);
-                if (resultado == null)
-                    return NotFound(new { mensaje = "Tipo de operación no encontrado" });
-                return Ok(resultado);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { mensaje = ex.Message });
-            }
-        }
-    }
-}
-
-
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Controllers\UsuarioController.cs ===
 using Compartido.DTOs.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
@@ -825,6 +750,7 @@ namespace GestionOperacionesAduaneras.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsuarioController : ControllerBase
     {
         private readonly IObtenerUsuarios _obtenerUsuarios;
@@ -851,6 +777,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // GET /api/usuarios/{id} - Obtener usuario por ID
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult ObtenerPorId(int id)
         {
             try
@@ -868,6 +795,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // GET /api/usuarios - Obtener todos los usuarios
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult ObtenerTodos()
         {
             try
@@ -885,6 +813,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // PUT /api/usuarios/{id} - Modificar usuario
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Modificar(int id, [FromBody] ModificarUsuarioDTO dto)
         {
             try
@@ -902,6 +831,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // DELETE /api/usuarios/{id} - Eliminar usuario
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Eliminar(int id)
         {
             try
@@ -919,7 +849,6 @@ namespace GestionOperacionesAduaneras.Controllers
 
         // GET /api/usuarios/logueado - Obtener usuario logueado
         [HttpGet("logueado")]
-        [Authorize]
         public async Task<IActionResult> ObtenerUsuarioLogueado()
         {
             try
@@ -1005,7 +934,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b710987207a5bc03a2d32100d79b73bd4010b2fe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd9de5588469460061de776d8e0ee2d75e9a40b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -1258,6 +1187,8 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IModificarUsuario, ModificarUsuario>();
             builder.Services.AddScoped<IEliminarUsuario, EliminarUsuario>();
             builder.Services.AddScoped<IObtenerUsuarioLogueado, ObtenerUsuarioLogueado>();
+            builder.Services.AddScoped<IAceptarConsentimientoUsuario, AceptarConsentimientoUsuario>();
+            builder.Services.AddScoped<ICambiarPasswordUsuario, CambiarPasswordUsuario>();
 
             // Casos de uso cliente 
             builder.Services.AddScoped<ILogin, Login>();
@@ -2118,6 +2049,7 @@ namespace LogicaAccesoDatos.Data
 }
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Migrations\20260502215616_InitialCreate.cs ===
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -4451,7 +4383,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b710987207a5bc03a2d32100d79b73bd4010b2fe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd9de5588469460061de776d8e0ee2d75e9a40b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -4836,7 +4768,6 @@ namespace LogicaAccesoDatos.Repositorios
     }
 }
 
-
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Repositorios\RepositorioUsuario.cs ===
 using LogicaAccesoDatos.Contexto;
 using LogicaNegocio.Entidades;
@@ -4896,50 +4827,53 @@ namespace LogicaAccesoDatos.Repositorios
 
         public void Update(Usuario item, int id)
         {
-            var usuarioExistente = FindById(id);
-            if (usuarioExistente != null)
-            {
-                usuarioExistente.Nombre = item.Nombre;
-                usuarioExistente.Apellido = item.Apellido;
-                usuarioExistente.Email = new Email(item.Email.Valor);
-                usuarioExistente.RolId = item.RolId;
-                _context.SaveChanges();
-            }
+            var usuario = FindById(id);
+
+            if (usuario == null)
+                throw new Exception("Usuario no encontrado.");
+
+            usuario.Nombre = item.Nombre;
+            usuario.Apellido = item.Apellido;
+            usuario.Email = new Email(item.Email.Valor);
+            usuario.RolId = item.RolId;
+
+            _context.SaveChanges();
         }
 
         // Metodo update para actualizar el estado del usuario a activo, y para actualizar la contraseña, en el primer login
-        public void UpdateEstado(Usuario item, int id)
-        {
-            var usuarioExistente = FindById(id);
-            if (usuarioExistente != null)
-            {
-                usuarioExistente.Estado = "Activo";
-                _context.SaveChanges();
-            }
-        }
-
+        /*     public void UpdateEstado(Usuario item, int id)
+             {
+                 var usuarioExistente = FindById(id);
+                 if (usuarioExistente != null)
+                 {
+                     usuarioExistente.Estado = "Activo";
+                     _context.SaveChanges();
+                 }
+             }
+        */
         public void UpdatePassword(Usuario item, int id)
         {
-            try
-            {
-                var usuarioExistente = FindById(id);
-                if (usuarioExistente != null)
-                {
-                    var pass = new Password(item.Password.Valor);
-                    if (pass.Equals(item.Password.Valor))
-                    {
-                        throw new Exception("La contraseña es igual a la anterior. Por favor, elija una contraseña diferente.");
-                    }
-                }
-                usuarioExistente.Password = item.Password;
-                usuarioExistente.PrimerLogin = false;
-            }
-            catch (Exception ex)
-            {
+            var usuario = FindById(id);
 
-                throw new Exception($"Error al validar la contraseña: {ex.Message}");
-            }
+            if (usuario == null)
+                throw new Exception("Usuario no encontrado.");
 
+            usuario.Password = item.Password;
+            usuario.PrimerLogin = false;
+
+            _context.SaveChanges();
+        }
+
+        public void AceptarConsentimeinto(int id)
+        {
+            var usuario = FindById(id);
+
+            if (usuario == null)
+                throw new Exception("Usuario no encontrado.");
+
+            usuario.Estado = "Activo";
+
+            _context.SaveChanges();
         }
     }
 }
@@ -4966,6 +4900,11 @@ namespace LogicaAccesoDatos.Repositorios
                 Rol = new Rol("Admin")
             }*/
         };
+
+        public void AceptarConsentimeinto(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         public void Add(Usuario item)
         {
@@ -5102,7 +5041,13 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 using Compartido.DTOs.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
 using LogicaNegocio.InterfacesRepositorios;
+using LogicaNegocio.InterfacesServicios;
 using LogicaNegocio.ValueObject;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 {
@@ -5303,173 +5248,6 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Despachante
 }
 
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Operacion\CrearOperacion.cs ===
-using Compartido.DTOs.Operacion;
-using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
-using LogicaAplicacion.Mappers;
-using LogicaNegocio.InterfacesRepositorios;
-
-namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
-{
-    public class CrearOperacion : ICrearOperacion
-    {
-        private readonly IRepositorioOperacion _operacionRepo;
-        private readonly IRepositorioCliente _clienteRepo;
-        private readonly IRepositorioTipoOperacion _tipoOperacionRepo;
-
-        public CrearOperacion(IRepositorioOperacion operacionRepo, IRepositorioCliente clienteRepo, IRepositorioTipoOperacion tipoOperacionRepo)
-        {
-            _operacionRepo = operacionRepo;
-            _clienteRepo = clienteRepo;
-            _tipoOperacionRepo = tipoOperacionRepo;
-        }
-
-        public OperacionRespuestaDTO Ejecutar(CrearOperacionDTO dto)
-        {
-            var cliente = _clienteRepo.FindById(dto.ClienteId);
-            if (cliente == null)
-                throw new Exception("El cliente seleccionado no existe.");
-
-            if (_operacionRepo.ExisteNroCarpeta(dto.NroCarpeta))
-                throw new Exception("Ya existe una operación con ese número de carpeta.");
-
-            var tipoOperacion = _tipoOperacionRepo.FindById(dto.TipoOperacionId);
-            if (tipoOperacion == null)
-                throw new Exception("El tipo de operación seleccionado no es válido.");
-
-            var operacion = new LogicaNegocio.Entidades.Operacion(dto.NroCarpeta, tipoOperacion, cliente);
-
-            operacion.Validar();
-
-            _operacionRepo.Add(operacion);
-
-            return OperacionMapper.ToDTO(operacion);
-        }
-
-    }
-}
-
-
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Operacion\ObtenerOperaciones.cs ===
-using Compartido.DTOs.Operacion;
-using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
-using LogicaAplicacion.Mappers;
-using LogicaNegocio.Entidades;
-using LogicaNegocio.InterfacesRepositorios;
-
-
-namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
-{
-    public class ObtenerOperaciones : IObtenerOperaciones
-    {
-        private readonly IRepositorioOperacion _operacionRepo;
-
-        public ObtenerOperaciones(IRepositorioOperacion operacionRepo)
-        {
-            _operacionRepo = operacionRepo;
-        }
-
-        public IEnumerable<OperacionListadoDTO> Ejecutar(
-            int? clienteId,
-            int? tipoOperacionId,
-            string? estado,
-            DateTime? fechaDesde,
-            DateTime? fechaHasta)
-        {
-            // Traemos todas y filtramos en memoria.
-            // Para volúmenes grandes se puede mejorar con consultas LINQ directas al contexto.
-            var operaciones = _operacionRepo.FindAll();
-
-            if (clienteId.HasValue)
-                operaciones = operaciones.Where(o => o.ClienteId == clienteId.Value);
-
-            if (tipoOperacionId.HasValue)
-                operaciones = operaciones.Where(o => o.TipoOperacionId == tipoOperacionId.Value);
-
-            if (!string.IsNullOrWhiteSpace(estado) &&
-                Enum.TryParse<EstadoOperacion>(estado, out var estadoEnum))
-                operaciones = operaciones.Where(o => o.Estado == estadoEnum);
-
-            if (fechaDesde.HasValue)
-                operaciones = operaciones.Where(o => o.FechaRegistro >= fechaDesde.Value);
-
-            if (fechaHasta.HasValue)
-                operaciones = operaciones.Where(o => o.FechaRegistro <= fechaHasta.Value);
-
-            return operaciones
-                .Select(OperacionMapper.ToListadoDTO)
-                .ToList();
-        }
-    }
-}
-
-
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Operacion\ObtenerOperacionesPorCliente.cs ===
-using Compartido.DTOs.Operacion;
-using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
-using LogicaAplicacion.Mappers;
-using LogicaNegocio.InterfacesRepositorios;
-
-namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
-{
-    public class ObtenerOperacionesPorCliente : IObtenerOperacionesPorCliente
-    {
-        private readonly IRepositorioOperacion _operacionRepo;
-        private readonly IRepositorioCliente _clienteRepo;
-
-        public ObtenerOperacionesPorCliente(
-            IRepositorioOperacion operacionRepo,
-            IRepositorioCliente clienteRepo)
-        {
-            _operacionRepo = operacionRepo;
-            _clienteRepo = clienteRepo;
-        }
-
-        public IEnumerable<OperacionListadoDTO> Ejecutar(int clienteId)
-        {
-            // Verificamos que el cliente exista antes de buscar sus operaciones
-            var cliente = _clienteRepo.FindById(clienteId);
-            if (cliente == null)
-                throw new Exception("Cliente no encontrado.");
-
-            return _operacionRepo
-                .FindByClienteId(clienteId)
-                .Select(OperacionMapper.ToListadoDTO)
-                .ToList();
-        }
-    }
-}
-
-
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Operacion\ObtenerOperacionPorId.cs ===
-using Compartido.DTOs.Operacion;
-using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
-using LogicaAplicacion.Mappers;
-using LogicaNegocio.InterfacesRepositorios;
-
-namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
-{
-    public class ObtenerOperacionPorId : IObtenerOperacionPorId
-    {
-        private readonly IRepositorioOperacion _operacionRepo;
-
-        public ObtenerOperacionPorId(IRepositorioOperacion operacionRepo)
-        {
-            _operacionRepo = operacionRepo;
-        }
-
-        public OperacionRespuestaDTO Ejecutar(int operacionId)
-        {
-            var operacion = _operacionRepo.FindById(operacionId);
-            if (operacion == null)
-                throw new Exception("Operación no encontrada.");
-
-            return OperacionMapper.ToDTO(operacion);
-        }
-    }
-}
-
-
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Rol\CrearRol.cs ===
 using Compartido.DTOs.Rol;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol;
@@ -5525,62 +5303,83 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol
 }
 
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\TipoOperacion\CrearTipoOperacion.cs ===
-using Compartido.DTOs.TipoOperacion;
-using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.TipoOperacion;
-using LogicaAplicacion.Mappers;
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\AceptarConsentimientoUsuario.cs ===
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesRepositorios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.TipoOperacion
+namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
 {
-    public class CrearTipoOperacion : ICrearTipoOperacion
+    public class AceptarConsentimientoUsuario : IAceptarConsentimientoUsuario
     {
-        private readonly IRepositorioTipoOperacion _repoTipoOperacion;
+        private readonly IRepositorioUsuario _repo;
 
-        public CrearTipoOperacion(IRepositorioTipoOperacion repoTipoOperacion)
+        public AceptarConsentimientoUsuario(IRepositorioUsuario repo)
         {
-            _repoTipoOperacion = repoTipoOperacion;
+            _repo = repo;
         }
 
-        public TipoOperacionListadoDTO Ejecutar(CrearTipoOperacionDTO dto)
+        public void Ejecutar(int userId)
         {
-            if (dto == null || string.IsNullOrWhiteSpace(dto.Descripcion))
-                throw new Exception("La descripción es obligatoria.");
+            var usuario = _repo.FindById(userId);
 
-            // Verificar que no exista otro tipo con la misma descripción
-            var existente = _repoTipoOperacion.FindByDescripcion(dto.Descripcion.Trim());
-            if (existente != null)
-                throw new Exception(
-                    $"Ya existe un tipo de operación con la descripción '{dto.Descripcion}'.");
+            if (usuario == null)
+                throw new Exception("Usuario no encontrado");
 
-            // El mapper convierte el DTO a entidad
-            var tipoOperacion = TipoOperacionMapper.ToEntity(dto);
+            _repo.AceptarConsentimeinto(userId);
 
-            _repoTipoOperacion.Add(tipoOperacion);
 
-            // Retornamos el DTO de respuesta con el ID asignado por la base de datos
-            return TipoOperacionMapper.ToDTO(tipoOperacion);
         }
     }
 }
 
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\TipoOperacion\ObtenerTipoOperacionPorId.cs ===
-using Compartido.DTOs.TipoOperacion;
-using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.TipoOperacion;
-using LogicaAplicacion.Mappers;
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\CambiarPasswordUsuario.cs ===
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.InterfacesRepositorios;
+using LogicaNegocio.ValueObject;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.TipoOperacion
+namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
 {
-    public class ObtenerTipoOperacionPorId : IObtenerTipoOperacionPorId
+    public class CambiarPasswordUsuario : ICambiarPasswordUsuario
     {
-        private readonly IRepositorioTipoOperacion _tipoOperacionRepo;
+        private readonly IRepositorioUsuario _repo;
 
-        public ObtenerTipoOperacionPorId(IRepositorioTipoOperacion tipoOperacionRepo)
+        public CambiarPasswordUsuario(IRepositorioUsuario repo)
         {
-            _tipoOperacionRepo = tipoOperacionRepo;
+            _repo = repo;
         }
+
+        public void Ejecutar(int userId, string nuevaPassword)
+        {
+            var usuario = _repo.FindById(userId);
+
+            if (usuario == null)
+                throw new Exception("Usuario no encontrado");
+
+            if (nuevaPassword.Length < 8)
+                throw new Exception("Debe tener al menos 8 caracteres");
+
+            if (usuario.Password.Valor == nuevaPassword)
+                throw new Exception("No puede repetir contraseña");
+
+            usuario.Password = new Password(nuevaPassword);
+            // usuario.PasswordHash = PasswordHasher.Hash(newPassword);
+            usuario.PrimerLogin = false;
+
+            _repo.UpdatePassword(usuario, userId);
+        }
+    }
+}
 
         public TipoOperacionListadoDTO Ejecutar(int id)
         {
@@ -5589,38 +5388,6 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.TipoOperacion
             {
                 throw new Exception($"No se encontró el tipo de operación con ID {id}");
             }
-
-            return TipoOperacionMapper.ToDTO(tipoOperacion);
-        }
-    }
-}
-
-
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\TipoOperacion\ObtenerTiposOperacion.cs ===
-using Compartido.DTOs.TipoOperacion;
-using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.TipoOperacion;
-using LogicaAplicacion.Mappers;
-using LogicaNegocio.InterfacesRepositorios;
-
-namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.TipoOperacion
-{
-    public class ObtenerTiposOperacion : IObtenerTiposOperacion
-    {
-        private readonly IRepositorioTipoOperacion _tipoOperacionRepo;
-
-        public ObtenerTiposOperacion(IRepositorioTipoOperacion tipoOperacionRepo)
-        {
-            _tipoOperacionRepo = tipoOperacionRepo;
-        }
-
-        public IEnumerable<TipoOperacionListadoDTO> Ejecutar()
-        {
-            var tipos = _tipoOperacionRepo.FindAll();
-            // Usamos el mapper para convertir cada entidad a DTO
-            return TipoOperacionMapper.ToListaDTO(tipos);
-        }
-    }
-}
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\EliminarUsuario.cs ===
@@ -5646,6 +5413,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\Login.cs ===
+using BCrypt.Net;
 using Compartido.DTOs.Auth;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaNegocio.Excepciones.Usuarios.Login;
@@ -5717,6 +5485,12 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Usuarios\ModificarEstadoUsuario.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
 {
     internal class ModificarEstadoUsuario
@@ -5858,6 +5632,12 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Cliente\IEliminarCliente.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente
 {
     public interface IEliminarCliente
@@ -5927,83 +5707,6 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante
 }
 
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Operacion\IActualizarDatosAduaneros.cs ===
-using Compartido.DTOs.Operacion;
-
-namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion
-{
-    public interface IActualizarDatosAduaneros
-    {
-        OperacionRespuestaDTO Ejecutar(int operacionId, ActualizarDatosAduanerosDTO dto);
-    }
-}
-
-
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Operacion\ICrearOperacion.cs ===
-using Compartido.DTOs.Operacion;
-
-namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion
-{
-    public interface ICrearOperacion
-    {
-        OperacionRespuestaDTO Ejecutar(CrearOperacionDTO dto);
-    }
-}
-
-
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Operacion\IFinalizarOperacion.cs ===
-using Compartido.DTOs.Operacion;
-
-namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion
-{
-    public interface IFinalizarOperacion
-    {
-        OperacionRespuestaDTO Ejecutar(int operacionId);
-    }
-}
-
-
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Operacion\IObtenerOperaciones.cs ===
-using Compartido.DTOs.Operacion;
-
-namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion
-{
-    public interface IObtenerOperaciones
-    {
-        IEnumerable<OperacionListadoDTO> Ejecutar(
-           int? clienteId,
-           int? tipoOperacionId,
-           string? estado,
-           DateTime? fechaDesde,
-           DateTime? fechaHasta);
-    }
-}
-
-
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Operacion\IObtenerOperacionesPorCliente.cs ===
-using Compartido.DTOs.Operacion;
-
-namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion
-{
-    public interface IObtenerOperacionesPorCliente
-    {
-        IEnumerable<OperacionListadoDTO> Ejecutar(int clienteId);
-    }
-}
-
-
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Operacion\IObtenerOperacionPorId.cs ===
-using Compartido.DTOs.Operacion;
-
-namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion
-{
-    public interface IObtenerOperacionPorId
-    {
-        OperacionRespuestaDTO Ejecutar(int operacionId);
-    }
-}
-
-
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Rol\ICrearRol.cs ===
 using Compartido.DTOs.Rol;
 
@@ -6030,8 +5733,46 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Rol
 }
 
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\TipoOperacion\ICrearTipoOperacion.cs ===
-using Compartido.DTOs.TipoOperacion;
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\IAceptarConsentimientoUsuario.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios
+{
+    public interface IAceptarConsentimientoUsuario
+    {
+        void Ejecutar(int userId);
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\ICambiarPasswordUsuario.cs ===
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios
+{
+    public interface ICambiarPasswordUsuario
+    {
+        void Ejecutar(int userId, string nuevaPassword);
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Usuarios\IEliminarUsuario.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.TipoOperacion
 {
@@ -6227,72 +5968,6 @@ namespace LogicaAplicacion.Mappers
 }
 
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\Mappers\OperacionMapper.cs ===
-using Compartido.DTOs.Operacion;
-using LogicaNegocio.Entidades;
-
-namespace LogicaAplicacion.Mappers
-{
-    public static class OperacionMapper
-    {
-        // Convierte una entidad Operacion al DTO de respuesta.
-        public static OperacionRespuestaDTO ToDTO(Operacion operacion)
-        {
-            return new OperacionRespuestaDTO
-            {
-                Id = operacion.Id,
-                NroCarpeta = operacion.NroCarpeta,
-                FechaRegistro = operacion.FechaRegistro,
-
-                // Convertimos el enum a texto legible para el frontend
-                // Por ejemplo: EstadoOperacion.EnProceso → "En proceso"
-                Estado = operacion.Estado switch
-                {
-                    EstadoOperacion.Iniciado => "Iniciado",
-                    EstadoOperacion.DocumentacionPendiente => "Documentación pendiente",
-                    EstadoOperacion.EnProceso => "En proceso",
-                    EstadoOperacion.Finalizado => "Finalizado",
-                    _ => operacion.Estado.ToString()
-                },
-
-                ClienteId = operacion.ClienteId,
-                NombreCliente = $"{operacion.Cliente?.Nombre} {operacion.Cliente?.Apellido}".Trim(),
-                RazonSocialCliente = operacion.Cliente?.RazonSocial ?? string.Empty,
-
-                TipoOperacionId = operacion.TipoOperacionId,
-                TipoOperacion = operacion.TipoOperacion?.Descripcion ?? string.Empty,
-
-                NroDua = operacion.NroDua,
-                TipoConocimientoId = operacion.TipoConocimientoId,
-                TipoConocimiento = operacion.TipoConocimiento?.Descripcion,
-                NroConocimiento = operacion.NroConocimiento
-            };
-        }
-
-        // Convierte al DTO de listado (mismo contenido, nombre diferente para claridad).
-        public static OperacionListadoDTO ToListadoDTO(Operacion operacion)
-        {
-            var dto = ToDTO(operacion);
-            return new OperacionListadoDTO
-            {
-                Id = dto.Id,
-                NroCarpeta = dto.NroCarpeta,
-                FechaRegistro = dto.FechaRegistro,
-                Estado = dto.Estado,
-                ClienteId = dto.ClienteId,
-                NombreCliente = dto.NombreCliente,
-                RazonSocialCliente = dto.RazonSocialCliente,
-                TipoOperacionId = dto.TipoOperacionId,
-                TipoOperacion = dto.TipoOperacion,
-                NroDua = dto.NroDua,
-                TipoConocimientoId = dto.TipoConocimientoId,
-                TipoConocimiento = dto.TipoConocimiento,
-                NroConocimiento = dto.NroConocimiento
-            };
-        }
-    }
-}
-
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\Mappers\RolMapper.cs ===
 using Compartido.DTOs.Rol;
 using LogicaNegocio.Entidades;
@@ -6333,46 +6008,6 @@ namespace LogicaAplicacion.Mappers
     }
 }
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\Mappers\TipoOperacionMapper.cs ===
-using Compartido.DTOs.TipoOperacion;
-using LogicaNegocio.Entidades;
-
-namespace LogicaAplicacion.Mappers
-{
-    public static class TipoOperacionMapper
-    {
-        // Convierte el DTO de creación a la entidad.
-        public static TipoOperacion ToEntity(CrearTipoOperacionDTO dto)
-        {
-            if (dto == null || string.IsNullOrWhiteSpace(dto.Descripcion))
-                throw new Exception("La descripción del tipo de operación es obligatoria.");
-
-            return new TipoOperacion(dto.Descripcion);
-        }
-
-        // Convierte la entidad al DTO de respuesta.
-        public static TipoOperacionListadoDTO ToDTO(TipoOperacion tipoOperacion)
-        {
-            if (tipoOperacion == null)
-                throw new Exception("El tipo de operación no puede ser nulo.");
-
-            return new TipoOperacionListadoDTO
-            {
-                Id = tipoOperacion.Id,
-                Descripcion = tipoOperacion.Descripcion
-            };
-        }
-
-        // Convierte una lista de entidades a una lista de DTOs. Para CU de obtener todos
-        public static IEnumerable<TipoOperacionListadoDTO> ToListaDTO(
-            IEnumerable<TipoOperacion> tipos)
-        {
-            return tipos.Select(t => ToDTO(t));
-        }
-    }
-}
-
-
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs ===
 // <autogenerated />
 using System;
@@ -6397,7 +6032,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b710987207a5bc03a2d32100d79b73bd4010b2fe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd9de5588469460061de776d8e0ee2d75e9a40b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -6428,6 +6063,12 @@ namespace LogicaAplicacion
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Asistente.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace LogicaNegocio.Entidades
 {
     public class Asistente : Usuario
@@ -6437,6 +6078,12 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Asunto.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace LogicaNegocio.Entidades
 {
     public class Asunto
@@ -6505,6 +6152,12 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Comunicacion.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace LogicaNegocio.Entidades
 {
     public class Comunicacion
@@ -6563,7 +6216,7 @@ namespace LogicaNegocio.Entidades
 
         public Despachante(string nombre, string apellido, Email email, Password password, Rol rol) : base(nombre, apellido, email, password, rol)
         {
-
+          
         }
 
 
@@ -6572,6 +6225,12 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\DetalleLiquidacion.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace LogicaNegocio.Entidades
 {
     public class DetalleLiquidacion
@@ -6594,6 +6253,12 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Documento.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace LogicaNegocio.Entidades
 {
     public class Documento
@@ -6622,6 +6287,12 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\EstadoLiquidacion.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace LogicaNegocio.Entidades
 {
     public enum EstadoLiquidacion
@@ -6634,6 +6305,12 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\EstadoOperacion.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace LogicaNegocio.Entidades
 {
     public enum EstadoOperacion
@@ -6647,6 +6324,12 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Factura.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace LogicaNegocio.Entidades
 {
     public class Factura
@@ -6670,6 +6353,12 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Liquidacion.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace LogicaNegocio.Entidades
 {
     public class Liquidacion
@@ -6731,6 +6420,12 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Nomenclatura.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace LogicaNegocio.Entidades
 {
     public enum Nomenclatura
@@ -6743,6 +6438,12 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Notificacion.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace LogicaNegocio.Entidades
 {
     public class Notificacion
@@ -6778,8 +6479,11 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Operacion.cs ===
-using LogicaNegocio.Excepciones.Operacion;
-using LogicaNegocio.InterfacesEntidades;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LogicaNegocio.Entidades
 {
@@ -6910,6 +6614,12 @@ namespace LogicaNegocio.Entidades
 
 }
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Pago.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Pago.cs ===
 namespace LogicaNegocio.Entidades
@@ -6986,6 +6696,13 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoComunicacion.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoComunicacion.cs ===
 namespace LogicaNegocio.Entidades
 {
     public class TipoComunicacion
@@ -7010,6 +6727,13 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoConocimiento.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoConocimiento.cs ===
 namespace LogicaNegocio.Entidades
 {
     public class TipoConocimiento
@@ -7027,6 +6751,13 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoNotificacion.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoNotificacion.cs ===
 namespace LogicaNegocio.Entidades
 {
     public enum TipoNotificacion
@@ -7040,8 +6771,11 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoOperacion.cs ===
-using LogicaNegocio.Excepciones.TipoOperacion;
-using LogicaNegocio.InterfacesEntidades;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LogicaNegocio.Entidades
 {
@@ -7064,6 +6798,13 @@ namespace LogicaNegocio.Entidades
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoPago.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoPago.cs ===
 namespace LogicaNegocio.Entidades
@@ -7119,6 +6860,13 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\ValidacionPago.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\ValidacionPago.cs ===
 namespace LogicaNegocio.Entidades
 {
     public class ValidacionPago
@@ -7152,6 +6900,13 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteConOperacionesActivasException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteConOperacionesActivasException.cs ===
 namespace LogicaNegocio.Excepciones.Cliente
 {
     public class ClienteConOperacionesActivasException : ClassException
@@ -7160,6 +6915,13 @@ namespace LogicaNegocio.Excepciones.Cliente
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteDireccionExcesoCaracteresException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteDireccionExcesoCaracteresException.cs ===
 namespace LogicaNegocio.Excepciones.Cliente
@@ -7172,6 +6934,13 @@ namespace LogicaNegocio.Excepciones.Cliente
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteExistenteConIgualRutException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteExistenteConIgualRutException.cs ===
 namespace LogicaNegocio.Excepciones.Cliente
 {
     public class ClienteExistenteConIgualRutException : ClassException
@@ -7180,6 +6949,13 @@ namespace LogicaNegocio.Excepciones.Cliente
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteNoEncontradoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteNoEncontradoException.cs ===
 namespace LogicaNegocio.Excepciones.Cliente
@@ -7192,6 +6968,13 @@ namespace LogicaNegocio.Excepciones.Cliente
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteTelefonoMasVeinteCaracteresException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteTelefonoMasVeinteCaracteresException.cs ===
 namespace LogicaNegocio.Excepciones.Cliente
 {
     public class ClienteTelefonoMasVeinteCaracteresException : ClassException
@@ -7200,6 +6983,13 @@ namespace LogicaNegocio.Excepciones.Cliente
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteTelefonoVacioException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteTelefonoVacioException.cs ===
 namespace LogicaNegocio.Excepciones.Cliente
@@ -7280,6 +7070,12 @@ namespace LogicaNegocio.Excepciones.Operacion
     }
 }
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolDatosIncorrectosException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolDatosIncorrectosException.cs ===
 namespace LogicaNegocio.Excepciones.Roles
@@ -7290,6 +7086,13 @@ namespace LogicaNegocio.Excepciones.Roles
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolDebeSerAsignadoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolDebeSerAsignadoException.cs ===
 namespace LogicaNegocio.Excepciones.Roles
@@ -7304,6 +7107,13 @@ namespace LogicaNegocio.Excepciones.Roles
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolExcesoCaracteresException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolExcesoCaracteresException.cs ===
 namespace LogicaNegocio.Excepciones.Roles
 {
     public class RolExcesoCaracteresException : ClassException
@@ -7312,6 +7122,13 @@ namespace LogicaNegocio.Excepciones.Roles
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolNoEncontradoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolNoEncontradoException.cs ===
 namespace LogicaNegocio.Excepciones.Roles
@@ -7324,6 +7141,13 @@ namespace LogicaNegocio.Excepciones.Roles
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolSinNombreException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\RolSinNombreException.cs ===
 namespace LogicaNegocio.Excepciones.Roles
 {
     public class RolSinNombreException : ClassException
@@ -7332,6 +7156,13 @@ namespace LogicaNegocio.Excepciones.Roles
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\YaExisteRolConEseNombreException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Roles\YaExisteRolConEseNombreException.cs ===
 namespace LogicaNegocio.Excepciones.Roles
@@ -7344,6 +7175,13 @@ namespace LogicaNegocio.Excepciones.Roles
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutNoValidoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutNoValidoException.cs ===
 namespace LogicaNegocio.Excepciones.Rut
 {
     public class RutNoValidoException : ClassException
@@ -7352,6 +7190,13 @@ namespace LogicaNegocio.Excepciones.Rut
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutNumerosIgualesException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutNumerosIgualesException.cs ===
 namespace LogicaNegocio.Excepciones.Rut
@@ -7366,6 +7211,13 @@ namespace LogicaNegocio.Excepciones.Rut
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutSoloConDoceDigitosException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutSoloConDoceDigitosException.cs ===
 namespace LogicaNegocio.Excepciones.Rut
 {
     public class RutSoloConDoceDigitosException : ClassException
@@ -7376,6 +7228,13 @@ namespace LogicaNegocio.Excepciones.Rut
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutSoloNumerosException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutSoloNumerosException.cs ===
 namespace LogicaNegocio.Excepciones.Rut
 {
     public class RutSoloNumerosException : ClassException
@@ -7384,6 +7243,13 @@ namespace LogicaNegocio.Excepciones.Rut
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutVacioException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Rut\RutVacioException.cs ===
 namespace LogicaNegocio.Excepciones.Rut
@@ -7404,6 +7270,12 @@ namespace LogicaNegocio.Excepciones.TipoOperacion
     }
 }
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\Login\CredencialesInvalidasException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\Login\CredencialesInvalidasException.cs ===
 namespace LogicaNegocio.Excepciones.Usuarios.Login
@@ -7416,6 +7288,13 @@ namespace LogicaNegocio.Excepciones.Usuarios.Login
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\Login\UsuarioNoEncontradoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\Login\UsuarioNoEncontradoException.cs ===
 namespace LogicaNegocio.Excepciones.Usuarios.Login
 {
     public class UsuarioNoEncontradoException : UsuarioException
@@ -7424,6 +7303,13 @@ namespace LogicaNegocio.Excepciones.Usuarios.Login
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\ApellidoUsuarioSuperaCaracteresException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\ApellidoUsuarioSuperaCaracteresException.cs ===
 namespace LogicaNegocio.Excepciones.Usuarios
@@ -7436,6 +7322,13 @@ namespace LogicaNegocio.Excepciones.Usuarios
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\ApellidoVacioUsuarioException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\ApellidoVacioUsuarioException.cs ===
 namespace LogicaNegocio.Excepciones.Usuarios
 {
     public class ApellidoVacioUsuarioException : ClassException
@@ -7444,6 +7337,13 @@ namespace LogicaNegocio.Excepciones.Usuarios
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\NombreUsuarioSuperaCaracteresException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\NombreUsuarioSuperaCaracteresException.cs ===
 namespace LogicaNegocio.Excepciones.Usuarios
@@ -7456,6 +7356,13 @@ namespace LogicaNegocio.Excepciones.Usuarios
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\NombreVacioUsuarioException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\NombreVacioUsuarioException.cs ===
 namespace LogicaNegocio.Excepciones.Usuarios
 {
     public class NombreVacioUsuarioException : ClassException
@@ -7464,6 +7371,13 @@ namespace LogicaNegocio.Excepciones.Usuarios
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\UsuarioEmailFormatoInvalidoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\UsuarioEmailFormatoInvalidoException.cs ===
 namespace LogicaNegocio.Excepciones.Usuarios
@@ -7478,6 +7392,13 @@ namespace LogicaNegocio.Excepciones.Usuarios
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\UsuarioEmailVacioException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\UsuarioEmailVacioException.cs ===
 namespace LogicaNegocio.Excepciones.Usuarios
 {
     public class UsuarioEmailVacioException : ClassException
@@ -7488,6 +7409,13 @@ namespace LogicaNegocio.Excepciones.Usuarios
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\UsuarioException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\UsuarioException.cs ===
 namespace LogicaNegocio.Excepciones.Usuarios
@@ -7505,6 +7433,13 @@ namespace LogicaNegocio.Excepciones.Usuarios
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\UsuarioExistenteConMismoCorreoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Usuarios\UsuarioExistenteConMismoCorreoException.cs ===
 namespace LogicaNegocio.Excepciones.Usuarios
 {
     public class UsuarioExistenteConMismoCorreoException : ClassException
@@ -7513,6 +7448,13 @@ namespace LogicaNegocio.Excepciones.Usuarios
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\ClassException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\ClassException.cs ===
 namespace LogicaNegocio.Excepciones
@@ -7528,6 +7470,13 @@ namespace LogicaNegocio.Excepciones
     }
 }
 
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesEntidades\IEntity.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesEntidades\IEntity.cs ===
 namespace LogicaNegocio.InterfacesEntidades
@@ -7548,6 +7497,12 @@ namespace LogicaNegocio.InterfacesEntidades
     }
 }
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesRepositorios\IRepositorio.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesRepositorios\IRepositorio.cs ===
 namespace LogicaNegocio.InterfacesRepositorios
@@ -7594,34 +7549,6 @@ namespace LogicaNegocio.InterfacesRepositorios
 }
 
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesRepositorios\IRepositorioOperacion.cs ===
-using LogicaNegocio.Entidades;
-
-namespace LogicaNegocio.InterfacesRepositorios
-{
-    public interface IRepositorioOperacion : IRepositorio<Operacion>
-    {
-
-        // Busca una operación por su número de carpeta.
-        Operacion FindByNroCarpeta(string nroCarpeta);
-
-        // Retorna todas las operaciones asociadas a un cliente específico.
-        IEnumerable<Operacion> FindByClienteId(int clienteId);
-
-        // Retorna todas las operaciones filtradas por estado.
-        IEnumerable<Operacion> FindByEstado(EstadoOperacion estado);
-
-        // Verifica si ya existe una operación con ese número de carpeta.
-        // Se usa para validar unicidad antes de crear o actualizar.
-        // El parámetro excluirId permite ignorar la operación actual al editar.
-        bool ExisteNroCarpeta(string nroCarpeta, int? excluirId = null);
-
-        // Verifica si ya existe una operación con ese número de DUA.
-        bool ExisteNroDua(string nroDua, int? excluirId = null);
-    }
-}
-
-
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesRepositorios\IRepositorioRol.cs ===
 using LogicaNegocio.Entidades;
 
@@ -7656,8 +7583,10 @@ namespace LogicaNegocio.InterfacesRepositorios
     {
         //Usuario Login(string email, string contrasenia);
         Task<Usuario?> GetByEmail(string email);
-        void UpdateEstado(Usuario item, int id);
+        //void UpdateEstado(Usuario item, int id);
         void UpdatePassword(Usuario item, int id);
+
+        void AceptarConsentimeinto(int id);
     }
 }
 
@@ -7713,7 +7642,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b710987207a5bc03a2d32100d79b73bd4010b2fe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd9de5588469460061de776d8e0ee2d75e9a40b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -21,8 +21,8 @@ namespace LogicaNegocio.ValueObject
             if (valor.Distinct().Count() == 1)
                 throw new RutNumerosIgualesException();
 
-            if (!ValidarDigitoVerificador(valor))
-                throw new RutNoValidoException();
+            //if (!ValidarDigitoVerificador(valor))
+              //  throw new RutNoValidoException();
 
             Valor = valor;
         }

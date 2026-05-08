@@ -19,11 +19,12 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
             var clientes = _clienteRepo.FindAll();
             return clientes.Select(c => new ClienteDTO
             {
+                Id = c.Id,
                 Nombre = c.Nombre,
                 Apellido = c.Apellido,
                 Email = c.Email.Valor,
                 RazonSocial = c.RazonSocial,
-                Rut = c.Rut,
+                Rut = c.Rut.Valor,
                 Telefono = c.Telefono,
                 Direccion = c.Direccion,
                 Estado = c.Estado
