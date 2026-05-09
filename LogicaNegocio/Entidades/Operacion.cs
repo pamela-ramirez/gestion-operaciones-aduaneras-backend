@@ -51,6 +51,8 @@ namespace LogicaNegocio.Entidades
             ClienteId = cliente.Id;
             Estado = EstadoOperacion.Iniciado;
             FechaRegistro = DateTime.Now;
+
+            Validar();
         }
 
         // Metodo para actualizar datos aduaneros, cuando el despachante completa la informacion
@@ -59,12 +61,12 @@ namespace LogicaNegocio.Entidades
         {
 
             // Solo valida y actualiza los campos que llegaron con valor
-            if (nroDua != null)
+            if (nroDua is not null)
             {
                 if (string.IsNullOrWhiteSpace(nroDua))
                     throw new NroDuaVacioOperacionException();
 
-                NroDua = nroDua;
+                NroDua = nroDua.Trim();
             }
 
             if (tipoConocimiento != null)
@@ -121,10 +123,19 @@ namespace LogicaNegocio.Entidades
             if (ClienteId <= 0)
                 throw new ClienteSeleccionadoInvalidoException();
 
+            if (Cliente == null)
+                throw new ClienteSeleccionadoInvalidoException();
+
             if (TipoOperacionId <= 0)
                 throw new SeleccionarTipoOperacionException();
 
-            if (Estado <= 0)
+            if (TipoOperacion == null)
+                throw new SeleccionarTipoOperacionException();
+
+            if (FechaRegistro == default)
+                throw new FechaRegistroOperacionInvalidaException();
+
+            if (!Enum.IsDefined(typeof(EstadoOperacion), Estado))
                 throw new IngresarEstadoOperacionException();
 
         }
