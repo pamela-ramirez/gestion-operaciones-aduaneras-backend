@@ -21,5 +21,11 @@ namespace LogicaNegocio.InterfacesRepositorios
 
         // Verifica si ya existe una operación con ese número de DUA.
         bool ExisteNroDua(string nroDua, int? excluirId = null);
+
+        // Retorna todas las operaciones que coincidan con los filtros proporcionados.
+        IEnumerable<Operacion> FindConFiltros(int? clienteId, int? tipoOperacionId,
+                                       string? estado, DateTime? fechaDesde,
+                                       DateTime? fechaHasta);
+
     }
 }
