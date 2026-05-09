@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.Operacion;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
+using LogicaAplicacion.Excepciones.Operacion;
 using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 
@@ -22,17 +23,16 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
         {
             var cliente = _clienteRepo.FindById(dto.ClienteId);
             if (cliente == null)
-                throw new Exception("El cliente seleccionado no existe.");
+                throw new ClienteSeleccionadoNoExisteException();
 
             if (_operacionRepo.ExisteNroCarpeta(dto.NroCarpeta))
-                throw new Exception("Ya existe una operación con ese número de carpeta.");
+                throw new OperacionExistenteConMismoNroCarpetaException();
 
             var tipoOperacion = _tipoOperacionRepo.FindById(dto.TipoOperacionId);
             if (tipoOperacion == null)
-                throw new Exception("El tipo de operación seleccionado no es válido.");
+                throw new TipoDeOperacionNoEncontradoException();
 
-            var operacion = new LogicaNegocio.Entidades.Operacion(dto.NroCarpeta, tipoOperacion, cliente);
-
+            var operacion = OperacionMapper.ToEntity(dto, tipoOperacion, cliente);
             operacion.Validar();
 
             _operacionRepo.Add(operacion);
