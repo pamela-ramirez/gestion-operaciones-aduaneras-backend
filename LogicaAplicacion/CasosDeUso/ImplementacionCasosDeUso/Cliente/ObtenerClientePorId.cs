@@ -1,6 +1,7 @@
 ﻿using Compartido.DTOs.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
 using LogicaAplicacion.Excepciones.Cliente;
+using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
@@ -21,19 +22,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
                 throw new ClienteNoEncontradoException();
             }
 
-            return new ClienteDTO
-            {
-                Id = cliente.Id,
-                Nombre = cliente.Nombre,
-                Apellido = cliente.Apellido,
-                Email = cliente.Email.Valor,
-                RazonSocial = cliente.RazonSocial,
-                Rut = cliente.Rut.Valor,
-                Telefono = cliente.Telefono,
-                Direccion = cliente.Direccion
-            };
+            return ClienteMapper.ToClienteDTO(cliente);
         }
-
-        // TODO Pasar el new ClienteDTO a un mapeador para mapearlo a un DTO
     }
 }
