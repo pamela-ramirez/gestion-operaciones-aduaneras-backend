@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.Operacion;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
+using LogicaAplicacion.Excepciones.Operacion;
 using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 
@@ -18,7 +19,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
         {
             var operacion = _operacionRepo.FindById(operacionId);
             if (operacion == null)
-                throw new Exception("Operación no encontrada.");
+                throw new OperacionNoEncontradaException();
 
             return OperacionMapper.ToDTO(operacion);
         }

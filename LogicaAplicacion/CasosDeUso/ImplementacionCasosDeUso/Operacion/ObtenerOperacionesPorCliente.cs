@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.Operacion;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
+using LogicaAplicacion.Excepciones.Operacion;
 using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 
@@ -23,7 +24,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
             // Verificamos que el cliente exista antes de buscar sus operaciones
             var cliente = _clienteRepo.FindById(clienteId);
             if (cliente == null)
-                throw new Exception("Cliente no encontrado.");
+                throw new ClienteSeleccionadoNoExisteException();
 
             return _operacionRepo
                 .FindByClienteId(clienteId)
