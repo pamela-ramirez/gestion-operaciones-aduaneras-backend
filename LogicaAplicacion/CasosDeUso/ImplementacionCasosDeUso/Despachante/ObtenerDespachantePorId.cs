@@ -1,5 +1,7 @@
 ﻿using Compartido.DTOs.Despachante;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante;
+using LogicaAplicacion.Excepciones.Usuario;
+using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Despachante
@@ -17,17 +19,11 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Despachante
             var despachante = _repositorioDespachante.FindById(id);
             if (despachante == null)
             {
-                throw new Exception("Despachante no encontrado");
+                throw new UsuarioNoEncontradoException();
             }
-            return new DespachanteDTO
-            {
-                Nombre = despachante.Nombre,
-                Apellido = despachante.Apellido,
-                Email = despachante.Email.Valor,
-                Codigo = despachante.Codigo
-            };
 
-            // TODO Pasar el new DespachanteDTO a un mapeador para mapearlo a un DTO
+            return DespachanteMapper.ToDespachanteDTO(despachante);
+
         }
     }
 }

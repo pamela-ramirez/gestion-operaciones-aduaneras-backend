@@ -1,6 +1,7 @@
 ﻿using Compartido.DTOs.Cliente;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Cliente;
 using LogicaAplicacion.Excepciones.Cliente;
+using LogicaAplicacion.Excepciones.Usuario;
 using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 
@@ -19,7 +20,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
             var cliente = _clienteRepo.FindById(id);
             if (cliente == null)
             {
-                throw new ClienteNoEncontradoException();
+                throw new UsuarioNoEncontradoException();
             }
 
             return ClienteMapper.ToClienteDTO(cliente);

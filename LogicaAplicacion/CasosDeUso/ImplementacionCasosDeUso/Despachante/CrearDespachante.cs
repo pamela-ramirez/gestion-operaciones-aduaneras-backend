@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.Despachante;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante;
+using LogicaAplicacion.Excepciones.Usuario;
 using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 
@@ -18,7 +19,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Despachante
         {
             var existe = _repositorioDespachante.ExisteEmail(dto.Email);
             if (existe)
-                throw new Exception("Ya existe un despachante con ese email");
+                throw new UsuarioExistenteConMismoCorreoException();
 
             var rolDespachante = _repositorioRol.FindById(2);
             var username = $"{dto.Email.Split('@')[0]}";
