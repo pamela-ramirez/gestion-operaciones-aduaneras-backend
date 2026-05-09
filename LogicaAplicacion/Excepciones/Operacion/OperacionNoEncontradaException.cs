@@ -9,6 +9,6 @@ namespace LogicaAplicacion.Excepciones.Operacion
     public class OperacionNoEncontradaException : ClaseExcepcion
     {
         public OperacionNoEncontradaException() : base("La operación solicitada no se encontró.")
-        {
+        { }
     }
 }
