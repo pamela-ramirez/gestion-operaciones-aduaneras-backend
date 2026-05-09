@@ -1,6 +1,7 @@
 ﻿using Compartido.DTOs.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
 using LogicaAplicacion.Excepciones.Usuario;
+using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
@@ -14,23 +15,15 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
             _repo = repo;
         }
 
-        public async Task<UsuarioLogueadoDTO> Ejecutar(int id)
+        //public async Task<UsuarioLogueadoDTO> Ejecutar(int id)
+        public Task<UsuarioLogueadoDTO> Ejecutar(int id)
         {
             var usuario = _repo.FindById(id);
 
             if (usuario == null)
                 throw new UsuarioNoEncontradoException();
 
-            return new UsuarioLogueadoDTO
-            {
-                Id = usuario.Id,
-                Email = usuario.Email.Valor,
-                Rol = usuario.Rol.NombreRol,
-                Estado = usuario.Estado,
-                PrimerLogin = usuario.PrimerLogin
-            };
+            return Task.FromResult(UsuarioMapper.ToLogueadoDTO(usuario));
         }
-
-
     }
 }
