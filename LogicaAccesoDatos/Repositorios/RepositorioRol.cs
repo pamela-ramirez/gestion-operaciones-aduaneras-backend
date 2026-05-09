@@ -1,4 +1,5 @@
 ﻿using LogicaAccesoDatos.Contexto;
+using LogicaAccesoDatos.Excepciones;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.Excepciones.Roles;
 using LogicaNegocio.InterfacesRepositorios;
@@ -25,8 +26,7 @@ namespace LogicaAccesoDatos.Repositorios
             var rol = FindById(id);
             if (rol == null)
             {
-                //throw new RolNoEncontradoException();
-                throw new Exception("El rol no ha sido encontrado.");
+                throw new RolNoEncontradoException();
             }
             _context.Roles.Remove(rol);
             _context.SaveChanges();
@@ -37,8 +37,7 @@ namespace LogicaAccesoDatos.Repositorios
             var rolExistente = FindById(id);
             if (rolExistente == null)
             {
-                //throw new RolNoEncontradoException();
-                throw new Exception("El rol no ha sido encontrado.");
+                throw new RolNoEncontradoException();
             }
 
             rolExistente.NombreRol = item.NombreRol;
