@@ -1,4 +1,5 @@
 ﻿using LogicaAccesoDatos.Contexto;
+using LogicaAccesoDatos.Excepciones;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ namespace LogicaAccesoDatos.Repositorios
         {
             var operacion = FindById(id);
             if (operacion == null)
-                throw new Exception("Operación no encontrada.");
+                throw new OperacionNoEncontradaException();
 
             _context.Operaciones.Remove(operacion);
             _context.SaveChanges();
