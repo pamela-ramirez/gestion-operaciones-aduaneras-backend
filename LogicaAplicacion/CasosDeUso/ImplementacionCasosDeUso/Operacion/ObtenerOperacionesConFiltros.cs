@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.Operacion;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
+using LogicaAplicacion.Excepciones.Operacion;
 using LogicaAplicacion.Mappers;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
@@ -23,25 +24,11 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
             DateTime? fechaDesde,
             DateTime? fechaHasta)
         {
-            // Traemos todas y filtramos en memoria.
-            // Para volúmenes grandes se puede mejorar con consultas LINQ directas al contexto.
-            var operaciones = _operacionRepo.FindAll();
+            if (fechaDesde.HasValue && fechaHasta.HasValue && fechaDesde > fechaHasta)
+                throw new FechasIntercambiadasException();
 
-            if (clienteId.HasValue)
-                operaciones = operaciones.Where(o => o.ClienteId == clienteId.Value);
-
-            if (tipoOperacionId.HasValue)
-                operaciones = operaciones.Where(o => o.TipoOperacionId == tipoOperacionId.Value);
-
-            if (!string.IsNullOrWhiteSpace(estado) &&
-                Enum.TryParse<EstadoOperacion>(estado, out var estadoEnum))
-                operaciones = operaciones.Where(o => o.Estado == estadoEnum);
-
-            if (fechaDesde.HasValue)
-                operaciones = operaciones.Where(o => o.FechaRegistro >= fechaDesde.Value);
-
-            if (fechaHasta.HasValue)
-                operaciones = operaciones.Where(o => o.FechaRegistro <= fechaHasta.Value);
+            var operaciones = _operacionRepo.FindConFiltros(
+                clienteId, tipoOperacionId, estado, fechaDesde, fechaHasta);
 
             return operaciones
                 .Select(OperacionMapper.ToListadoDTO)
