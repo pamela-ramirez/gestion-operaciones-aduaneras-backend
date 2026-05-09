@@ -5,7 +5,13 @@ namespace LogicaAplicacion.Mappers
 {
     public static class OperacionMapper
     {
-        // Convierte una entidad Operacion al DTO de respuesta.
+        // Convierte el DTO de creación a Operacion
+        public static Operacion ToEntity(CrearOperacionDTO dto, TipoOperacion tipoOperacion, Cliente cliente)
+        {
+            return new Operacion(dto.NroCarpeta, tipoOperacion, cliente);
+        }
+
+        // Convierte una entidad Operacion al DTO de respuesta
         public static OperacionRespuestaDTO ToDTO(Operacion operacion)
         {
             return new OperacionRespuestaDTO
