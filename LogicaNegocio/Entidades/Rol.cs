@@ -3,7 +3,7 @@ using LogicaNegocio.InterfacesEntidades;
 
 namespace LogicaNegocio.Entidades
 {
-    public class Rol : IEntity
+    public class Rol : IEntity, IValidable
     {
         public int Id { get; set; }
         public string NombreRol { get; set; }
