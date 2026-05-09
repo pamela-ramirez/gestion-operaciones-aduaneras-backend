@@ -49,7 +49,8 @@ namespace LogicaAplicacion.Mappers
                 RazonSocial = cliente.RazonSocial,
                 Rut = cliente.Rut.Valor,
                 Telefono = cliente.Telefono,
-                Direccion = cliente.Direccion
+                Direccion = cliente.Direccion,
+                Estado = cliente.Estado
             };
         }
     }
