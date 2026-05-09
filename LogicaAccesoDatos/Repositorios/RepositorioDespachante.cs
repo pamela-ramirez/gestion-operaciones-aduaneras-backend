@@ -1,6 +1,8 @@
 ﻿using LogicaAccesoDatos.Contexto;
+using LogicaAccesoDatos.Excepciones;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
+using Microsoft.EntityFrameworkCore;
 
 namespace LogicaAccesoDatos.Repositorios
 {
@@ -19,7 +21,13 @@ namespace LogicaAccesoDatos.Repositorios
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            Despachante despachante = FindById(id);
+            if (despachante == null)
+            {
+                throw new UsuarioNoEncontradoException();
+            }
+            _context.Despachantes.Remove(despachante);
+            _context.SaveChanges();
         }
 
         public bool ExisteEmail(string email)
@@ -30,7 +38,9 @@ namespace LogicaAccesoDatos.Repositorios
 
         public IEnumerable<Despachante> FindAll()
         {
-            throw new NotImplementedException();
+            return _context.Despachantes
+                .Include(d => d.Rol)
+                .ToList();
         }
 
         public Despachante FindById(int id)
@@ -41,7 +51,18 @@ namespace LogicaAccesoDatos.Repositorios
 
         public void Update(Despachante item, int id)
         {
-            throw new NotImplementedException();
+            Despachante despachanteExistente = FindById(id);
+            if (despachanteExistente == null)
+            {
+                throw new UsuarioNoEncontradoException();
+            }
+
+            despachanteExistente.Nombre = item.Nombre;
+            despachanteExistente.Apellido = item.Apellido;
+            despachanteExistente.Email = item.Email;
+            despachanteExistente.Codigo = item.Codigo;
+
+            _context.SaveChanges();
         }
     }
 }
