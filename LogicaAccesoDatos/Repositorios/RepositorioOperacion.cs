@@ -30,6 +30,10 @@ namespace LogicaAccesoDatos.Repositorios
             _context.Operaciones.Remove(operacion);
             _context.SaveChanges();
         }
+        public void Update(Operacion item, int id)
+        {
+            _context.SaveChanges();
+        }
 
         public bool ExisteNroCarpeta(string nroCarpeta, int? excluirId = null)
         {
@@ -86,9 +90,32 @@ namespace LogicaAccesoDatos.Repositorios
             throw new NotImplementedException();
         }
 
-        public void Update(Operacion item, int id)
+        public IEnumerable<Operacion> FindConFiltros(int? clienteId, int? tipoOperacionId, string? estado, DateTime? fechaDesde, DateTime? fechaHasta)
         {
-            _context.SaveChanges();
+            var query = _context.Operaciones
+                .Include(o => o.Cliente)
+                .Include(o => o.TipoOperacion)
+        .       AsQueryable();
+
+            if (clienteId.HasValue)
+                query = query.Where(o => o.ClienteId == clienteId.Value);
+
+            if (tipoOperacionId.HasValue)
+                query = query.Where(o => o.TipoOperacionId == tipoOperacionId.Value);
+
+            if (!string.IsNullOrWhiteSpace(estado) &&
+                Enum.TryParse<EstadoOperacion>(estado, out var estadoEnum))
+                query = query.Where(o => o.Estado == estadoEnum);
+
+            if (fechaDesde.HasValue)
+                query = query.Where(o => o.FechaRegistro >= fechaDesde.Value);
+
+            if (fechaHasta.HasValue)
+                query = query.Where(o => o.FechaRegistro <= fechaHasta.Value);
+
+            return query.ToList();
         }
+
+ 
     }
 }
