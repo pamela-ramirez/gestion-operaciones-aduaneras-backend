@@ -22,9 +22,14 @@ namespace LogicaNegocio.Entidades
 
         public void Validar()
         {
-            if (string.IsNullOrEmpty(NombreRol))
+            if (string.IsNullOrWhiteSpace(NombreRol))
             {
                 throw new RolSinNombreException();
+            }
+
+            if(NombreRol.Length > 100)
+            {
+                throw new RolExcesoCaracteresException();
             }
         }
 
