@@ -1,4 +1,5 @@
 ﻿using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
+using LogicaAplicacion.Excepciones.Usuario;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
 using System.Collections.Generic;
@@ -22,11 +23,8 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
             var usuario = _repo.FindById(userId);
 
             if (usuario == null)
-                throw new Exception("Usuario no encontrado");
-
+                throw new UsuarioNoEncontradoException();
             _repo.AceptarConsentimeinto(userId);
-
-
         }
     }
 }
