@@ -10,7 +10,7 @@ namespace LogicaNegocio.Entidades
 
         public Despachante() { }
 
-        public Despachante(string nombre, string apellido, Email email, Password password, Rol rol, string? codigo) : base(nombre, apellido, email, password, rol)
+        public Despachante(string nombre, string apellido, Email email, Password password, Rol rol, string? codigo = null) : base(nombre, apellido, email, password, rol)
         {
             this.Codigo = codigo;
             Validar();
@@ -21,7 +21,7 @@ namespace LogicaNegocio.Entidades
             // valida todo lo heredado de Usuario
             base.Validar();
 
-            if (Codigo.Length > 30)
+            if (Codigo != null && Codigo.Length > 30)
                 throw new CodigoDespachanteExcesoCaracteresException();
         }
     }
