@@ -1,25 +1,23 @@
 ﻿using Compartido.DTOs.Rol;
+using LogicaAplicacion.Excepciones.Rol;
 using LogicaNegocio.Entidades;
-using LogicaNegocio.Excepciones.Roles;
 
 namespace LogicaAplicacion.Mappers
 {
     public static class RolMapper
     {
-        public static Rol DTORolToRol(RolDTO dto)
+        public static Rol ToEntity(RolDTO dto)
         {
-            if (dto == null || string.IsNullOrWhiteSpace(dto.NombreRol))
-                //throw new RolDatosIncorrectosException();
-                throw new Exception("El nombre del rol no puede ser nulo o vacío.");
+            if (dto == null)
+                throw new NombreRolNuloException();
 
             return new Rol(dto.NombreRol);
         }
 
-        public static RolListadoDTO RolToDTO(Rol rol)
+        public static RolListadoDTO ToDTO(Rol rol)
         {
             if (rol == null)
-                //throw new RolDatosIncorrectosException();
-                throw new Exception("El nombre del rol no puede ser nulo o vacío.");
+                throw new NombreRolNuloException();
 
             return new RolListadoDTO
             {
@@ -30,11 +28,7 @@ namespace LogicaAplicacion.Mappers
 
         public static IEnumerable<RolListadoDTO> ListToDTO(IEnumerable<Rol> roles)
         {
-            return roles.Select(r => new RolListadoDTO
-            {
-                Id = r.Id,
-                NombreRol = r.NombreRol
-            });
+            return roles.Select(r => ToDTO(r));
         }
     }
 }
