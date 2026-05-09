@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.Usuarios;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
+using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 
 namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
@@ -16,18 +17,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
         public IEnumerable<UsuarioListadoDTO> Ejecutar()
         {
             var usuarios = _repo.FindAll();
-
-            return usuarios.Select(u => new UsuarioListadoDTO
-            {
-                Id = u.Id,
-                Nombre = u.Nombre,
-                Apellido = u.Apellido,
-                Email = u.Email.Valor,
-                Rol = u.Rol.NombreRol,
-                FechaCreacion = u.FechaCreacion,
-                PrimerLogin = u.PrimerLogin,
-                Estado = u.Estado
-            });
+            return usuarios.Select(u => UsuarioMapper.ToListadoDTO(u));
         }
     }
 }
