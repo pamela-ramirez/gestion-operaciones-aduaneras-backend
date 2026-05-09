@@ -1,4 +1,5 @@
 ﻿using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Usuarios;
+using LogicaAplicacion.Excepciones.Usuario;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.ValueObject;
 using System;
@@ -23,13 +24,10 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
             var usuario = _repo.FindById(userId);
 
             if (usuario == null)
-                throw new Exception("Usuario no encontrado");
-
-            if (nuevaPassword.Length < 8)
-                throw new Exception("Debe tener al menos 8 caracteres");
+                throw new UsuarioNoEncontradoException();
 
             if (usuario.Password.Valor == nuevaPassword)
-                throw new Exception("No puede repetir contraseña");
+                throw new UsuarioNuevaPasswordRepetidaException();
 
             usuario.Password = new Password(nuevaPassword);
             // usuario.PasswordHash = PasswordHasher.Hash(newPassword);
