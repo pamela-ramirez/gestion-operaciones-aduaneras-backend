@@ -104,5 +104,11 @@ namespace LogicaAccesoDatos.Repositorios
 
             _context.SaveChanges();
         }
+
+        public bool ExisteEmail(string email)
+        {
+            return _context.Usuarios
+                .Any(u => u.Email.Valor == email);
+        }
     }
 }

@@ -26,7 +26,8 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
             if (existe)
                 throw new ClienteExistenteConIgualRutException();
 
-            var existeEmail = _usuarioRepo.GetByEmail(dto.Email) != null;
+            var existeEmail = _usuarioRepo.ExisteEmail(dto.Email);
+
             if (existeEmail)
                 throw new UsuarioExistenteConMismoCorreoException();
 
