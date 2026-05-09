@@ -28,6 +28,36 @@ namespace LogicaAccesoDatos.Data
 
             context.Usuarios.Add(admin);
             context.SaveChanges();
+
+            // Verificar si ya hay operaciones cargadas (para no duplicar)
+            if (context.Operaciones.Any())
+                return;
+
+            var cliente1 = context.Usuarios.OfType<Cliente>()
+                .FirstOrDefault(c => c.Email.Valor == "martina.gonzalez@gonzalezimport.com");
+            var cliente2 = context.Usuarios.OfType<Cliente>()
+                .FirstOrDefault(c => c.Email.Valor == "roberto.alvarez@alvarezexport.com");
+            var cliente3 = context.Usuarios.OfType<Cliente>()
+                .FirstOrDefault(c => c.Email.Valor == "laura.mendez@mendezasociados.com");
+
+            var tipoImportacion = context.TiposOperacion.FirstOrDefault(t => t.Descripcion == "Importación");
+            var tipoExportacion = context.TiposOperacion.FirstOrDefault(t => t.Descripcion == "Exportación");
+
+            if (cliente1 != null && cliente2 != null && cliente3 != null
+                && tipoImportacion != null && tipoExportacion != null)
+            {
+                var operaciones = new List<Operacion>
+    {
+        new Operacion("CARP-2025-001", tipoImportacion, cliente1),
+        new Operacion("CARP-2025-002", tipoExportacion, cliente2),
+        new Operacion("CARP-2025-003", tipoImportacion, cliente3),
+        new Operacion("CARP-2025-004", tipoExportacion, cliente1),
+    };
+
+                context.Operaciones.AddRange(operaciones);
+                context.SaveChanges();
+            }
+
         }
     }
 }
