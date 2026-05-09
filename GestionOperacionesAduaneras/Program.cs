@@ -92,6 +92,7 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IObtenerOperacionesConFiltros, ObtenerOperacionesConFiltros>();
             builder.Services.AddScoped<IObtenerOperacionesPorCliente, ObtenerOperacionesPorCliente>();
             builder.Services.AddScoped<IObtenerOperacionPorId, ObtenerOperacionPorId>();
+            builder.Services.AddScoped<IObtenerOperaciones, ObtenerOperaciones>();
             //builder.Services.AddScoped<IActualizarDatosAduaneros, ActualizarDatosAduaneros>();
             //builder.Services.AddScoped<IFinalizarOperacion, FinalizarOperacion>();
 
