@@ -140,13 +140,13 @@ namespace LogicaAccesoDatos.Contexto
                 {
                     rut.Property(r => r.Valor)
                         .HasColumnName("Rut")
-                        .IsRequired()
                         .HasMaxLength(20);
                 });
 
                 entity.OwnsOne(c => c.Rut)
                     .HasIndex(r => r.Valor)
                     .IsUnique()
+                    .HasFilter("[Rut] IS NOT NULL")
                     .HasDatabaseName("IX_Clientes_RUT_Unique");
 
                 entity.Property(c => c.RazonSocial)

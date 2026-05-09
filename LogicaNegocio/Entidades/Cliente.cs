@@ -4,7 +4,7 @@ namespace LogicaNegocio.Entidades
 {
     public class Cliente : Usuario
     {
-        public Rut Rut { get; set; }
+        public Rut? Rut { get; set; }
         public string RazonSocial { get; set; } = string.Empty;
         public string? Telefono { get; set; } = string.Empty;
         public string? Direccion { get; set; }
