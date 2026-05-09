@@ -79,7 +79,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaEnvio")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 7, 21, 54, 5, 160, DateTimeKind.Local).AddTicks(8301))
+                        .HasDefaultValue(new DateTime(2026, 5, 9, 17, 48, 51, 689, DateTimeKind.Local).AddTicks(3380))
                         .HasColumnName("FechaEnvio");
 
                     b.Property<int?>("OperacionId")
@@ -143,7 +143,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 7, 21, 54, 5, 150, DateTimeKind.Local).AddTicks(5273))
+                        .HasDefaultValue(new DateTime(2026, 5, 9, 17, 48, 51, 687, DateTimeKind.Local).AddTicks(2062))
                         .HasColumnName("FechaCarga");
 
                     b.Property<string>("Formato")
@@ -185,7 +185,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 7, 21, 54, 5, 158, DateTimeKind.Local).AddTicks(4859))
+                        .HasDefaultValue(new DateTime(2026, 5, 9, 17, 48, 51, 688, DateTimeKind.Local).AddTicks(8426))
                         .HasColumnName("FechaCarga");
 
                     b.Property<int>("LiquidacionId")
@@ -261,7 +261,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaRegistro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 7, 21, 54, 5, 145, DateTimeKind.Local).AddTicks(9927))
+                        .HasDefaultValue(new DateTime(2026, 5, 9, 17, 48, 51, 685, DateTimeKind.Local).AddTicks(9959))
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("NroCarpeta")
@@ -523,7 +523,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCreacion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 7, 21, 54, 5, 128, DateTimeKind.Local).AddTicks(6096))
+                        .HasDefaultValue(new DateTime(2026, 5, 9, 17, 48, 51, 681, DateTimeKind.Local).AddTicks(8329))
                         .HasColumnName("FechaCreacion");
 
                     b.Property<string>("Nombre")
@@ -547,7 +547,7 @@ namespace LogicaAccesoDatos.Migrations
 
                     b.ToTable("Usuarios", (string)null);
 
-                    b.HasDiscriminator<int>("Discriminator").HasValue(0);
+                    b.HasDiscriminator<int>("Discriminator");
 
                     b.UseTphMappingStrategy();
                 });
@@ -567,7 +567,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaValidacion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 7, 21, 54, 5, 157, DateTimeKind.Local).AddTicks(1260))
+                        .HasDefaultValue(new DateTime(2026, 5, 9, 17, 48, 51, 688, DateTimeKind.Local).AddTicks(5324))
                         .HasColumnName("FechaValidacion");
 
                     b.Property<string>("MotivoRechazo")
@@ -589,6 +589,13 @@ namespace LogicaAccesoDatos.Migrations
                     b.HasIndex("UsuarioValidacionId");
 
                     b.ToTable("ValidacionesPago", (string)null);
+                });
+
+            modelBuilder.Entity("LogicaNegocio.Entidades.Admin", b =>
+                {
+                    b.HasBaseType("LogicaNegocio.Entidades.Usuario");
+
+                    b.HasDiscriminator().HasValue(0);
                 });
 
             modelBuilder.Entity("LogicaNegocio.Entidades.Cliente", b =>
@@ -861,8 +868,7 @@ namespace LogicaAccesoDatos.Migrations
                                 .HasForeignKey("ClienteId");
                         });
 
-                    b.Navigation("Rut")
-                        .IsRequired();
+                    b.Navigation("Rut");
                 });
 
             modelBuilder.Entity("LogicaNegocio.Entidades.Liquidacion", b =>
