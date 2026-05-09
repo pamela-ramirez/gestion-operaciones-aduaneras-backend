@@ -30,15 +30,6 @@ namespace LogicaNegocio.Entidades
             base.Validar();
 
             // Valida lo propio de Cliente
-            if (string.IsNullOrWhiteSpace(Telefono))
-                throw new ClienteTelefonoVacioException();
-
-            if (Telefono.Length > 20)
-                throw new ClienteTelefonoMasVeinteCaracteresException();
-
-            if (Direccion != null && Direccion.Length > 300)
-                throw new ClienteDireccionExcesoCaracteresException();
-
             if (string.IsNullOrWhiteSpace(RazonSocial))
                 throw new RazonSocialVaciaException();
 
@@ -47,6 +38,15 @@ namespace LogicaNegocio.Entidades
 
             if (RazonSocial.Length > 200)
                 throw new RazonSocialExcesoCaracteresException();
+
+            if (string.IsNullOrWhiteSpace(Telefono))
+                throw new ClienteTelefonoVacioException();
+
+            if (Telefono.Length > 20)
+                throw new ClienteTelefonoMasVeinteCaracteresException();
+
+            if (Direccion != null && Direccion.Length > 300)
+                throw new ClienteDireccionExcesoCaracteresException();
         }
     }
 }
