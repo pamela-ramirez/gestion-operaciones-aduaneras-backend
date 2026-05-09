@@ -19,11 +19,11 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Rol
             if (existente != null)
                 throw new YaExisteRolConEseNombreException();
 
-            var rol = RolMapper.DTORolToRol(rolDTO);
+            var rol = RolMapper.ToEntity(rolDTO);
             rol.Validar();
 
             _repoRol.Add(rol);
-            return RolMapper.RolToDTO(rol);
+            return RolMapper.ToDTO(rol);
         }
     }
 }
