@@ -4,8 +4,9 @@ namespace LogicaNegocio.ValueObject
 {
     public record Rut
     {
-        public string Valor { get; }
+        public string Valor { get; private set; }
 
+        private Rut() { }
         public Rut(string valor)
         {
             if (string.IsNullOrWhiteSpace(valor))
