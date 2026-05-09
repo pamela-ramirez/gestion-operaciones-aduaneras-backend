@@ -21,10 +21,10 @@ namespace LogicaNegocio.Entidades
             this.Telefono = telefono;
             this.Direccion = direccion;
 
-            Validar();
+            //Validar();
         }
 
-        public override void Validar()
+       /* public override void Validar()
         {
             // Valida todo lo de Usuario
             base.Validar();
@@ -47,6 +47,6 @@ namespace LogicaNegocio.Entidades
 
             if (Direccion != null && Direccion.Length > 300)
                 throw new ClienteDireccionExcesoCaracteresException();
-        }
+        }*/
     }
 }
