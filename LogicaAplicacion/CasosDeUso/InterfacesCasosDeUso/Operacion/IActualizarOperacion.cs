@@ -2,7 +2,7 @@
 
 namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion
 {
-    public interface IActualizarDatosAduaneros
+    public interface IActualizarOperacion
     {
         OperacionRespuestaDTO Ejecutar(int operacionId, ActualizarDatosAduanerosDTO dto);
     }

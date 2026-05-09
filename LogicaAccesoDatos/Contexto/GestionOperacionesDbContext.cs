@@ -140,7 +140,6 @@ namespace LogicaAccesoDatos.Contexto
                 {
                     rut.Property(r => r.Valor)
                         .HasColumnName("Rut")
-                        .IsRequired()
                         .HasMaxLength(20);
                 });
 
