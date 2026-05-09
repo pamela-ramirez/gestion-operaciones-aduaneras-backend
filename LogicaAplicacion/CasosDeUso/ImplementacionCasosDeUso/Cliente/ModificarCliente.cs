@@ -32,22 +32,22 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
             if (!string.IsNullOrWhiteSpace(dto.Apellido))
                 cliente.Apellido = dto.Apellido;
 
-            var clienteConEmail = _usuarioRepo.GetByEmail(dto.Email);
-            if (clienteConEmail != null)
-            {
-                throw new UsuarioExistenteConMismoCorreoException();
-            }
-
-            if (!string.IsNullOrWhiteSpace(dto.Email))
-                cliente.Email = new Email(dto.Email);
-
             if (!string.IsNullOrWhiteSpace(dto.Telefono))
                 cliente.Telefono = dto.Telefono;
 
+            if (!string.IsNullOrWhiteSpace(dto.Email))
+            {
+                var clienteConEmail = _usuarioRepo.GetByEmail(dto.Email);
+                if (clienteConEmail != null && clienteConEmail.Id != id)
+                    throw new UsuarioExistenteConMismoCorreoException();
+
+                cliente.Email = new Email(dto.Email);
+            }
+
+            cliente.Validar();
             _clienteRepo.Update(cliente, id);
 
             return dto;
         }
-
     }
 }
