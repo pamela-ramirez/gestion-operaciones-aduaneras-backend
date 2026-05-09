@@ -16,6 +16,7 @@ namespace LogicaAccesoDatos.Contexto
         // Tablas de la base de datos
         public DbSet<Rol> Roles { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Despachante> Despachantes { get; set; }
         public DbSet<TipoOperacion> TiposOperacion { get; set; }
@@ -59,7 +60,7 @@ namespace LogicaAccesoDatos.Contexto
             // Configuración de herencia TPH (Table Per Hierarchy) con discriminador para manejar jerarquia
             modelBuilder.Entity<Usuario>()
                 .HasDiscriminator<int>("Discriminator")
-                .HasValue<Usuario>(0)
+                .HasValue<Admin>(0)
                 .HasValue<Cliente>(1)
                 .HasValue<Despachante>(2);
             //TODO - Agregar clase admin (nuevo rol)

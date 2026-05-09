@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,7 +8,7 @@
 namespace LogicaAccesoDatos.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -99,11 +100,11 @@ namespace LogicaAccesoDatos.Migrations
                     Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     RolId = table.Column<int>(type: "int", nullable: false),
-                    FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 7, 21, 39, 27, 989, DateTimeKind.Local).AddTicks(8489)),
+                    FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 9, 12, 56, 16, 948, DateTimeKind.Local).AddTicks(3808)),
                     PrimerLogin = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     Estado = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, defaultValue: "Pendiente"),
                     Discriminator = table.Column<int>(type: "int", nullable: false),
-                    RUT = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Rut = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     RazonSocial = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     Telefono = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     Direccion = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
@@ -127,7 +128,7 @@ namespace LogicaAccesoDatos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NroCarpeta = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 7, 21, 39, 27, 994, DateTimeKind.Local).AddTicks(2162)),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 9, 12, 56, 16, 950, DateTimeKind.Local).AddTicks(6452)),
                     Estado = table.Column<int>(type: "int", nullable: false),
                     TipoOperacionId = table.Column<int>(type: "int", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
@@ -165,7 +166,7 @@ namespace LogicaAccesoDatos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Contenido = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
-                    FechaEnvio = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 7, 21, 39, 28, 7, DateTimeKind.Local).AddTicks(1004)),
+                    FechaEnvio = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 9, 12, 56, 16, 952, DateTimeKind.Local).AddTicks(9948)),
                     Enviado = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     UsuarioEnvioId = table.Column<int>(type: "int", nullable: false),
                     OperacionId = table.Column<int>(type: "int", nullable: true),
@@ -210,7 +211,7 @@ namespace LogicaAccesoDatos.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     RutaArchivo = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Formato = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    FechaCarga = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 7, 21, 39, 27, 998, DateTimeKind.Local).AddTicks(2842)),
+                    FechaCarga = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 9, 12, 56, 16, 951, DateTimeKind.Local).AddTicks(3869)),
                     OperacionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -276,7 +277,7 @@ namespace LogicaAccesoDatos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RutaArchivo = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    FechaCarga = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 7, 21, 39, 28, 5, DateTimeKind.Local).AddTicks(3907)),
+                    FechaCarga = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 9, 12, 56, 16, 952, DateTimeKind.Local).AddTicks(3930)),
                     LiquidacionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -321,7 +322,7 @@ namespace LogicaAccesoDatos.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FechaValidacion = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 7, 21, 39, 28, 4, DateTimeKind.Local).AddTicks(330)),
+                    FechaValidacion = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 9, 12, 56, 16, 952, DateTimeKind.Local).AddTicks(1750)),
                     Aprobado = table.Column<bool>(type: "bit", nullable: false),
                     MotivoRechazo = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     UsuarioValidacionId = table.Column<int>(type: "int", nullable: false),
@@ -467,9 +468,9 @@ namespace LogicaAccesoDatos.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Clientes_RUT_Unique",
                 table: "Usuarios",
-                column: "RUT",
+                column: "Rut",
                 unique: true,
-                filter: "[RUT] IS NOT NULL");
+                filter: "[Rut] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Despachantes_Codigo_Unique",
