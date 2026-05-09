@@ -37,5 +37,20 @@ namespace LogicaAplicacion.Mappers
                 PasswordTemporal = passwordTemporal
             };
         }
+
+        public static ClienteDTO ToClienteDTO(Cliente cliente)
+        {
+            return new ClienteDTO
+            {
+                Id = cliente.Id,
+                Nombre = cliente.Nombre,
+                Apellido = cliente.Apellido,
+                Email = cliente.Email.Valor,
+                RazonSocial = cliente.RazonSocial,
+                Rut = cliente.Rut.Valor,
+                Telefono = cliente.Telefono,
+                Direccion = cliente.Direccion
+            };
+        }
     }
 }
