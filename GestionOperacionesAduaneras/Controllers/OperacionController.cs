@@ -14,17 +14,20 @@ namespace GestionOperacionesAduaneras.Controllers
         private readonly IObtenerOperacionesConFiltros _obtenerOperacionesConFiltros;
         private readonly IObtenerOperacionesPorCliente _obtenerOperacionesPorCliente;
         private readonly IObtenerOperacionPorId _obtenerOperacionPorId;
+        private readonly IActualizarOperacion _actualizarOperacion;
 
         public OperacionController(
             ICrearOperacion crearOperacion,
             IObtenerOperacionesConFiltros obtenerOperacionesConFiltros,
             IObtenerOperacionesPorCliente obtenerOperacionesPorCliente,
-            IObtenerOperacionPorId obtenerOperacionPorId)
+            IObtenerOperacionPorId obtenerOperacionPorId,
+            IActualizarOperacion actualizarOperacion)
         {
             _crearOperacion = crearOperacion;
             _obtenerOperacionesConFiltros = obtenerOperacionesConFiltros;
             _obtenerOperacionesPorCliente = obtenerOperacionesPorCliente;
             _obtenerOperacionPorId = obtenerOperacionPorId;
+            _actualizarOperacion = actualizarOperacion;
         }
 
         // POST /api/operacion
@@ -105,6 +108,21 @@ namespace GestionOperacionesAduaneras.Controllers
             }
         }
 
+        // PATCH /api/operacion/{id}/datos-aduaneros
+        [HttpPatch("{id}/datos-aduaneros")]
+        [Authorize(Roles = "Admin, Despachante")]
+        public IActionResult ActualizarOperacion(int id, [FromBody] ActualizarDatosAduanerosDTO dto)
+        {
+            try
+            {
+                var resultado = _actualizarOperacion.Ejecutar(id, dto);
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensaje = ex.Message });
+            }
+        }
 
     }
 }
