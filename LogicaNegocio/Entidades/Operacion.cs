@@ -109,7 +109,14 @@ namespace LogicaNegocio.Entidades
         // El estado Finalizado se asigna manualmente
         public void Finalizar()
         {
-            Estado = EstadoOperacion.Finalizado;
+            if (NroDua != null && TipoConocimiento != null &&
+                NroConocimiento != null && Estado == EstadoOperacion.EnProceso)
+            {
+                Estado = EstadoOperacion.Finalizado;
+            }
+            else { 
+                throw new FinalizarOperacionInvalidoException();
+            }   
         }
 
         public void Validar()
