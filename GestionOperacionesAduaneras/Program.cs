@@ -54,7 +54,7 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IRepositorioDespachante, RepositorioDespachante>();
             builder.Services.AddScoped<IRepositorioOperacion, RepositorioOperacion>();
             builder.Services.AddScoped<IRepositorioTipoOperacion, RepositorioTipoOperacion>();
-            //builder.Services.AddScoped<IRepositorioTipoConocimiento, RepositorioTipoConocimiento>();
+            builder.Services.AddScoped<IRepositorioTipoConocimiento, RepositorioTipoConocimiento>();
 
             // Servicios
             builder.Services.AddScoped<IJwtService, JwtService>();
@@ -93,7 +93,7 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IObtenerOperacionesPorCliente, ObtenerOperacionesPorCliente>();
             builder.Services.AddScoped<IObtenerOperacionPorId, ObtenerOperacionPorId>();
             builder.Services.AddScoped<IObtenerOperaciones, ObtenerOperaciones>();
-            //builder.Services.AddScoped<IActualizarDatosAduaneros, ActualizarDatosAduaneros>();
+            builder.Services.AddScoped<IActualizarOperacion, ActualizarOperacion>();
             //builder.Services.AddScoped<IFinalizarOperacion, FinalizarOperacion>();
 
             // Casos de uso de uso de TipoOperacion
