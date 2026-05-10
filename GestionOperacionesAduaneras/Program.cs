@@ -64,7 +64,7 @@ namespace GestionOperacionesAduaneras
             //builder.Services.AddScoped<IClienteService, ClienteService>();
 
 
-            // Casos de uso usuario
+            // Casos de uso Usuario
             builder.Services.AddScoped<IObtenerUsuarios, ObtenerUsuarios>();
             builder.Services.AddScoped<IObtenerUsuarioPorId, ObtenerUsuarioPorId>();
             builder.Services.AddScoped<IModificarUsuario, ModificarUsuario>();
@@ -73,7 +73,7 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IAceptarConsentimientoUsuario, AceptarConsentimientoUsuario>();
             builder.Services.AddScoped<ICambiarPasswordUsuario, CambiarPasswordUsuario>();
 
-            // Casos de uso cliente 
+            // Casos de uso Cliente 
             builder.Services.AddScoped<ILogin, Login>();
             builder.Services.AddScoped<ICrearCliente, CrearCliente>();
             builder.Services.AddScoped<IObtenerClientes, ObtenerClientes>();
@@ -81,11 +81,11 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IModificarCliente, ModificarCliente>();
             builder.Services.AddScoped<IEliminarCliente, EliminarCliente>();
 
-            // Casos de uso despachante
+            // Casos de uso Despachante
             builder.Services.AddScoped<ICrearDespachante, CrearDespachante>();
             builder.Services.AddScoped<IObtenerDespachantePorId, ObtenerDespachantePorId>();
 
-            // Casos de uso rol
+            // Casos de uso Rol
             builder.Services.AddScoped<ICrearRol, CrearRol>();
             builder.Services.AddScoped<IObtenerRoles, ObtenerRoles>();
 
@@ -96,7 +96,7 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IObtenerOperacionPorId, ObtenerOperacionPorId>();
             builder.Services.AddScoped<IObtenerOperaciones, ObtenerOperaciones>();
             builder.Services.AddScoped<IActualizarOperacion, ActualizarOperacion>();
-            //builder.Services.AddScoped<IFinalizarOperacion, FinalizarOperacion>();
+            builder.Services.AddScoped<IFinalizarOperacion, FinalizarOperacion>();
 
             // Casos de uso de uso de TipoOperacion
             builder.Services.AddScoped<ICrearTipoOperacion, CrearTipoOperacion>();
