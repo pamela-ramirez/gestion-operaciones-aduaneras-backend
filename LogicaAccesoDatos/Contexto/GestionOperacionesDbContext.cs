@@ -128,8 +128,7 @@ namespace LogicaAccesoDatos.Contexto
                 entity.Property(u => u.Estado)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .HasColumnName("Estado")
-                    .HasDefaultValue("Pendiente");
+                    .HasColumnName("Estado");
             });
 
             // Configuración de la tabla Cliente
