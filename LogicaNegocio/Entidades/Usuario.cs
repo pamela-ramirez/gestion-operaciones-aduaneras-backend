@@ -21,10 +21,7 @@ namespace LogicaNegocio.Entidades
         //también para mostrar el estado del usuario (activo o inactivo)
         public DateTime FechaCreacion { get; set; }
         public bool PrimerLogin { get; set; }
-        public string Estado { get; set; }
-
-        // TODO ver si funciona todo con enum estado
-        //public EstadoUsuario Estado { get; set; }
+        public EstadoUsuario Estado { get; set; }
 
         public Usuario() { }
 
@@ -37,8 +34,7 @@ namespace LogicaNegocio.Entidades
             Rol = rol;
             FechaCreacion = DateTime.Now;
             PrimerLogin = true; // Por defecto, es el primer login al crear el usuario}
-            Estado = "Pendiente"; // Por defecto, el usuario se crea como pendiente
-            //Estado = EstadoUsuario.Pendiente;
+            Estado = EstadoUsuario.Pendiente;
             Validar();
         }
 
