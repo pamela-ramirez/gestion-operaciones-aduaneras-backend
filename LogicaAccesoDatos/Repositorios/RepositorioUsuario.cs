@@ -1,4 +1,5 @@
 ﻿using LogicaAccesoDatos.Contexto;
+using LogicaAccesoDatos.Excepciones;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.ValueObject;
@@ -26,7 +27,7 @@ namespace LogicaAccesoDatos.Repositorios
             var usuario = FindById(id);
             if (usuario == null)
             {
-                throw new Exception("Usuario no encontrado.");
+                throw new UsuarioNoEncontradoException();
             }
             _context.Usuarios.Remove(usuario);
             _context.SaveChanges();
@@ -59,7 +60,7 @@ namespace LogicaAccesoDatos.Repositorios
             var usuario = FindById(id);
 
             if (usuario == null)
-                throw new Exception("Usuario no encontrado.");
+                throw new UsuarioNoEncontradoException();
 
             usuario.Nombre = item.Nombre;
             usuario.Apellido = item.Apellido;
@@ -85,7 +86,7 @@ namespace LogicaAccesoDatos.Repositorios
             var usuario = FindById(id);
 
             if (usuario == null)
-                throw new Exception("Usuario no encontrado.");
+                throw new UsuarioNoEncontradoException();
 
             usuario.Password = item.Password;
             usuario.PrimerLogin = false;
@@ -98,9 +99,10 @@ namespace LogicaAccesoDatos.Repositorios
             var usuario = FindById(id);
 
             if (usuario == null)
-                throw new Exception("Usuario no encontrado.");
+                throw new UsuarioNoEncontradoException();
 
-            usuario.Estado = "Activo";
+            //usuario.Estado = "Activo";
+            usuario.Estado = EstadoUsuario.Activo;
 
             _context.SaveChanges();
         }
