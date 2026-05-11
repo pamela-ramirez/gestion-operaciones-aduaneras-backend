@@ -40,7 +40,7 @@ namespace LogicaAplicacion.Mappers
 
                 NroDua = operacion.NroDua,
                 TipoConocimientoId = operacion.TipoConocimientoId,
-                TipoConocimiento = operacion.TipoConocimiento?.Descripcion ?? string.Empty,
+                TipoConocimiento = operacion.TipoConocimiento?.Descripcion,
                 NroConocimiento = operacion.NroConocimiento
             };
         }
