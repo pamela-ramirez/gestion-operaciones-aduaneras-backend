@@ -95,6 +95,7 @@ namespace LogicaAccesoDatos.Repositorios
             var query = _context.Operaciones
                 .Include(o => o.Cliente)
                 .Include(o => o.TipoOperacion)
+                .Include(o => o.TipoConocimiento)
         .       AsQueryable();
 
             if (clienteId.HasValue)
@@ -115,7 +116,6 @@ namespace LogicaAccesoDatos.Repositorios
 
             return query.ToList();
         }
-
  
     }
 }
