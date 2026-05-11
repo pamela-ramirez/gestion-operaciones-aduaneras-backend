@@ -11,6 +11,7 @@ namespace GestionOperacionesAduaneras.Controllers
     public class OperacionController : ControllerBase
     {
         private readonly ICrearOperacion _crearOperacion;
+        private readonly IObtenerOperaciones _obtenerOperaciones;
         private readonly IObtenerOperacionesConFiltros _obtenerOperacionesConFiltros;
         private readonly IObtenerOperacionesPorCliente _obtenerOperacionesPorCliente;
         private readonly IObtenerOperacionPorId _obtenerOperacionPorId;
@@ -19,6 +20,7 @@ namespace GestionOperacionesAduaneras.Controllers
 
         public OperacionController(
             ICrearOperacion crearOperacion,
+            IObtenerOperaciones obtenerOperaciones,
             IObtenerOperacionesConFiltros obtenerOperacionesConFiltros,
             IObtenerOperacionesPorCliente obtenerOperacionesPorCliente,
             IObtenerOperacionPorId obtenerOperacionPorId,
@@ -26,6 +28,7 @@ namespace GestionOperacionesAduaneras.Controllers
             IFinalizarOperacion finalizarOperacion)
         {
             _crearOperacion = crearOperacion;
+            _obtenerOperaciones = obtenerOperaciones;
             _obtenerOperacionesConFiltros = obtenerOperacionesConFiltros;
             _obtenerOperacionesPorCliente = obtenerOperacionesPorCliente;
             _obtenerOperacionPorId = obtenerOperacionPorId;
@@ -72,7 +75,23 @@ namespace GestionOperacionesAduaneras.Controllers
         // GET /api/operacion
         [HttpGet]
         [Authorize(Roles = "Despachante,Admin")]
-        public IActionResult ObtenerTodos(
+        public IActionResult ObtenerTodos()
+        {
+            try
+            {
+                var resultado = _obtenerOperaciones.Ejecutar();
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensaje = ex.Message });
+            }
+        }
+
+        // GET /api/operacion/filtros?clienteId=1&tipoOperacionId=2&estado=EnProceso&fechaDesde=2024-01-01&fechaHasta=2024-12-31
+        [HttpGet("filtros")]
+        [Authorize(Roles = "Despachante,Admin")]
+        public IActionResult ObtenerTodosConFiltros(
             [FromQuery] int? clienteId,
             [FromQuery] int? tipoOperacionId,
             [FromQuery] string? estado,
@@ -87,7 +106,6 @@ namespace GestionOperacionesAduaneras.Controllers
                     estado,
                     fechaDesde,
                     fechaHasta);
-
                 return Ok(resultado);
             }
             catch (Exception ex)
@@ -127,8 +145,8 @@ namespace GestionOperacionesAduaneras.Controllers
             }
         }
 
-        // POST /api/operacion/{id}/finalizar
-        [HttpPost("{id}/finalizar")]
+        // PATCH /api/operacion/{id}/finalizar
+        [HttpPatch("{id}/finalizar")]
         [Authorize(Roles = "Admin, Despachante")]
         public IActionResult FinalizarOperacion(int id)
         {
