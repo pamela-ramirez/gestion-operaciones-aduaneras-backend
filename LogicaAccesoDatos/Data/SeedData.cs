@@ -59,7 +59,7 @@ namespace LogicaAccesoDatos.Data
                     Codigo = "DESP-001",
                     FechaCreacion = new DateTime(2025, 1, 10),
                     PrimerLogin = false,
-                    Estado = "Activo"
+                    Estado = EstadoUsuario.Activo
                 },
                 new
                 {
@@ -70,7 +70,7 @@ namespace LogicaAccesoDatos.Data
                     Codigo = "DESP-002",
                     FechaCreacion = new DateTime(2025, 3, 5),
                     PrimerLogin = false,
-                    Estado = "Activo"
+                    Estado = EstadoUsuario.Activo
                 }
             );
 
@@ -100,7 +100,7 @@ namespace LogicaAccesoDatos.Data
                     Direccion = (string?)"Av. 18 de Julio 1234, Montevideo",
                     FechaCreacion = new DateTime(2025, 2, 1),
                     PrimerLogin = false,
-                    Estado = "Activo"
+                    Estado = EstadoUsuario.Activo
                 },
                 new
                 {
@@ -113,7 +113,7 @@ namespace LogicaAccesoDatos.Data
                     Direccion = (string?)"Rambla República Argentina 2040, Montevideo",
                     FechaCreacion = new DateTime(2025, 2, 15),
                     PrimerLogin = false,
-                    Estado = "Activo"
+                    Estado = EstadoUsuario.Activo
                 },
                 new
                 {
@@ -126,7 +126,7 @@ namespace LogicaAccesoDatos.Data
                     Direccion = (string?)"Bulevar Artigas 1500, Montevideo",
                     FechaCreacion = new DateTime(2025, 3, 20),
                     PrimerLogin = false,
-                    Estado = "Activo"
+                    Estado = EstadoUsuario.Activo
                 }
             );
 
