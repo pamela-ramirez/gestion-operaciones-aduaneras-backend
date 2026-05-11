@@ -17,7 +17,7 @@ namespace LogicaAplicacion.Mappers
                 Id = usuario.Id,
                 Email = usuario.Email.Valor,
                 Rol = usuario.Rol.NombreRol,
-                Estado = usuario.Estado,
+                Estado = usuario.Estado.ToString(),
                 PrimerLogin = usuario.PrimerLogin
             };
         }
@@ -33,7 +33,7 @@ namespace LogicaAplicacion.Mappers
                 Rol = usuario.Rol.NombreRol,
                 FechaCreacion = usuario.FechaCreacion,
                 PrimerLogin = usuario.PrimerLogin,
-                Estado = usuario.Estado
+                Estado = usuario.Estado.ToString()
             };
         }
     }
