@@ -50,7 +50,7 @@ namespace LogicaAplicacion.Mappers
                 Rut = cliente.Rut.Valor,
                 Telefono = cliente.Telefono,
                 Direccion = cliente.Direccion,
-                Estado = cliente.Estado
+                Estado = cliente.Estado.ToString()
             };
         }
     }
