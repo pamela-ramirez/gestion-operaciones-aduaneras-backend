@@ -27,6 +27,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
                 throw new OperacionNoEncontradaException();
 
             operacion.Finalizar();
+            _operacionRepositorio.Update(operacion, operacionId);
             return OperacionMapper.ToDTO(operacion);
         }
     }
