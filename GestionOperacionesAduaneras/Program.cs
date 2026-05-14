@@ -23,6 +23,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using LogicaAccesoDatos.Servicios;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Documento;
+using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Documentos;
 
 namespace GestionOperacionesAduaneras
 {
@@ -49,7 +52,6 @@ namespace GestionOperacionesAduaneras
 
 
             // Repositorios
-            //builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuarioMock>();
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
             builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();
             builder.Services.AddScoped<IRepositorioRol, RepositorioRol>();
@@ -57,11 +59,12 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IRepositorioOperacion, RepositorioOperacion>();
             builder.Services.AddScoped<IRepositorioTipoOperacion, RepositorioTipoOperacion>();
             builder.Services.AddScoped<IRepositorioTipoConocimiento, RepositorioTipoConocimiento>();
+            builder.Services.AddScoped<IRepositorioDocumento, RepositorioDocumento>();
 
             // Servicios
             builder.Services.AddScoped<IJwtService, JwtService>();
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-            //builder.Services.AddScoped<IClienteService, ClienteService>();
+            builder.Services.AddScoped<IAlmacenamientoArchivos, AlmacenamientoLocal>();
 
 
             // Casos de uso Usuario
@@ -97,6 +100,7 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IObtenerOperaciones, ObtenerOperaciones>();
             builder.Services.AddScoped<IActualizarOperacion, ActualizarOperacion>();
             builder.Services.AddScoped<IFinalizarOperacion, FinalizarOperacion>();
+            builder.Services.AddScoped <IObtenerDocumentosPorOperacion, ObtenerDocumentosPorOperacion>();
 
             // Casos de uso de uso de TipoOperacion
             builder.Services.AddScoped<ICrearTipoOperacion, CrearTipoOperacion>();
@@ -106,6 +110,11 @@ namespace GestionOperacionesAduaneras
             // Caso de uso de TipoConocimiento
             builder.Services.AddScoped<IObtenerTiposConocimiento, ObtenerTiposConocimiento>();
 
+
+            // Caso de uso de Documento
+            builder.Services.AddScoped<ICrearDocumento, CrearDocumento>();
+            builder.Services.AddScoped<IObtenerDocumentoPorId, ObtenerDocumentoPorId>();
+ 
 
             // Autenticación JWT
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
