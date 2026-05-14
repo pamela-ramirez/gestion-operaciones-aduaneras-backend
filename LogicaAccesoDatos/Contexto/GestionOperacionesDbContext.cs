@@ -304,7 +304,6 @@ namespace LogicaAccesoDatos.Contexto
 
                 entity.Property(d => d.Formato)
                     .IsRequired()
-                    .HasMaxLength(10)
                     .HasColumnName("Formato");
 
                 entity.Property(d => d.FechaCarga)
