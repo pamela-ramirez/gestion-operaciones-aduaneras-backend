@@ -17,6 +17,7 @@ namespace GestionOperacionesAduaneras.Controllers
         private readonly IObtenerOperacionPorId _obtenerOperacionPorId;
         private readonly IActualizarOperacion _actualizarOperacion;
         private readonly IFinalizarOperacion _finalizarOperacion;
+        private readonly IObtenerDocumentosPorOperacion _obtenerDocumentosPorOperacion;
 
         public OperacionController(
             ICrearOperacion crearOperacion,
@@ -25,7 +26,8 @@ namespace GestionOperacionesAduaneras.Controllers
             IObtenerOperacionesPorCliente obtenerOperacionesPorCliente,
             IObtenerOperacionPorId obtenerOperacionPorId,
             IActualizarOperacion actualizarOperacion,
-            IFinalizarOperacion finalizarOperacion)
+            IFinalizarOperacion finalizarOperacion,
+            IObtenerDocumentosPorOperacion obtenerDocumentosPorOperacion)
         {
             _crearOperacion = crearOperacion;
             _obtenerOperaciones = obtenerOperaciones;
@@ -34,6 +36,7 @@ namespace GestionOperacionesAduaneras.Controllers
             _obtenerOperacionPorId = obtenerOperacionPorId;
             _actualizarOperacion = actualizarOperacion;
             _finalizarOperacion = finalizarOperacion;
+            _obtenerDocumentosPorOperacion = obtenerDocumentosPorOperacion;
         }
 
         // POST /api/operacion
@@ -160,6 +163,22 @@ namespace GestionOperacionesAduaneras.Controllers
                 return BadRequest(new { mensaje = ex.Message });
             }
 
+        }
+
+        // GET /api/operacion/{id}/documentos
+        [HttpGet("{id}/documentos")]
+        [Authorize(Roles = "Admin, Despachante")]
+        public IActionResult ObtenerDocumentosPorOperacion(int id)
+        {
+            try
+            {
+                var resultado = _obtenerDocumentosPorOperacion.Ejecutar(id);
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
         }
     }
 }

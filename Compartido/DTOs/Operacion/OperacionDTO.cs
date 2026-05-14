@@ -47,5 +47,15 @@
     // DTO de respuesta al crear o actualizar una operación.
     // Contiene los mismos datos que el listado.
     public class OperacionRespuestaDTO : OperacionListadoDTO { }
+
+
+    // Listado de documentos asociados a una operación
+    public class OperacionListadoDocumentosDTO
+    {
+        public IEnumerable<DocumentoRespuestaDTO> Documentos { get; set; } = new List<DocumentoRespuestaDTO>();
+
+    }
+
+
 }
 
