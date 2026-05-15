@@ -1,4 +1,6 @@
-﻿namespace Compartido.DTOs.Operacion
+﻿using Compartido.DTOs.Documento;
+
+namespace Compartido.DTOs.Operacion
 {
 
 
