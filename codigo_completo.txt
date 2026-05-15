@@ -150,6 +150,35 @@ namespace Compartido.DTOs.Despachante
 }
 
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Documento\DocumentoDTO.cs ===
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Compartido.DTOs.Documento
+{
+    public class CrearDocumentoDTO
+    {
+        public string Nombre { get; set; }
+        public IFormFile Archivo { get; set; }  // el archivo binario
+        public int OperacionId { get; set; }
+    }
+}
+
+    public class DocumentoRespuestaDTO
+    {
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Formato { get; set; }   // "PDF", "JPG" o "PNG"
+        public DateTime FechaCarga { get; set; }
+        public int OperacionId { get; set; }
+
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Operacion\OperacionDTO.cs ===
 namespace Compartido.DTOs.Operacion
 {
@@ -200,6 +229,16 @@ namespace Compartido.DTOs.Operacion
     // DTO de respuesta al crear o actualizar una operación.
     // Contiene los mismos datos que el listado.
     public class OperacionRespuestaDTO : OperacionListadoDTO { }
+
+
+    // Listado de documentos asociados a una operación
+    public class OperacionListadoDocumentosDTO
+    {
+        public IEnumerable<DocumentoRespuestaDTO> Documentos { get; set; } = new List<DocumentoRespuestaDTO>();
+
+    }
+
+
 }
 
 
@@ -358,7 +397,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ebf2c9ef77de8cd09c84cac8a4e7f5325ed34631")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+859617f0351a265fb9fbcc5e6e02354035c6da42")]
 [assembly: System.Reflection.AssemblyProductAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -676,6 +715,94 @@ namespace GestionOperacionesAduaneras.Controllers
 }
 
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Controllers\DocumentoController.cs ===
+using Compartido.DTOs.Documento;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Documento;
+using LogicaAplicacion.Excepciones.Documento;
+using LogicaAplicacion.Excepciones.Operacion;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace GestionOperacionesAduaneras.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
+    public class DocumentoController : ControllerBase
+    {
+        private readonly ICrearDocumento _crearDocumento;
+        private readonly IObtenerDocumentoPorId _obtenerDocumentoPorId;
+
+        public DocumentoController(ICrearDocumento crearDocumento,
+            IObtenerDocumentoPorId obtenerDocumentoPorId)
+        {
+            _crearDocumento = crearDocumento;
+            _obtenerDocumentoPorId = obtenerDocumentoPorId;
+        }
+
+        // POST /api/documento
+        [HttpPost]
+        [Authorize(Roles = "Despachante,Admin")]
+        public async Task<IActionResult> CrearDocumento([FromForm] CrearDocumentoDTO dto)
+        {
+         /*   try
+            {
+                var resultado = await _crearDocumento.Ejecutar(dto);
+                // 201 Created + el documento fue creado
+                return CreatedAtAction(
+                    nameof(ObtenerPorId),
+                    new { id = resultado.Id },
+                    resultado
+                );
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensaje = ex.Message });
+            }
+         */
+
+
+            try
+            {
+                var resultado = await _crearDocumento.Ejecutar(dto);
+                return CreatedAtAction(
+                    nameof(ObtenerPorId),
+                    new { id = resultado.Id },
+                    resultado
+                );
+            }
+            catch (OperacionNoEncontradaException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (FormatoNoPermitidoException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        // GET /api/documento/{id}
+        [HttpGet("{id}")]
+        public IActionResult ObtenerPorId(int id)
+        {
+            try
+            {
+                var resultado = _obtenerDocumentoPorId.Ejecutar(id);
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+        }
+    }
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\GestionOperacionesAduaneras\Controllers\OperacionController.cs ===
 using Compartido.DTOs.Operacion;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
@@ -690,23 +817,32 @@ namespace GestionOperacionesAduaneras.Controllers
     public class OperacionController : ControllerBase
     {
         private readonly ICrearOperacion _crearOperacion;
+        private readonly IObtenerOperaciones _obtenerOperaciones;
         private readonly IObtenerOperacionesConFiltros _obtenerOperacionesConFiltros;
         private readonly IObtenerOperacionesPorCliente _obtenerOperacionesPorCliente;
         private readonly IObtenerOperacionPorId _obtenerOperacionPorId;
         private readonly IActualizarOperacion _actualizarOperacion;
+        private readonly IFinalizarOperacion _finalizarOperacion;
+        private readonly IObtenerDocumentosPorOperacion _obtenerDocumentosPorOperacion;
 
         public OperacionController(
             ICrearOperacion crearOperacion,
+            IObtenerOperaciones obtenerOperaciones,
             IObtenerOperacionesConFiltros obtenerOperacionesConFiltros,
             IObtenerOperacionesPorCliente obtenerOperacionesPorCliente,
             IObtenerOperacionPorId obtenerOperacionPorId,
-            IActualizarOperacion actualizarOperacion)
+            IActualizarOperacion actualizarOperacion,
+            IFinalizarOperacion finalizarOperacion,
+            IObtenerDocumentosPorOperacion obtenerDocumentosPorOperacion)
         {
             _crearOperacion = crearOperacion;
+            _obtenerOperaciones = obtenerOperaciones;
             _obtenerOperacionesConFiltros = obtenerOperacionesConFiltros;
             _obtenerOperacionesPorCliente = obtenerOperacionesPorCliente;
             _obtenerOperacionPorId = obtenerOperacionPorId;
             _actualizarOperacion = actualizarOperacion;
+            _finalizarOperacion = finalizarOperacion;
+            _obtenerDocumentosPorOperacion = obtenerDocumentosPorOperacion;
         }
 
         // POST /api/operacion
@@ -748,7 +884,23 @@ namespace GestionOperacionesAduaneras.Controllers
         // GET /api/operacion
         [HttpGet]
         [Authorize(Roles = "Despachante,Admin")]
-        public IActionResult ObtenerTodos(
+        public IActionResult ObtenerTodos()
+        {
+            try
+            {
+                var resultado = _obtenerOperaciones.Ejecutar();
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensaje = ex.Message });
+            }
+        }
+
+        // GET /api/operacion/filtros?clienteId=1&tipoOperacionId=2&estado=EnProceso&fechaDesde=2024-01-01&fechaHasta=2024-12-31
+        [HttpGet("filtros")]
+        [Authorize(Roles = "Despachante,Admin")]
+        public IActionResult ObtenerTodosConFiltros(
             [FromQuery] int? clienteId,
             [FromQuery] int? tipoOperacionId,
             [FromQuery] string? estado,
@@ -763,7 +915,6 @@ namespace GestionOperacionesAduaneras.Controllers
                     estado,
                     fechaDesde,
                     fechaHasta);
-
                 return Ok(resultado);
             }
             catch (Exception ex)
@@ -803,6 +954,38 @@ namespace GestionOperacionesAduaneras.Controllers
             }
         }
 
+        // PATCH /api/operacion/{id}/finalizar
+        [HttpPatch("{id}/finalizar")]
+        [Authorize(Roles = "Admin, Despachante")]
+        public IActionResult FinalizarOperacion(int id)
+        {
+            try
+            {
+                var resultado = _finalizarOperacion.Ejecutar(id);
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensaje = ex.Message });
+            }
+
+        }
+
+        // GET /api/operacion/{id}/documentos
+        [HttpGet("{id}/documentos")]
+        [Authorize(Roles = "Admin, Despachante")]
+        public IActionResult ObtenerDocumentosPorOperacion(int id)
+        {
+            try
+            {
+                var resultado = _obtenerDocumentosPorOperacion.Ejecutar(id);
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+        }
     }
 }
 
@@ -1184,7 +1367,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ebf2c9ef77de8cd09c84cac8a4e7f5325ed34631")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+859617f0351a265fb9fbcc5e6e02354035c6da42")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -1412,6 +1595,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using LogicaAccesoDatos.Servicios;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Documento;
+using LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Documentos;
 
 namespace GestionOperacionesAduaneras
 {
@@ -1438,7 +1624,6 @@ namespace GestionOperacionesAduaneras
 
 
             // Repositorios
-            //builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuarioMock>();
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
             builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();
             builder.Services.AddScoped<IRepositorioRol, RepositorioRol>();
@@ -1446,14 +1631,15 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IRepositorioOperacion, RepositorioOperacion>();
             builder.Services.AddScoped<IRepositorioTipoOperacion, RepositorioTipoOperacion>();
             builder.Services.AddScoped<IRepositorioTipoConocimiento, RepositorioTipoConocimiento>();
+            builder.Services.AddScoped<IRepositorioDocumento, RepositorioDocumento>();
 
             // Servicios
             builder.Services.AddScoped<IJwtService, JwtService>();
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-            //builder.Services.AddScoped<IClienteService, ClienteService>();
+            builder.Services.AddScoped<IAlmacenamientoArchivos, AlmacenamientoLocal>();
 
 
-            // Casos de uso usuario
+            // Casos de uso Usuario
             builder.Services.AddScoped<IObtenerUsuarios, ObtenerUsuarios>();
             builder.Services.AddScoped<IObtenerUsuarioPorId, ObtenerUsuarioPorId>();
             builder.Services.AddScoped<IModificarUsuario, ModificarUsuario>();
@@ -1462,7 +1648,7 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IAceptarConsentimientoUsuario, AceptarConsentimientoUsuario>();
             builder.Services.AddScoped<ICambiarPasswordUsuario, CambiarPasswordUsuario>();
 
-            // Casos de uso cliente 
+            // Casos de uso Cliente 
             builder.Services.AddScoped<ILogin, Login>();
             builder.Services.AddScoped<ICrearCliente, CrearCliente>();
             builder.Services.AddScoped<IObtenerClientes, ObtenerClientes>();
@@ -1470,11 +1656,11 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IModificarCliente, ModificarCliente>();
             builder.Services.AddScoped<IEliminarCliente, EliminarCliente>();
 
-            // Casos de uso despachante
+            // Casos de uso Despachante
             builder.Services.AddScoped<ICrearDespachante, CrearDespachante>();
             builder.Services.AddScoped<IObtenerDespachantePorId, ObtenerDespachantePorId>();
 
-            // Casos de uso rol
+            // Casos de uso Rol
             builder.Services.AddScoped<ICrearRol, CrearRol>();
             builder.Services.AddScoped<IObtenerRoles, ObtenerRoles>();
 
@@ -1485,7 +1671,8 @@ namespace GestionOperacionesAduaneras
             builder.Services.AddScoped<IObtenerOperacionPorId, ObtenerOperacionPorId>();
             builder.Services.AddScoped<IObtenerOperaciones, ObtenerOperaciones>();
             builder.Services.AddScoped<IActualizarOperacion, ActualizarOperacion>();
-            //builder.Services.AddScoped<IFinalizarOperacion, FinalizarOperacion>();
+            builder.Services.AddScoped<IFinalizarOperacion, FinalizarOperacion>();
+            builder.Services.AddScoped <IObtenerDocumentosPorOperacion, ObtenerDocumentosPorOperacion>();
 
             // Casos de uso de uso de TipoOperacion
             builder.Services.AddScoped<ICrearTipoOperacion, CrearTipoOperacion>();
@@ -1495,6 +1682,11 @@ namespace GestionOperacionesAduaneras
             // Caso de uso de TipoConocimiento
             builder.Services.AddScoped<IObtenerTiposConocimiento, ObtenerTiposConocimiento>();
 
+
+            // Caso de uso de Documento
+            builder.Services.AddScoped<ICrearDocumento, CrearDocumento>();
+            builder.Services.AddScoped<IObtenerDocumentoPorId, ObtenerDocumentoPorId>();
+ 
 
             // Autenticación JWT
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -1733,8 +1925,7 @@ namespace LogicaAccesoDatos.Contexto
                 entity.Property(u => u.Estado)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .HasColumnName("Estado")
-                    .HasDefaultValue("Pendiente");
+                    .HasColumnName("Estado");
             });
 
             // Configuración de la tabla Cliente
@@ -1910,7 +2101,6 @@ namespace LogicaAccesoDatos.Contexto
 
                 entity.Property(d => d.Formato)
                     .IsRequired()
-                    .HasMaxLength(10)
                     .HasColumnName("Formato");
 
                 entity.Property(d => d.FechaCarga)
@@ -2341,7 +2531,7 @@ namespace LogicaAccesoDatos.Data
                     Codigo = "DESP-001",
                     FechaCreacion = new DateTime(2025, 1, 10),
                     PrimerLogin = false,
-                    Estado = "Activo"
+                    Estado = EstadoUsuario.Activo
                 },
                 new
                 {
@@ -2352,7 +2542,7 @@ namespace LogicaAccesoDatos.Data
                     Codigo = "DESP-002",
                     FechaCreacion = new DateTime(2025, 3, 5),
                     PrimerLogin = false,
-                    Estado = "Activo"
+                    Estado = EstadoUsuario.Activo
                 }
             );
 
@@ -2382,7 +2572,7 @@ namespace LogicaAccesoDatos.Data
                     Direccion = (string?)"Av. 18 de Julio 1234, Montevideo",
                     FechaCreacion = new DateTime(2025, 2, 1),
                     PrimerLogin = false,
-                    Estado = "Activo"
+                    Estado = EstadoUsuario.Activo
                 },
                 new
                 {
@@ -2395,7 +2585,7 @@ namespace LogicaAccesoDatos.Data
                     Direccion = (string?)"Rambla República Argentina 2040, Montevideo",
                     FechaCreacion = new DateTime(2025, 2, 15),
                     PrimerLogin = false,
-                    Estado = "Activo"
+                    Estado = EstadoUsuario.Activo
                 },
                 new
                 {
@@ -2408,7 +2598,7 @@ namespace LogicaAccesoDatos.Data
                     Direccion = (string?)"Bulevar Artigas 1500, Montevideo",
                     FechaCreacion = new DateTime(2025, 3, 20),
                     PrimerLogin = false,
-                    Estado = "Activo"
+                    Estado = EstadoUsuario.Activo
                 }
             );
 
@@ -2510,7 +2700,7 @@ namespace LogicaAccesoDatos.Excepciones
 }
 
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Migrations\20260509224807_InitialCreate.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Migrations\20260514013438_FormatoDocumentoDeStringAEnum.cs ===
 using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
@@ -2521,7 +2711,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LogicaAccesoDatos.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class FormatoDocumentoDeStringAEnum : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -2613,9 +2803,9 @@ namespace LogicaAccesoDatos.Migrations
                     Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     RolId = table.Column<int>(type: "int", nullable: false),
-                    FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 9, 19, 48, 7, 447, DateTimeKind.Local).AddTicks(6103)),
+                    FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 13, 22, 34, 37, 606, DateTimeKind.Local).AddTicks(2799)),
                     PrimerLogin = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    Estado = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, defaultValue: "Pendiente"),
+                    Estado = table.Column<int>(type: "int", maxLength: 50, nullable: false),
                     Discriminator = table.Column<int>(type: "int", nullable: false),
                     Rut = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     RazonSocial = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
@@ -2641,7 +2831,7 @@ namespace LogicaAccesoDatos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NroCarpeta = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 9, 19, 48, 7, 450, DateTimeKind.Local).AddTicks(3021)),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 13, 22, 34, 37, 610, DateTimeKind.Local).AddTicks(7772)),
                     Estado = table.Column<int>(type: "int", nullable: false),
                     TipoOperacionId = table.Column<int>(type: "int", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
@@ -2679,7 +2869,7 @@ namespace LogicaAccesoDatos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Contenido = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
-                    FechaEnvio = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 9, 19, 48, 7, 452, DateTimeKind.Local).AddTicks(2392)),
+                    FechaEnvio = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 13, 22, 34, 37, 614, DateTimeKind.Local).AddTicks(3112)),
                     Enviado = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     UsuarioEnvioId = table.Column<int>(type: "int", nullable: false),
                     OperacionId = table.Column<int>(type: "int", nullable: true),
@@ -2723,8 +2913,8 @@ namespace LogicaAccesoDatos.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     RutaArchivo = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Formato = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    FechaCarga = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 9, 19, 48, 7, 451, DateTimeKind.Local).AddTicks(224)),
+                    Formato = table.Column<int>(type: "int", nullable: false),
+                    FechaCarga = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 13, 22, 34, 37, 612, DateTimeKind.Local).AddTicks(467)),
                     OperacionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -2790,7 +2980,7 @@ namespace LogicaAccesoDatos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RutaArchivo = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    FechaCarga = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 9, 19, 48, 7, 451, DateTimeKind.Local).AddTicks(9481)),
+                    FechaCarga = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 13, 22, 34, 37, 613, DateTimeKind.Local).AddTicks(8242)),
                     LiquidacionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -2835,7 +3025,7 @@ namespace LogicaAccesoDatos.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FechaValidacion = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 9, 19, 48, 7, 451, DateTimeKind.Local).AddTicks(7398)),
+                    FechaValidacion = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 5, 13, 22, 34, 37, 613, DateTimeKind.Local).AddTicks(4868)),
                     Aprobado = table.Column<bool>(type: "bit", nullable: false),
                     MotivoRechazo = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     UsuarioValidacionId = table.Column<int>(type: "int", nullable: false),
@@ -2886,6 +3076,25 @@ namespace LogicaAccesoDatos.Migrations
                 {
                     { 1, "Importación" },
                     { 2, "Exportación" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Usuarios",
+                columns: new[] { "Id", "Apellido", "Codigo", "Discriminator", "Estado", "FechaCreacion", "Nombre", "RolId", "Email", "PasswordHash" },
+                values: new object[,]
+                {
+                    { 10, "Fernández", "DESP-001", 2, 2, new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Carlos", 2, "carlos.fernandez@despacho.com.uy", "Despacho100!" },
+                    { 11, "Ríos", "DESP-002", 2, 2, new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Valeria", 2, "valeria.rios@despacho.com.uy", "Despacho100!" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Usuarios",
+                columns: new[] { "Id", "Apellido", "Direccion", "Discriminator", "Estado", "FechaCreacion", "Nombre", "RazonSocial", "RolId", "Telefono", "Email", "PasswordHash", "Rut" },
+                values: new object[,]
+                {
+                    { 20, "González", "Av. 18 de Julio 1234, Montevideo", 1, 2, new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Martina", "González Import S.R.L.", 3, "099123456", "martina.gonzalez@gonzalezimport.com.uy", "Cliente100!", "21.234.567-8" },
+                    { 21, "Álvarez", "Rambla República Argentina 2040, Montevideo", 1, 2, new DateTime(2025, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Roberto", "Álvarez Exportaciones S.A.", 3, "098765432", "roberto.alvarez@alvarezexport.com.uy", "Cliente100!", "21.987.654-3" },
+                    { 22, "Méndez", "Bulevar Artigas 1500, Montevideo", 1, 2, new DateTime(2025, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Laura", "Méndez & Asociados Ltda.", 3, "091234567", "laura.mendez@mendezasociados.com.uy", "Cliente100!", "21.456.789-0" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -3064,7 +3273,7 @@ namespace LogicaAccesoDatos.Migrations
 }
 
 
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Migrations\20260509224807_InitialCreate.Designer.cs ===
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Migrations\20260514013438_FormatoDocumentoDeStringAEnum.Designer.cs ===
 // <auto-generated />
 using System;
 using LogicaAccesoDatos.Contexto;
@@ -3079,8 +3288,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaAccesoDatos.Migrations
 {
     [DbContext(typeof(GestionOperacionesDbContext))]
-    [Migration("20260509224807_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260514013438_FormatoDocumentoDeStringAEnum")]
+    partial class FormatoDocumentoDeStringAEnum
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -3149,7 +3358,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaEnvio")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 9, 19, 48, 7, 452, DateTimeKind.Local).AddTicks(2392))
+                        .HasDefaultValue(new DateTime(2026, 5, 13, 22, 34, 37, 614, DateTimeKind.Local).AddTicks(3112))
                         .HasColumnName("FechaEnvio");
 
                     b.Property<int?>("OperacionId")
@@ -3213,13 +3422,11 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 9, 19, 48, 7, 451, DateTimeKind.Local).AddTicks(224))
+                        .HasDefaultValue(new DateTime(2026, 5, 13, 22, 34, 37, 612, DateTimeKind.Local).AddTicks(467))
                         .HasColumnName("FechaCarga");
 
-                    b.Property<string>("Formato")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
+                    b.Property<int>("Formato")
+                        .HasColumnType("int")
                         .HasColumnName("Formato");
 
                     b.Property<string>("Nombre")
@@ -3255,7 +3462,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 9, 19, 48, 7, 451, DateTimeKind.Local).AddTicks(9481))
+                        .HasDefaultValue(new DateTime(2026, 5, 13, 22, 34, 37, 613, DateTimeKind.Local).AddTicks(8242))
                         .HasColumnName("FechaCarga");
 
                     b.Property<int>("LiquidacionId")
@@ -3331,7 +3538,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaRegistro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 9, 19, 48, 7, 450, DateTimeKind.Local).AddTicks(3021))
+                        .HasDefaultValue(new DateTime(2026, 5, 13, 22, 34, 37, 610, DateTimeKind.Local).AddTicks(7772))
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("NroCarpeta")
@@ -3582,18 +3789,15 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<int>("Discriminator")
                         .HasColumnType("int");
 
-                    b.Property<string>("Estado")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Estado")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasDefaultValue("Pendiente")
+                        .HasColumnType("int")
                         .HasColumnName("Estado");
 
                     b.Property<DateTime>("FechaCreacion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 9, 19, 48, 7, 447, DateTimeKind.Local).AddTicks(6103))
+                        .HasDefaultValue(new DateTime(2026, 5, 13, 22, 34, 37, 606, DateTimeKind.Local).AddTicks(2799))
                         .HasColumnName("FechaCreacion");
 
                     b.Property<string>("Nombre")
@@ -3637,7 +3841,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaValidacion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 9, 19, 48, 7, 451, DateTimeKind.Local).AddTicks(7398))
+                        .HasDefaultValue(new DateTime(2026, 5, 13, 22, 34, 37, 613, DateTimeKind.Local).AddTicks(4868))
                         .HasColumnName("FechaValidacion");
 
                     b.Property<string>("MotivoRechazo")
@@ -3689,6 +3893,47 @@ namespace LogicaAccesoDatos.Migrations
                         .HasColumnName("Telefono");
 
                     b.HasDiscriminator().HasValue(1);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 20,
+                            Apellido = "González",
+                            Estado = 2,
+                            FechaCreacion = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Martina",
+                            PrimerLogin = false,
+                            RolId = 3,
+                            Direccion = "Av. 18 de Julio 1234, Montevideo",
+                            RazonSocial = "González Import S.R.L.",
+                            Telefono = "099123456"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Apellido = "Álvarez",
+                            Estado = 2,
+                            FechaCreacion = new DateTime(2025, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Roberto",
+                            PrimerLogin = false,
+                            RolId = 3,
+                            Direccion = "Rambla República Argentina 2040, Montevideo",
+                            RazonSocial = "Álvarez Exportaciones S.A.",
+                            Telefono = "098765432"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Apellido = "Méndez",
+                            Estado = 2,
+                            FechaCreacion = new DateTime(2025, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Laura",
+                            PrimerLogin = false,
+                            RolId = 3,
+                            Direccion = "Bulevar Artigas 1500, Montevideo",
+                            RazonSocial = "Méndez & Asociados Ltda.",
+                            Telefono = "091234567"
+                        });
                 });
 
             modelBuilder.Entity("LogicaNegocio.Entidades.Despachante", b =>
@@ -3706,6 +3951,30 @@ namespace LogicaAccesoDatos.Migrations
                         .HasFilter("[Codigo] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue(2);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 10,
+                            Apellido = "Fernández",
+                            Estado = 2,
+                            FechaCreacion = new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Carlos",
+                            PrimerLogin = false,
+                            RolId = 2,
+                            Codigo = "DESP-001"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Apellido = "Ríos",
+                            Estado = 2,
+                            FechaCreacion = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Valeria",
+                            PrimerLogin = false,
+                            RolId = 2,
+                            Codigo = "DESP-002"
+                        });
                 });
 
             modelBuilder.Entity("LogicaNegocio.Entidades.Comunicacion", b =>
@@ -3863,6 +4132,33 @@ namespace LogicaAccesoDatos.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("UsuarioId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    UsuarioId = 10,
+                                    Valor = "carlos.fernandez@despacho.com.uy"
+                                },
+                                new
+                                {
+                                    UsuarioId = 11,
+                                    Valor = "valeria.rios@despacho.com.uy"
+                                },
+                                new
+                                {
+                                    UsuarioId = 20,
+                                    Valor = "martina.gonzalez@gonzalezimport.com.uy"
+                                },
+                                new
+                                {
+                                    UsuarioId = 21,
+                                    Valor = "roberto.alvarez@alvarezexport.com.uy"
+                                },
+                                new
+                                {
+                                    UsuarioId = 22,
+                                    Valor = "laura.mendez@mendezasociados.com.uy"
+                                });
                         });
 
                     b.OwnsOne("LogicaNegocio.ValueObject.Password", "Password", b1 =>
@@ -3882,6 +4178,33 @@ namespace LogicaAccesoDatos.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("UsuarioId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    UsuarioId = 10,
+                                    Valor = "Despacho100!"
+                                },
+                                new
+                                {
+                                    UsuarioId = 11,
+                                    Valor = "Despacho100!"
+                                },
+                                new
+                                {
+                                    UsuarioId = 20,
+                                    Valor = "Cliente100!"
+                                },
+                                new
+                                {
+                                    UsuarioId = 21,
+                                    Valor = "Cliente100!"
+                                },
+                                new
+                                {
+                                    UsuarioId = 22,
+                                    Valor = "Cliente100!"
+                                });
                         });
 
                     b.Navigation("Email")
@@ -3936,6 +4259,23 @@ namespace LogicaAccesoDatos.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("ClienteId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    ClienteId = 20,
+                                    Valor = "21.234.567-8"
+                                },
+                                new
+                                {
+                                    ClienteId = 21,
+                                    Valor = "21.987.654-3"
+                                },
+                                new
+                                {
+                                    ClienteId = 22,
+                                    Valor = "21.456.789-0"
+                                });
                         });
 
                     b.Navigation("Rut");
@@ -4051,7 +4391,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaEnvio")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 9, 19, 48, 7, 452, DateTimeKind.Local).AddTicks(2392))
+                        .HasDefaultValue(new DateTime(2026, 5, 13, 22, 34, 37, 614, DateTimeKind.Local).AddTicks(3112))
                         .HasColumnName("FechaEnvio");
 
                     b.Property<int?>("OperacionId")
@@ -4115,13 +4455,11 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 9, 19, 48, 7, 451, DateTimeKind.Local).AddTicks(224))
+                        .HasDefaultValue(new DateTime(2026, 5, 13, 22, 34, 37, 612, DateTimeKind.Local).AddTicks(467))
                         .HasColumnName("FechaCarga");
 
-                    b.Property<string>("Formato")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
+                    b.Property<int>("Formato")
+                        .HasColumnType("int")
                         .HasColumnName("Formato");
 
                     b.Property<string>("Nombre")
@@ -4157,7 +4495,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaCarga")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 9, 19, 48, 7, 451, DateTimeKind.Local).AddTicks(9481))
+                        .HasDefaultValue(new DateTime(2026, 5, 13, 22, 34, 37, 613, DateTimeKind.Local).AddTicks(8242))
                         .HasColumnName("FechaCarga");
 
                     b.Property<int>("LiquidacionId")
@@ -4233,7 +4571,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaRegistro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 9, 19, 48, 7, 450, DateTimeKind.Local).AddTicks(3021))
+                        .HasDefaultValue(new DateTime(2026, 5, 13, 22, 34, 37, 610, DateTimeKind.Local).AddTicks(7772))
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("NroCarpeta")
@@ -4484,18 +4822,15 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<int>("Discriminator")
                         .HasColumnType("int");
 
-                    b.Property<string>("Estado")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Estado")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasDefaultValue("Pendiente")
+                        .HasColumnType("int")
                         .HasColumnName("Estado");
 
                     b.Property<DateTime>("FechaCreacion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 9, 19, 48, 7, 447, DateTimeKind.Local).AddTicks(6103))
+                        .HasDefaultValue(new DateTime(2026, 5, 13, 22, 34, 37, 606, DateTimeKind.Local).AddTicks(2799))
                         .HasColumnName("FechaCreacion");
 
                     b.Property<string>("Nombre")
@@ -4539,7 +4874,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaValidacion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 9, 19, 48, 7, 451, DateTimeKind.Local).AddTicks(7398))
+                        .HasDefaultValue(new DateTime(2026, 5, 13, 22, 34, 37, 613, DateTimeKind.Local).AddTicks(4868))
                         .HasColumnName("FechaValidacion");
 
                     b.Property<string>("MotivoRechazo")
@@ -4591,6 +4926,47 @@ namespace LogicaAccesoDatos.Migrations
                         .HasColumnName("Telefono");
 
                     b.HasDiscriminator().HasValue(1);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 20,
+                            Apellido = "González",
+                            Estado = 2,
+                            FechaCreacion = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Martina",
+                            PrimerLogin = false,
+                            RolId = 3,
+                            Direccion = "Av. 18 de Julio 1234, Montevideo",
+                            RazonSocial = "González Import S.R.L.",
+                            Telefono = "099123456"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Apellido = "Álvarez",
+                            Estado = 2,
+                            FechaCreacion = new DateTime(2025, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Roberto",
+                            PrimerLogin = false,
+                            RolId = 3,
+                            Direccion = "Rambla República Argentina 2040, Montevideo",
+                            RazonSocial = "Álvarez Exportaciones S.A.",
+                            Telefono = "098765432"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Apellido = "Méndez",
+                            Estado = 2,
+                            FechaCreacion = new DateTime(2025, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Laura",
+                            PrimerLogin = false,
+                            RolId = 3,
+                            Direccion = "Bulevar Artigas 1500, Montevideo",
+                            RazonSocial = "Méndez & Asociados Ltda.",
+                            Telefono = "091234567"
+                        });
                 });
 
             modelBuilder.Entity("LogicaNegocio.Entidades.Despachante", b =>
@@ -4608,6 +4984,30 @@ namespace LogicaAccesoDatos.Migrations
                         .HasFilter("[Codigo] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue(2);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 10,
+                            Apellido = "Fernández",
+                            Estado = 2,
+                            FechaCreacion = new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Carlos",
+                            PrimerLogin = false,
+                            RolId = 2,
+                            Codigo = "DESP-001"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Apellido = "Ríos",
+                            Estado = 2,
+                            FechaCreacion = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Valeria",
+                            PrimerLogin = false,
+                            RolId = 2,
+                            Codigo = "DESP-002"
+                        });
                 });
 
             modelBuilder.Entity("LogicaNegocio.Entidades.Comunicacion", b =>
@@ -4765,6 +5165,33 @@ namespace LogicaAccesoDatos.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("UsuarioId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    UsuarioId = 10,
+                                    Valor = "carlos.fernandez@despacho.com.uy"
+                                },
+                                new
+                                {
+                                    UsuarioId = 11,
+                                    Valor = "valeria.rios@despacho.com.uy"
+                                },
+                                new
+                                {
+                                    UsuarioId = 20,
+                                    Valor = "martina.gonzalez@gonzalezimport.com.uy"
+                                },
+                                new
+                                {
+                                    UsuarioId = 21,
+                                    Valor = "roberto.alvarez@alvarezexport.com.uy"
+                                },
+                                new
+                                {
+                                    UsuarioId = 22,
+                                    Valor = "laura.mendez@mendezasociados.com.uy"
+                                });
                         });
 
                     b.OwnsOne("LogicaNegocio.ValueObject.Password", "Password", b1 =>
@@ -4784,6 +5211,33 @@ namespace LogicaAccesoDatos.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("UsuarioId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    UsuarioId = 10,
+                                    Valor = "Despacho100!"
+                                },
+                                new
+                                {
+                                    UsuarioId = 11,
+                                    Valor = "Despacho100!"
+                                },
+                                new
+                                {
+                                    UsuarioId = 20,
+                                    Valor = "Cliente100!"
+                                },
+                                new
+                                {
+                                    UsuarioId = 21,
+                                    Valor = "Cliente100!"
+                                },
+                                new
+                                {
+                                    UsuarioId = 22,
+                                    Valor = "Cliente100!"
+                                });
                         });
 
                     b.Navigation("Email")
@@ -4838,6 +5292,23 @@ namespace LogicaAccesoDatos.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("ClienteId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    ClienteId = 20,
+                                    Valor = "21.234.567-8"
+                                },
+                                new
+                                {
+                                    ClienteId = 21,
+                                    Valor = "21.987.654-3"
+                                },
+                                new
+                                {
+                                    ClienteId = 22,
+                                    Valor = "21.456.789-0"
+                                });
                         });
 
                     b.Navigation("Rut");
@@ -4895,7 +5366,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ebf2c9ef77de8cd09c84cac8a4e7f5325ed34631")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+859617f0351a265fb9fbcc5e6e02354035c6da42")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -5077,6 +5548,57 @@ namespace LogicaAccesoDatos.Repositorios
 }
 
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Repositorios\RepositorioDocumento.cs ===
+using LogicaAccesoDatos.Contexto;
+using LogicaNegocio.Entidades;
+using LogicaNegocio.InterfacesRepositorios;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAccesoDatos.Repositorios
+{
+    public class RepositorioDocumento : IRepositorioDocumento
+    {
+        private readonly GestionOperacionesDbContext _context;
+
+        public RepositorioDocumento(GestionOperacionesDbContext context)
+        {
+            _context = context;
+        }
+        public void Add(Documento item)
+        {
+            _context.Documentos.Add(item);
+            _context.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Documento> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Documento FindById(int id)
+        {
+            return _context.Documentos.Include(d => d.Operacion)
+                .FirstOrDefault(d => d.Id == id);
+        }
+
+        public void Update(Documento item, int id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Repositorios\RepositorioOperacion.cs ===
 using LogicaAccesoDatos.Contexto;
 using LogicaAccesoDatos.Excepciones;
@@ -5175,6 +5697,7 @@ namespace LogicaAccesoDatos.Repositorios
             var query = _context.Operaciones
                 .Include(o => o.Cliente)
                 .Include(o => o.TipoOperacion)
+                .Include(o => o.TipoConocimiento)
         .       AsQueryable();
 
             if (clienteId.HasValue)
@@ -5195,7 +5718,6 @@ namespace LogicaAccesoDatos.Repositorios
 
             return query.ToList();
         }
-
  
     }
 }
@@ -5374,6 +5896,7 @@ namespace LogicaAccesoDatos.Repositorios
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Repositorios\RepositorioUsuario.cs ===
 using LogicaAccesoDatos.Contexto;
+using LogicaAccesoDatos.Excepciones;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
 using LogicaNegocio.ValueObject;
@@ -5401,7 +5924,7 @@ namespace LogicaAccesoDatos.Repositorios
             var usuario = FindById(id);
             if (usuario == null)
             {
-                throw new Exception("Usuario no encontrado.");
+                throw new UsuarioNoEncontradoException();
             }
             _context.Usuarios.Remove(usuario);
             _context.SaveChanges();
@@ -5434,7 +5957,7 @@ namespace LogicaAccesoDatos.Repositorios
             var usuario = FindById(id);
 
             if (usuario == null)
-                throw new Exception("Usuario no encontrado.");
+                throw new UsuarioNoEncontradoException();
 
             usuario.Nombre = item.Nombre;
             usuario.Apellido = item.Apellido;
@@ -5460,7 +5983,7 @@ namespace LogicaAccesoDatos.Repositorios
             var usuario = FindById(id);
 
             if (usuario == null)
-                throw new Exception("Usuario no encontrado.");
+                throw new UsuarioNoEncontradoException();
 
             usuario.Password = item.Password;
             usuario.PrimerLogin = false;
@@ -5473,9 +5996,10 @@ namespace LogicaAccesoDatos.Repositorios
             var usuario = FindById(id);
 
             if (usuario == null)
-                throw new Exception("Usuario no encontrado.");
+                throw new UsuarioNoEncontradoException();
 
-            usuario.Estado = "Activo";
+            //usuario.Estado = "Activo";
+            usuario.Estado = EstadoUsuario.Activo;
 
             _context.SaveChanges();
         }
@@ -5484,6 +6008,58 @@ namespace LogicaAccesoDatos.Repositorios
         {
             return _context.Usuarios
                 .Any(u => u.Email.Valor == email);
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Servicios\AlmacenamientoAzure.cs ===
+using LogicaNegocio.InterfacesServicios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAccesoDatos.Servicios
+{
+    public class AlmacenamientoAzure //: IAlmacenamientoArchivos
+    {
+        /*public async Task<string> GuardarAsync(Stream archivo, string nombreArchivo)
+        {
+            // lógica de Azure Blob Storage
+            // devuelve la URL pública del archivo
+        }*/
+
+        //Crear una clase segun que tipo de almacenamiento a utilizar, si utilizamos Firebase o Azure
+        //En program agregarlo, ejemplo: builder.Services.AddScoped<IAlmacenamientoArchivos, AlmacenamientoAzure>();
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Servicios\AlmacenamientoLocal.cs ===
+using LogicaNegocio.InterfacesServicios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAccesoDatos.Servicios
+{
+    public class AlmacenamientoLocal : IAlmacenamientoArchivos
+    {
+        public async Task<string> GuardarAsync(Stream archivo, string nombreArchivo)
+        {
+            var carpeta = Path.Combine("wwwroot", "documentos");
+            Directory.CreateDirectory(carpeta);
+            var nombre = $"{Guid.NewGuid()}_{nombreArchivo}";
+            var ruta = Path.Combine(carpeta, nombre);
+
+            using var stream = new FileStream(ruta, FileMode.Create);
+            await archivo.CopyToAsync(stream);
+
+            return ruta;
         }
     }
 }
@@ -5758,6 +6334,108 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Despachante
 }
 
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Documentos\CrearDocumento.cs ===
+using Compartido.DTOs.Documento;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Documento;
+using LogicaAplicacion.Excepciones.Documento;
+using LogicaAplicacion.Excepciones.Operacion;
+using LogicaAplicacion.Mappers;
+using LogicaNegocio.Entidades;
+using LogicaNegocio.InterfacesRepositorios;
+using LogicaNegocio.InterfacesServicios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Documentos
+{
+    public class CrearDocumento : ICrearDocumento
+    {
+        private readonly IRepositorioDocumento _repositorioDocumento;
+        private readonly IRepositorioOperacion _repositorioOperacion;
+        private readonly IAlmacenamientoArchivos _almacenamiento;
+        public CrearDocumento(IRepositorioDocumento repositorioDocumento, 
+            IRepositorioOperacion repositorioOperacion,
+            IAlmacenamientoArchivos almacenamiento)
+        {
+            _repositorioDocumento = repositorioDocumento;
+            _repositorioOperacion = repositorioOperacion;
+            _almacenamiento = almacenamiento;
+        }
+        public async Task<DocumentoRespuestaDTO> Ejecutar(CrearDocumentoDTO dto)
+        {
+            var operacion = _repositorioOperacion.FindById(dto.OperacionId);
+            if (operacion == null)
+                throw new OperacionNoEncontradaException();
+
+            // Detectar el formato del archivo
+            string extensionConPunto = Path.GetExtension(dto.Archivo.FileName);
+            string extension = extensionConPunto.Replace(".", "").ToUpper();
+
+            var formatosPermitidos = new Dictionary<string, TipoFormato>
+            {
+                { "PDF", TipoFormato.PDF },
+                { "JPG", TipoFormato.JPG },
+                { "PNG", TipoFormato.PNG }
+            };
+
+            if (!formatosPermitidos.TryGetValue(extension, out var formato))
+                throw new FormatoNoPermitidoException(extension);
+
+            // Se usa para local, Firebase o Azure
+            var rutaArchivo = await _almacenamiento.GuardarAsync(
+                dto.Archivo.OpenReadStream(),
+                dto.Archivo.FileName
+            );
+
+            var documento = new Documento(dto.Nombre, rutaArchivo, formato, dto.OperacionId);
+            documento.OperacionId = dto.OperacionId;
+
+            _repositorioDocumento.Add(documento);
+
+            return DocumentoMapper.ToDTO(documento);
+        }
+    }
+    
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Documentos\ObtenerDocumentoPorId.cs ===
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Documento;
+using LogicaAplicacion.Excepciones.Documento;
+using LogicaAplicacion.Mappers;
+using LogicaNegocio.InterfacesRepositorios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Documentos
+{
+    public class ObtenerDocumentoPorId : IObtenerDocumentoPorId
+    {
+        private readonly IRepositorioDocumento _repositorioDocumento;
+
+        public ObtenerDocumentoPorId(IRepositorioDocumento repositorioDocumento)
+        {
+            _repositorioDocumento = repositorioDocumento;
+        }
+        public DocumentoRespuestaDTO Ejecutar(int id)
+        {
+             var documento = _repositorioDocumento.FindById(id);
+            if (documento == null)
+            {
+                throw new DocumentoNoEncontradoException();
+            }
+            return DocumentoMapper.ToDTO(documento);
+        }
+    }
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Operacion\ActualizarOperacion.cs ===
 using Compartido.DTOs.Operacion;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
@@ -5859,6 +6537,8 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Operacion\FinalizarOperacion.cs ===
 using Compartido.DTOs.Operacion;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
+using LogicaAplicacion.Excepciones.Operacion;
+using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
 using System.Collections.Generic;
@@ -5878,7 +6558,45 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
         }
         public OperacionRespuestaDTO Ejecutar(int operacionId)
         {
-            throw new NotImplementedException();
+            var operacion = _operacionRepositorio.FindById(operacionId);
+            if (operacion == null)
+
+                throw new OperacionNoEncontradaException();
+
+            operacion.Finalizar();
+            _operacionRepositorio.Update(operacion, operacionId);
+            return OperacionMapper.ToDTO(operacion);
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Operacion\ObtenerDocumentosPorOperacion.cs ===
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
+using LogicaAplicacion.Excepciones.Operacion;
+using LogicaAplicacion.Mappers;
+using LogicaNegocio.InterfacesRepositorios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
+{
+    public class ObtenerDocumentosPorOperacion : IObtenerDocumentosPorOperacion
+    {
+        private readonly IRepositorioOperacion _repositorioOperacion;
+        public ObtenerDocumentosPorOperacion(IRepositorioOperacion repositorioOperacion)
+        {
+            _repositorioOperacion = repositorioOperacion;
+        }
+        public IEnumerable<DocumentoRespuestaDTO> Ejecutar(int idOperacion)
+        {
+            var operacion = _repositorioOperacion.FindById(idOperacion);
+            if (operacion == null)
+                throw new OperacionNoEncontradaException();
+            return DocumentoMapper.ToListadoDTO(operacion.Documentos);
         }
     }
 }
@@ -6578,6 +7296,39 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Despachante
 }
 
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Documento\ICrearDocumento.cs ===
+using Compartido.DTOs.Documento;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Documento
+{
+    public interface ICrearDocumento
+    {
+        Task<DocumentoRespuestaDTO> Ejecutar(CrearDocumentoDTO dto);
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Documento\IObtenerDocumentoPorId.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Documento
+{
+    public interface IObtenerDocumentoPorId
+    {
+        DocumentoRespuestaDTO Ejecutar(int id);
+    }
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Operacion\IActualizarOperacion.cs ===
 using Compartido.DTOs.Operacion;
 
@@ -6610,6 +7361,22 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion
     public interface IFinalizarOperacion
     {
         OperacionRespuestaDTO Ejecutar(int operacionId);
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Operacion\IObtenerDocumentosPorOperacion.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion
+{
+    public interface IObtenerDocumentosPorOperacion
+    {
+        IEnumerable<DocumentoRespuestaDTO> Ejecutar(int idOperacion);
     }
 }
 
@@ -6900,6 +7667,44 @@ namespace LogicaAplicacion.Excepciones.Cliente
 }
 
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\Excepciones\Documento\DocumentoNoEncontradoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.Excepciones.Documento
+{
+    public class DocumentoNoEncontradoException : ClaseExcepcion
+    {
+        public DocumentoNoEncontradoException()
+            : base("No se encontró el documento.")
+        {
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\Excepciones\Documento\FormatoNoPermitidoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.Excepciones.Documento
+{
+    public class FormatoNoPermitidoException : ClaseExcepcion
+    {
+        public FormatoNoPermitidoException(string extension)
+            : base($"Formato no permitido: {extension}. Solo se aceptan PDF, JPG, PNG.")
+        {
+        }
+    }
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\Excepciones\Operacion\ClienteSeleccionadoNoExisteException.cs ===
 using System;
 using System.Collections.Generic;
@@ -7179,7 +7984,7 @@ namespace LogicaAplicacion.Mappers
                 Rut = cliente.Rut.Valor,
                 Telefono = cliente.Telefono,
                 Direccion = cliente.Direccion,
-                Estado = cliente.Estado
+                Estado = cliente.Estado.ToString()
             };
         }
     }
@@ -7226,6 +8031,38 @@ namespace LogicaAplicacion.Mappers
                 Email = despachante.Email.Valor,
                 Codigo = despachante.Codigo
             };
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\Mappers\DocumentoMapper.cs ===
+using LogicaNegocio.Entidades;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAplicacion.Mappers
+{
+    public class DocumentoMapper
+    {
+        public static DocumentoRespuestaDTO ToDTO(Documento documento)
+        {
+            return new DocumentoRespuestaDTO
+            {
+                Id = documento.Id,
+                Nombre = documento.Nombre,
+                Formato = documento.Formato.ToString(), // convierte enum a string
+                FechaCarga = documento.FechaCarga,
+                OperacionId = documento.OperacionId
+            };
+        }
+
+        public static IEnumerable<DocumentoRespuestaDTO> ToListadoDTO(IEnumerable<Documento> documentos)
+        {
+            return documentos.Select(d => ToDTO(d)).ToList();
         }
     }
 }
@@ -7444,7 +8281,7 @@ namespace LogicaAplicacion.Mappers
                 Id = usuario.Id,
                 Email = usuario.Email.Valor,
                 Rol = usuario.Rol.NombreRol,
-                Estado = usuario.Estado,
+                Estado = usuario.Estado.ToString(),
                 PrimerLogin = usuario.PrimerLogin
             };
         }
@@ -7460,7 +8297,7 @@ namespace LogicaAplicacion.Mappers
                 Rol = usuario.Rol.NombreRol,
                 FechaCreacion = usuario.FechaCreacion,
                 PrimerLogin = usuario.PrimerLogin,
-                Estado = usuario.Estado
+                Estado = usuario.Estado.ToString()
             };
         }
     }
@@ -7491,7 +8328,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6880643a4844aa212a747336a17c92e3bc57c94f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+859617f0351a265fb9fbcc5e6e02354035c6da42")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -7750,6 +8587,9 @@ namespace LogicaNegocio.Entidades
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\Documento.cs ===
+using LogicaNegocio.Excepciones.Documento;
+using System.ComponentModel.DataAnnotations;
+
 namespace LogicaNegocio.Entidades
 {
     public class Documento
@@ -7757,7 +8597,7 @@ namespace LogicaNegocio.Entidades
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string RutaArchivo { get; set; }
-        public string Formato { get; set; } // PDF, JPG, PNG
+        public TipoFormato Formato { get; set; } // PDF, JPG, PNG
         public DateTime FechaCarga { get; set; } = DateTime.Now;
 
         public int OperacionId { get; set; }
@@ -7765,13 +8605,27 @@ namespace LogicaNegocio.Entidades
 
         public Documento() { }
         public Documento(string nombre, string rutaArchivo,
-            string formato, Operacion operacion)
+            TipoFormato formato, int operacionid)
         {
             Nombre = nombre;
             RutaArchivo = rutaArchivo;
             Formato = formato;
-            Operacion = operacion;
+            OperacionId = operacionid;
             FechaCarga = DateTime.Now;
+
+            Validar(); // Valida al final, cuando ya todo está asignado
+        }
+
+        public void Validar()
+        {
+            if (string.IsNullOrEmpty(Nombre))
+                throw new NombreDocumentoVacioException();
+            if(string.IsNullOrEmpty(RutaArchivo))
+                throw new RutaArchivoDocumentoVaciaException();
+            if (!Enum.IsDefined(typeof(TipoFormato), Formato))
+                throw new FormatoDocumentoInvalidoException();
+            if(OperacionId <= 0)
+                throw new OperacionIdInvalidoException();
         }
     }
 }
@@ -8225,6 +9079,24 @@ namespace LogicaNegocio.Entidades
 }
 
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoFormato.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Entidades
+{
+    public enum TipoFormato
+    {
+        PDF = 1,
+        JPG = 2,
+        PNG = 3
+    }
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Entidades\TipoNotificacion.cs ===
 namespace LogicaNegocio.Entidades
 {
@@ -8299,10 +9171,7 @@ namespace LogicaNegocio.Entidades
         //también para mostrar el estado del usuario (activo o inactivo)
         public DateTime FechaCreacion { get; set; }
         public bool PrimerLogin { get; set; }
-        public string Estado { get; set; }
-
-        // TODO ver si funciona todo con enum estado
-        //public EstadoUsuario Estado { get; set; }
+        public EstadoUsuario Estado { get; set; }
 
         public Usuario() { }
 
@@ -8315,8 +9184,7 @@ namespace LogicaNegocio.Entidades
             Rol = rol;
             FechaCreacion = DateTime.Now;
             PrimerLogin = true; // Por defecto, es el primer login al crear el usuario}
-            Estado = "Pendiente"; // Por defecto, el usuario se crea como pendiente
-            //Estado = EstadoUsuario.Pendiente;
+            Estado = EstadoUsuario.Pendiente;
             Validar();
         }
 
@@ -8496,6 +9364,78 @@ namespace LogicaNegocio.Excepciones.Despachante
     {
         public CodigoDespachanteExcesoCaracteresException()
             : base("El código del despachante no puede superar los 30 caracteres.") { }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Documento\FormatoDocumentoInvalidoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Documento
+{
+    public class FormatoDocumentoInvalidoException : ClassException
+    {
+        public FormatoDocumentoInvalidoException() : base("El formato del documento es inválido.")
+        {
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Documento\NombreDocumentoVacioException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Documento
+{
+    public class NombreDocumentoVacioException: ClassException
+    {
+        public NombreDocumentoVacioException() : base("El nombre del documento no puede estar vacío.")
+        {
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Documento\OperacionIdInvalidoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Documento
+{
+    public class OperacionIdInvalidoException : ClassException
+    {
+        public OperacionIdInvalidoException() : base("El ID de la operación no es válido.")
+        {
+        }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Documento\RutaArchivoDocumentoVaciaException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.Excepciones.Documento
+{
+    public class RutaArchivoDocumentoVaciaException: ClassException
+    {
+        public RutaArchivoDocumentoVaciaException() : base("La ruta del archivo no puede estar vacía.")
+        {
+        }
     }
 }
 
@@ -9056,6 +9996,22 @@ namespace LogicaNegocio.InterfacesRepositorios
 }
 
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesRepositorios\IRepositorioDocumento.cs ===
+using LogicaNegocio.Entidades;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.InterfacesRepositorios
+{
+    public interface IRepositorioDocumento : IRepositorio<Documento>
+    {
+    }
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesRepositorios\IRepositorioOperacion.cs ===
 using LogicaNegocio.Entidades;
 
@@ -9149,6 +10105,22 @@ namespace LogicaNegocio.InterfacesRepositorios
 }
 
 
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesServicios\IAlmacenamientoArchivos.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaNegocio.InterfacesServicios
+{
+    public interface IAlmacenamientoArchivos
+    {
+        Task<string> GuardarAsync(Stream archivo, string nombreArchivo);
+    }
+}
+
+
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\InterfacesServicios\IJwtService.cs ===
 using LogicaNegocio.Entidades;
 
@@ -9200,7 +10172,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+892b8897d215477a3424d9e4825e4887dd0a9239")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+859617f0351a265fb9fbcc5e6e02354035c6da42")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
