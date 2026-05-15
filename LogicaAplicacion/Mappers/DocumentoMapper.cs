@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.Entidades;
+﻿using Compartido.DTOs.Documento;
+using LogicaNegocio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace LogicaAplicacion.Mappers
                 Nombre = documento.Nombre,
                 Formato = documento.Formato.ToString(), // convierte enum a string
                 FechaCarga = documento.FechaCarga,
-                OperacionId = documento.OperacionId
+                OperacionId = documento.OperacionId,
+                RutaArchivo = documento.RutaArchivo
             };
         }
 

@@ -13,7 +13,7 @@ namespace Compartido.DTOs.Documento
         public IFormFile Archivo { get; set; }  // el archivo binario
         public int OperacionId { get; set; }
     }
-}
+
 
     public class DocumentoRespuestaDTO
     {
@@ -22,5 +22,7 @@ namespace Compartido.DTOs.Documento
         public string Formato { get; set; }   // "PDF", "JPG" o "PNG"
         public DateTime FechaCarga { get; set; }
         public int OperacionId { get; set; }
+        public string RutaArchivo { get; set; }
+    }
 
 }
