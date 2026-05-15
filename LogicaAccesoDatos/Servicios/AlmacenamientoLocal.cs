@@ -19,7 +19,7 @@ namespace LogicaAccesoDatos.Servicios
             using var stream = new FileStream(ruta, FileMode.Create);
             await archivo.CopyToAsync(stream);
 
-            return ruta;
+            return $"documentos/{nombre}";
         }
     }
 }
