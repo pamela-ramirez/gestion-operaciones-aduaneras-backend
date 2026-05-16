@@ -35,7 +35,6 @@ namespace LogicaNegocio.Entidades
             FechaCreacion = DateTime.Now;
             PrimerLogin = true; // Por defecto, es el primer login al crear el usuario}
             Estado = EstadoUsuario.Pendiente;
-            Validar();
         }
 
         public virtual void Validar()
