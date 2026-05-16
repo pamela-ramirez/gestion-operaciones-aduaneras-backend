@@ -40,8 +40,6 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 
             var cliente = ClienteMapper.ToEntity(dto, rolCliente);
 
-            cliente.Validar();
-
             _clienteRepo.Add(cliente);
 
             return ClienteMapper.ToDTO(cliente, username, passwordTemporal);
