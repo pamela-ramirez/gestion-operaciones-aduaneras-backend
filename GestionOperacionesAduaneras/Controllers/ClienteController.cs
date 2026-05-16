@@ -84,8 +84,8 @@ namespace GestionOperacionesAduaneras.Controllers
         }
 
 
-        // PUT /api/cliente/{id} - Modificar cliente
-        [HttpPut("{id}")] // Se podria cambiar a patch
+        // PATCH /api/cliente/{id} - Modificar cliente
+        [HttpPatch("{id}")]
         [Authorize(Roles = "Admin, Despachante")]
         public IActionResult Modificar(int id, [FromBody] ModificarClienteDTO dto)
         {

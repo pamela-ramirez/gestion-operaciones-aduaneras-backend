@@ -13,21 +13,18 @@ namespace GestionOperacionesAduaneras.Controllers
     {
         private readonly IObtenerUsuarios _obtenerUsuarios;
         private readonly IObtenerUsuarioPorId _obtenerUsuarioPorId;
-        private readonly IModificarUsuario _modificarUsuario;
         private readonly IEliminarUsuario _eliminarUsuario;
         private readonly IObtenerUsuarioLogueado _obtenerUsuarioLogueado;
 
         public UsuarioController(
             IObtenerUsuarios obtenerUsuarios,
             IObtenerUsuarioPorId obtenerUsuarioPorId,
-            IModificarUsuario modificarUsuario,
             IEliminarUsuario eliminarUsuario,
             IObtenerUsuarioLogueado obtenerUsuarioLogueado
         )
         {
             _obtenerUsuarios = obtenerUsuarios;
             _obtenerUsuarioPorId = obtenerUsuarioPorId;
-            _modificarUsuario = modificarUsuario;
             _eliminarUsuario = eliminarUsuario;
             _obtenerUsuarioLogueado = obtenerUsuarioLogueado;
         }
@@ -60,24 +57,6 @@ namespace GestionOperacionesAduaneras.Controllers
             {
                 var resultado = _obtenerUsuarios.Ejecutar();
                 // 200 OK con la lista de usuarios
-                return Ok(resultado);
-            }
-            catch (Exception ex)
-            {
-                // 400 Bad Request con el msj de error
-                return BadRequest(new { mensaje = ex.Message });
-            }
-        }
-
-        // PUT /api/usuarios/{id} - Modificar usuario
-        [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
-        public IActionResult Modificar(int id, [FromBody] ModificarUsuarioDTO dto)
-        {
-            try
-            {
-                var resultado = _modificarUsuario.Ejecutar(id, dto);
-                // 200 OK con el usuario modificado
                 return Ok(resultado);
             }
             catch (Exception ex)

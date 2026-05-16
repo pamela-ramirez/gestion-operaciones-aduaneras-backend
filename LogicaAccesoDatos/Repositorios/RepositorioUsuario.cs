@@ -62,48 +62,6 @@ namespace LogicaAccesoDatos.Repositorios
             if (usuario == null)
                 throw new UsuarioNoEncontradoException();
 
-            usuario.Nombre = item.Nombre;
-            usuario.Apellido = item.Apellido;
-            usuario.Email = new Email(item.Email.Valor);
-            usuario.RolId = item.RolId;
-
-            _context.SaveChanges();
-        }
-
-        // Metodo update para actualizar el estado del usuario a activo, y para actualizar la contraseña, en el primer login
-        /*     public void UpdateEstado(Usuario item, int id)
-             {
-                 var usuarioExistente = FindById(id);
-                 if (usuarioExistente != null)
-                 {
-                     usuarioExistente.Estado = "Activo";
-                     _context.SaveChanges();
-                 }
-             }
-        */
-        public void UpdatePassword(Usuario item, int id)
-        {
-            var usuario = FindById(id);
-
-            if (usuario == null)
-                throw new UsuarioNoEncontradoException();
-
-            usuario.Password = item.Password;
-            usuario.PrimerLogin = false;
-
-            _context.SaveChanges();
-        }
-
-        public void AceptarConsentimeinto(int id)
-        {
-            var usuario = FindById(id);
-
-            if (usuario == null)
-                throw new UsuarioNoEncontradoException();
-
-            //usuario.Estado = "Activo";
-            usuario.Estado = EstadoUsuario.Activo;
-
             _context.SaveChanges();
         }
 

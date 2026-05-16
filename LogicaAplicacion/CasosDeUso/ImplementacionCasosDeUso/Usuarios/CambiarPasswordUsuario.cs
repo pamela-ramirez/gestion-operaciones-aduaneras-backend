@@ -22,18 +22,12 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
         public void Ejecutar(int userId, string nuevaPassword)
         {
             var usuario = _repo.FindById(userId);
-
             if (usuario == null)
                 throw new UsuarioNoEncontradoException();
 
-            if (usuario.Password.Valor == nuevaPassword)
-                throw new UsuarioNuevaPasswordRepetidaException();
+            usuario.CambiarPassword(nuevaPassword); // La lógica está en la entidad
 
-            usuario.Password = new Password(nuevaPassword);
-            // usuario.PasswordHash = PasswordHasher.Hash(newPassword);
-            usuario.PrimerLogin = false;
-
-            _repo.UpdatePassword(usuario, userId);
+            _repo.Update(usuario, userId);
         }
     }
 }

@@ -60,7 +60,7 @@ namespace GestionOperacionesAduaneras.Controllers
         }
 
         [Authorize]
-        [HttpPost("aceptar-consentimiento")]
+        [HttpPatch("aceptar-consentimiento")]
         public IActionResult AceptarConsentimiento()
             {
             try
@@ -78,7 +78,7 @@ namespace GestionOperacionesAduaneras.Controllers
         }
 
         [Authorize]
-        [HttpPost("cambiar-password")]
+        [HttpPatch("cambiar-password")]
         public IActionResult CambiarPassword(
         [FromBody] CambiarPasswordDTO dto)
         {
@@ -92,8 +92,7 @@ namespace GestionOperacionesAduaneras.Controllers
             }
             catch (Exception ex)
             {
-                //return BadRequest(ex.Message);
-                return BadRequest(ModelState);
+                return BadRequest(ex.Message);
             }
         }
     }

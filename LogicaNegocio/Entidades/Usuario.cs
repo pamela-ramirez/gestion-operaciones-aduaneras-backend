@@ -60,5 +60,23 @@ namespace LogicaNegocio.Entidades
             if (FechaCreacion == default)
                 throw new FechaCreacionInvalidaException();
         }
+
+        public void CambiarPassword(string nuevaPassword)
+        {
+            if (Password.Valor == nuevaPassword)
+                throw new UsuarioNuevaPasswordRepetidaException();
+
+            Password = new Password(nuevaPassword); // Password se valida sola al construirse
+            PrimerLogin = false;
+        }
+
+        public void AceptarConsentimiento()
+        {
+            if (Estado == EstadoUsuario.Activo)
+                throw new ConsentimientoYaAceptadoUsuarioException();
+
+            Estado = EstadoUsuario.Activo;
+            // La FechaConsentimiento se agregaria aqui
+        }
     }
 }
