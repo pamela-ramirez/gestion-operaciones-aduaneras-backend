@@ -73,7 +73,7 @@ namespace GestionOperacionesAduaneras.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { mensaje = ex.Message });
             }
         }
 
@@ -92,7 +92,7 @@ namespace GestionOperacionesAduaneras.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { mensaje = ex.Message });
             }
         }
     }
