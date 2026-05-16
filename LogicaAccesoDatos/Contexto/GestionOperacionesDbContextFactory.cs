@@ -12,10 +12,11 @@ namespace LogicaAccesoDatos.Contexto
             // Cadena de conexión con servidor SQL
 
             //Romina
-            //optionsBuilder.UseSqlServer("Server=LAPTOP-7HNCQVS5\\SQLEXPRESS1;Database=GestionOperacionesAduaneras;Trusted_Connection=true;TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer("Server=LAPTOP-7HNCQVS5\\SQLEXPRESS1;Database=GestionOperacionesAduaneras;Trusted_Connection=true;TrustServerCertificate=true;");
 
             //Pamela
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=GestionOperacionesAduaneras;Trusted_Connection=true;TrustServerCertificate=true;");
+            //optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=GestionOperacionesAduaneras;Trusted_Connection=true;TrustServerCertificate=true;");
+            
             return new GestionOperacionesDbContext(optionsBuilder.Options);
         }
     }
