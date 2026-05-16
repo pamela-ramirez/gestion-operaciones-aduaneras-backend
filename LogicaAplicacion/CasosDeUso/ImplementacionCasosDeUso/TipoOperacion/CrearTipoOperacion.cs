@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.TipoOperacion;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.TipoOperacion;
+using LogicaAplicacion.Excepciones.TipoOperacion;
 using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
 
@@ -17,13 +18,12 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.TipoOperacion
         public TipoOperacionListadoDTO Ejecutar(CrearTipoOperacionDTO dto)
         {
             if (dto == null || string.IsNullOrWhiteSpace(dto.Descripcion))
-                throw new Exception("La descripción es obligatoria.");
+                throw new DescripcionTipoOperacionVaciaException();
 
             // Verificar que no exista otro tipo con la misma descripción
             var existente = _repoTipoOperacion.FindByDescripcion(dto.Descripcion.Trim());
             if (existente != null)
-                throw new Exception(
-                    $"Ya existe un tipo de operación con la descripción '{dto.Descripcion}'.");
+                throw new DescripcionTipoOperacionYaExistenteException();
 
             // El mapper convierte el DTO a entidad
             var tipoOperacion = TipoOperacionMapper.ToEntity(dto);

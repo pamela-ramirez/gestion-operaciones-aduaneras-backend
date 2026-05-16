@@ -166,7 +166,7 @@ namespace Compartido.DTOs.Documento
         public IFormFile Archivo { get; set; }  // el archivo binario
         public int OperacionId { get; set; }
     }
-}
+
 
     public class DocumentoRespuestaDTO
     {
@@ -175,11 +175,15 @@ namespace Compartido.DTOs.Documento
         public string Formato { get; set; }   // "PDF", "JPG" o "PNG"
         public DateTime FechaCarga { get; set; }
         public int OperacionId { get; set; }
+        public string RutaArchivo { get; set; }
+    }
 
 }
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\Compartido\DTOs\Operacion\OperacionDTO.cs ===
+using Compartido.DTOs.Documento;
+
 namespace Compartido.DTOs.Operacion
 {
 
@@ -397,7 +401,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+859617f0351a265fb9fbcc5e6e02354035c6da42")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78dcf89f4849f99d67322bc876f49f90bca31571")]
 [assembly: System.Reflection.AssemblyProductAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Compartido")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -745,21 +749,21 @@ namespace GestionOperacionesAduaneras.Controllers
         [Authorize(Roles = "Despachante,Admin")]
         public async Task<IActionResult> CrearDocumento([FromForm] CrearDocumentoDTO dto)
         {
-         /*   try
-            {
-                var resultado = await _crearDocumento.Ejecutar(dto);
-                // 201 Created + el documento fue creado
-                return CreatedAtAction(
-                    nameof(ObtenerPorId),
-                    new { id = resultado.Id },
-                    resultado
-                );
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { mensaje = ex.Message });
-            }
-         */
+            /*   try
+               {
+                   var resultado = await _crearDocumento.Ejecutar(dto);
+                   // 201 Created + el documento fue creado
+                   return CreatedAtAction(
+                       nameof(ObtenerPorId),
+                       new { id = resultado.Id },
+                       resultado
+                   );
+               }
+               catch (Exception ex)
+               {
+                   return BadRequest(new { mensaje = ex.Message });
+               }
+            */
 
 
             try
@@ -771,6 +775,11 @@ namespace GestionOperacionesAduaneras.Controllers
                     resultado
                 );
             }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensaje = ex.Message });
+            }
+            /*
             catch (OperacionNoEncontradaException ex)
             {
                 return NotFound(ex.Message);
@@ -782,7 +791,7 @@ namespace GestionOperacionesAduaneras.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
-            }
+            }*/
         }
 
         // GET /api/documento/{id}
@@ -1367,7 +1376,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+859617f0351a265fb9fbcc5e6e02354035c6da42")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78dcf89f4849f99d67322bc876f49f90bca31571")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionOperacionesAduaneras")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -1760,6 +1769,7 @@ namespace GestionOperacionesAduaneras
             app.UseHttpsRedirection();
             app.UseCors("AllowFrontend"); // <-- habilitar CORS
             app.UseAuthentication(); // <-- primero autenticación
+            app.UseStaticFiles(); // Habilita el servicio de archivos estáticos
             app.UseAuthorization();  // <-- después autorización
 
 
@@ -2678,6 +2688,22 @@ namespace LogicaAccesoDatos.Excepciones
         public RolNoEncontradoException() : base("No se encontró el rol especificado.")
         {
         }
+    }
+}
+
+
+// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Excepciones\TipoOperacionNoEncontradoException.cs ===
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicaAccesoDatos.Excepciones
+{
+    public class TipoOperacionNoEncontradoException : ClaseGenericaException
+    {
+        public TipoOperacionNoEncontradoException() :base("Tipo de operación no encontrado."){ }
     }
 }
 
@@ -5366,7 +5392,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+859617f0351a265fb9fbcc5e6e02354035c6da42")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78dcf89f4849f99d67322bc876f49f90bca31571")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAccesoDatos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -5840,6 +5866,7 @@ namespace LogicaAccesoDatos.Repositorios
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAccesoDatos\Repositorios\RepositorioTipoOperacion.cs ===
 using LogicaAccesoDatos.Contexto;
+using LogicaAccesoDatos.Excepciones;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
 
@@ -5863,7 +5890,7 @@ namespace LogicaAccesoDatos.Repositorios
         {
             var tipo = FindById(id);
             if (tipo == null)
-                throw new Exception("Tipo de operación no encontrado.");
+                throw new TipoOperacionNoEncontradoException();
 
             _context.TiposOperacion.Remove(tipo);
             _context.SaveChanges();
@@ -6059,7 +6086,7 @@ namespace LogicaAccesoDatos.Servicios
             using var stream = new FileStream(ruta, FileMode.Create);
             await archivo.CopyToAsync(stream);
 
-            return ruta;
+            return $"documentos/{nombre}";
         }
     }
 }
@@ -6118,7 +6145,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
 
             var cliente = ClienteMapper.ToEntity(dto, rolCliente);
 
-            cliente.Validar();
+            //cliente.Validar();
 
             _clienteRepo.Add(cliente);
 
@@ -6403,6 +6430,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Documentos
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Documentos\ObtenerDocumentoPorId.cs ===
+using Compartido.DTOs.Documento;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Documento;
 using LogicaAplicacion.Excepciones.Documento;
 using LogicaAplicacion.Mappers;
@@ -6572,6 +6600,7 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Operacion
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\ImplementacionCasosDeUso\Operacion\ObtenerDocumentosPorOperacion.cs ===
+using Compartido.DTOs.Documento;
 using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion;
 using LogicaAplicacion.Excepciones.Operacion;
 using LogicaAplicacion.Mappers;
@@ -7314,6 +7343,7 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Documento
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Documento\IObtenerDocumentoPorId.cs ===
+using Compartido.DTOs.Documento;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7366,6 +7396,7 @@ namespace LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Operacion
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\CasosDeUso\InterfacesCasosDeUso\Operacion\IObtenerDocumentosPorOperacion.cs ===
+using Compartido.DTOs.Documento;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8037,6 +8068,7 @@ namespace LogicaAplicacion.Mappers
 
 
 // === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaAplicacion\Mappers\DocumentoMapper.cs ===
+using Compartido.DTOs.Documento;
 using LogicaNegocio.Entidades;
 using System;
 using System.Collections.Generic;
@@ -8056,7 +8088,8 @@ namespace LogicaAplicacion.Mappers
                 Nombre = documento.Nombre,
                 Formato = documento.Formato.ToString(), // convierte enum a string
                 FechaCarga = documento.FechaCarga,
-                OperacionId = documento.OperacionId
+                OperacionId = documento.OperacionId,
+                RutaArchivo = documento.RutaArchivo
             };
         }
 
@@ -8328,7 +8361,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+859617f0351a265fb9fbcc5e6e02354035c6da42")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78dcf89f4849f99d67322bc876f49f90bca31571")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaAplicacion")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -8444,24 +8477,24 @@ namespace LogicaNegocio.Entidades
     public class Cliente : Usuario
     {
         public Rut? Rut { get; set; }
-        public string RazonSocial { get; set; } = string.Empty;
+        public string RazonSocial { get; set; }
         public string? Telefono { get; set; }
         public string? Direccion { get; set; }
 
 
         public Cliente() { }
 
-        public Cliente(string nombre, string apellido, Email email, Password password, Rol rol, Rut rut, string razonSocial, string telefono, string? direccion) : base(nombre, apellido, email, password, rol)
+        public Cliente(string nombre, string apellido, Email email, Password password, Rol rol, Rut rut, string razonSocial, string? telefono, string? direccion) : base(nombre, apellido, email, password, rol)
         {
             this.Rut = rut;
             this.RazonSocial = razonSocial;
             this.Telefono = telefono;
             this.Direccion = direccion;
 
-            //Validar();
+            Validar();
         }
 
-       /* public override void Validar()
+        public override void Validar()
         {
             // Valida todo lo de Usuario
             base.Validar();
@@ -8476,15 +8509,12 @@ namespace LogicaNegocio.Entidades
             if (RazonSocial.Length > 200)
                 throw new RazonSocialExcesoCaracteresException();
 
-            if (string.IsNullOrWhiteSpace(Telefono))
-                throw new ClienteTelefonoVacioException();
-
-            if (Telefono.Length > 20)
+            if (Telefono != null && Telefono.Length > 20)
                 throw new ClienteTelefonoMasVeinteCaracteresException();
 
             if (Direccion != null && Direccion.Length > 300)
                 throw new ClienteDireccionExcesoCaracteresException();
-        }*/
+        }
     }
 }
 
@@ -9281,22 +9311,6 @@ namespace LogicaNegocio.Excepciones.Cliente
     public class ClienteTelefonoMasVeinteCaracteresException : ClassException
     {
         public ClienteTelefonoMasVeinteCaracteresException() : base("El teléfono no puede superar 20 caracteres.") { }
-    }
-}
-
-
-// === C:\Users\romin\source\repos\RominaRamonORT\gestion-operaciones-aduaneras-backend\LogicaNegocio\Excepciones\Cliente\ClienteTelefonoVacioException.cs ===
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LogicaNegocio.Excepciones.Cliente
-{
-    public class ClienteTelefonoVacioException : ClassException
-    {
-        public ClienteTelefonoVacioException() : base("El teléfono no puede estar vacío.") { }
     }
 }
 
@@ -10172,7 +10186,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+859617f0351a265fb9fbcc5e6e02354035c6da42")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78dcf89f4849f99d67322bc876f49f90bca31571")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogicaNegocio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,4 +1,6 @@
-﻿using LogicaNegocio.ValueObject;
+﻿using LogicaNegocio.Excepciones.Despachante;
+using LogicaNegocio.InterfacesEntidades;
+using LogicaNegocio.ValueObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,18 +9,19 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Entidades
 {
-    public class Admin : Usuario
+    public class Admin : Usuario, IValidable    
     {
         public Admin() { }
 
-        public Admin(
-            string nombre,
-            string apellido,
-            Email email,
-            Password password,
-            Rol rol
-        ) : base(nombre, apellido, email, password, rol)
+        public Admin(string nombre,string apellido, Email email, Password password, Rol rol) : base(nombre, apellido, email, password, rol)
         {
+            Validar();
+        }
+
+        public override void Validar()
+        {
+            // valida todo lo heredado de Usuario
+            base.Validar();
         }
     }
 }

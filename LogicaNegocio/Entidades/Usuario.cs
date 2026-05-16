@@ -35,7 +35,6 @@ namespace LogicaNegocio.Entidades
             FechaCreacion = DateTime.Now;
             PrimerLogin = true; // Por defecto, es el primer login al crear el usuario}
             Estado = EstadoUsuario.Pendiente;
-            Validar();
         }
 
         public virtual void Validar()
@@ -60,11 +59,6 @@ namespace LogicaNegocio.Entidades
 
             if (FechaCreacion == default)
                 throw new FechaCreacionInvalidaException();
-
-            // TODO validar que funcione estado enum y descomentar esto
-            //if (!Enum.IsDefined(typeof(EstadoUsuario), Estado))
-            //  throw new EstadoUsuarioInvalidoException();
         }
-
     }
 }

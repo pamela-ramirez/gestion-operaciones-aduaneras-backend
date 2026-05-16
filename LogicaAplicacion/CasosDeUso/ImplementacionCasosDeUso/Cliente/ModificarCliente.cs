@@ -34,6 +34,9 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Cliente
             if (!string.IsNullOrWhiteSpace(dto.Telefono))
                 cliente.Telefono = dto.Telefono;
 
+            /*if(!string.IsNullOrWhiteSpace(dto.Direccion))
+                cliente.Direccion = dto.Direccion;*/
+
             if (!string.IsNullOrWhiteSpace(dto.Email))
             {
                 var clienteConEmail = _usuarioRepo.GetByEmail(dto.Email);

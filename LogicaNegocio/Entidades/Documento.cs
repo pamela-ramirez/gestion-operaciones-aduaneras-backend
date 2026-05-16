@@ -1,9 +1,10 @@
 ﻿using LogicaNegocio.Excepciones.Documento;
+using LogicaNegocio.InterfacesEntidades;
 using System.ComponentModel.DataAnnotations;
 
 namespace LogicaNegocio.Entidades
 {
-    public class Documento
+    public class Documento: IEntity, IValidable
     {
         public int Id { get; set; }
         public string Nombre { get; set; }

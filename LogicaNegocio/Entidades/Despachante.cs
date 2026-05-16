@@ -1,9 +1,10 @@
 ﻿using LogicaNegocio.Excepciones.Despachante;
+using LogicaNegocio.InterfacesEntidades;
 using LogicaNegocio.ValueObject;
 
 namespace LogicaNegocio.Entidades
 {
-    public class Despachante : Usuario
+    public class Despachante : Usuario, IValidable
     {
         //codigo de despachante
         public string? Codigo { get; set; }

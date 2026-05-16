@@ -1,4 +1,5 @@
 ﻿using LogicaAccesoDatos.Contexto;
+using LogicaAccesoDatos.Excepciones;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
 
@@ -22,7 +23,7 @@ namespace LogicaAccesoDatos.Repositorios
         {
             var tipo = FindById(id);
             if (tipo == null)
-                throw new Exception("Tipo de operación no encontrado.");
+                throw new TipoOperacionNoEncontradoException();
 
             _context.TiposOperacion.Remove(tipo);
             _context.SaveChanges();
