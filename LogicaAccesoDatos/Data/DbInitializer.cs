@@ -19,8 +19,10 @@ namespace LogicaAccesoDatos.Data
                 return; // seguridad
 
             // 3. Crear usuario admin
-            var admin = new Despachante
+            var admin = new Admin
             {
+                Nombre = "Administrador",
+                Apellido = "-",
                 Email = new Email("admin@admin.com"),
                 Password = new Password("Admin123!!"),
                 RolId = rolAdmin.Id
