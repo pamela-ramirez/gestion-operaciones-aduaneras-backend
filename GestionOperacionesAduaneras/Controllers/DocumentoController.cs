@@ -27,23 +27,6 @@ namespace GestionOperacionesAduaneras.Controllers
         [Authorize(Roles = "Despachante,Admin")]
         public async Task<IActionResult> CrearDocumento([FromForm] CrearDocumentoDTO dto)
         {
-         /*   try
-            {
-                var resultado = await _crearDocumento.Ejecutar(dto);
-                // 201 Created + el documento fue creado
-                return CreatedAtAction(
-                    nameof(ObtenerPorId),
-                    new { id = resultado.Id },
-                    resultado
-                );
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { mensaje = ex.Message });
-            }
-         */
-
-
             try
             {
                 var resultado = await _crearDocumento.Ejecutar(dto);
@@ -53,17 +36,9 @@ namespace GestionOperacionesAduaneras.Controllers
                     resultado
                 );
             }
-            catch (OperacionNoEncontradaException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch (FormatoNoPermitidoException ex)
-            {
-                return BadRequest(ex.Message);
-            }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return BadRequest(new { mensaje = ex.Message });
             }
         }
 
