@@ -45,6 +45,7 @@ namespace LogicaAccesoDatos.Repositorios
             clienteExistente.Telefono = item.Telefono;
             clienteExistente.Direccion = item.Direccion;
             clienteExistente.RazonSocial = item.RazonSocial;
+            clienteExistente.Rut = item.Rut;
 
             _context.SaveChanges();
         }
