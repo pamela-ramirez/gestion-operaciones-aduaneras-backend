@@ -188,6 +188,7 @@ namespace GestionOperacionesAduaneras
             app.UseHttpsRedirection();
             app.UseCors("AllowFrontend"); // <-- habilitar CORS
             app.UseAuthentication(); // <-- primero autenticación
+            app.UseStaticFiles(); // Habilita el servicio de archivos estáticos
             app.UseAuthorization();  // <-- después autorización
 
 

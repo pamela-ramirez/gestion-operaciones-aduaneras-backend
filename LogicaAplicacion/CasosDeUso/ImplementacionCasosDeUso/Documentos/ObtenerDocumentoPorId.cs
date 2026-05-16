@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Documento;
+﻿using Compartido.DTOs.Documento;
+using LogicaAplicacion.CasosDeUso.InterfacesCasosDeUso.Documento;
 using LogicaAplicacion.Excepciones.Documento;
 using LogicaAplicacion.Mappers;
 using LogicaNegocio.InterfacesRepositorios;
