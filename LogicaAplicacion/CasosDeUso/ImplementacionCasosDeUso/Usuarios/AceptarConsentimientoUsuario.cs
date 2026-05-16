@@ -21,10 +21,12 @@ namespace LogicaAplicacion.CasosDeUso.ImplementacionCasosDeUso.Usuarios
         public void Ejecutar(int userId)
         {
             var usuario = _repo.FindById(userId);
-
             if (usuario == null)
                 throw new UsuarioNoEncontradoException();
-            _repo.AceptarConsentimeinto(userId);
+
+            usuario.AceptarConsentimiento(); // La logica esta en la entidad
+
+            _repo.Update(usuario, userId);
         }
     }
 }

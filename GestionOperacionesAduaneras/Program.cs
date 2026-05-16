@@ -60,7 +60,6 @@ namespace GestionOperacionesAduaneras
             // Casos de uso Usuario
             builder.Services.AddScoped<IObtenerUsuarios, ObtenerUsuarios>();
             builder.Services.AddScoped<IObtenerUsuarioPorId, ObtenerUsuarioPorId>();
-            builder.Services.AddScoped<IModificarUsuario, ModificarUsuario>();
             builder.Services.AddScoped<IEliminarUsuario, EliminarUsuario>();
             builder.Services.AddScoped<IObtenerUsuarioLogueado, ObtenerUsuarioLogueado>();
             builder.Services.AddScoped<IAceptarConsentimientoUsuario, AceptarConsentimientoUsuario>();
