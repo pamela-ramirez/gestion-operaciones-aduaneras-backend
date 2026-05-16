@@ -14,12 +14,15 @@ namespace GestionOperacionesAduaneras.Controllers
     {
         private readonly ICrearDocumento _crearDocumento;
         private readonly IObtenerDocumentoPorId _obtenerDocumentoPorId;
+        private readonly IEliminarDocumento _eliminarDocumento;
 
         public DocumentoController(ICrearDocumento crearDocumento,
-            IObtenerDocumentoPorId obtenerDocumentoPorId)
+            IObtenerDocumentoPorId obtenerDocumentoPorId,
+            IEliminarDocumento eliminarDocumento)
         {
             _crearDocumento = crearDocumento;
             _obtenerDocumentoPorId = obtenerDocumentoPorId;
+            _eliminarDocumento = eliminarDocumento;
         }
 
         // POST /api/documento
@@ -56,5 +59,23 @@ namespace GestionOperacionesAduaneras.Controllers
                 return NotFound(new { mensaje = ex.Message });
             }
         }
+
+        // DELETE /api/documento/{id} - Eliminar documento
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin, Despachante")]
+        public IActionResult Eliminar(int id)
+        {
+            try
+            {
+                _eliminarDocumento.Ejecutar(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+        }
+
+
     }
 }

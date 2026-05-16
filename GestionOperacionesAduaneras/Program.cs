@@ -41,16 +41,6 @@ namespace GestionOperacionesAduaneras
                     builder.Configuration.GetConnectionString("DefaultConnection")
                 ));
 
-            // Agregar DbContext
-            //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            //builder.Services.AddDbContext<GestionOperacionesDbContext>(options =>
-            //   options.UseSqlServer(connectionString));
-
-            //builder.Services.AddControllers();
-            //builder.Services.AddEndpointsApiExplorer();
-            //builder.Services.AddSwaggerGen();
-
-
             // Repositorios
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
             builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();
@@ -114,7 +104,8 @@ namespace GestionOperacionesAduaneras
             // Caso de uso de Documento
             builder.Services.AddScoped<ICrearDocumento, CrearDocumento>();
             builder.Services.AddScoped<IObtenerDocumentoPorId, ObtenerDocumentoPorId>();
- 
+            builder.Services.AddScoped <IEliminarDocumento, EliminarDocumento>();
+
 
             // Autenticación JWT
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

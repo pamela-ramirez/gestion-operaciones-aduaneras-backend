@@ -1,4 +1,5 @@
 ﻿using LogicaAccesoDatos.Contexto;
+using LogicaAccesoDatos.Excepciones;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorios;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +27,11 @@ namespace LogicaAccesoDatos.Repositorios
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            Documento doc = FindById(id);
+            if (doc == null)
+                throw new DocumentoNoEncontradoException();
+            _context.Documentos.Remove(doc);
+            _context.SaveChanges();
         }
 
         public IEnumerable<Documento> FindAll()
