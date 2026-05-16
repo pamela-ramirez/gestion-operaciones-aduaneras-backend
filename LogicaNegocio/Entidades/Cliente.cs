@@ -4,7 +4,7 @@ using LogicaNegocio.ValueObject;
 
 namespace LogicaNegocio.Entidades
 {
-    public class Cliente : Usuario
+    public class Cliente : Usuario, IValidable
     {
         public Rut? Rut { get; set; }
         public string RazonSocial { get; set; }

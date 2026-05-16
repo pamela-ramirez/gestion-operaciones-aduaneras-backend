@@ -59,11 +59,6 @@ namespace LogicaNegocio.Entidades
 
             if (FechaCreacion == default)
                 throw new FechaCreacionInvalidaException();
-
-            // TODO validar que funcione estado enum y descomentar esto
-            //if (!Enum.IsDefined(typeof(EstadoUsuario), Estado))
-            //  throw new EstadoUsuarioInvalidoException();
         }
-
     }
 }

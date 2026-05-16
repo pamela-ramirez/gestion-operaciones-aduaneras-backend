@@ -1,4 +1,5 @@
 ﻿using LogicaNegocio.Excepciones.Despachante;
+using LogicaNegocio.InterfacesEntidades;
 using LogicaNegocio.ValueObject;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Entidades
 {
-    public class Admin : Usuario
+    public class Admin : Usuario, IValidable    
     {
         public Admin() { }
 
